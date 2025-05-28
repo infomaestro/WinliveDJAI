@@ -1,4 +1,4 @@
-# Mixxx
+# WinliveDJAI
 
 [![GitHub latest tag](https://img.shields.io/github/tag/mixxxdj/mixxx.svg)](https://mixxx.org/download)
 [![Packaging status](https://repology.org/badge/tiny-repos/mixxx.svg)](https://repology.org/metapackage/mixxx/versions)
@@ -7,8 +7,8 @@
 [![Zulip chat](https://img.shields.io/badge/zulip-join_chat-brightgreen.svg)](https://mixxx.zulipchat.com)
 [![Donate](https://img.shields.io/opencollective/all/mixxx?label=Donate)](https://mixxx.org/donate)
 
-[Mixxx] is Free DJ software that gives you everything you need to perform live
-DJ mixes. Mixxx works on GNU/Linux, Windows, and macOS.
+[WinliveDJAI] is Free DJ software that gives you everything you need to perform live
+DJ mixes. WinliveDJAI works on Windows, and macOS. Based on Mixxx.
 
 ## Quick Start
 
