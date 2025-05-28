@@ -12,7 +12,7 @@ DJ mixes. WinliveDJAI works on Windows, and macOS. Based on Mixxx.
 
 ## Quick Start
 
-To get started with Mixxx:
+To get started with WinliveDJAI:
 
 1. For live use, [download the latest stable version][download-stable].
 2. For experimentation and testing, [download a development release][download-testing].
