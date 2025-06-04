@@ -250,6 +250,12 @@ void CoreServices::initialize(QApplication* pApp) {
 #endif
 
     UserSettingsPointer pConfig = m_pSettingsManager->settings();
+    
+    // use default value
+    QString configVersion = pConfig->getValueString(ConfigKey("[Channel1]", "quantize"));
+    if (configVersion.isEmpty()) {
+        pConfig->setValue(ConfigKey("[Channel1]", "quantize"), ConfigValue(0));
+    }
 
     Sandbox::setPermissionsFilePath(QDir(pConfig->getSettingsPath()).filePath("sandbox.cfg"));
 
