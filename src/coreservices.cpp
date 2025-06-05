@@ -251,14 +251,26 @@ void CoreServices::initialize(QApplication* pApp) {
 
     UserSettingsPointer pConfig = m_pSettingsManager->settings();
 
-    // use default values
+    // use default values customized for Winlive Dj Ai
     QString configVersion = pConfig->getValueString(ConfigKey("[Channel1]", "quantize"));
     if (configVersion.isEmpty()) {
         pConfig->setValue(ConfigKey("[Channel1]", "quantize"),1.0);
         pConfig->setValue(ConfigKey("[Channel1]", "keylock"), 1.0);
         pConfig->setValue(ConfigKey("[Channel2]", "quantize"), 1.0);
         pConfig->setValue(ConfigKey("[Channel2]", "keylock"),1.0);
+        pConfig->setValue(ConfigKey("[Channel3]", "quantize"), 1.0);
+        pConfig->setValue(ConfigKey("[Channel3]", "keylock"), 1.0);
+        pConfig->setValue(ConfigKey("[Channel4]", "quantize"), 1.0);
+        pConfig->setValue(ConfigKey("[Channel4]", "keylock"), 1.0);
+        pConfig->setValue(ConfigKey("[Skin]", "show_effectrack"),0); 
+        pConfig->setValue(ConfigKey("[Skin]", "show_microphones"), 0); 
+        pConfig->setValue(ConfigKey("[Skin]", "show_samplers"), 0); 
+        pConfig->setValue(ConfigKey("[Skin]", "show_effectrack"), 0); 
+        pConfig->setValue(ConfigKey("[Skin]", "show_main_head_mixer"), 0);
+        pConfig->setValue(ConfigKey("[Skin]", "show_spinnies"), 0);
+         
     }
+
 
     Sandbox::setPermissionsFilePath(QDir(pConfig->getSettingsPath()).filePath("sandbox.cfg"));
 
