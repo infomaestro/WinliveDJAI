@@ -269,6 +269,8 @@ void CoreServices::initialize(QApplication* pApp) {
         pConfig->setValue(ConfigKey("[Skin]", "show_main_head_mixer"), 0);
         pConfig->setValue(ConfigKey("[Skin]", "show_spinnies"), 1.0);
         pConfig->setValue(ConfigKey("[Skin]", "select_big_spinny_or_cover"), 1.0);
+        pConfig->setValue(ConfigKey("[Skin]", "show_library_coverart "), 0);
+        pConfig->setValue(ConfigKey("[Skin]", "show_preview_decks "), 0);
     }
 
 
