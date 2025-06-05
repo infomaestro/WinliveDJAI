@@ -2651,7 +2651,7 @@ WLibrary QPlainTextEdit,
 WTrackTableView,
 WLibraryTextBrowser,
 WLibrarySidebar {
-  alternate-background-color: #0a0a0a;
+  alternate-background-color:#0f181a; /* oldwas #0a0a0a*/
 /* In selected library rows this sets the color of
   * shapes in star rating delegate
   * focus border of Cover Art and Color delegates
@@ -2659,6 +2659,8 @@ WLibrarySidebar {
   selection-color: #fff;
   /* background of Color delegate in selected row */
   selection-background-color: #2c454f;
+  background-color: #0f0f0f; /*add colore bg*/
+  color:#ffd8ca;/*add colore font */
 }
 WLibrarySidebar {
   outline: none;
