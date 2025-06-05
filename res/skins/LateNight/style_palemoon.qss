@@ -16,7 +16,7 @@
 /**********************************************************************
 ************** container background colors & borders *****************/
 #SkinContainer {
-  background-color: #080808;
+  background-color: #333b41; /*wdjai color oldwas #080808*/
 }
 
 #Deck1, #DeckCompact1, #DeckMini1,
@@ -85,7 +85,7 @@ QAbstractScrollArea::corner {
   border-bottom: 1px solid #020202;
   border-left: 1px solid #191919;
   border-radius: 1px;
-  background-color: #151517;
+  background-color: #13242f;  /*wdjai color oldwas #151517*/
   }
   #ToolBar {
     border-width: 0px 0px 1px 0px;
@@ -220,7 +220,7 @@ WSearchLineEdit {
   border-bottom: 1px solid #020202;
   border-right: 1px solid #111;
   border-radius: 1px;
-  background-color: #151517;
+  background-color: #13242f;  /*wdjai color oldwas #151517*/
   }
 
 /* meters */
@@ -248,7 +248,7 @@ WSearchLineEdit {
   border-bottom: 1px solid #020202;
   border-right: 1px solid #111;
   border-radius: 1px;
-  background-color: #151517;
+  background-color: #13242f;  /*wdjai color oldwas #151517*/
   }
 
 
@@ -354,7 +354,7 @@ WTrackProperty:hover[selected="true"],
 WTrackProperty[selected="true"],
 #BpmTapContainer:hover,
 #PlayPositionText:hover, #PlayPositionTextSmall:hover {
-  background-color: #151517;
+  background-color: #13242f;  /*wdjai color oldwas #151517*/
   }
   WTrackProperty:hover[selected="true"],
   WTrackProperty[selected="true"] {
@@ -377,8 +377,27 @@ WTrackProperty[selected="true"],
 
 
 /**********************************************************************
-************** container background colors & borders *****************/
+************** container background colors & borders  *****************/
 
+#Deck1, #DeckCompact1, #DeckMini1,
+#Deck2, #DeckCompact2, #DeckMini2,
+#Deck3, #DeckCompact3, #DeckMini3,
+#Deck4, #DeckCompact4, #DeckMini4,
+#MixerContainer,
+#VuMeterDeck1_Compact,
+#VuMeterDeck2_Compact,
+#VuMeterDeck3_Compact,
+#VuMeterDeck4_Compact,
+#VuMeterMain_Compact,
+#FxUnit1, #FxUnit3,
+#FxUnit2, #FxUnit4,
+#FxRackFillerR,
+#FxRackFillerL,
+#MicAuxRack,
+#SamplerRow,
+#PreviewDeck {
+  background-color: #22282f; /*shark*/
+}
 
 
 
@@ -1666,7 +1685,7 @@ WBeatSpinBox::down-button {
   /* dark buttons in toolbar */
   #ToolBar WPushButton[displayValue="0"],
   #MixerMainHeadphone #FxAssignButtons WPushButton[displayValue="0"] {
-    background-color: #151517;
+    background-color: #13242f;  /*wdjai color oldwas #151517*/
   }
 
 /* Orange for 'active' status */
@@ -3098,7 +3117,7 @@ WEffectChainPresetButton QMenu QCheckBox,
 #fadeModeCombobox::item,
 WSearchLineEdit QAbstractScrollArea,
 WSearchLineEdit::item {
-  background-color: #151517;
+  background-color: #13242f;  /*wdjai color oldwas #151517*/
 }
 /* hovered items */
 #MainMenu::item:selected,
