@@ -2662,7 +2662,7 @@ WLibrarySidebar {
   selection-background-color: #2c454f;
   background-color: #0f0f0f; /*add colore bg*/
   color:#ffd8ca;/*add colore font */
-  font-size: 18px;
+  font-size: 16px; /*add font size*/
 }
 WLibrarySidebar {
   outline: none;
