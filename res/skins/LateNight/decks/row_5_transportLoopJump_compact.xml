@@ -21,7 +21,7 @@
               <Template src="skins:LateNight/controls/button_2state_right_display.xml">
                 <SetVariable name="TooltipId">play_cue_set</SetVariable>
                 <SetVariable name="ObjectName">PlayDeck</SetVariable>
-                <SetVariable name="Size">68f,26f</SetVariable>
+                <SetVariable name="Size">136f,52</SetVariable>
                 <SetVariable name="BtnSize">play</SetVariable>
                 <SetVariable name="ConfigKey"><Variable name="Group"/>,play</SetVariable>
                 <SetVariable name="ConfigKeyRight"><Variable name="Group"/>,cue_set</SetVariable>

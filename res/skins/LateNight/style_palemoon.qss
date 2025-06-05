@@ -186,7 +186,7 @@ WSearchLineEdit {
   }
   #OverviewBox[highlight="1"],
   #OverviewBoxMini[highlight="1"] {
-    background-color: #151515;
+    background-color:1d312a;/* old is #151515*/
   }
   #KeyText {
     border-width: 1px 0px 1px 0px;
@@ -751,6 +751,7 @@ WBeatSpinBox::down-button,
 
 #MixerDecks {
   padding: 2px 5px 2px 5px;
+  background-color: #1d312a;  /*wdjai color new added 'Timber Green*/  
   }
   #MixerChannel_2Decks_Left {
     margin: 0px 2px;
@@ -1474,7 +1475,7 @@ QPushButton#pushButtonRecording:checked {
 
 /* crop shadow on the left border for all buttons in Fx assign and vinyl control grid
   (except leftmost button in each grid > overwritten in the block below) */
-#VinylModeButton,
+#VinylModeButon,
 #VinylCueButton[displayValue="0"],
 #PassthroughButton[displayValue="0"],
 #SyncLeader[value="0"],
@@ -2661,6 +2662,7 @@ WLibrarySidebar {
   selection-background-color: #2c454f;
   background-color: #0f0f0f; /*add colore bg*/
   color:#ffd8ca;/*add colore font */
+  font-size: 18px;
 }
 WLibrarySidebar {
   outline: none;
