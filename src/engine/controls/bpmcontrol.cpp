@@ -268,14 +268,7 @@ BpmControl::BpmControl(const QString& group,
     m_pBeatsUndoPossible = std::make_unique<ControlObject>(
             ConfigKey(group, "beats_undo_possible"));
     m_pBeatsUndoPossible->setReadOnly();
-
-    /* All'inizio del costruttore o dove preferisci
-    QString configPath = pConfig->getSettingsPath();
-    if (!QFile::exists(configPath + "\mixxx.cfg")) {
-        // Il file non esiste: imposta le opzioni di default
-        m_pQuantize.set(1.0); // esempio: quantize sempre attivo
-        // ...altre opzioni di default...
-    }*/
+ 
    
 }
 
