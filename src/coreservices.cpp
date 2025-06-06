@@ -255,7 +255,7 @@ void CoreServices::initialize(QApplication* pApp) {
     QString configVersion = pConfig->getValueString(ConfigKey("[Channel1]", "quantize"));
     if (configVersion.isEmpty()) {
         // open default config file
-        pConfig->reopen(QDir(pConfig->getResourcePath()).filePath("default.cfg")); 
+        pConfig->reopen(QDir(pConfig->getResourcePath()).filePath(DEFAULT_SETTINGS_FILE)); 
     }
 
 
