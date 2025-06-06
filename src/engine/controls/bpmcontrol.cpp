@@ -12,6 +12,9 @@
 #include "util/duration.h"
 #include "util/logger.h"
 #include "util/math.h"
+//#include <QFile>
+//#include <QDir>
+
 
 namespace {
 const mixxx::Logger kLogger("BpmControl");
@@ -72,7 +75,7 @@ BpmControl::BpmControl(const QString& group,
           m_dLastSyncAdjustment(1.0) {
     m_dSyncTargetBeatDistance.setValue(0.0);
     m_dUserOffset.setValue(0.0);
-
+   
     m_pRateRatio = std::make_unique<ControlProxy>(group, "rate_ratio", this);
     m_pRateRatio->connectValueChanged(this, &BpmControl::slotUpdateEngineBpm,
                                       Qt::DirectConnection);
@@ -265,6 +268,15 @@ BpmControl::BpmControl(const QString& group,
     m_pBeatsUndoPossible = std::make_unique<ControlObject>(
             ConfigKey(group, "beats_undo_possible"));
     m_pBeatsUndoPossible->setReadOnly();
+
+    /* All'inizio del costruttore o dove preferisci
+    QString configPath = pConfig->getSettingsPath();
+    if (!QFile::exists(configPath + "\mixxx.cfg")) {
+        // Il file non esiste: imposta le opzioni di default
+        m_pQuantize.set(1.0); // esempio: quantize sempre attivo
+        // ...altre opzioni di default...
+    }*/
+   
 }
 
 mixxx::Bpm BpmControl::getBpm() const {

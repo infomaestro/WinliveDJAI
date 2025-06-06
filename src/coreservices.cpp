@@ -257,6 +257,29 @@ void CoreServices::initialize(QApplication* pApp) {
         pConfig->setValue(ConfigKey("[Channel1]", "quantize"), ConfigValue(0));
     }
 
+    // use default values customized for Winlive Dj Ai
+    QString configVersion = pConfig->getValueString(ConfigKey("[Channel1]", "quantize"));
+    if (configVersion.isEmpty()) {
+        pConfig->setValue(ConfigKey("[Channel1]", "quantize"),1.0);
+        pConfig->setValue(ConfigKey("[Channel1]", "keylock"), 1.0);
+        pConfig->setValue(ConfigKey("[Channel2]", "quantize"), 1.0);
+        pConfig->setValue(ConfigKey("[Channel2]", "keylock"),1.0);
+        pConfig->setValue(ConfigKey("[Channel3]", "quantize"), 1.0);
+        pConfig->setValue(ConfigKey("[Channel3]", "keylock"), 1.0);
+        pConfig->setValue(ConfigKey("[Channel4]", "quantize"), 1.0);
+        pConfig->setValue(ConfigKey("[Channel4]", "keylock"), 1.0);
+        pConfig->setValue(ConfigKey("[Skin]", "show_effectrack"),0); 
+        pConfig->setValue(ConfigKey("[Skin]", "show_microphones"), 0); 
+        pConfig->setValue(ConfigKey("[Skin]", "show_samplers"), 0); 
+        pConfig->setValue(ConfigKey("[Skin]", "show_effectrack"), 0); 
+        pConfig->setValue(ConfigKey("[Skin]", "show_main_head_mixer"), 0);
+        pConfig->setValue(ConfigKey("[Skin]", "show_spinnies"), 1.0);
+        pConfig->setValue(ConfigKey("[Skin]", "select_big_spinny_or_cover"), 1.0);
+        pConfig->setValue(ConfigKey("[Skin]", "show_library_coverart "), 0);
+        pConfig->setValue(ConfigKey("[Skin]", "show_preview_decks "), 0);
+    }
+
+
     Sandbox::setPermissionsFilePath(QDir(pConfig->getSettingsPath()).filePath("sandbox.cfg"));
 
     QString resourcePath = pConfig->getResourcePath();

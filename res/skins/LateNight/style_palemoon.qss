@@ -16,7 +16,7 @@
 /**********************************************************************
 ************** container background colors & borders *****************/
 #SkinContainer {
-  background-color: #080808;
+  background-color: #333b41; /*wdjai color oldwas #080808*/
 }
 
 #Deck1, #DeckCompact1, #DeckMini1,
@@ -85,7 +85,7 @@ QAbstractScrollArea::corner {
   border-bottom: 1px solid #020202;
   border-left: 1px solid #191919;
   border-radius: 1px;
-  background-color: #151517;
+  background-color: #13242f;  /*wdjai color oldwas #151517*/
   }
   #ToolBar {
     border-width: 0px 0px 1px 0px;
@@ -186,7 +186,7 @@ WSearchLineEdit {
   }
   #OverviewBox[highlight="1"],
   #OverviewBoxMini[highlight="1"] {
-    background-color: #151515;
+    background-color:1d312a;/* old is #151515*/
   }
   #KeyText {
     border-width: 1px 0px 1px 0px;
@@ -220,7 +220,7 @@ WSearchLineEdit {
   border-bottom: 1px solid #020202;
   border-right: 1px solid #111;
   border-radius: 1px;
-  background-color: #151517;
+  background-color: #13242f;  /*wdjai color oldwas #151517*/
   }
 
 /* meters */
@@ -248,7 +248,7 @@ WSearchLineEdit {
   border-bottom: 1px solid #020202;
   border-right: 1px solid #111;
   border-radius: 1px;
-  background-color: #151517;
+  background-color: #13242f;  /*wdjai color oldwas #151517*/
   }
 
 
@@ -354,7 +354,7 @@ WTrackProperty:hover[selected="true"],
 WTrackProperty[selected="true"],
 #BpmTapContainer:hover,
 #PlayPositionText:hover, #PlayPositionTextSmall:hover {
-  background-color: #151517;
+  background-color: #13242f;  /*wdjai color oldwas #151517*/
   }
   WTrackProperty:hover[selected="true"],
   WTrackProperty[selected="true"] {
@@ -377,8 +377,27 @@ WTrackProperty[selected="true"],
 
 
 /**********************************************************************
-************** container background colors & borders *****************/
+************** container background colors & borders  *****************/
 
+#Deck1, #DeckCompact1, #DeckMini1,
+#Deck2, #DeckCompact2, #DeckMini2,
+#Deck3, #DeckCompact3, #DeckMini3,
+#Deck4, #DeckCompact4, #DeckMini4,
+#MixerContainer,
+#VuMeterDeck1_Compact,
+#VuMeterDeck2_Compact,
+#VuMeterDeck3_Compact,
+#VuMeterDeck4_Compact,
+#VuMeterMain_Compact,
+#FxUnit1, #FxUnit3,
+#FxUnit2, #FxUnit4,
+#FxRackFillerR,
+#FxRackFillerL,
+#MicAuxRack,
+#SamplerRow,
+#PreviewDeck {
+  background-color: #22282f; /*shark*/
+}
 
 
 
@@ -732,6 +751,7 @@ WBeatSpinBox::down-button,
 
 #MixerDecks {
   padding: 2px 5px 2px 5px;
+  background-color: #1d312a;  /*wdjai color new added 'Timber Green*/  
   }
   #MixerChannel_2Decks_Left {
     margin: 0px 2px;
@@ -1455,7 +1475,7 @@ QPushButton#pushButtonRecording:checked {
 
 /* crop shadow on the left border for all buttons in Fx assign and vinyl control grid
   (except leftmost button in each grid > overwritten in the block below) */
-#VinylModeButton,
+#VinylModeButon,
 #VinylCueButton[displayValue="0"],
 #PassthroughButton[displayValue="0"],
 #SyncLeader[value="0"],
@@ -1666,7 +1686,7 @@ WBeatSpinBox::down-button {
   /* dark buttons in toolbar */
   #ToolBar WPushButton[displayValue="0"],
   #MixerMainHeadphone #FxAssignButtons WPushButton[displayValue="0"] {
-    background-color: #151517;
+    background-color: #13242f;  /*wdjai color oldwas #151517*/
   }
 
 /* Orange for 'active' status */
@@ -2632,7 +2652,7 @@ WLibrary QPlainTextEdit,
 WTrackTableView,
 WLibraryTextBrowser,
 WLibrarySidebar {
-  alternate-background-color: #0a0a0a;
+  alternate-background-color:#0f181a; /* oldwas #0a0a0a*/
 /* In selected library rows this sets the color of
   * shapes in star rating delegate
   * focus border of Cover Art and Color delegates
@@ -2640,6 +2660,9 @@ WLibrarySidebar {
   selection-color: #fff;
   /* background of Color delegate in selected row */
   selection-background-color: #2c454f;
+  background-color: #0f0f0f; /*add colore bg*/
+  color:#ffd8ca;/*add colore font */
+  font-size: 16px; /*add font size*/
 }
 WLibrarySidebar {
   outline: none;
@@ -3098,7 +3121,7 @@ WEffectChainPresetButton QMenu QCheckBox,
 #fadeModeCombobox::item,
 WSearchLineEdit QAbstractScrollArea,
 WSearchLineEdit::item {
-  background-color: #151517;
+  background-color: #13242f;  /*wdjai color oldwas #151517*/
 }
 /* hovered items */
 #MainMenu::item:selected,

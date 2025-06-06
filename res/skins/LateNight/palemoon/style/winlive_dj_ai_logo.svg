@@ -1,0 +1,26 @@
+
+<svg width="500" height="200" viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <rect width="500" height="200" fill="#111111"/>
+  <g fill="#00BCD4">
+    <!-- Headphones + Vinyl -->
+    <circle cx="60" cy="100" r="30" stroke="#00BCD4" stroke-width="6"/>
+    <circle cx="60" cy="100" r="10" fill="#00BCD4"/>
+    <path d="M30 100 Q30 60 60 60 Q90 60 90 100" stroke="#00BCD4" stroke-width="6" fill="none"/>
+    <!-- Waveform -->
+    <rect x="140" y="80" width="4" height="40"/>
+    <rect x="148" y="90" width="4" height="20"/>
+    <rect x="156" y="85" width="4" height="30"/>
+    <!-- Robot head -->
+    <rect x="400" y="80" width="50" height="40" rx="10" fill="#00BCD4"/>
+    <circle cx="415" cy="100" r="5" fill="#111111"/>
+    <circle cx="435" cy="100" r="5" fill="#111111"/>
+    <rect x="423" y="110" width="14" height="4" rx="2" fill="#111111"/>
+    <line x1="425" y1="80" x2="425" y2="70" stroke="#00BCD4" stroke-width="3"/>
+    <circle cx="425" cy="68" r="3" fill="#00BCD4"/>
+  </g>
+  <g fill="white" font-family="Arial, sans-serif" font-weight="bold">
+    <text x="120" y="60" font-size="32">WINLIVE</text>
+    <text x="120" y="110" font-size="40">DJ</text>
+    <text x="460" y="130" font-size="32" text-anchor="end">AI</text>
+  </g>
+</svg>
