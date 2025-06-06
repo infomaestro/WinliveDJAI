@@ -206,6 +206,11 @@ template <class ValueType> class ConfigObject {
         return m_settingsPath;
     }
 
+    // Set internal filename
+    void setFilename(QString& file)  {
+        m_filename = file;
+    }
+
     QSet<QString> getGroups();
     QList<ConfigKey> getKeysWithGroup(const QString& group) const;
 

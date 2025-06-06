@@ -719,12 +719,12 @@
     </message>
     <message>
         <location filename="../../src/library/browse/browsetablemodel.cpp" line="224"/>
-        <source>Mixxx Library</source>
+        <source>Winlive Dj AI Library</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/library/browse/browsetablemodel.cpp" line="225"/>
-        <source>Could not load the following file because it is in use by Mixxx or another application.</source>
+        <source>Could not load the following file because it is in use by Winlive Dj AI or another application.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -755,12 +755,12 @@
     <name>CmdlineArgs</name>
     <message>
         <location filename="../../src/util/cmdlineargs.cpp" line="163"/>
-        <source>Mixxx is an open source DJ software. For more information, see: </source>
+        <source>Winlive Dj AI is an open source DJ software. For more information, see: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/util/cmdlineargs.cpp" line="171"/>
-        <source>Starts Mixxx in full-screen mode</source>
+        <source>Starts Winlive Dj AI in full-screen mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -770,7 +770,7 @@
     </message>
     <message>
         <location filename="../../src/util/cmdlineargs.cpp" line="215"/>
-        <source>Top-level directory where Mixxx should look for its resource files such as MIDI mappings, overriding the default installation location.</source>
+        <source>Top-level directory where Winlive Dj AI should look for its resource files such as MIDI mappings, overriding the default installation location.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -780,7 +780,7 @@
     </message>
     <message>
         <location filename="../../src/util/cmdlineargs.cpp" line="253"/>
-        <source>Causes Mixxx to display/log all of the controller data it receives and script functions it loads</source>
+        <source>Causes Winlive Dj AI to display/log all of the controller data it receives and script functions it loads</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -795,17 +795,17 @@
     </message>
     <message>
         <location filename="../../src/util/cmdlineargs.cpp" line="201"/>
-        <source>Top-level directory where Mixxx should look for settings. Default is: </source>
+        <source>Top-level directory where Winlive Dj AI should look for settings. Default is: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/util/cmdlineargs.cpp" line="188"/>
-        <source>Starts Auto DJ when Mixxx is launched.</source>
+        <source>Starts Auto DJ when Winlive Dj AI is launched.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/util/cmdlineargs.cpp" line="194"/>
-        <source>Rescans the library when Mixxx is launched.</source>
+        <source>Rescans the library when Winlive Dj AI is launched.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -825,7 +825,7 @@
     </message>
     <message>
         <location filename="../../src/util/cmdlineargs.cpp" line="290"/>
-        <source>Enables safe-mode. Disables OpenGL waveforms, and spinning vinyl widgets. Try this option if Mixxx is crashing on startup.</source>
+        <source>Enables safe-mode. Disables OpenGL waveforms, and spinning vinyl widgets. Try this option if Winlive Dj AI is crashing on startup.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -845,17 +845,17 @@ trace    - Above + Profiling messages</source>
     </message>
     <message>
         <location filename="../../src/util/cmdlineargs.cpp" line="325"/>
-        <source>Sets the the logging level at which the log buffer is flushed to mixxx.log. &lt;level&gt; is one of the values defined at --log-level above.</source>
+        <source>Sets the the logging level at which the log buffer is flushed to Winlive Dj AI.log. &lt;level&gt; is one of the values defined at --log-level above.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/util/cmdlineargs.cpp" line="339"/>
-        <source>Sets the maximum file size of the mixxx.log file in bytes. Use -1 for unlimited. The default is 100 MB as 1e5 or 100000000.</source>
+        <source>Sets the maximum file size of the Winlive Dj AI.log file in bytes. Use -1 for unlimited. The default is 100 MB as 1e5 or 100000000.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/util/cmdlineargs.cpp" line="351"/>
-        <source>Breaks (SIGINT) Mixxx, if a DEBUG_ASSERT evaluates to false. Under a debugger you can continue afterwards.</source>
+        <source>Breaks (SIGINT) Winlive Dj AI, if a DEBUG_ASSERT evaluates to false. Under a debugger you can continue afterwards.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3908,7 +3908,7 @@ trace    - Above + Profiling messages</source>
     <name>DlgAbout</name>
     <message>
         <location filename="../../src/dialog/dlgabout.cpp" line="38"/>
-        <source>Mixxx %1.%2 Development Team</source>
+        <source>Winlive Dj AI %1.%2 Development Team</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3946,7 +3946,7 @@ trace    - Above + Profiling messages</source>
     <name>DlgAboutDlg</name>
     <message>
         <location filename="../../src/dialog/dlgaboutdlg.ui" line="26"/>
-        <source>About Mixxx</source>
+        <source>About Winlive Dj AI</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4255,14 +4255,14 @@ If no track sources are configured, the track is added from the library instead.
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgprefbeatsdlg.ui" line="20"/>
-        <source>When beat detection is enabled, Mixxx detects the beats per minute and beats of your tracks,
+        <source>When beat detection is enabled, Winlive Dj AI detects the beats per minute and beats of your tracks,
 automatically shows a beat-grid for them, and allows you to synchronize tracks using their beat information.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgprefbeatsdlg.ui" line="62"/>
         <source>Enable fast beat detection.
-If activated Mixxx only analyzes the first minute of a track for beat information.
+If activated Winlive Dj AI only analyzes the first minute of a track for beat information.
 This can speed up beat detection on slower computers but may result in lower quality beatgrids.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4315,7 +4315,7 @@ Often results in higher quality beatgrids, but will not do well on tracks that h
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgprefbeatsdlg.ui" line="74"/>
-        <source>e.g. from 3rd-party programs or Mixxx versions before 1.11.
+        <source>e.g. from 3rd-party programs or Winlive Dj AI versions before 1.11.
 (Not checked: Analyze only, if no beats exist.)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4419,12 +4419,12 @@ Often results in higher quality beatgrids, but will not do well on tracks that h
     </message>
     <message>
         <location filename="../../src/controllers/dlgcontrollerlearning.cpp" line="32"/>
-        <source>Click anywhere in Mixxx or choose a control to learn</source>
+        <source>Click anywhere in Winlive Dj AI or choose a control to learn</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/controllers/dlgcontrollerlearning.cpp" line="33"/>
-        <source>You can click on any button, slider, or knob in Mixxx to teach it that control.  You can also type in the box to search for a control by name, or click the Choose Control button to select from a list.</source>
+        <source>You can click on any button, slider, or knob in Winlive Dj AI to teach it that control.  You can also type in the box to search for a control by name, or click the Choose Control button to select from a list.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4434,7 +4434,7 @@ Often results in higher quality beatgrids, but will not do well on tracks that h
     </message>
     <message>
         <location filename="../../src/controllers/dlgcontrollerlearning.cpp" line="45"/>
-        <source>If you manipulate the control, you should see the Mixxx user interface respond the way you expect.</source>
+        <source>If you manipulate the control, you should see the Winlive Dj AI user interface respond the way you expect.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4474,12 +4474,12 @@ Often results in higher quality beatgrids, but will not do well on tracks that h
     </message>
     <message>
         <location filename="../../src/controllers/dlgcontrollerlearning.cpp" line="495"/>
-        <source>The selected control does not exist.&lt;br&gt;This likely a bug. Please report it on the Mixxx bug tracker.&lt;br&gt;&lt;a href=&apos;https://github.com/mixxxdj/mixxx/issues&apos;&gt;https://github.com/mixxxdj/mixxx/issues&lt;/a&gt;&lt;br&gt;&lt;br&gt;You tried to learn: %1,%2</source>
+        <source>The selected control does not exist.&lt;br&gt;This likely a bug. Please report it on the Winlive Dj AI bug tracker.&lt;br&gt;&lt;a href=&apos;https://github.com/Winlive Dj AIdj/Winlive Dj AI/issues&apos;&gt;https://github.com/Winlive Dj AIdj/Winlive Dj AI/issues&lt;/a&gt;&lt;br&gt;&lt;br&gt;You tried to learn: %1,%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/controllers/dlgcontrollerlearning.cpp" line="521"/>
-        <source>The control you clicked in Mixxx is not learnable.
+        <source>The control you clicked in Winlive Dj AI is not learnable.
 This could be because you are either using an old skin and this control is no longer supported, or you clicked a control that provides visual feedback and can only be mapped to outputs like LEDs via scripts.
 
 You tried to learn: %1,%2</source>
@@ -4508,7 +4508,7 @@ You tried to learn: %1,%2</source>
     </message>
     <message>
         <location filename="../../src/dialog/dlgdevelopertoolsdlg.ui" line="46"/>
-        <source>Dumps all ControlObject values to a csv-file saved in the settings path (e.g. ~/.mixxx)</source>
+        <source>Dumps all ControlObject values to a csv-file saved in the settings path (e.g. ~/.Winlive Dj AI)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4852,7 +4852,7 @@ Two source connections to the same server that have the same mountpoint can not 
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgprefbroadcastdlg.ui" line="506"/>
-        <source>Mixxx Icecast Testing</source>
+        <source>Winlive Dj AI Icecast Testing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4862,7 +4862,7 @@ Two source connections to the same server that have the same mountpoint can not 
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgprefbroadcastdlg.ui" line="551"/>
-        <source>http://www.mixxx.org</source>
+        <source>http://www.Winlive Dj AI.org</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5162,7 +5162,7 @@ Two source connections to the same server that have the same mountpoint can not 
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgprefcolorsdlg.ui" line="106"/>
-        <source>When key colors are enabled, Mixxx will display a color hint
+        <source>When key colors are enabled, Winlive Dj AI will display a color hint
 associated with each key.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5257,7 +5257,7 @@ Apply settings and continue?</source>
     </message>
     <message>
         <location filename="../../src/controllers/dlgprefcontroller.cpp" line="208"/>
-        <source>&lt;font color=&apos;#BB0000&apos;&gt;&lt;b&gt;If you use this mapping your controller may not work correctly. Please select another mapping or disable the controller.&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;br&gt;This mapping was designed for a newer Mixxx Controller Engine and cannot be used on your current Mixxx installation.&lt;br&gt;Your Mixxx installation has Controller Engine version %1. This mapping requires a Controller Engine version &gt;= %2.&lt;br&gt;&lt;br&gt;For more information visit the wiki page on &lt;a href=&apos;https://mixxx.org/wiki/doku.php/controller_engine_versions&apos;&gt;Controller Engine Versions&lt;/a&gt;.</source>
+        <source>&lt;font color=&apos;#BB0000&apos;&gt;&lt;b&gt;If you use this mapping your controller may not work correctly. Please select another mapping or disable the controller.&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;br&gt;This mapping was designed for a newer Winlive Dj AI Controller Engine and cannot be used on your current Winlive Dj AI installation.&lt;br&gt;Your Winlive Dj AI installation has Controller Engine version %1. This mapping requires a Controller Engine version &gt;= %2.&lt;br&gt;&lt;br&gt;For more information visit the wiki page on &lt;a href=&apos;https://Winlive Dj AI.org/wiki/doku.php/controller_engine_versions&apos;&gt;Controller Engine Versions&lt;/a&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5467,18 +5467,18 @@ Apply settings and continue?</source>
     <name>DlgPrefControllers</name>
     <message>
         <location filename="../../src/controllers/dlgprefcontrollers.cpp" line="60"/>
-        <source>%1 is a virtual controller that allows to use e.g. the &apos;MIDI for light&apos; mapping.&lt;br/&gt;You need to restart Mixxx in order to enable it.&lt;br/&gt;&lt;b&gt;Note:&lt;/b&gt; mappings meant for physical controllers can cause issues and even render the Mixxx GUI unresponsive when being loaded to %1.</source>
+        <source>%1 is a virtual controller that allows to use e.g. the &apos;MIDI for light&apos; mapping.&lt;br/&gt;You need to restart Winlive Dj AI in order to enable it.&lt;br/&gt;&lt;b&gt;Note:&lt;/b&gt; mappings meant for physical controllers can cause issues and even render the Winlive Dj AI GUI unresponsive when being loaded to %1.</source>
         <extracomment>text enclosed in &lt;b&gt; is bold, &lt;br/&gt; is a linebreak %1 is the placehodler for &apos;MIDI Through Port&apos;</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/controllers/dlgprefcontrollers.cpp" line="75"/>
-        <source>Mixxx uses &quot;mappings&quot; to connect messages from your controller to controls in Mixxx. If you do not see a mapping for your controller in the &quot;Load Mapping&quot; menu when you click on your controller on the left sidebar, you may be able to download one online from the %1. Place the XML (.xml) and Javascript (.js) file(s) in the &quot;User Mapping Folder&quot; then restart Mixxx. If you download a mapping in a ZIP file, extract the XML and Javascript file(s) from the ZIP file to your &quot;User Mapping Folder&quot; then restart Mixxx.</source>
+        <source>Winlive Dj AI uses &quot;mappings&quot; to connect messages from your controller to controls in Winlive Dj AI. If you do not see a mapping for your controller in the &quot;Load Mapping&quot; menu when you click on your controller on the left sidebar, you may be able to download one online from the %1. Place the XML (.xml) and Javascript (.js) file(s) in the &quot;User Mapping Folder&quot; then restart Winlive Dj AI. If you download a mapping in a ZIP file, extract the XML and Javascript file(s) from the ZIP file to your &quot;User Mapping Folder&quot; then restart Winlive Dj AI.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/controllers/dlgprefcontrollers.cpp" line="91"/>
-        <source>Mixxx DJ Hardware Guide</source>
+        <source>Winlive Dj AI DJ Hardware Guide</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5506,7 +5506,7 @@ Apply settings and continue?</source>
     </message>
     <message>
         <location filename="../../src/controllers/dlgprefcontrollersdlg.ui" line="65"/>
-        <source>Mixxx did not detect any controllers. If you connected the controller while Mixxx was running you must restart Mixxx first.</source>
+        <source>Winlive Dj AI did not detect any controllers. If you connected the controller while Winlive Dj AI was running you must restart Winlive Dj AI first.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5531,7 +5531,7 @@ Apply settings and continue?</source>
     </message>
     <message>
         <location filename="../../src/controllers/dlgprefcontrollersdlg.ui" line="30"/>
-        <source>Controllers are physical devices that send MIDI or HID signals to your computer over a USB connection. These allow you to control Mixxx in a more hands-on way than a keyboard and mouse. Attached controllers that Mixxx recognizes are shown in the &quot;Controllers&quot; section in the sidebar.</source>
+        <source>Controllers are physical devices that send MIDI or HID signals to your computer over a USB connection. These allow you to control Winlive Dj AI in a more hands-on way than a keyboard and mouse. Attached controllers that Winlive Dj AI recognizes are shown in the &quot;Controllers&quot; section in the sidebar.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5647,12 +5647,12 @@ Apply settings and continue?</source>
     <name>DlgPrefDeck</name>
     <message>
         <location filename="../../src/preferences/dialog/dlgprefdeck.cpp" line="60"/>
-        <source>Mixxx mode</source>
+        <source>Winlive Dj AI mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgprefdeck.cpp" line="61"/>
-        <source>Mixxx mode (no blinking)</source>
+        <source>Winlive Dj AI mode (no blinking)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5800,14 +5800,14 @@ Apply settings and continue?</source>
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgprefdeckdlg.ui" line="79"/>
-        <source>Mixxx mode:
+        <source>Winlive Dj AI mode:
 - Cue button while pause at cue point = preview
 - Cue button while pause not at cue point = set cue point
 - Cue button while playing = pause at cue point
-Mixxx mode (no blinking):
-- Same as Mixxx mode but with no blinking indicators
+Winlive Dj AI mode (no blinking):
+- Same as Winlive Dj AI mode but with no blinking indicators
 Pioneer mode:
-- Same as Mixxx mode with a flashing play button
+- Same as Winlive Dj AI mode with a flashing play button
 Denon mode:
 - Cue button at cue point = preview
 - Cue button not at cue point = pause at cue point
@@ -5855,7 +5855,7 @@ CUP mode:
         <location filename="../../src/preferences/dialog/dlgprefdeckdlg.ui" line="55"/>
         <source>When the analyzer places the intro start point automatically,
 it will place it at the main cue point if the main cue point has been set previously.
-This may be helpful for upgrading to Mixxx 2.3 from earlier versions.
+This may be helpful for upgrading to Winlive Dj AI 2.3 from earlier versions.
 
 If this option is disabled, the intro start point is automatically placed at the first sound.</source>
         <translation type="unfinished"></translation>
@@ -6056,7 +6056,7 @@ You can always drag-and-drop tracks on screen to clone a deck.</source>
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgprefdeckdlg.ui" line="618"/>
-        <source>The tempo of a previous soft leader track at the beginning of the transition is kept steady. After the transition, the follower track will maintain this original tempo. This technique serves as a workaround to avoid dynamic tempo changes, as seen during the outro of rubato-style tracks. For instance, it prevents the follower track from continuing with a slowed-down tempo of the soft leader. This corresponds to the behavior before Mixxx 2.4. Changes from explicit selected leaders are always applied.</source>
+        <source>The tempo of a previous soft leader track at the beginning of the transition is kept steady. After the transition, the follower track will maintain this original tempo. This technique serves as a workaround to avoid dynamic tempo changes, as seen during the outro of rubato-style tracks. For instance, it prevents the follower track from continuing with a slowed-down tempo of the soft leader. This corresponds to the behavior before Winlive Dj AI 2.4. Changes from explicit selected leaders are always applied.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6264,7 +6264,7 @@ You can always drag-and-drop tracks on screen to clone a deck.</source>
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgprefinterface.cpp" line="385"/>
-        <source>Mixxx must be restarted before the new locale, scaling or multi-sampling settings will take effect.</source>
+        <source>Winlive Dj AI must be restarted before the new locale, scaling or multi-sampling settings will take effect.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6277,7 +6277,7 @@ You can always drag-and-drop tracks on screen to clone a deck.</source>
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgprefkeydlg.ui" line="20"/>
-        <source>When key detection is enabled, Mixxx detects the musical key of your tracks
+        <source>When key detection is enabled, Winlive Dj AI detects the musical key of your tracks
 and allows you to pitch adjust them for harmonic mixing.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6521,12 +6521,12 @@ and allows you to pitch adjust them for harmonic mixing.</source>
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgpreflibrary.cpp" line="417"/>
-        <source>Mixxx will no longer watch this directory for new tracks. What would you like to do with the tracks from this directory and subdirectories?&lt;ul&gt;&lt;li&gt;Hide all tracks from this directory and subdirectories.&lt;/li&gt;&lt;li&gt;Delete all metadata for these tracks from Mixxx permanently.&lt;/li&gt;&lt;li&gt;Leave the tracks unchanged in your library.&lt;/li&gt;&lt;/ul&gt;Hiding tracks saves their metadata in case you re-add them in the future.</source>
+        <source>Winlive Dj AI will no longer watch this directory for new tracks. What would you like to do with the tracks from this directory and subdirectories?&lt;ul&gt;&lt;li&gt;Hide all tracks from this directory and subdirectories.&lt;/li&gt;&lt;li&gt;Delete all metadata for these tracks from Winlive Dj AI permanently.&lt;/li&gt;&lt;li&gt;Leave the tracks unchanged in your library.&lt;/li&gt;&lt;/ul&gt;Hiding tracks saves their metadata in case you re-add them in the future.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgpreflibrary.cpp" line="428"/>
-        <source>Metadata means all track details (artist, title, playcount, etc.) as well as beatgrids, hotcues, and loops. This choice only affects the Mixxx library. No files on disk will be changed or deleted.</source>
+        <source>Metadata means all track details (artist, title, playcount, etc.) as well as beatgrids, hotcues, and loops. This choice only affects the Winlive Dj AI library. No files on disk will be changed or deleted.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6559,7 +6559,7 @@ and allows you to pitch adjust them for harmonic mixing.</source>
     <name>DlgPrefLibraryDlg</name>
     <message>
         <location filename="../../src/preferences/dialog/dlgpreflibrarydlg.ui" line="73"/>
-        <source>If removed, Mixxx will no longer watch this directory and its subdirectories for new tracks.</source>
+        <source>If removed, Winlive Dj AI will no longer watch this directory and its subdirectories for new tracks.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6569,7 +6569,7 @@ and allows you to pitch adjust them for harmonic mixing.</source>
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgpreflibrarydlg.ui" line="48"/>
-        <source>Add a directory where your music is stored. Mixxx will watch this directory and its subdirectories for new tracks.</source>
+        <source>Add a directory where your music is stored. Winlive Dj AI will watch this directory and its subdirectories for new tracks.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6584,13 +6584,13 @@ and allows you to pitch adjust them for harmonic mixing.</source>
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgpreflibrarydlg.ui" line="59"/>
-        <source>If an existing music directory is moved, Mixxx doesn&apos;t know where to find the audio files in it. Choose Relink to select the music directory in its new location. &lt;br/&gt; This will re-establish the links to the audio files in the Mixxx library.</source>
+        <source>If an existing music directory is moved, Winlive Dj AI doesn&apos;t know where to find the audio files in it. Choose Relink to select the music directory in its new location. &lt;br/&gt; This will re-establish the links to the audio files in the Winlive Dj AI library.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgpreflibrarydlg.ui" line="62"/>
         <source>Relink</source>
-        <extracomment>This will re-establish the links to the audio files in the Mixxx database if you move an music directory to a new location.</extracomment>
+        <extracomment>This will re-establish the links to the audio files in the Winlive Dj AI database if you move an music directory to a new location.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6635,7 +6635,7 @@ and allows you to pitch adjust them for harmonic mixing.</source>
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgpreflibrarydlg.ui" line="406"/>
-        <source>History playlist with less than N tracks will be deleted&lt;br/&gt;&lt;br/&gt;Note: the cleanup will be performed during startup and shutdown of Mixxx.</source>
+        <source>History playlist with less than N tracks will be deleted&lt;br/&gt;&lt;br/&gt;Note: the cleanup will be performed during startup and shutdown of Winlive Dj AI.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6720,17 +6720,17 @@ and allows you to pitch adjust them for harmonic mixing.</source>
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgpreflibrarydlg.ui" line="606"/>
-        <source>The Mixxx settings directory contains the library database, various configuration files, log files, track analysis data, as well as custom controller mappings.</source>
+        <source>The Winlive Dj AI settings directory contains the library database, various configuration files, log files, track analysis data, as well as custom controller mappings.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgpreflibrarydlg.ui" line="629"/>
-        <source>Edit those files only if you know what you are doing and only while Mixxx is not running.</source>
+        <source>Edit those files only if you know what you are doing and only while Winlive Dj AI is not running.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgpreflibrarydlg.ui" line="645"/>
-        <source>Open Mixxx Settings Folder</source>
+        <source>Open Winlive Dj AI Settings Folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6770,7 +6770,7 @@ and allows you to pitch adjust them for harmonic mixing.</source>
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgpreflibrarydlg.ui" line="139"/>
-        <source>Keeps track color, beat grid, bpm lock, cue points, and loops synchronized with SERATO_MARKERS/MARKERS2 file tags.&lt;br/&gt;&lt;br/&gt;WARNING: Enabling this option also enables the reimport of Serato metadata after files have been modified outside of Mixxx. On reimport existing metadata in Mixxx is replaced with the metadata found in file tags. Custom metadata not included in file tags like loop colors is lost.</source>
+        <source>Keeps track color, beat grid, bpm lock, cue points, and loops synchronized with SERATO_MARKERS/MARKERS2 file tags.&lt;br/&gt;&lt;br/&gt;WARNING: Enabling this option also enables the reimport of Serato metadata after files have been modified outside of Winlive Dj AI. On reimport existing metadata in Winlive Dj AI is replaced with the metadata found in file tags. Custom metadata not included in file tags like loop colors is lost.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6800,7 +6800,7 @@ and allows you to pitch adjust them for harmonic mixing.</source>
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgpreflibrarydlg.ui" line="516"/>
-        <source>You will need to restart Mixxx for these settings to take effect.</source>
+        <source>You will need to restart Winlive Dj AI for these settings to take effect.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7142,7 +7142,7 @@ and allows you to pitch adjust them for harmonic mixing.</source>
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgprefmodplugdlg.ui" line="393"/>
-        <source>Module files are decoded at once and kept in RAM to allow for seeking and smooth operation in Mixxx. About 10MB of RAM are required for 1 minute of audio.</source>
+        <source>Module files are decoded at once and kept in RAM to allow for seeking and smooth operation in Winlive Dj AI. About 10MB of RAM are required for 1 minute of audio.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7366,7 +7366,7 @@ and allows you to pitch adjust them for harmonic mixing.</source>
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgprefreplaygaindlg.ui" line="278"/>
-        <source>ReplayGain targets a reference loudness of -18 LUFS (Loudness Units relative to Full Scale). You may increase it if you find Mixxx is too quiet or reduce it if you find that your tracks are clipping. You may also want to decrease the volume of unanalyzed tracks if you find they are often louder than ReplayGained tracks. For podcasting a loudness of -16 LUFS is recommended.
+        <source>ReplayGain targets a reference loudness of -18 LUFS (Loudness Units relative to Full Scale). You may increase it if you find Winlive Dj AI is too quiet or reduce it if you find that your tracks are clipping. You may also want to decrease the volume of unanalyzed tracks if you find they are often louder than ReplayGained tracks. For podcasting a loudness of -16 LUFS is recommended.
 
 The loudness target is approximate and assumes track pregain and main output level are unchanged.</source>
         <translation type="unfinished"></translation>
@@ -7413,7 +7413,7 @@ The loudness target is approximate and assumes track pregain and main output lev
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgprefreplaygaindlg.ui" line="293"/>
-        <source>When an unanalyzed track is playing, Mixxx will avoid an abrupt volume change by not applying a newly calculated ReplayGain value.</source>
+        <source>When an unanalyzed track is playing, Winlive Dj AI will avoid an abrupt volume change by not applying a newly calculated ReplayGain value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7491,12 +7491,12 @@ The loudness target is approximate and assumes track pregain and main output lev
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgprefsound.cpp" line="306"/>
-        <source>The %1 lists sound cards and controllers you may want to consider for using Mixxx.</source>
+        <source>The %1 lists sound cards and controllers you may want to consider for using Winlive Dj AI.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgprefsound.cpp" line="310"/>
-        <source>Mixxx DJ Hardware Guide</source>
+        <source>Winlive Dj AI DJ Hardware Guide</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7506,7 +7506,7 @@ The loudness target is approximate and assumes track pregain and main output lev
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgprefsound.cpp" line="360"/>
-        <source>Mixxx must be restarted before the multi-threaded RubberBand setting change will take effect.</source>
+        <source>Winlive Dj AI must be restarted before the multi-threaded RubberBand setting change will take effect.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7562,7 +7562,7 @@ The loudness target is approximate and assumes track pregain and main output lev
     <message>
         <location filename="../../src/preferences/dialog/dlgprefsound.cpp" line="1024"/>
         <location filename="../../src/preferences/dialog/dlgprefsound.cpp" line="1034"/>
-        <source>Refer to the Mixxx User Manual for details.</source>
+        <source>Refer to the Winlive Dj AI User Manual for details.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7734,7 +7734,7 @@ The loudness target is approximate and assumes track pregain and main output lev
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgprefsounddlg.ui" line="352"/>
-        <source>Downsize your audio buffer to improve Mixxx&apos;s responsiveness.</source>
+        <source>Downsize your audio buffer to improve Winlive Dj AI&apos;s responsiveness.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8116,7 +8116,7 @@ Select from different types of displays for the waveform, which differ primarily
     </message>
     <message>
         <location filename="../../src/preferences/dialog/dlgprefwaveformdlg.ui" line="665"/>
-        <source>Mixxx caches the waveforms of your tracks on disk the first time you load a track. This reduces CPU usage when you are playing live but requires extra disk space.</source>
+        <source>Winlive Dj AI caches the waveforms of your tracks on disk the first time you load a track. This reduces CPU usage when you are playing live but requires extra disk space.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9104,7 +9104,7 @@ Often results in higher quality beatgrids, but will not do well on tracks that h
     <message>
         <location filename="../../src/effects/presets/effectchainpresetmanager.cpp" line="114"/>
         <location filename="../../src/effects/presets/effectchainpresetmanager.cpp" line="216"/>
-        <source>Mixxx Effect Chain Presets</source>
+        <source>Winlive Dj AI Effect Chain Presets</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9278,7 +9278,7 @@ Often results in higher quality beatgrids, but will not do well on tracks that h
     <message>
         <location filename="../../src/effects/backends/effectsbackend.cpp" line="10"/>
         <source>Built-In</source>
-        <extracomment>Backend type for effects that are built into Mixxx.</extracomment>
+        <extracomment>Backend type for effects that are built into Winlive Dj AI.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9529,7 +9529,7 @@ Often results in higher quality beatgrids, but will not do well on tracks that h
         <location filename="../../src/skin/legacy/legacyskinparser.cpp" line="1389"/>
         <location filename="../../src/skin/legacy/legacyskinparser.cpp" line="1479"/>
         <source>Safe Mode Enabled</source>
-        <extracomment>Shown when Mixxx is running in safe mode.</extracomment>
+        <extracomment>Shown when Winlive Dj AI is running in safe mode.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9700,7 +9700,7 @@ Do you really want to overwrite it?</source>
     </message>
     <message>
         <location filename="../../src/library/scanner/libraryscannerdlg.cpp" line="19"/>
-        <source>It&apos;s taking Mixxx a minute to scan your music library, please wait...</source>
+        <source>It&apos;s taking Winlive Dj AI a minute to scan your music library, please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9731,17 +9731,17 @@ Do you really want to overwrite it?</source>
     <name>MidiController</name>
     <message>
         <location filename="../../src/controllers/midi/midicontroller.cpp" line="188"/>
-        <source>MixxxControl(s) not found</source>
+        <source>Winlive Dj AIControl(s) not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/controllers/midi/midicontroller.cpp" line="189"/>
-        <source>One or more MixxxControls specified in the outputs section of the loaded mapping were invalid.</source>
+        <source>One or more Winlive Dj AIControls specified in the outputs section of the loaded mapping were invalid.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/controllers/midi/midicontroller.cpp" line="196"/>
-        <source>* Make sure the MixxxControls in question actually exist. Visit the manual for a complete list: </source>
+        <source>* Make sure the Winlive Dj AIControls in question actually exist. Visit the manual for a complete list: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9751,7 +9751,7 @@ Do you really want to overwrite it?</source>
     </message>
     <message>
         <location filename="../../src/controllers/midi/midicontroller.cpp" line="193"/>
-        <source>* Check to see that the MixxxControl names are spelled correctly in the mapping file (.xml)
+        <source>* Check to see that the Winlive Dj AIControl names are spelled correctly in the mapping file (.xml)
 </source>
         <translation type="unfinished"></translation>
     </message>
@@ -9765,318 +9765,318 @@ Do you really want to overwrite it?</source>
     </message>
 </context>
 <context>
-    <name>MixxxDb</name>
+    <name>Winlive Dj AIDb</name>
     <message>
-        <location filename="../../src/database/mixxxdb.cpp" line="76"/>
+        <location filename="../../src/database/Winlive Dj AIdb.cpp" line="76"/>
         <source>Click OK to exit.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/database/mixxxdb.cpp" line="77"/>
+        <location filename="../../src/database/Winlive Dj AIdb.cpp" line="77"/>
         <source>Cannot upgrade database schema</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/database/mixxxdb.cpp" line="79"/>
+        <location filename="../../src/database/Winlive Dj AIdb.cpp" line="79"/>
         <source>Unable to upgrade your database schema to version %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/database/mixxxdb.cpp" line="81"/>
+        <location filename="../../src/database/Winlive Dj AIdb.cpp" line="81"/>
         <source>For help with database issues consult:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/database/mixxxdb.cpp" line="93"/>
-        <source>Your mixxxdb.sqlite file may be corrupt.</source>
+        <location filename="../../src/database/Winlive Dj AIdb.cpp" line="93"/>
+        <source>Your Winlive Dj AIdb.sqlite file may be corrupt.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/database/mixxxdb.cpp" line="94"/>
-        <source>Try renaming it and restarting Mixxx.</source>
+        <location filename="../../src/database/Winlive Dj AIdb.cpp" line="94"/>
+        <source>Try renaming it and restarting Winlive Dj AI.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/database/mixxxdb.cpp" line="102"/>
-        <source>Your mixxxdb.sqlite file was created by a newer version of Mixxx and is incompatible.</source>
+        <location filename="../../src/database/Winlive Dj AIdb.cpp" line="102"/>
+        <source>Your Winlive Dj AIdb.sqlite file was created by a newer version of Winlive Dj AI and is incompatible.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/database/mixxxdb.cpp" line="111"/>
+        <location filename="../../src/database/Winlive Dj AIdb.cpp" line="111"/>
         <source>The database schema file is invalid.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>MixxxLibraryFeature</name>
+    <name>Winlive Dj AILibraryFeature</name>
     <message>
-        <location filename="../../src/library/mixxxlibraryfeature.cpp" line="29"/>
+        <location filename="../../src/library/Winlive Dj AIlibraryfeature.cpp" line="29"/>
         <source>Missing Tracks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/library/mixxxlibraryfeature.cpp" line="30"/>
+        <location filename="../../src/library/Winlive Dj AIlibraryfeature.cpp" line="30"/>
         <source>Hidden Tracks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/library/mixxxlibraryfeature.cpp" line="124"/>
+        <location filename="../../src/library/Winlive Dj AIlibraryfeature.cpp" line="124"/>
         <source>Export to Engine DJ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/library/mixxxlibraryfeature.cpp" line="152"/>
+        <location filename="../../src/library/Winlive Dj AIlibraryfeature.cpp" line="152"/>
         <source>Tracks</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>MixxxMainWindow</name>
+    <name>Winlive Dj AIMainWindow</name>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="672"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="672"/>
         <source>Sound Device Busy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="681"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="681"/>
         <source>&lt;b&gt;Retry&lt;/b&gt; after closing the other application or reconnecting a sound device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="685"/>
-        <location filename="../../src/mixxxmainwindow.cpp" line="712"/>
-        <location filename="../../src/mixxxmainwindow.cpp" line="736"/>
-        <source>&lt;b&gt;Reconfigure&lt;/b&gt; Mixxx&apos;s sound device settings.</source>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="685"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="712"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="736"/>
+        <source>&lt;b&gt;Reconfigure&lt;/b&gt; Winlive Dj AI&apos;s sound device settings.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="688"/>
-        <location filename="../../src/mixxxmainwindow.cpp" line="715"/>
-        <source>Get &lt;b&gt;Help&lt;/b&gt; from the Mixxx Wiki.</source>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="688"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="715"/>
+        <source>Get &lt;b&gt;Help&lt;/b&gt; from the Winlive Dj AI Wiki.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="691"/>
-        <location filename="../../src/mixxxmainwindow.cpp" line="718"/>
-        <location filename="../../src/mixxxmainwindow.cpp" line="739"/>
-        <source>&lt;b&gt;Exit&lt;/b&gt; Mixxx.</source>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="691"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="718"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="739"/>
+        <source>&lt;b&gt;Exit&lt;/b&gt; Winlive Dj AI.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="632"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="632"/>
         <source>Retry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="220"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="220"/>
         <source>skin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="585"/>
-        <source>Allow Mixxx to hide the menu bar?</source>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="585"/>
+        <source>Allow Winlive Dj AI to hide the menu bar?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="587"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="587"/>
         <source>Hide</source>
         <extracomment>Always show the menu bar?</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="588"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="588"/>
         <source>Always show</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="591"/>
-        <source>The Mixxx menu bar is hidden and can be toggled with a single press of the &lt;b&gt;Alt&lt;/b&gt; key.&lt;br&gt;&lt;br&gt;Click &lt;b&gt;%1&lt;/b&gt; to agree.&lt;br&gt;&lt;br&gt;Click &lt;b&gt;%2&lt;/b&gt; to disable that, for example if you don&apos;t use Mixxx with a keyboard.&lt;br&gt;&lt;br&gt;You can change this setting any time in Preferences -&gt; Interface.&lt;br&gt;</source>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="591"/>
+        <source>The Winlive Dj AI menu bar is hidden and can be toggled with a single press of the &lt;b&gt;Alt&lt;/b&gt; key.&lt;br&gt;&lt;br&gt;Click &lt;b&gt;%1&lt;/b&gt; to agree.&lt;br&gt;&lt;br&gt;Click &lt;b&gt;%2&lt;/b&gt; to disable that, for example if you don&apos;t use Winlive Dj AI with a keyboard.&lt;br&gt;&lt;br&gt;You can change this setting any time in Preferences -&gt; Interface.&lt;br&gt;</source>
         <extracomment>Keep formatting tags &lt;b&gt; (bold text) and &lt;br&gt; (linebreak). %1 is the placeholder for the &apos;Always show&apos; button label</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="606"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="606"/>
         <source>Ask me again</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="634"/>
-        <location filename="../../src/mixxxmainwindow.cpp" line="747"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="634"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="747"/>
         <source>Reconfigure</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="636"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="636"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="638"/>
-        <location filename="../../src/mixxxmainwindow.cpp" line="749"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="638"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="749"/>
         <source>Exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="675"/>
-        <location filename="../../src/mixxxmainwindow.cpp" line="701"/>
-        <source>Mixxx was unable to open all the configured sound devices.</source>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="675"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="701"/>
+        <source>Winlive Dj AI was unable to open all the configured sound devices.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="699"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="699"/>
         <source>Sound Device Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="709"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="709"/>
         <source>&lt;b&gt;Retry&lt;/b&gt; after fixing an issue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="727"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="727"/>
         <source>No Output Devices</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="729"/>
-        <source>Mixxx was configured without any output sound devices. Audio processing will be disabled without a configured output device.</source>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="729"/>
+        <source>Winlive Dj AI was configured without any output sound devices. Audio processing will be disabled without a configured output device.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="733"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="733"/>
         <source>&lt;b&gt;Continue&lt;/b&gt; without any outputs.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="745"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="745"/>
         <source>Continue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="1019"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="1019"/>
         <source>Load track to Deck %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="1020"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="1020"/>
         <source>Deck %1 is currently playing a track.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="1022"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="1022"/>
         <source>Are you sure you want to load a new track?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="1112"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="1112"/>
         <source>There is no input device selected for this vinyl control.
 Please select an input device in the sound hardware preferences first.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="1126"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="1126"/>
         <source>There is no input device selected for this passthrough control.
 Please select an input device in the sound hardware preferences first.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="1140"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="1140"/>
         <source>There is no input device selected for this microphone.
 Do you want to select an input device?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="1154"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="1154"/>
         <source>There is no input device selected for this auxiliary.
 Do you want to select an input device?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="1180"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="1180"/>
         <source>Scan took %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="1182"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="1182"/>
         <source>No changes detected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="1184"/>
-        <location filename="../../src/mixxxmainwindow.cpp" line="1206"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="1184"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="1206"/>
         <source>%1 tracks in total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="1188"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="1188"/>
         <source>%1 new tracks found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="1192"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="1192"/>
         <source>%1 moved tracks detected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="1196"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="1196"/>
         <source>%1 tracks are missing (%2 total)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="1202"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="1202"/>
         <source>%1 tracks have been rediscovered</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="1211"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="1211"/>
         <source>Library scan finished</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="1275"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="1275"/>
         <source>Error in skin file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="1276"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="1276"/>
         <source>The selected skin cannot be loaded.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="1450"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="1450"/>
         <source>OpenGL Direct Rendering</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="1451"/>
-        <source>Direct rendering is not enabled on your machine.&lt;br&gt;&lt;br&gt;This means that the waveform displays will be very&lt;br&gt;&lt;b&gt;slow and may tax your CPU heavily&lt;/b&gt;. Either update your&lt;br&gt;configuration to enable direct rendering, or disable&lt;br&gt;the waveform displays in the Mixxx preferences by selecting&lt;br&gt;&quot;Empty&quot; as the waveform display in the &apos;Interface&apos; section.</source>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="1451"/>
+        <source>Direct rendering is not enabled on your machine.&lt;br&gt;&lt;br&gt;This means that the waveform displays will be very&lt;br&gt;&lt;b&gt;slow and may tax your CPU heavily&lt;/b&gt;. Either update your&lt;br&gt;configuration to enable direct rendering, or disable&lt;br&gt;the waveform displays in the Winlive Dj AI preferences by selecting&lt;br&gt;&quot;Empty&quot; as the waveform display in the &apos;Interface&apos; section.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="1486"/>
-        <location filename="../../src/mixxxmainwindow.cpp" line="1494"/>
-        <location filename="../../src/mixxxmainwindow.cpp" line="1503"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="1486"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="1494"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="1503"/>
         <source>Confirm Exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="1487"/>
-        <source>A deck is currently playing. Exit Mixxx?</source>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="1487"/>
+        <source>A deck is currently playing. Exit Winlive Dj AI?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="1495"/>
-        <source>A sampler is currently playing. Exit Mixxx?</source>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="1495"/>
+        <source>A sampler is currently playing. Exit Winlive Dj AI?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="1504"/>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="1504"/>
         <source>The preferences window is still open.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mixxxmainwindow.cpp" line="1505"/>
-        <source>Discard any changes and exit Mixxx?</source>
+        <location filename="../../src/Winlive Dj AImainwindow.cpp" line="1505"/>
+        <source>Discard any changes and exit Winlive Dj AI?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10141,7 +10141,7 @@ Do you want to select an input device?</source>
     <name>PredefinedColorPaletes</name>
     <message>
         <location filename="../../src/util/color/predefinedcolorpalettes.cpp" line="254"/>
-        <source>Mixxx Hotcue Colors</source>
+        <source>Winlive Dj AI Hotcue Colors</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10174,7 +10174,7 @@ Do you want to select an input device?</source>
     </message>
     <message>
         <location filename="../../src/util/color/predefinedcolorpalettes.cpp" line="372"/>
-        <source>Mixxx Track Colors</source>
+        <source>Winlive Dj AI Track Colors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -10199,7 +10199,7 @@ Do you want to select an input device?</source>
     </message>
     <message>
         <location filename="../../src/util/color/predefinedcolorpalettes.cpp" line="463"/>
-        <source>Mixxx Key Colors</source>
+        <source>Winlive Dj AI Key Colors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -10232,12 +10232,12 @@ Do you want to select an input device?</source>
     <name>QMessageBox</name>
     <message>
         <location filename="../../src/preferences/upgrade.cpp" line="639"/>
-        <source>Upgrading Mixxx</source>
+        <source>Upgrading Winlive Dj AI</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/preferences/upgrade.cpp" line="640"/>
-        <source>Mixxx now supports displaying cover art.
+        <source>Winlive Dj AI now supports displaying cover art.
 Do you want to scan your library for cover files now?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10253,17 +10253,17 @@ Do you want to scan your library for cover files now?</source>
     </message>
     <message>
         <location filename="../../src/preferences/upgrade.cpp" line="653"/>
-        <source>Upgrading Mixxx from v1.9.x/1.10.x.</source>
+        <source>Upgrading Winlive Dj AI from v1.9.x/1.10.x.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/preferences/upgrade.cpp" line="655"/>
-        <source>Mixxx has a new and improved beat detector.</source>
+        <source>Winlive Dj AI has a new and improved beat detector.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/preferences/upgrade.cpp" line="656"/>
-        <source>When you load tracks, Mixxx can re-analyze them and generate new, more accurate beatgrids. This will make automatic beatsync and looping more reliable.</source>
+        <source>When you load tracks, Winlive Dj AI can re-analyze them and generate new, more accurate beatgrids. This will make automatic beatsync and looping more reliable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -10273,7 +10273,7 @@ Do you want to scan your library for cover files now?</source>
     </message>
     <message>
         <location filename="../../src/preferences/upgrade.cpp" line="662"/>
-        <source>If you do not want Mixxx to re-analyze your tracks, choose &quot;Keep Current Beatgrids&quot;. You can change this setting at any time from the &quot;Beat Detection&quot; section of the Preferences.</source>
+        <source>If you do not want Winlive Dj AI to re-analyze your tracks, choose &quot;Keep Current Beatgrids&quot;. You can change this setting at any time from the &quot;Beat Detection&quot; section of the Preferences.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -10473,7 +10473,7 @@ Do you want to scan your library for cover files now?</source>
     </message>
     <message>
         <location filename="../../src/util/sandbox.cpp" line="122"/>
-        <source>Mixxx Needs Access to: %1</source>
+        <source>Winlive Dj AI Needs Access to: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -10482,26 +10482,26 @@ Do you want to scan your library for cover files now?</source>
 
 %1
 
-After clicking OK, you will see a file picker. Please select &apos;%2&apos; to proceed or click Cancel if you don&apos;t want to grant Mixxx access and abort this action.</source>
+After clicking OK, you will see a file picker. Please select &apos;%2&apos; to proceed or click Cancel if you don&apos;t want to grant Winlive Dj AI access and abort this action.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/util/sandbox.cpp" line="163"/>
-        <source>You selected the wrong file. To grant Mixxx access, please select the file &apos;%1&apos;. If you do not want to continue, press Cancel.</source>
+        <source>You selected the wrong file. To grant Winlive Dj AI access, please select the file &apos;%1&apos;. If you do not want to continue, press Cancel.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/util/sandbox.cpp" line="465"/>
-        <source>Upgrading old Mixxx settings</source>
+        <source>Upgrading old Winlive Dj AI settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/util/sandbox.cpp" line="468"/>
-        <source>Due to macOS sandboxing, Mixxx needs your permission to access your music library and settings from Mixxx versions before 2.3.0. After clicking OK, you will see a file selection dialog. 
+        <source>Due to macOS sandboxing, Winlive Dj AI needs your permission to access your music library and settings from Winlive Dj AI versions before 2.3.0. After clicking OK, you will see a file selection dialog. 
 
-To allow Mixxx to use your old library and settings, click the Open button in the file selection dialog. Mixxx will then move your old settings into the sandbox. This only needs to be done once.
+To allow Winlive Dj AI to use your old library and settings, click the Open button in the file selection dialog. Winlive Dj AI will then move your old settings into the sandbox. This only needs to be done once.
 
-If you do not want to grant Mixxx access, click Cancel on the file picker. Mixxx will create a new music library and use default settings.</source>
+If you do not want to grant Winlive Dj AI access, click Cancel on the file picker. Winlive Dj AI will create a new music library and use default settings.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -10793,7 +10793,7 @@ With width at zero, this allows for manually sweeping over the entire delay rang
     </message>
     <message>
         <location filename="../../src/effects/backends/builtin/metronomeeffect.cpp" line="87"/>
-        <source>The Mixxx Team</source>
+        <source>The Winlive Dj AI Team</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -11592,7 +11592,7 @@ Fully right: end of the effect period</source>
     </message>
     <message>
         <location filename="../../src/encoder/encoderfdkaac.cpp" line="258"/>
-        <source>&lt;html&gt;Mixxx cannot record or stream in AAC or HE-AAC without the FDK-AAC encoder. In order to record or stream in AAC or AAC+, you need to download &lt;b&gt;libfdk-aac&lt;/b&gt; and install it on your system.</source>
+        <source>&lt;html&gt;Winlive Dj AI cannot record or stream in AAC or HE-AAC without the FDK-AAC encoder. In order to record or stream in AAC or AAC+, you need to download &lt;b&gt;libfdk-aac&lt;/b&gt; and install it on your system.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -12071,7 +12071,7 @@ may introduce a &apos;pumping&apos; effect and/or distortion.</source>
     </message>
     <message>
         <location filename="../../src/library/rekordbox/rekordboxfeature.cpp" line="1424"/>
-        <source>Reads databases exported for Pioneer CDJ / XDJ players using the Rekordbox Export mode.&lt;br/&gt;Rekordbox can only export to USB or SD devices with a FAT or HFS file system.&lt;br/&gt;Mixxx can read a database from any device that contains the database folders (&lt;tt&gt;PIONEER&lt;/tt&gt; and &lt;tt&gt;Contents&lt;/tt&gt;).&lt;br/&gt;Not supported are Rekordbox databases that have been moved to an external device via&lt;br/&gt;&lt;i&gt;Preferences &gt; Advanced &gt; Database management&lt;/i&gt;.&lt;br/&gt;&lt;br/&gt;The following data is read:</source>
+        <source>Reads databases exported for Pioneer CDJ / XDJ players using the Rekordbox Export mode.&lt;br/&gt;Rekordbox can only export to USB or SD devices with a FAT or HFS file system.&lt;br/&gt;Winlive Dj AI can read a database from any device that contains the database folders (&lt;tt&gt;PIONEER&lt;/tt&gt; and &lt;tt&gt;Contents&lt;/tt&gt;).&lt;br/&gt;Not supported are Rekordbox databases that have been moved to an external device via&lt;br/&gt;&lt;i&gt;Preferences &gt; Advanced &gt; Database management&lt;/i&gt;.&lt;br/&gt;&lt;br/&gt;The following data is read:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -12081,7 +12081,7 @@ may introduce a &apos;pumping&apos; effect and/or distortion.</source>
     </message>
     <message>
         <location filename="../../src/library/rekordbox/rekordboxfeature.cpp" line="1445"/>
-        <source>Loops (only the first loop is currently usable in Mixxx)</source>
+        <source>Loops (only the first loop is currently usable in Winlive Dj AI)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -12118,7 +12118,7 @@ may introduce a &apos;pumping&apos; effect and/or distortion.</source>
     <name>SamplerBank</name>
     <message>
         <location filename="../../src/mixer/samplerbank.cpp" line="21"/>
-        <source>Mixxx Sampler Banks (*.xml)</source>
+        <source>Winlive Dj AI Sampler Banks (*.xml)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -12258,7 +12258,7 @@ may introduce a &apos;pumping&apos; effect and/or distortion.</source>
     <message>
         <location filename="../../src/engine/sidechain/shoutconnection.cpp" line="81"/>
         <location filename="../../src/engine/sidechain/shoutconnection.cpp" line="86"/>
-        <source>Mixxx encountered a problem</source>
+        <source>Winlive Dj AI encountered a problem</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -12368,7 +12368,7 @@ may introduce a &apos;pumping&apos; effect and/or distortion.</source>
     </message>
     <message>
         <location filename="../../src/engine/sidechain/shoutconnection.cpp" line="405"/>
-        <source>See https://github.com/mixxxdj/mixxx/issues/5701 for more information.</source>
+        <source>See https://github.com/Winlive Dj AIdj/Winlive Dj AI/issues/5701 for more information.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -13153,7 +13153,7 @@ may introduce a &apos;pumping&apos; effect and/or distortion.</source>
     </message>
     <message>
         <location filename="../../src/skin/legacy/tooltips.cpp" line="570"/>
-        <source>Set cue point (Pioneer/Mixxx/Numark mode), set cue point and play after release (CUP mode) OR preview from it (Denon mode).</source>
+        <source>Set cue point (Pioneer/Winlive Dj AI/Numark mode), set cue point and play after release (CUP mode) OR preview from it (Denon mode).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -14220,7 +14220,7 @@ Use this to change only the effected (wet) signal with EQ and filter effects.</s
     </message>
     <message>
         <location filename="../../src/skin/legacy/tooltips.cpp" line="1159"/>
-        <source>Refer to the web page on the Mixxx wiki for your controller for more information.</source>
+        <source>Refer to the web page on the Winlive Dj AI wiki for your controller for more information.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -14396,7 +14396,7 @@ Use this to change only the effected (wet) signal with EQ and filter effects.</s
     </message>
     <message>
         <location filename="../../src/skin/legacy/tooltips.cpp" line="781"/>
-        <source>When disabled, the track is controlled by Mixxx playback controls.</source>
+        <source>When disabled, the track is controlled by Winlive Dj AI playback controls.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -15474,7 +15474,7 @@ This can not be undone!</source>
     </message>
     <message>
         <location filename="../../src/widget/wmainmenubar.cpp" line="124"/>
-        <source>Quits Mixxx</source>
+        <source>Quits Winlive Dj AI</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -15606,7 +15606,7 @@ This can not be undone!</source>
     </message>
     <message>
         <location filename="../../src/widget/wmainmenubar.cpp" line="285"/>
-        <source>Show the microphone section of the Mixxx interface.</source>
+        <source>Show the microphone section of the Winlive Dj AI interface.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -15622,7 +15622,7 @@ This can not be undone!</source>
     </message>
     <message>
         <location filename="../../src/widget/wmainmenubar.cpp" line="301"/>
-        <source>Show the vinyl control section of the Mixxx interface.</source>
+        <source>Show the vinyl control section of the Winlive Dj AI interface.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -15638,7 +15638,7 @@ This can not be undone!</source>
     </message>
     <message>
         <location filename="../../src/widget/wmainmenubar.cpp" line="317"/>
-        <source>Show the preview deck in the Mixxx interface.</source>
+        <source>Show the preview deck in the Winlive Dj AI interface.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -15654,7 +15654,7 @@ This can not be undone!</source>
     </message>
     <message>
         <location filename="../../src/widget/wmainmenubar.cpp" line="333"/>
-        <source>Show cover art in the Mixxx interface.</source>
+        <source>Show cover art in the Winlive Dj AI interface.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -15686,7 +15686,7 @@ This can not be undone!</source>
     </message>
     <message>
         <location filename="../../src/widget/wmainmenubar.cpp" line="381"/>
-        <source>Display Mixxx using the full screen</source>
+        <source>Display Winlive Dj AI using the full screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -15701,7 +15701,7 @@ This can not be undone!</source>
     </message>
     <message>
         <location filename="../../src/widget/wmainmenubar.cpp" line="424"/>
-        <source>Use timecoded vinyls on external turntables to control Mixxx</source>
+        <source>Use timecoded vinyls on external turntables to control Winlive Dj AI</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -15761,7 +15761,7 @@ This can not be undone!</source>
     </message>
     <message>
         <location filename="../../src/widget/wmainmenubar.cpp" line="522"/>
-        <source>Change Mixxx settings (e.g. playback, MIDI, controls)</source>
+        <source>Change Winlive Dj AI settings (e.g. playback, MIDI, controls)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -15885,7 +15885,7 @@ This can not be undone!</source>
     </message>
     <message>
         <location filename="../../src/widget/wmainmenubar.cpp" line="658"/>
-        <source>Get help with Mixxx</source>
+        <source>Get help with Winlive Dj AI</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -15895,7 +15895,7 @@ This can not be undone!</source>
     </message>
     <message>
         <location filename="../../src/widget/wmainmenubar.cpp" line="674"/>
-        <source>Read the Mixxx user manual.</source>
+        <source>Read the Winlive Dj AI user manual.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -15915,7 +15915,7 @@ This can not be undone!</source>
     </message>
     <message>
         <location filename="../../src/widget/wmainmenubar.cpp" line="706"/>
-        <source>Open the Mixxx user settings directory.</source>
+        <source>Open the Winlive Dj AI user settings directory.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -16007,7 +16007,7 @@ This can not be undone!</source>
     </message>
     <message>
         <location filename="../../src/widget/wsearchlineedit.cpp" line="222"/>
-        <source>See User Manual &gt; Mixxx Library for more information.</source>
+        <source>See User Manual &gt; Winlive Dj AI Library for more information.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -16717,12 +16717,12 @@ This can not be undone!</source>
     </message>
     <message>
         <location filename="../../src/widget/wtrackmenu.cpp" line="2612"/>
-        <source>%1 track files were moved to trash and purged from the Mixxx database.</source>
+        <source>%1 track files were moved to trash and purged from the Winlive Dj AI database.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widget/wtrackmenu.cpp" line="2609"/>
-        <source>%1 track files were deleted from disk and purged from the Mixxx database.</source>
+        <source>%1 track files were deleted from disk and purged from the Winlive Dj AI database.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -16732,7 +16732,7 @@ This can not be undone!</source>
     </message>
     <message>
         <location filename="../../src/widget/wtrackmenu.cpp" line="2622"/>
-        <source>Track file was deleted from disk and purged from the Mixxx database.</source>
+        <source>Track file was deleted from disk and purged from the Winlive Dj AI database.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -16813,7 +16813,7 @@ This can not be undone!</source>
     </message>
     <message>
         <location filename="../../src/widget/wtrackmenu.cpp" line="2627"/>
-        <source>Track file was moved to trash and purged from the Mixxx database.</source>
+        <source>Track file was moved to trash and purged from the Winlive Dj AI database.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -16946,7 +16946,7 @@ This can not be undone!</source>
     </message>
 </context>
 <context>
-    <name>mixxx::CoreServices</name>
+    <name>Winlive Dj AI::CoreServices</name>
     <message>
         <location filename="../../src/coreservices.cpp" line="262"/>
         <source>fonts</source>
@@ -16995,14 +16995,14 @@ This can not be undone!</source>
     <message>
         <location filename="../../src/coreservices.cpp" line="598"/>
         <source>Unable to establish a database connection.
-Mixxx requires QT with SQLite support. Please read the Qt SQL driver documentation for information on how to build it.
+Winlive Dj AI requires QT with SQLite support. Please read the Qt SQL driver documentation for information on how to build it.
 
 Click OK to exit.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>mixxx::DlgLibraryExport</name>
+    <name>Winlive Dj AI::DlgLibraryExport</name>
     <message>
         <location filename="../../src/library/export/dlglibraryexport.cpp" line="77"/>
         <source>Entire music library</source>
@@ -17071,7 +17071,7 @@ Click OK to exit.</source>
     </message>
 </context>
 <context>
-    <name>mixxx::DlgTrackMetadataExport</name>
+    <name>Winlive Dj AI::DlgTrackMetadataExport</name>
     <message>
         <location filename="../../src/library/dlgtrackmetadataexport.cpp" line="16"/>
         <source>Export Modified Track Metadata</source>
@@ -17079,12 +17079,12 @@ Click OK to exit.</source>
     </message>
     <message>
         <location filename="../../src/library/dlgtrackmetadataexport.cpp" line="17"/>
-        <source>Mixxx may wait to modify files until they are not loaded to any decks or samplers. If you do not see changed metadata in other programs immediately, eject the track from all decks and samplers or shutdown Mixxx.</source>
+        <source>Winlive Dj AI may wait to modify files until they are not loaded to any decks or samplers. If you do not see changed metadata in other programs immediately, eject the track from all decks and samplers or shutdown Winlive Dj AI.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>mixxx::EnginePrimeExportJob</name>
+    <name>Winlive Dj AI::EnginePrimeExportJob</name>
     <message>
         <location filename="../../src/library/export/engineprimeexportjob.cpp" line="567"/>
         <source>Failed to export track %1 - %2:
@@ -17094,7 +17094,7 @@ Click OK to exit.</source>
     </message>
 </context>
 <context>
-    <name>mixxx::LibraryExporter</name>
+    <name>Winlive Dj AI::LibraryExporter</name>
     <message>
         <location filename="../../src/library/export/libraryexporter.cpp" line="58"/>
         <source>Export Completed</source>
@@ -17117,7 +17117,7 @@ Click OK to exit.</source>
     </message>
 </context>
 <context>
-    <name>mixxx::TaskMonitor</name>
+    <name>Winlive Dj AI::TaskMonitor</name>
     <message>
         <location filename="../../src/util/taskmonitor.cpp" line="171"/>
         <source>Abort</source>
@@ -17125,7 +17125,7 @@ Click OK to exit.</source>
     </message>
 </context>
 <context>
-    <name>mixxx::network::WebTask</name>
+    <name>Winlive Dj AI::network::WebTask</name>
     <message>
         <location filename="../../src/network/webtask.cpp" line="202"/>
         <source>No network access</source>
@@ -17138,7 +17138,7 @@ Click OK to exit.</source>
     </message>
 </context>
 <context>
-    <name>mixxx::qml::QmlVisibleEffectsModel</name>
+    <name>Winlive Dj AI::qml::QmlVisibleEffectsModel</name>
     <message>
         <location filename="../../src/qml/qmlvisibleeffectsmodel.cpp" line="44"/>
         <source>No effect loaded.</source>

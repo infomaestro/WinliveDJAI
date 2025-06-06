@@ -1,4 +1,5 @@
 #include "coreservices.h"
+#include "config.h"
 
 #include <QApplication>
 #include <QFileDialog>
@@ -256,6 +257,10 @@ void CoreServices::initialize(QApplication* pApp) {
     if (configVersion.isEmpty()) {
         // open default config file
         pConfig->reopen(QDir(pConfig->getResourcePath()).filePath(DEFAULT_SETTINGS_FILE)); 
+        
+        // set default name
+        QString original = QDir(pConfig->getSettingsPath()).filePath(MIXXX_SETTINGS_FILE);
+        pConfig->setFilename(original);
     }
 
 
