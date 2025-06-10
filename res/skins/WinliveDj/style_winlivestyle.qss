@@ -1401,7 +1401,7 @@ WEffectChainPresetSelector QAbstractScrollArea,
 #BroadcastButton[displayValue="0"],
 #SkinSettingsToggle[displayValue="0"],
 #LibraryFeatureControls QLabel {
-  color: #777;
+  color: #FFF;
 }
 
 /* Darker grey for knob labels & inactive decks/units */
