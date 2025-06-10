@@ -153,7 +153,7 @@
 		  max-height: 40px;
 		  }
 		  QProgressBar {
-		  background: url(skins:LateNight/palemoon/style/progressbar_bg.svg);
+		  background: url(skins:WinliveDJ/palemoon/style/progressbar_bg.svg);
 		  border: none;
 		  min-width: 164px;
 		  max-width: 164px;
@@ -161,11 +161,11 @@
 		  max-height: 5px;
 		  }
 		  QProgressBar::chunk {
-		  background: url(skins:LateNight/palemoon/style/progressbar.svg);
+		  background: url(skins:WinliveDJ/palemoon/style/progressbar.svg);
 		  }
 	  </LaunchImageStyle>
 
-      <Style src="skins:LateNight/style_palemoon.qss"/>
+      <Style src="skins:WinliveDJ/style_winlivestyle.qss"/>
 
       <SetVariable name="BtnScheme">palemoon</SetVariable>
       <SetVariable name="KnobScheme">palemoon</SetVariable>
@@ -212,12 +212,12 @@
       <SetVariable name="OverviewFontSizeSampler">10</SetVariable>
       <SetVariable name="OverviewFontSizePreview">9</SetVariable>
 
-      <!-- Set the button icons used by templates in LateNight/controls/button...xml
+      <!-- Set the button icons used by templates in WinliveDJ/controls/button...xml
            There, those border icons are stacked on top of the additional icons set in css.
            Other buttons that use text (like vinyl controls and Fx assign button) are styled
            in css via
               border-width: 2px;
-              border-image: url(skins:LateNight/path/to/btn_icon.svg) 2 2 2 2;
+              border-image: url(skins:WinliveDJ/path/to/btn_icon.svg) 2 2 2 2;
         Example themes: (in PaleMoon only the embedded style is used)
         * elevated: domed buttons that stand out, with a 3D border and a drop shadow
         * embedded: slightly domed buttons that seem leveled with surface and a surrounding groove
@@ -275,7 +275,7 @@
           background-color: #1e1e1e;
         }
         QLabel {
-          image: url(skins:LateNight/classic/style/mixxx_logo.svg);
+          image: url(skins:WinliveDJ/classic/style/mixxx_logo.svg);
           padding: 0;
           margin: 0px 2px 0px 2px;
           border: none;
@@ -285,7 +285,7 @@
           max-height: 42px;
         }
         QProgressBar {
-          background: url(skins:LateNight/classic/style/progressbar_bg.svg);
+          background: url(skins:WinliveDJ/classic/style/progressbar_bg.svg);
           border: none;
           min-width: 160px;
           max-width: 160px;
@@ -293,11 +293,11 @@
           max-height: 5px;
         }
         QProgressBar::chunk {
-          background: url(skins:LateNight/classic/style/progressbar.svg);
+          background: url(skins:WinliveDJ/classic/style/progressbar.svg);
         }
       </LaunchImageStyle>
 
-      <Style src="skins:LateNight/style_classic.qss"/>
+      <Style src="skins:WinliveDJ/style_classic.qss"/>
 
       <SetVariable name="BtnScheme">classic</SetVariable>
       <SetVariable name="KnobScheme">classic</SetVariable>
@@ -350,7 +350,7 @@
   </Schemes>
 
   <ObjectName>Mixxx</ObjectName>
-  <Style src="skins:LateNight/style.qss"
+  <Style src="skins:WinliveDJ/style.qss"
          src-linux="skins:default-menu-styles-linux.qss"
          src-windows="skins:default-menu-styles-windows.qss"/>
   <!-- MinimumSize should not be an exact monitor resolution. There needs
@@ -369,7 +369,7 @@
     <SingletonDefinition>
       <ObjectName>Deck1_Src</ObjectName>
       <Children>
-      <Template src="skins:LateNight/decks/deck.xml">
+      <Template src="skins:WinliveDJ/decks/deck.xml">
         <SetVariable name="ChanNum">1</SetVariable>
         <SetVariable name="DeckGroup">12</SetVariable>
         <SetVariable name="SignalColor"><Variable name="SignalColor_12"/></SetVariable>
@@ -381,7 +381,7 @@
     <SingletonDefinition>
       <ObjectName>Deck2_Src</ObjectName>
       <Children>
-        <Template src="skins:LateNight/decks/deck.xml">
+        <Template src="skins:WinliveDJ/decks/deck.xml">
           <SetVariable name="ChanNum">2</SetVariable>
           <SetVariable name="DeckGroup">12</SetVariable>
           <SetVariable name="SignalColor"><Variable name="SignalColor_12"/></SetVariable>
@@ -393,7 +393,7 @@
     <SingletonDefinition>
       <ObjectName>Deck3_Src</ObjectName>
       <Children>
-      <Template src="skins:LateNight/decks/deck.xml">
+      <Template src="skins:WinliveDJ/decks/deck.xml">
         <SetVariable name="ChanNum">3</SetVariable>
         <SetVariable name="DeckGroup">34</SetVariable>
         <SetVariable name="SignalColor"><Variable name="SignalColor_34"/></SetVariable>
@@ -405,7 +405,7 @@
     <SingletonDefinition>
       <ObjectName>Deck4_Src</ObjectName>
       <Children>
-      <Template src="skins:LateNight/decks/deck.xml">
+      <Template src="skins:WinliveDJ/decks/deck.xml">
         <SetVariable name="ChanNum">4</SetVariable>
         <SetVariable name="DeckGroup">34</SetVariable>
         <SetVariable name="SignalColor"><Variable name="SignalColor_34"/></SetVariable>
@@ -414,19 +414,19 @@
       </Children>
     </SingletonDefinition>
 
-    <Template src="skins:LateNight/mixer/singletons.xml"/>
+    <Template src="skins:WinliveDJ/mixer/singletons.xml"/>
 
     <SingletonDefinition>
       <ObjectName>LibrarySingleton</ObjectName>
       <Children>
-        <Template src="skins:LateNight/library.xml"/>
+        <Template src="skins:WinliveDJ/library.xml"/>
       </Children>
     </SingletonDefinition>
 
     <SingletonDefinition>
       <ObjectName>SamplerSettingsSingleton</ObjectName>
       <Children>
-        <Template src="skins:LateNight/helpers/skin_settings_samplers.xml"/>
+        <Template src="skins:WinliveDJ/helpers/skin_settings_samplers.xml"/>
       </Children>
     </SingletonDefinition>
 
@@ -436,7 +436,7 @@
       <SizePolicy>me,me</SizePolicy>
       <Children>
 
-        <Template src="skins:LateNight/toolbar.xml"/>
+        <Template src="skins:WinliveDJ/toolbar.xml"/>
 
         <!-- regular/maximized library  |  skin settings menu -->
         <WidgetGroup>
@@ -464,7 +464,7 @@
                       <Layout>vertical</Layout>
                       <SizePolicy>me,me</SizePolicy>
                       <Children>
-                        <Template src="skins:LateNight/waveforms_container.xml"/>
+                        <Template src="skins:WinliveDJ/waveforms_container.xml"/>
                       </Children>
                       <Connection>
                         <ConfigKey persist="true">[Skin],show_waveforms</ConfigKey>
@@ -490,15 +490,15 @@
                           <Layout>horizontal</Layout>
                           <SizePolicy>me,max</SizePolicy>
                           <Children>
-                            <Template src="skins:LateNight/decks/decks_left.xml"/>
-                            <Template src="skins:LateNight/mixer.xml"/>
-                            <Template src="skins:LateNight/decks/decks_right.xml"/>
+                            <Template src="skins:WinliveDJ/decks/decks_left.xml"/>
+                            <Template src="skins:WinliveDJ/mixer.xml"/>
+                            <Template src="skins:WinliveDJ/decks/decks_right.xml"/>
                           </Children>
                         </WidgetGroup>
 
-                        <Template src="skins:LateNight/fx_rack.xml"/>
-                        <Template src="skins:LateNight/samplers_rack.xml"/>
-                        <Template src="skins:LateNight/mic_aux_rack.xml"/>
+                        <Template src="skins:WinliveDJ/fx_rack.xml"/>
+                        <Template src="skins:WinliveDJ/samplers_rack.xml"/>
+                        <Template src="skins:WinliveDJ/mic_aux_rack.xml"/>
 
                         <SingletonContainer>
                           <ObjectName>LibrarySingleton</ObjectName>
@@ -520,8 +520,8 @@
                       <Layout>horizontal</Layout>
                       <SizePolicy>me,max</SizePolicy>
                       <Children>
-                        <Template src="skins:LateNight/decks/decks_left_mini.xml"/>
-                        <Template src="skins:LateNight/decks/decks_right_mini.xml"/>
+                        <Template src="skins:WinliveDJ/decks/decks_left_mini.xml"/>
+                        <Template src="skins:WinliveDJ/decks/decks_right_mini.xml"/>
                       </Children>
                       <Connection>
                         <ConfigKey persist="true">[LateNight],max_lib_show_decks</ConfigKey>
@@ -537,7 +537,7 @@
 
               </Children>
             </WidgetStack>
-            <Template src="skins:LateNight/skin_settings.xml"/>
+            <Template src="skins:WinliveDJ/skin_settings.xml"/>
 
           </Children>
         </WidgetGroup><!-- regular/maximized library + skin settings menu -->
