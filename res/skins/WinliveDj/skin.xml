@@ -173,7 +173,7 @@
       <SetVariable name="StyleScheme">palemoon</SetVariable>
 
       <!-- Waveform & Overview colors -->
-      <!-- This is a hack to have a grey background in empty decks.
+      <!-- This is a hack to have a grey background in empty decks. 
           When a track is loaded the bg gets darker for better contrast -->
       <SetVariable name="BgColorOverview_12">#19191a</SetVariable>
       <SetVariable name="BgColorOverview_34">#001b23</SetVariable>
