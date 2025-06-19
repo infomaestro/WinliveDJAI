@@ -296,22 +296,22 @@
 
 	<PushButton>
 		<Size>80f,20f</Size>
-		<TooltipId>skin_settings</TooltipId>
-		<ObjectName>WinliveAI</ObjectName>
+		<TooltipId>goto_winliveai</TooltipId>
+		<ObjectName>WinliveAiToggle</ObjectName>
 		<NumberStates>2</NumberStates>
 		<State>
 			<Number>0</Number>
-			<Text>      WINLIVE DJ</Text>
+			<Text>     WINLIVE DJ </Text>
 		</State>
 		<State>
 			<Number>1</Number>
-			<Text>      WINLIVE DJ</Text>
+			<Text>     WINLIVE DJ </Text>
 		</State>
 		<Connection>
-			<ConfigKey>[Skin],show_settings</ConfigKey>
+			<ConfigKey>[Skin],show_settings</ConfigKey>	
 		</Connection>
 	</PushButton>
-
+    
       <Label>
         <ObjectName>ToolbarLogo</ObjectName>
         <Size>74f,24f</Size>

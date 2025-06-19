@@ -1235,6 +1235,7 @@ WPushButton#VinylStatus[displayValue="0"], /* off */
 #GuiToggleButton[displayValue="0"],
 #BroadcastButton[displayValue="0"],
 #SkinSettingsToggle[displayValue="0"],
+#WinliveAiToggle[displayValue="0"],
 #RecDuration[highlight="0"] {
   color: #d2d2d1;
   }
@@ -1255,6 +1256,7 @@ WPushButton#VinylStatus[displayValue="3"], /* needle skip detected (pink bg) */
 #RecDuration[highlight="1"],
 #RecDuration[highlight="2"],
 #SkinSettingsToggle[displayValue="1"],
+#winliveAiToggle[displayValue="1"],
 QPushButton#pushButtonAutoDJ:checked,
 QPushButton#pushButtonRepeatPlaylist:checked,
 QPushButton#pushButtonAnalyze:checked,
@@ -1329,6 +1331,7 @@ WPushButton#VinylStatus[displayValue="0"],
 #RecFeedback[displayValue="0"],
 #BroadcastButton[displayValue="0"],
 #SkinSettingsToggle[displayValue="0"],
+#WinliveAiToggle[displayValue="0"],
 #LibraryFeatureControls QPushButton,
 WEffectSelector:!editable,
 #fadeModeCombobox:!editable {
@@ -1349,6 +1352,7 @@ WPushButton#FxAssignButton1[displayValue="1"],
 #BroadcastButton[displayValue="3"],
 #BroadcastButton[displayValue="4"],
 #SkinSettingsToggle[displayValue="1"],
+#winliveAiToggle[displayValue="1"],
 #LibraryFeatureControls QPushButton:pressed,
 QPushButton#pushButtonAutoDJ:checked,
 QPushButton#pushButtonRepeatPlaylist:checked,
@@ -1452,6 +1456,7 @@ WPushButton#GuiToggleButton[displayValue="0"],
 #RecFeedback[displayValue="0"],
 WPushButton#BroadcastButton[displayValue="0"],
 WPushButton#SkinSettingsToggle[displayValue="0"],
+WpushButton#Winliveai[displayValue="0"],
 WCueMenuPopup QPushButton {
   background-color: #262626;
 }
@@ -1547,6 +1552,7 @@ WPushButton#VinylStatus[displayValue="2"], /* blinks when the needle reaches the
 #BroadcastButton[displayValue="1"],   /* connecting: yellow */
 #RecFeedback[displayValue="1"],   /* initialize recording */
 #SkinSettingsToggle[displayValue="1"],
+#WinliveAiToggle[displayValue="1"],
 QPushButton#pushButtonAutoDJ:checked,
 QPushButton#pushButtonAnalyze:checked {
   background-color: #d09300;
@@ -2049,6 +2055,13 @@ WPushButton#BpmLockToggle[value="1"] {
   image: url(skins:WinliveDj/classic/buttons/btn__settings_off.svg) no-repeat left top;
   }
   #SkinSettingsToggle[displayValue="1"] {
+    image: url(skins:WinliveDj/classic/buttons/btn__settings_on.svg) no-repeat left top;
+  }
+
+#WinliveAiToggle[displayValue="0"] {
+  image: url(skins:WinliveDj/classic/buttons/btn__settings_off.svg) no-repeat left top;
+  }
+  #WinliveAiToggle[displayValue="1"] {
     image: url(skins:WinliveDj/classic/buttons/btn__settings_on.svg) no-repeat left top;
   }
 
