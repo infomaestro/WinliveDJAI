@@ -1619,7 +1619,9 @@ WPushButton#CrossfaderButton,
 #DeckRow_5_LoopCuesTransport WPushButton[displayValue="0"],
 #PlayCueMini WPushButton[displayValue="0"],
 WPushButton#PlayIndicator[displayValue="0"],
-WPushButton#CueDeck[displayValue="0"],
+WPushButton#CueDeck[displayValue="0"]::section {
+    background-color: #571719;
+  }
 #SamplerPlayBox WPushButton#PreviewIndicator,
 WPushButton#LoopActivate[displayValue="0"],
 #KeyControls WPushButton[displayValue="0"],
