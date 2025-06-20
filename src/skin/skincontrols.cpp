@@ -42,7 +42,11 @@ SkinControls::SkinControls()
                   true),
           m_showVinylControl(ConfigKey(kSkinGroup, QStringLiteral("show_vinylcontrol")),
                   true,
-                  false) {
+                  false), 
+          m_showWinliveAi(ConfigKey(kSkinGroup, QStringLiteral("show_winliveai")),
+                          false,
+                          false)   
+                        {
     m_showEffectRack.setButtonMode(mixxx::control::ButtonMode::Toggle);
     m_showLibraryCoverArt.setButtonMode(mixxx::control::ButtonMode::Toggle);
     m_showMicrophones.setButtonMode(mixxx::control::ButtonMode::Toggle);
@@ -55,6 +59,7 @@ SkinControls::SkinControls()
     m_showSettings.setButtonMode(mixxx::control::ButtonMode::Toggle);
     m_showSpinnies.setButtonMode(mixxx::control::ButtonMode::Toggle);
     m_showVinylControl.setButtonMode(mixxx::control::ButtonMode::Toggle);
+    m_showWinliveAi.setButtonMode(mixxx::control::ButtonMode::Toggle);
 
     m_showEffectRack.addAlias(ConfigKey(QStringLiteral("[EffectRack1]"), QStringLiteral("show")));
     m_showLibraryCoverArt.addAlias(ConfigKey(

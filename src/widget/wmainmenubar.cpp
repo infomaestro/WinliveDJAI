@@ -263,6 +263,18 @@ void WMainMenuBar::initialize() {
     pViewMenu->addSeparator();
 #endif
 
+     // Goto WinliveAi Section
+    QString goToWinliveAiTitle = tr("WinliveAi");
+    QString goToWinliveAiText = tr("Open WinliveAi service page on the web");
+    auto* pGoToWinliveAiPage = new QAction(goToWinliveAiTitle, this);
+    pGoToWinliveAiPage->setCheckable(true);
+    pGoToWinliveAiPage->setStatusTip(goToWinliveAiText);
+    pGoToWinliveAiPage->setWhatsThis(buildWhatsThis(goToWinliveAiTitle, goToWinliveAiText));
+    createVisibilityControl(pGoToWinliveAiPage,
+            ConfigKey(kSkinGroup, QStringLiteral("show_winliveai")));
+    pViewMenu->addAction(pGoToWinliveAiPage);
+
+
     // Skin Settings Menu
     QString mayNotBeSupported = tr("May not be supported on all skins.");
     QString showSkinSettingsTitle = tr("Show Skin Settings Menu");

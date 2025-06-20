@@ -1873,6 +1873,7 @@ WPushButton#VinylStatus[displayValue="3"] { /* needle skip detected */
 #SkinSettingsToggle[displayValue="1"] {
   background-color: #777;
 }
+
 #WinliveAiToggle[displayValue="1"] {
   background-color: #777;
 }
@@ -2530,12 +2531,14 @@ WPushButton#PlayDeck[value="0"] {
     image: url(skins:WinliveDj/palemoon/buttons/btn__settings_on.svg) no-repeat left top;
   }
 
-#WinliveAiToggle[displayValue="0"] {
-  image: url(skins:WinliveDj/palemoon/buttons/btn__settings_off.svg) no-repeat left top;
+ /*******
+  #WinliveAiToggle[displayValue="0"] {
+  image: url(skins:WinliveDj/palemoon/buttons/btn__lib_clear_search.svg) no-repeat left top;
   }
   #WinliveAiToggle[displayValue="1"] {
-    image: url(skins:WinliveDj/palemoon/buttons/btn__settings_on.svg) no-repeat left top;
+    image: url(skins:WinliveDj/palemoon/buttons/btn__lib_clear_search_focus.svg) no-repeat left top;
   }
+  *****/
 
 #ToolbarLogo {
   image: url(skins:WinliveDj/palemoon/style/mixxx_logo_small.svg) no-repeat center center;
