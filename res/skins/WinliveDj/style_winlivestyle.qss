@@ -1721,10 +1721,10 @@ QPushButton#pushButtonAnalyze:checked {
   }
   /* Orange border for Play buttons when previewing from
     Cue or Hotcue */
-  WPushButton#PreviewIndicator[value="1"] {
-    border: 3px solid #b24c12;
+   WPushButton#PreviewIndicator[value="1"] {
+    /* border: 3px solid #b24c12; prev uncommented*/
     /* work around round borders being painted outside the actual border area */
-    border-radius: 0px;
+    /* border-radius: 0px; prev uncommented*/
   }
 /* dim orange for momentary controls */
 #KeyControls WPushButton[pressed="true"],
