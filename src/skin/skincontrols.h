@@ -6,6 +6,8 @@ class SkinControls {
   public:
     SkinControls();
 
+    void showWinliveAI();
+    void showWinliveAI(boolean registering);
   private:
     ControlPushButton m_showEffectRack;
     ControlPushButton m_showLibraryCoverArt;
@@ -19,4 +21,5 @@ class SkinControls {
     ControlPushButton m_showSettings;
     ControlPushButton m_showSpinnies;
     ControlPushButton m_showVinylControl;
+    ControlPushButton m_showWinliveAi;
 };

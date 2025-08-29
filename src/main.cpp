@@ -105,8 +105,13 @@ int runMixxx(MixxxApplication* pApp, const CmdlineArgs& args) {
         } else {
             qDebug() << "Displaying main window";
             mainWindow.show();
-
-            qDebug() << "Running Mixxx";
+            
+            // delay 5 seconds then show the registration dialog if needed
+            QTimer::singleShot(5000, [pCoreServices]() {
+                qDebug() << "Now showing register dialog window";
+                pCoreServices->showRegisterWindow();
+            });
+            qDebug() << "Running Program";
             exitCode = pApp->exec();
         }
     }
@@ -196,7 +201,7 @@ int main(int argc, char * argv[]) {
 
 #ifdef __LINUX__
     // Needed by Wayland compositors to set proper app_id and window icon
-    QGuiApplication::setDesktopFileName(QStringLiteral("org.mixxx.Mixxx"));
+    QGuiApplication::setDesktopFileName(QStringLiteral("www.promusicsoftware.com"));
 #endif
 
     // Setting the organization name results in a QDesktopStorage::DataLocation
@@ -284,6 +289,13 @@ int main(int argc, char * argv[]) {
 
     // When the last window is closed, terminate the Qt event loop.
     QObject::connect(&app, &MixxxApplication::lastWindowClosed, &app, &MixxxApplication::quit);
+
+    // sharedMemory is used to detect if another instance of WinliveDjAi is already running.
+    QSharedMemory sharedMemory("WLDJAI20_ID");
+    if (!sharedMemory.create(1)) {
+        QMessageBox::warning(nullptr, "App is already running", "First close the program!");
+        return 0; 
+    }
 
     int exitCode = runMixxx(&app, args);
 

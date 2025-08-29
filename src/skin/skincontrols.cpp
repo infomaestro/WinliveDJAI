@@ -1,4 +1,6 @@
 #include "skin/skincontrols.h"
+#include "dialog/dlgregister.h"
+#include "util/serial.h"
 
 #include <QString>
 
@@ -42,7 +44,11 @@ SkinControls::SkinControls()
                   true),
           m_showVinylControl(ConfigKey(kSkinGroup, QStringLiteral("show_vinylcontrol")),
                   true,
-                  false) {
+                  false),          
+		  m_showWinliveAi(ConfigKey(kSkinGroup, QStringLiteral("show_winliveai")),
+                  false,
+                  false){
+
     m_showEffectRack.setButtonMode(ControlPushButton::TOGGLE);
     m_showLibraryCoverArt.setButtonMode(ControlPushButton::TOGGLE);
     m_showMicrophones.setButtonMode(ControlPushButton::TOGGLE);
@@ -55,6 +61,8 @@ SkinControls::SkinControls()
     m_showSettings.setButtonMode(ControlPushButton::TOGGLE);
     m_showSpinnies.setButtonMode(ControlPushButton::TOGGLE);
     m_showVinylControl.setButtonMode(ControlPushButton::TOGGLE);
+    m_showWinliveAi.setButtonMode(ControlPushButton::TOGGLE);
+
 
     m_showEffectRack.addAlias(ConfigKey(QStringLiteral("[EffectRack1]"), QStringLiteral("show")));
     m_showLibraryCoverArt.addAlias(ConfigKey(
@@ -67,4 +75,47 @@ SkinControls::SkinControls()
             QStringLiteral("[Samplers]"), QStringLiteral("show_samplers")));
     m_showMaximizedLibrary.addAlias(ConfigKey(
             QStringLiteral("[Master]"), QStringLiteral("maximize_library")));
+
+	 // Connect per intercettare il click su WinliveAi
+    connect(&m_showWinliveAi, QOverload<double>::of(&ControlObject::valueChanged), this, [this](double value) {
+        if (value > 0.0) {
+            showWinliveAI(false);
+        }
+    });
+
+ void SkinControls::showWinliveAI() {
+    showWinliveAI(true);
+ }
+
+ void SkinControls::showWinliveAI(boolean registering) {
+     CheckLicenseHelper license;
+
+     if (license.loadFromFile() 
+         && license.hasValidLicense() == true) {
+     
+         if (registering == false) {
+             qDebug() << "Application licensed to:" << license.personalAccount();
+
+             QUrl url("https://www.promusicsoftware.com/mt020.php");
+             QUrlQuery query;
+             query.addQueryItem("wl001prac", license.personalAccount());
+             query.addQueryItem("wl001wlsn", license.serialNumber());
+             url.setQuery(query);
+
+             mixxx::DesktopHelper::openUrl(url);
+
+             return;
+         }
+         return;
+     }
+
+     QScopedPointer<DlgRegister> dialog(new DlgRegister());
+     int result = dialog->exec();
+
+     if (result == QDialog::Accepted) {
+         qDebug() << "User accepted registration";
+     } else {
+         qDebug() << "User declined registration";
+     }
+
 }

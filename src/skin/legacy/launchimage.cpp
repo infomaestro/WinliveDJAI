@@ -12,7 +12,6 @@
 
 namespace {
 bool isIn2024ChristmasHolidays() {
-    auto currentDate = QDate::currentDate();
     return (currentDate.month() == 12 && currentDate.day() >= 24) ||
             (currentDate.month() == 1 && currentDate.day() <= 6);
 }
@@ -24,7 +23,7 @@ LaunchImage::LaunchImage(QWidget* pParent, const QString& styleSheet)
         setStyleSheet(
                 "LaunchImage { background-color: #202020; }"
                 "QLabel { "
-                "image: url(:/images/mixxx-icon-logo-christmas.svg);"
+                "image: url(:/images/wldjai_logo.svg);"
                 "padding:0;"
                 "margin:0;"
                 "border:none;"
@@ -46,7 +45,7 @@ LaunchImage::LaunchImage(QWidget* pParent, const QString& styleSheet)
         setStyleSheet(
                 "LaunchImage { background-color: #202020; }"
                 "QLabel { "
-                "image: url(:/images/mixxx-icon-logo-symbolic.svg);"
+                "image: url(:/images/wldjai_logo.svg);"
                 "padding:0;"
                 "margin:0;"
                 "border:none;"

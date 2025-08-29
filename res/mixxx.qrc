@@ -30,13 +30,13 @@
         <file>images/library/ic_library_rekordbox.svg</file>
         <file>images/library/ic_library_serato.svg</file>
       <!-- logo and icons for 'About' dialog -->
-        <file>images/mixxx_logo.svg</file>
-        <file>images/icons/scalable/apps/mixxx.svg</file>
+        <file>images/wldjai_logo_black.svg</file>
+        <file>images/icons/scalable/apps/wldjai.svg</file>
         <file>images/heart_icon_light.svg</file>
         <file>images/heart_icon_dark.svg</file>
         <file>images/heart_icon_rainbow.svg</file>
-        <file>images/mixxx-icon-logo-symbolic.svg</file> <!-- default launch image -->
-        <file>images/mixxx-icon-logo-christmas.svg</file> <!-- christmas launch image -->
+        <file>images/wldjai_logo.svg</file> <!-- default launch image -->
+        <file>images/wldjai_logo.svg</file> <!-- christmas launch image -->
         <file>images/skin_preview_placeholder.png</file>
         <file>images/ic_checkmark.svg</file>
         <file>images/ic_delete.svg</file>

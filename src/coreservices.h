@@ -38,6 +38,7 @@ class CoreServices : public QObject {
 
     /// The secondary long run which should be called after displaying the start up screen
     void initialize(QApplication* pApp);
+    void showRegisterWindow();
 
     std::shared_ptr<KeyboardEventFilter> getKeyboardEventFilter() const {
         return m_pKeyboardEventFilter;

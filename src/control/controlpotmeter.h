@@ -56,6 +56,10 @@ class PotmeterControls : public QObject {
     ControlPushButton m_controlSetMinusOne;
     ControlPushButton m_controlToggle;
     ControlPushButton m_controlMinusToggle;
+    ControlPushButton m_controlUpAlt;
+    ControlPushButton m_controlDownAlt;
+    ControlPushButton m_controlUpSmallAlt;
+    ControlPushButton m_controlDownSmallAlt;
     int m_stepCount;
     double m_smallStepCount;
 };

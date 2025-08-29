@@ -14,6 +14,8 @@
 #include "util/desktophelper.h"
 #include "util/experiment.h"
 #include "vinylcontrol/defs_vinylcontrol.h"
+#include "dialog/dlgregister.h"
+#include "util/serial.h"
 
 namespace {
 
@@ -121,7 +123,7 @@ void WMainMenuBar::initialize() {
     pFileMenu->addSeparator();
 
     QString quitTitle = tr("&Exit");
-    QString quitText = tr("Quits Mixxx");
+    QString quitText = tr("Quits WinliveDjAi");
     auto* pFileQuit = new QAction(quitTitle, this);
     pFileQuit->setShortcut(
         QKeySequence(m_pKbdConfig->getValue(ConfigKey("[KeyboardShortcuts]", "FileMenu_Quit"),
@@ -235,6 +237,30 @@ void WMainMenuBar::initialize() {
     pViewMenu->addSeparator();
 #endif
 
+    // Goto WinliveAi Section
+    QString goToWinliveAiTitle = tr("Go to WinliveAi...");
+    QString goToWinliveAiText = tr("Open WinliveAi service page on the web");
+    auto* pGoToWinliveAiPage = new QAction(goToWinliveAiTitle, this);
+    pGoToWinliveAiPage->setCheckable(false);
+    pGoToWinliveAiPage->setStatusTip(goToWinliveAiText);
+    pGoToWinliveAiPage->setWhatsThis(buildWhatsThis(goToWinliveAiTitle, goToWinliveAiText));
+    connect(pGoToWinliveAiPage, &QAction::triggered, this, [this] {
+        slotVisitUrl(QUrl(WDJ_WINLIVEAI_URL));
+    });
+    pViewMenu->addAction(pGoToWinliveAiPage);
+
+    // Goto WinliveAi Section
+    QString goToWinliveLicenseTitle = tr("Registration Data...");
+    QString goToWinliveLicenseText = tr("Open Winlive Dj Ai registration form");
+    auto* pGoToWinliveLicensePage = new QAction(goToWinliveLicenseTitle, this);
+    pGoToWinliveLicensePage->setCheckable(false);
+    pGoToWinliveLicensePage->setStatusTip(goToWinliveLicenseText);
+    pGoToWinliveLicensePage->setWhatsThis(buildWhatsThis(goToWinliveLicenseTitle, goToWinliveLicenseText));
+    connect(pGoToWinliveLicensePage, &QAction::triggered, this, [this] {
+        QScopedPointer<DlgRegister> dialog(new DlgRegister());
+        int result = dialog->exec();
+    });
+    pViewMenu->addAction(pGoToWinliveLicensePage);
     // Skin Settings Menu
     QString mayNotBeSupported = tr("May not be supported on all skins.");
     QString showSkinSettingsTitle = tr("Show Skin Settings Menu");
@@ -254,7 +280,7 @@ void WMainMenuBar::initialize() {
 
     // Microphone Section
     QString showMicrophoneTitle = tr("Show Microphone Section");
-    QString showMicrophoneText = tr("Show the microphone section of the Mixxx interface.") +
+    QString showMicrophoneText = tr("Show the microphone section of the WinliveDjAi interface.") +
             " " + mayNotBeSupported;
     auto* pViewShowMicrophone = new QAction(showMicrophoneTitle, this);
     pViewShowMicrophone->setCheckable(true);
@@ -270,7 +296,7 @@ void WMainMenuBar::initialize() {
 
 #ifdef __VINYLCONTROL__
     QString showVinylControlTitle = tr("Show Vinyl Control Section");
-    QString showVinylControlText = tr("Show the vinyl control section of the Mixxx interface.") +
+    QString showVinylControlText = tr("Show the vinyl control section of the WinliveDjAi interface.") +
             " " + mayNotBeSupported;
     auto* pViewVinylControl = new QAction(showVinylControlTitle, this);
     pViewVinylControl->setCheckable(true);
@@ -286,7 +312,7 @@ void WMainMenuBar::initialize() {
 #endif
 
     QString showPreviewDeckTitle = tr("Show Preview Deck");
-    QString showPreviewDeckText = tr("Show the preview deck in the Mixxx interface.") +
+    QString showPreviewDeckText = tr("Show the preview deck in the WinliveDjAi interface.") +
             " " + mayNotBeSupported;
     auto* pViewShowPreviewDeck = new QAction(showPreviewDeckTitle, this);
     pViewShowPreviewDeck->setCheckable(true);
@@ -302,7 +328,7 @@ void WMainMenuBar::initialize() {
 
 
     QString showCoverArtTitle = tr("Show Cover Art");
-    QString showCoverArtText = tr("Show cover art in the Mixxx interface.") +
+    QString showCoverArtText = tr("Show cover art in the WinliveDjAi interface.") +
             " " + mayNotBeSupported;
     auto* pViewShowCoverArt = new QAction(showCoverArtTitle, this);
     pViewShowCoverArt->setCheckable(true);
@@ -350,7 +376,7 @@ void WMainMenuBar::initialize() {
     pViewMenu->addSeparator();
 
     QString fullScreenTitle = tr("&Full Screen");
-    QString fullScreenText = tr("Display Mixxx using the full screen");
+    QString fullScreenText = tr("Display WinliveDjAi using the full screen");
     auto* pViewFullScreen = new QAction(fullScreenTitle, this);
     QList<QKeySequence> shortcuts;
     // We use F11 _AND_ the OS shortcut only on Linux and Windows because on
@@ -394,7 +420,7 @@ void WMainMenuBar::initialize() {
 #ifdef __VINYLCONTROL__
     QMenu* pVinylControlMenu = new QMenu(tr("&Vinyl Control"), this);
     QString vinylControlText = tr(
-            "Use timecoded vinyls on external turntables to control Mixxx");
+            "Use timecoded vinyls on external turntables to control WinliveDjAi");
 
     for (int i = 0; i < kMaximumVinylControlInputs; ++i) {
         QString vinylControlTitle = tr("Enable Vinyl Control &%1").arg(i + 1);
@@ -491,7 +517,7 @@ void WMainMenuBar::initialize() {
     pOptionsMenu->addSeparator();
 
     QString preferencesTitle = tr("&Preferences");
-    QString preferencesText = tr("Change Mixxx settings (e.g. playback, MIDI, controls)");
+    QString preferencesText = tr("Change WinliveDjAi settings (e.g. playback, MIDI, controls)");
     auto* pOptionsPreferences = new QAction(preferencesTitle, this);
     pOptionsPreferences->setShortcut(
         QKeySequence(m_pKbdConfig->getValue(
@@ -626,8 +652,8 @@ void WMainMenuBar::initialize() {
 #endif
 
     // Community Support
-    QString supportTitle = tr("&Community Support") + externalLinkSuffix;
-    QString supportText = tr("Get help with Mixxx");
+    QString supportTitle = tr("&Support") + externalLinkSuffix;
+    QString supportText = tr("Get help with WinliveDjAi");
     auto* pHelpSupport = new QAction(supportTitle, this);
     pHelpSupport->setStatusTip(supportText);
     pHelpSupport->setWhatsThis(buildWhatsThis(supportTitle, supportText));
@@ -643,7 +669,7 @@ void WMainMenuBar::initialize() {
     QString manualSuffix = manualUrl.isLocalFile() ? QString() : externalLinkSuffix;
 
     QString manualTitle = tr("&User Manual") + manualSuffix;
-    QString manualText = tr("Read the Mixxx user manual.");
+    QString manualText = tr("Read the WinliveDjAi user manual.");
     auto* pHelpManual = new QAction(manualTitle, this);
     pHelpManual->setStatusTip(manualText);
     pHelpManual->setWhatsThis(buildWhatsThis(manualTitle, manualText));
@@ -675,7 +701,7 @@ void WMainMenuBar::initialize() {
     // User Settings Directory
     const QString& settingsDirPath = m_pConfig->getSettingsPath();
     QString settingsDirTitle = tr("&Settings directory");
-    QString settingsDirText = tr("Open the Mixxx user settings directory.");
+    QString settingsDirText = tr("Open the WinliveDjAi user settings directory.");
     auto* pHelpSettingsDir = new QAction(settingsDirTitle, this);
     pHelpSettingsDir->setMenuRole(QAction::NoRole);
     pHelpSettingsDir->setStatusTip(settingsDirText);

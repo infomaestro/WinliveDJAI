@@ -53,6 +53,7 @@ CmdlineArgs::CmdlineArgs()
           m_controllerDebug(false),
           m_controllerAbortOnWarning(false),
           m_developer(false),
+          m_defaultOptions(false),
 #ifdef MIXXX_USE_QML
           m_qml(false),
 #endif
@@ -272,6 +273,11 @@ bool CmdlineArgs::parse(const QStringList& arguments, CmdlineArgs::ParseMode mod
                             : QString());
     parser.addOption(developer);
 
+    const QCommandLineOption defaultoptions(QStringLiteral("defaultoptions"),
+            forUserFeedback ? QCoreApplication::translate("CmdlineArgs",
+                                      "Delete custom preference and start with default options")
+                            : QString());
+    parser.addOption(defaultoptions);
 #ifdef MIXXX_USE_QML
     const QCommandLineOption qml(QStringLiteral("qml"),
             forUserFeedback ? QCoreApplication::translate("CmdlineArgs",
@@ -439,6 +445,7 @@ bool CmdlineArgs::parse(const QStringList& arguments, CmdlineArgs::ParseMode mod
     m_controllerDebug = parser.isSet(controllerDebug) || parser.isSet(controllerDebugDeprecated);
     m_controllerAbortOnWarning = parser.isSet(controllerAbortOnWarning);
     m_developer = parser.isSet(developer);
+    m_defaultOptions = parser.isSet(defaultoptions);
 #ifdef MIXXX_USE_QML
     m_qml = parser.isSet(qml);
 #endif

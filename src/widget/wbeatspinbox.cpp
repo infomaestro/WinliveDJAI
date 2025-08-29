@@ -30,9 +30,10 @@ WBeatSpinBox::WBeatSpinBox(QWidget* parent,
     setKeyboardTracking(false);
     // Prevent this widget from getting focused with Tab
     // to avoid interfering with using the library via keyboard.
-    setFocusPolicy(Qt::ClickFocus);
+
     // This is necessary to also ignore Shift+Tab (Qt::BacktabFocusReason).
-    lineEdit()->setFocusPolicy(Qt::ClickFocus);
+    lineEdit()->setReadOnly(true);// not editable, so no focus
+    setFocusPolicy(Qt::NoFocus); 
 
     setValue(m_valueControl.get());
     connect(this,

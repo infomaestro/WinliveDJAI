@@ -14,7 +14,7 @@ QT_FORWARD_DECLARE_CLASS(QLabel);
 //    <LaunchImageStyle>
 //        LaunchImage { background-color: #202020; }
 //        QLabel {
-//            image: url(skin:/style/mixxx-icon-logo-symbolic.svg);
+//            image: url(skin:/style/wldjai_logo.svg);
 //            padding:0;
 //            margin:0;
 //            border:none;

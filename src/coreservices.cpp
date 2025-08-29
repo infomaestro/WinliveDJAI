@@ -68,6 +68,9 @@ constexpr int kMicrophoneCount = 4;
 constexpr int kAuxiliaryCount = 4;
 constexpr int kSamplerCount = 4;
 
+// Variabile statica globale
+static mixxx::CoreServices* g_coreServicesInstance = nullptr;
+
 #define CLEAR_AND_CHECK_DELETED(x) clearHelper(x, #x);
 
 template<typename T>
@@ -353,6 +356,7 @@ CoreServices::CoreServices(const CmdlineArgs& args, QApplication* pApp)
     mixxx::Translations::initializeTranslations(
             m_pSettingsManager->settings(), pApp, m_cmdlineArgs.getLocale());
     initializeKeyboard();
+    g_coreServicesInstance = this; // Set the global instance pointer
 }
 
 CoreServices::~CoreServices() {
@@ -402,6 +406,8 @@ CoreServices::~CoreServices() {
         }
         // Finally drop all shared pointers by exiting this scope
     }
+
+    g_coreServicesInstance = nullptr;
 
     // Report the total time we have been running.
     m_runtime_timer.elapsed(true);
@@ -462,6 +468,23 @@ void CoreServices::initialize(QApplication* pApp) {
 
     UserSettingsPointer pConfig = m_pSettingsManager->settings();
 
+    // use default values customized for Winlive Dj Ai
+    QString configVersion = pConfig->getValueString(ConfigKey("[Channel1]", "quantize"));
+    
+    bool resetSettings = m_cmdlineArgs.getDefaultOptions();
+    
+    if (resetSettings) {
+        deleteSettingsFile();
+    }
+
+    if (configVersion.isEmpty() || resetSettings ) {
+        // open default config file
+        pConfig->reopen(QDir(pConfig->getResourcePath()).filePath(DEFAULT_SETTINGS_FILE)); 
+        
+        // set default name
+        QString original = QDir(pConfig->getSettingsPath()).filePath(MIXXX_SETTINGS_FILE);
+        pConfig->setFilename(original);
+    }
     Sandbox::setPermissionsFilePath(QDir(pConfig->getSettingsPath()).filePath("sandbox.cfg"));
 
     QString resourcePath = pConfig->getResourcePath();
@@ -674,6 +697,7 @@ void CoreServices::initialize(QApplication* pApp) {
         }
     }
 
+
     m_isInitialized = true;
 }
 
@@ -746,7 +770,7 @@ bool CoreServices::initializeDatabase() {
         QMessageBox::critical(nullptr,
                 tr("Cannot open database"),
                 tr("Unable to establish a database connection.\n"
-                   "Mixxx requires QT with SQLite support. Please read "
+                   "WinliveDjAi requires QT with SQLite support. Please read "
                    "the Qt SQL driver documentation for information on how "
                    "to build it.\n\n"
                    "Click OK to exit."),
@@ -863,6 +887,36 @@ void CoreServices::finalize() {
     m_pControlIndicatorTimer.reset();
 
     t.elapsed(true);
+}
+
+void CoreServices::showRegisterWindow() {
+    m_pSkinControls->showWinliveAI();
+
+}
+
+void CoreServices::deleteSettingsFile() {
+    UserSettingsPointer pConfig = m_pSettingsManager->settings();
+    QString settingspath = QDir(pConfig->getSettingsPath()).filePath(MIXXX_SETTINGS_FILE);
+    QMessageBox::information(nullptr,
+            tr("Information"),
+            tr("Starting with default options"),
+            QMessageBox::Ok);
+     // Verifica se il file esiste e lo cancella
+    QFile settingsFile(settingspath);
+    if (settingsFile.exists()) {
+        if (settingsFile.remove()) {
+            qDebug() << "Settings file deleted successfully:" << settingspath;
+        } else {
+            qWarning() << "Failed to delete settings file:" << settingspath;
+        }
+    } else {
+        qDebug() << "Settings file does not exist:" << settingspath;
+    }
+}
+
+// static method to get the global instance of CoreServices
+mixxx::CoreServices* CoreServices::getInstance() {
+    return g_coreServicesInstance;
 }
 
 } // namespace mixxx

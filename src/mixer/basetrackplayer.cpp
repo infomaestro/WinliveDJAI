@@ -29,6 +29,9 @@ const QString kEffectGroupFormat = QStringLiteral("[EqualizerRack1_%1_Effect1]")
 inline double trackColorToDouble(mixxx::RgbColor::optional_t color) {
     return (color ? static_cast<double>(*color) : kNoTrackColor);
 }
+
+int m_loadedSongsCounter;
+
 } // namespace
 
 BaseTrackPlayer::BaseTrackPlayer(PlayerManager* pParent, const QString& group)
@@ -59,6 +62,14 @@ BaseTrackPlayerImpl::BaseTrackPlayerImpl(
             defaultOrientation,
             primaryDeck);
 
+    m_pInputConfigured = make_parented<ControlProxy>(getGroup(), "input_configured", this);
+    m_loadedSongsCounter = 0; 
+#ifdef __VINYLCONTROL__
+    m_pVinylControlEnabled = make_parented<ControlProxy>(getGroup(), "vinylcontrol_enabled", this);
+    m_pVinylControlEnabled->connectValueChanged(this, &BaseTrackPlayerImpl::slotVinylControlEnabled);
+    m_pVinylControlStatus = make_parented<ControlProxy>(getGroup(), "vinylcontrol_status", this);
+#endif
+
     EngineBuffer* pEngineBuffer = m_pChannel->getEngineBuffer();
     pMixingEngine->addChannel(m_pChannel);
 
@@ -74,11 +85,6 @@ BaseTrackPlayerImpl::BaseTrackPlayerImpl(
             &EngineBuffer::trackLoadFailed,
             this,
             &BaseTrackPlayerImpl::slotLoadFailed);
-    connect(pEngineBuffer,
-            &EngineBuffer::noVinylControlInputConfigured,
-            this,
-            // signal-to-signal
-            &BaseTrackPlayerImpl::noVinylControlInputConfigured);
 
     m_pEject = std::make_unique<ControlPushButton>(ConfigKey(getGroup(), "eject"));
     connect(m_pEject.get(),
@@ -677,6 +683,20 @@ void BaseTrackPlayerImpl::slotTrackLoaded(TrackPointer pNewTrack,
     // Update the PlayerInfo class that is used in EngineBroadcast to replace
     // the metadata of a stream
     PlayerInfo::instance().setTrackInfo(getGroup(), m_pLoadedTrack);
+   	int nCount = LoadedSongsCounter();
+   
+   if (nCount % 5 == 0) { // ogni 5 canzoni caricate mostra la finestra di registrazione
+       if (auto* coreServices = mixxx::CoreServices::getInstance()) {
+           coreServices->showRegisterWindow();
+		}
+    }
+  
+
+}
+
+int BaseTrackPlayerImpl::LoadedSongsCounter() {
+    ++m_loadedSongsCounter;
+    return m_loadedSongsCounter;
 }
 
 TrackPointer BaseTrackPlayerImpl::getLoadedTrack() const {
@@ -899,6 +919,23 @@ void BaseTrackPlayerImpl::setupEqControls() {
             group, QStringLiteral("button_parameter2"), this);
     m_pHighFilterKill = make_parented<ControlProxy>(
             group, QStringLiteral("button_parameter3"), this);
+}
+
+void BaseTrackPlayerImpl::slotVinylControlEnabled(double v) {
+#ifdef __VINYLCONTROL__
+    bool configured = m_pInputConfigured->toBool();
+    bool vinylcontrol_enabled = v > 0.0;
+
+    // Warn the user if they try to enable vinyl control on a player with no
+    // configured input.
+    if (!configured && vinylcontrol_enabled) {
+        m_pVinylControlEnabled->set(0.0);
+        m_pVinylControlStatus->set(VINYL_STATUS_DISABLED);
+        emit noVinylControlInputConfigured();
+    }
+#else
+    Q_UNUSED(v);
+#endif
 }
 
 void BaseTrackPlayerImpl::slotWaveformZoomValueChangeRequest(double v) {

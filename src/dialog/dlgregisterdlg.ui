@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+	<class>DlgRegisterDlg</class>
+	<widget class="QDialog" name="DlgRegisterDlg">
+		<property name="windowModality">
+			<enum>Qt::WindowModality::ApplicationModal</enum>
+		</property>
+		<property name="geometry">
+			<rect>
+				<x>0</x>
+				<y>0</y>
+				<width>602</width>
+				<height>446</height>
+			</rect>
+		</property>
+		<property name="windowTitle">
+			<string>Winlive Dj Ai Registration</string>
+		</property>
+		<property name="locale">
+			<locale language="Italian" country="Italy"/>
+		</property>
+		<property name="modal">
+			<bool>false</bool>
+		</property>
+		<layout class="QVBoxLayout" name="verticalLayout" stretch="1,0">
+			<item>
+				<layout class="QGridLayout" name="gridLayout" rowstretch="1,0,0,0,0">
+					<property name="leftMargin">
+						<number>8</number>
+					</property>
+					<property name="topMargin">
+						<number>8</number>
+					</property>
+					<property name="rightMargin">
+						<number>8</number>
+					</property>
+					<property name="bottomMargin">
+						<number>8</number>
+					</property>
+					<property name="spacing">
+						<number>1</number>	
+					</property>
+					<item row="1" column="0">
+						<widget class="QTextEdit" name="textEdit">
+							<property name="html">
+								<string>&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Calibri&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;By registering, you will be entitled to access the following services and additional features:&lt;/p&gt; &lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt; &lt;li style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;General support&lt;/li&gt; &lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Online remote support&lt;/li&gt; &lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Winlive AI Audio Processor&lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</string>
+							</property>
+						</widget>
+					</item>
+					<item row="0" column="0">
+						<widget class="QLabel" name="label_3">
+							<property name="font">
+								<font>
+									<pointsize>28</pointsize>
+									<bold>true</bold>
+								</font>
+							</property>
+							<property name="text">
+								<string>Winlive Dj Ai Registration</string>
+							</property>
+							<property name="alignment">
+								<set>Qt::AlignmentFlag::AlignCenter</set>
+							</property>
+						</widget>
+					</item>
+					<item row="4" column="0">
+						<widget class="QLabel" name="labelStatus">
+							<property name="frameShape">
+								<enum>QFrame::Shape::NoFrame</enum>
+							</property>
+							<property name="frameShadow">
+								<enum>QFrame::Shadow::Raised</enum>
+							</property>
+							<property name="text">
+								<string>Status: &lt;b&gt;%1&lt;/b&gt;</string>
+							</property>
+						</widget>
+					</item>
+					<item row="2" column="0">
+						<widget class="QLabel" name="label_4">
+							<property name="font">
+								<font>
+									<pointsize>13</pointsize>
+									<bold>false</bold>
+								</font>
+							</property>
+							<property name="text">
+								<string>&lt;a href=&quot;https://www.promusicsoftware.com/detail0.php?prod=15050&quot;&gt;&lt;span style=&quot; text-decoration: underline; font-weight: bold; color:#0d3943;&quot;&gt;Click here for more details.&lt;/span&gt;&lt;/a&gt;</string>
+							</property>
+							<property name="margin">
+								<number>10</number>
+							</property>
+							<property name="openExternalLinks">
+								<bool>true</bool>
+							</property>
+						</widget>
+					</item>
+					<item row="3" column="0">
+						<widget class="QGroupBox" name="groupBox">
+							<property name="title">
+								<string>Registration Form</string>
+							</property>
+							<layout class="QGridLayout" name="gridLayout_2">
+								<property name="topMargin">
+									<number>9</number>
+								</property>
+								<item row="0" column="0">
+									<widget class="QLabel" name="label">
+										<property name="text">
+											<string>Personal Account</string>
+										</property>
+									</widget>
+								</item>
+								<item row="0" column="1">
+									<widget class="QLineEdit" name="editPersonalAccount">
+										<property name="maxLength">
+											<number>8</number>
+										</property>
+									</widget>
+								</item>
+								<item row="1" column="1">
+									<widget class="QLineEdit" name="editSerialNumber">
+										<property name="maxLength">
+											<number>16</number>
+										</property>
+									</widget>
+								</item>
+								<item row="1" column="0">
+									<widget class="QLabel" name="label_2">
+										<property name="text">
+											<string>Serial Number</string>
+										</property>
+									</widget>
+								</item>
+							</layout>
+						</widget>
+					</item>
+				</layout>
+			</item>
+			<item>
+				<widget class="QFrame" name="frame">
+					<property name="frameShape">
+						<enum>QFrame::Shape::StyledPanel</enum>
+					</property>
+					<property name="frameShadow">
+						<enum>QFrame::Shadow::Raised</enum>
+					</property>
+					<layout class="QHBoxLayout" name="horizontalLayout">
+						<item>
+							<widget class="QPushButton" name="buttonCancel">
+								<property name="text">
+									<string>Continue without registering</string>
+								</property>
+								<property name="iconSize">
+									<size>
+										<width>24</width>
+										<height>24</height>
+									</size>
+								</property>
+								<property name="autoDefault">
+									<bool>false</bool>
+								</property>
+							</widget>
+						</item>
+						<item>
+							<spacer name="horizontalSpacer">
+								<property name="orientation">
+									<enum>Qt::Orientation::Horizontal</enum>
+								</property>
+								<property name="sizeHint" stdset="0">
+									<size>
+										<width>40</width>
+										<height>20</height>
+									</size>
+								</property>
+							</spacer>
+						</item>
+						<item>
+							<widget class="QPushButton" name="buttonClose">
+								<property name="enabled">
+									<bool>true</bool>
+								</property>
+								<property name="text">
+									<string>Close</string>
+								</property>
+							</widget>
+						</item>
+						<item>
+							<widget class="QPushButton" name="buttonRegister">
+								<property name="font">
+									<font>
+										<bold>true</bold>
+									</font>
+								</property>
+								<property name="text">
+									<string>Register</string>
+								</property>
+								<property name="iconSize">
+									<size>
+										<width>24</width>
+										<height>24</height>
+									</size>
+								</property>
+								<property name="default">
+									<bool>true</bool>
+								</property>
+								<property name="flat">
+									<bool>false</bool>
+								</property>
+							</widget>
+						</item>
+					</layout>
+				</widget>
+			</item>
+		</layout>
+	</widget>
+	<tabstops>
+		<tabstop>editPersonalAccount</tabstop>
+		<tabstop>editSerialNumber</tabstop>
+		<tabstop>buttonRegister</tabstop>
+	</tabstops>
+	<resources/>
+	<connections/>
+</ui>

@@ -20,6 +20,9 @@
      <property name="title">
       <string>Skin</string>
      </property>
+	 <property name="visible">
+		<bool>false</bool> <!-- set to true to allow changings skin-->
+	 </property>	
      <layout class="QVBoxLayout" name="skinLayout">
 
       <item>

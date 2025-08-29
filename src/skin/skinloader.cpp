@@ -125,7 +125,7 @@ SkinPointer SkinLoader::getConfiguredSkin() const {
 }
 
 QString SkinLoader::getDefaultSkinName() const {
-    return "LateNight";
+    return "WinliveDj";
 }
 
 QWidget* SkinLoader::loadConfiguredSkin(QWidget* pParent,

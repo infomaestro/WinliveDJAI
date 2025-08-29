@@ -68,3 +68,6 @@ src/test/**/*.actual
 res/qrc_mixxx.cc
 /.vs
 /out
+/src/mixxx.aps
+/src/RCa08576
+/src/RDa08576

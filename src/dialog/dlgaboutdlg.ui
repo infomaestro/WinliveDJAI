@@ -263,7 +263,7 @@ p, li { white-space: pre-wrap; }
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="btnDonate"/>
+      <widget class="QPushButton" name="btnAddons"/>
      </item>
      <item>
       <widget class="QDialogButtonBox" name="buttonBox">

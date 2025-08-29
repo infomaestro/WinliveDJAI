@@ -801,6 +801,8 @@ add_library(mixxx-lib STATIC EXCLUDE_FROM_ALL
   src/database/schemamanager.cpp
   src/dialog/dlgabout.cpp
   src/dialog/dlgaboutdlg.ui
+  src/dialog/dlgregister.cpp
+  src/dialog/dlgregisterdlg.ui
   src/dialog/dlgdevelopertools.cpp
   src/dialog/dlgdevelopertoolsdlg.ui
   src/dialog/dlgkeywheel.cpp
@@ -1221,6 +1223,7 @@ add_library(mixxx-lib STATIC EXCLUDE_FROM_ALL
   src/util/screensaver.cpp
   src/util/screensavermanager.cpp
   src/util/semanticversion.cpp
+  src/util/serial.cpp
   src/util/stat.cpp
   src/util/statmodel.cpp
   src/util/statsmanager.cpp
@@ -1494,6 +1497,7 @@ target_precompile_headers(mixxx-lib PUBLIC
   src/util/screensaver.h
   src/util/screensavermanager.h
   src/util/semanticversion.h
+  src/util/serial.h
   src/util/singleton.h
   src/util/span.h
   src/util/stat.h
@@ -1963,22 +1967,29 @@ install(
     "${MIXXX_INSTALL_LICENSEDIR}"
 )
 
+
 # Documentation
 install(
   FILES
     "${CMAKE_CURRENT_SOURCE_DIR}/README.md"
-    "${CMAKE_CURRENT_SOURCE_DIR}/res/Mixxx-Keyboard-Shortcuts.pdf"
-  DESTINATION
-    "${MIXXX_INSTALL_DOCDIR}"
+    "${CMAKE_CURRENT_SOURCE_DIR}/res/WinliveDjAi-Keyboard-Shortcuts.pdf"
+  DESTINATION "${MIXXX_INSTALL_DOCDIR}"
 )
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/res/Mixxx-Manual.pdf")
+
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/res/WinliveDjAi-Manual.pdf")
   install(
-    FILES
-      "${CMAKE_CURRENT_SOURCE_DIR}/res/Mixxx-Manual.pdf"
-    DESTINATION
-      "${MIXXX_INSTALL_DOCDIR}"
+    FILES "${CMAKE_CURRENT_SOURCE_DIR}/res/WinliveDjAi-Manual.pdf"
+    DESTINATION "${MIXXX_INSTALL_DOCDIR}"
   )
 endif()
+
+# Default Options (custom)
+install(
+  FILES
+    "${CMAKE_CURRENT_SOURCE_DIR}/res/default.cfg"
+  DESTINATION "${MIXXX_INSTALL_DATADIR}"
+)
+
 
 # Additional Linux-only files
 if(UNIX AND NOT APPLE)
@@ -3965,7 +3976,7 @@ set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Digital DJ Application")
 set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/packaging/CPackPackageDescription.txt")
 set(CPACK_PACKAGE_INSTALL_DIRECTORY "Mixxx")
 set(CPACK_PACKAGE_EXECUTABLES "mixxx;Mixxx")
-set(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}/res/images/mixxx_install_logo.bmp")
+set(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}/res/images/wldjai_install_logo.bmp")
 set(CPACK_PACKAGE_HOMEPAGE_URL "https://www.mixxx.org/")
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
 set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
@@ -3978,6 +3989,7 @@ set(CPACK_GIT_COMMIT_DATE ${GIT_COMMIT_DATE})
 
 # Detailed version information, git info and package file name are set from
 # CPackConfig.cmake, not here.
+
 
 set(CPACK_SOURCE_IGNORE_FILES  "\\\\.#;/#;.*~;\\\\.o$")
 list(APPEND CPACK_SOURCE_IGNORE_FILES "/\\\\.git/")

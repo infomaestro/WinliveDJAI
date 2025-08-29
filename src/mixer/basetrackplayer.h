@@ -12,6 +12,7 @@
 #include "util/color/rgbcolor.h"
 #include "util/parented_ptr.h"
 #include "util/performancetimer.h"
+#include "coreservices.h"
 
 class EngineMixer;
 class ControlObject;
@@ -122,6 +123,7 @@ class BaseTrackPlayerImpl : public BaseTrackPlayer {
     void slotTrackColorChangeRequest(double value);
     /// Slot for change signals from up/down controls (relative values)
     void slotTrackRatingChangeRequestRelative(int change);
+    void slotVinylControlEnabled(double v);
     void slotWaveformZoomValueChangeRequest(double pressed);
     void slotWaveformZoomUp(double pressed);
     void slotWaveformZoomDown(double pressed);
@@ -210,4 +212,7 @@ class BaseTrackPlayerImpl : public BaseTrackPlayer {
     parented_ptr<ControlProxy> m_pPreGain;
     parented_ptr<ControlProxy> m_pRateRatio;
     parented_ptr<ControlProxy> m_pPitchAdjust;
+    parented_ptr<ControlProxy> m_pInputConfigured;
+    parented_ptr<ControlProxy> m_pVinylControlEnabled;
+    parented_ptr<ControlProxy> m_pVinylControlStatus;
 };

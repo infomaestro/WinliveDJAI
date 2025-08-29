@@ -79,7 +79,11 @@ PotmeterControls::PotmeterControls(const ConfigKey& key)
           m_controlSetMinusOne(configKeyFromBaseKey(key, QStringLiteral("_set_minus_one"))),
           m_controlToggle(configKeyFromBaseKey(key, QStringLiteral("_toggle"))),
           m_controlMinusToggle(configKeyFromBaseKey(key, QStringLiteral("_minus_toggle"))),
-          m_stepCount(10),
+          m_controlUpAlt(configKeyFromBaseKey(key, QStringLiteral("_up_alt"))),
+          m_controlDownAlt(configKeyFromBaseKey(key, QStringLiteral("_down_alt"))),
+          m_controlUpSmallAlt(configKeyFromBaseKey(key, QStringLiteral("_up_small_alt"))),
+          m_controlDownSmallAlt(configKeyFromBaseKey(key, QStringLiteral("_down_small_alt"))),
+          m_stepCount(24),
           m_smallStepCount(100) {
     m_controlUp.setKbdRepeatable(true);
     m_controlDown.setKbdRepeatable(true);
@@ -95,10 +99,20 @@ PotmeterControls::PotmeterControls(const ConfigKey& key)
             &ControlPushButton::valueChanged,
             this,
             &PotmeterControls::decSmallValue);
-    m_controlUp.setKbdRepeatable(true);
-    m_controlUpSmall.setKbdRepeatable(true);
-    m_controlDown.setKbdRepeatable(true);
-    m_controlDownSmall.setKbdRepeatable(true);
+    m_controlUpAlt.setKbdRepeatable(true);
+    m_controlUpSmallAlt.setKbdRepeatable(true);
+    m_controlDownAlt.setKbdRepeatable(true);
+    m_controlDownSmallAlt.setKbdRepeatable(true);
+    connect(&m_controlUpAlt, &ControlPushButton::valueChanged, this, &PotmeterControls::incValue);
+    connect(&m_controlDownAlt, &ControlPushButton::valueChanged, this, &PotmeterControls::decValue);
+    connect(&m_controlUpSmallAlt,
+            &ControlPushButton::valueChanged,
+            this,
+            &PotmeterControls::incSmallValue);
+    connect(&m_controlDownSmallAlt,
+            &ControlPushButton::valueChanged,
+            this,
+            &PotmeterControls::decSmallValue);
 
     connect(&m_controlSetDefault,
             &ControlPushButton::valueChanged,
@@ -137,6 +151,10 @@ void PotmeterControls::addAlias(const ConfigKey& key) {
     m_controlSetMinusOne.addAlias(configKeyFromBaseKey(key, QStringLiteral("_set_minus_one")));
     m_controlToggle.addAlias(configKeyFromBaseKey(key, QStringLiteral("_toggle")));
     m_controlMinusToggle.addAlias(configKeyFromBaseKey(key, QStringLiteral("_minus_toggle")));
+    m_controlUp.addAlias(configKeyFromBaseKey(key, QStringLiteral("_up_alt")));
+    m_controlDown.addAlias(configKeyFromBaseKey(key, QStringLiteral("_down_alt")));
+    m_controlUpSmallAlt.addAlias(configKeyFromBaseKey(key, QStringLiteral("_up_small_alt")));
+    m_controlDownSmallAlt.addAlias(configKeyFromBaseKey(key, QStringLiteral("_down_small_alt")));
 }
 
 void PotmeterControls::incValue(double v) {
