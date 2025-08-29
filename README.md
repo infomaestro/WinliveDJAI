@@ -1,18 +1,18 @@
-# Mixxx
+# WinliveDjAi
 
-[![GitHub latest tag](https://img.shields.io/github/tag/mixxxdj/mixxx.svg)](https://mixxx.org/download)
+[![GitHub latest tag](https://img.shields.io/github/tag/WinliveDjAidj/mixxx.svg)](https://mixxx.org/download)
 [![Packaging status](https://repology.org/badge/tiny-repos/mixxx.svg)](https://repology.org/metapackage/mixxx/versions)
 [![Build status](https://github.com/mixxxdj/mixxx/actions/workflows/build.yml/badge.svg)](https://github.com/mixxxdj/mixxx/actions/workflows/build.yml)
 [![Coverage status](https://coveralls.io/repos/github/mixxxdj/mixxx/badge.svg)](https://coveralls.io/github/mixxxdj/mixxx)
 [![Zulip chat](https://img.shields.io/badge/zulip-join_chat-brightgreen.svg)](https://mixxx.zulipchat.com)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://mixxx.org/donate)
 
-[Mixxx] is Free DJ software that gives you everything you need to perform live
-DJ mixes. Mixxx works on GNU/Linux, Windows, and macOS.
+[WinliveDjAi] is Free DJ software that gives you everything you need to perform live
+DJ mixes. WinliveDjAi works on GNU/Linux, Windows, and macOS.
 
 ## Quick Start
 
-To get started with Mixxx:
+To get started with WinliveDjAi:
 
 1. For live use, [download the latest stable version][download-stable].
 2. For experimentation and testing, [download a development release][download-testing].
@@ -20,15 +20,15 @@ To get started with Mixxx:
 
 ## Bug tracker
 
-The Mixxx team uses [Github Issues][issues] to manage Mixxx development.
+The WinliveDjAi team uses [Github Issues][issues] to manage WinliveDjAi development.
 
 Have a bug or feature request? [File a bug on Github][fileabug].
 
-Want to get involved in Mixxx development? Assign yourself a bug from the [easy
+Want to get involved in WinliveDjAi development? Assign yourself a bug from the [easy
 bug list][easybugs] and get started!
 Read [CONTRIBUTING](CONTRIBUTING.md) for more information.
 
-## Building Mixxx
+## Building WinliveDjAi
 
 First, open a terminal (on Windows, use "**x64 Native Tools Command Prompt for
 [VS 2022][visualstudio2022]**"), download the mixxx
@@ -48,7 +48,7 @@ corresponding command for your operating system:
 | Fedora | `tools/rpm_buildenv.sh setup` |
 | Other Linux distros | See the [wiki article](https://github.com/mixxxdj/mixxx/wiki/Compiling%20on%20Linux) |
 
-To build Mixxx, run
+To build WinliveDjAi, run
 
     $ mkdir build
     $ cd build
@@ -62,55 +62,34 @@ Detailed build instructions for each target OS can be found [on the wiki](https:
 
 ## Documentation
 
-For help using Mixxx, there are a variety of options:
+For help using WinliveDjAi, there are a variety of options:
 
-- [Mixxx manual][manual]
-- [Mixxx wiki][wiki]
+- [WinliveDjAi manual][manual]
+- [WinliveDjAi wiki][wiki]
 - [Hardware Compatibility]
 - [Creating Skins]
 
 ## Translation
 
-Help to spread Mixxx with translations into more languages, as well as to update and ensure the accuracy of existing translations.
+Help to spread WinliveDjAi with translations into more languages, as well as to update and ensure the accuracy of existing translations.
 
 - [Help translate content]
-- [Mixxx i18n wiki]
-- [Mixxx localization forum]
-- [Mixxx glossary]
+- [WinliveDjAi i18n wiki]
+- [WinliveDjAi localization forum]
+- [WinliveDjAi glossary]
 
 ## Community
 
-Mixxx is a vibrant community of hackers, DJs and artists. To keep track of
+WinliveDjAi is a vibrant community of hackers, DJs and artists. To keep track of
 development and community news:
 
 - Chat with us on [Zulip][zulip].
 - Follow us on [Mastodon], [Twitter] and [Facebook].
-- Subscribe to the [Mixxx Blog][blog].
-- Post on the [Mixxx forums][discourse].
+- Subscribe to the [WinliveDjAi Blog][blog].
+- Post on the [WinliveDjAi forums][discourse].
 
 ## License
 
-Mixxx is released under the GPLv2. See the LICENSE file for a full copy of the
+WinliveDjAi is released under the GPLv2. See the LICENSE file for a full copy of the
 license.
 
-[mixxx]: https://mixxx.org
-[download-stable]: https://mixxx.org/download/#stable
-[download-testing]: https://mixxx.org/download/#testing
-[issues]: https://github.com/mixxxdj/mixxx/issues
-[fileabug]: https://github.com/mixxxdj/mixxx/issues/new/choose
-[mastodon]: https://floss.social/@mixxx
-[twitter]: https://twitter.com/mixxxdj
-[facebook]: https://www.facebook.com/pages/Mixxx-DJ-Software/21723485212
-[blog]: https://mixxx.org/news/
-[manual]: https://manual.mixxx.org/
-[wiki]: https://github.com/mixxxdj/mixxx/wiki
-[visualstudio2022]: https://docs.microsoft.com/visualstudio/install/install-visual-studio?view=vs-2022
-[easybugs]: https://github.com/mixxxdj/mixxx/issues?q=is%3Aopen+is%3Aissue+label%3Aeasy
-[creating skins]: https://mixxx.org/wiki/doku.php/Creating-Skins
-[help translate content]: https://www.transifex.com/projects/p/mixxxdj
-[Mixxx i18n wiki]: https://github.com/mixxxdj/mixxx/wiki/Internationalization
-[Mixxx localization forum]: https://mixxx.discourse.group/c/translation/13
-[Mixxx glossary]: https://www.transifex.com/projects/p/mixxxdj/glossary/l/en/
-[hardware compatibility]: https://manual.mixxx.org/2.3/en/hardware/manuals.html
-[zulip]: https://mixxx.zulipchat.com/
-[discourse]: https://mixxx.discourse.group/
