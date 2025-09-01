@@ -57,12 +57,12 @@
   </provides>
   <screenshots>
     <screenshot type="default">
-      <image>https://mixxx.org/theme/images/2.3/screenshots/latenight-palemoon-3840x2160.png</image>
-      <caption>Mixxx with the default LateNight PaleMoon skin</caption>
+      <image>https://mixxx.org/theme/images/2.3/screenshots/WinliveDj-palemoon-3840x2160.png</image>
+      <caption>Mixxx with the default WinliveDj PaleMoon skin</caption>
     </screenshot>
     <screenshot>
-      <image>https://mixxx.org/theme/images/2.3/screenshots/latenight-classic-3840x2160.png</image>
-      <caption>Mixxx with the LateNight Classic skin</caption>
+      <image>https://mixxx.org/theme/images/2.3/screenshots/WinliveDj-classic-3840x2160.png</image>
+      <caption>Mixxx with the WinliveDj Classic skin</caption>
     </screenshot>
     <screenshot>
       <image>https://mixxx.org/theme/images/2.3/screenshots/deere-3840x2160.png</image>
@@ -653,7 +653,7 @@
  </p>
  <ul>
   <li>
-   Deere/LateNight (64 samplers): Bring back library in regular view
+   Deere/WinliveDj (64 samplers): Bring back library in regular view
    #14101
    #14097
    #14700
@@ -1126,23 +1126,23 @@
    #13747
   </li>
   <li>
-   LateNight: Merge vinyl control toggle and status light
+   WinliveDj: Merge vinyl control toggle and status light
    #12947
    #10192
   </li>
   <li>
-   LateNight, Deere, Tango: Deactivate beatgrid edit controls if BPM is locked
+   WinliveDj, Deere, Tango: Deactivate beatgrid edit controls if BPM is locked
    #13320
    #13323
    #13325
   </li>
   <li>
-   LateNight: Add/tweak CueDelete icons
+   WinliveDj: Add/tweak CueDelete icons
    #13495
    #13492
   </li>
   <li>
-   LateNight: Use Classic launch image style also for 64 samplers version
+   WinliveDj: Use Classic launch image style also for 64 samplers version
    #13796
   </li>
   <li>
@@ -1765,7 +1765,7 @@
    #13257
   </li>
   <li>
-   LateNight: Use default colors for sampler overviews (like main decks)
+   WinliveDj: Use default colors for sampler overviews (like main decks)
    #13274
   </li>
   <li>
@@ -3426,36 +3426,36 @@
    #11183
   </li>
   <li>
-   LateNight: Move logo to the right
+   WinliveDj: Move logo to the right
    #4677
   </li>
   <li>
-   LateNight: Use correct tooltip for key control toggle
+   WinliveDj: Use correct tooltip for key control toggle
    #4696
   </li>
   <li>
-   LateNight: Add toggles to show loop and beatjump controls
+   WinliveDj: Add toggles to show loop and beatjump controls
    #4713
   </li>
   <li>
-   LateNight: Remove blinking play indicator from mini samplers
+   WinliveDj: Remove blinking play indicator from mini samplers
    #4807
   </li>
   <li>
-   LateNight: Add buffer underflow indicator
+   WinliveDj: Add buffer underflow indicator
    #4906
    #10978
   </li>
   <li>
-   LateNight: Fix xfader icons in samplers and aux units
+   WinliveDj: Fix xfader icons in samplers and aux units
    #12477
   </li>
   <li>
-   LateNight: use default RGB waveform colors
+   WinliveDj: use default RGB waveform colors
    #12712
   </li>
   <li>
-   Add LateNight (64 Samplers)
+   Add WinliveDj (64 Samplers)
    #11715
   </li>
   <li>

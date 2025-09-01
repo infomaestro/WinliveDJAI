@@ -1008,7 +1008,7 @@ NS6II.PadModeContainers.BeatgridSettings = function(channelOffset) {
 
     NS6II.PadMode.call(this, channelOffset);
 
-    // Same layout as waveform customization in LateNight
+    // Same layout as waveform customization in WinliveDj
     // except pads[4] (bottom left button)
 
     this.pads[0] = new NS6II.Pad({

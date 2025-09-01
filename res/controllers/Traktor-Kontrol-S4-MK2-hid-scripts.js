@@ -1580,7 +1580,7 @@ TraktorS4MK2.outputCueCallback = function(value, group, key) {
     }
 
     var RGB_value = [0, 0, 0];
-    // Use different colors for decks 1/2 and 3/4 that match LateNight (red and blue).
+    // Use different colors for decks 1/2 and 3/4 that match WinliveDj (red and blue).
     if (group === "[Channel1]" || group === "[Channel2]") {
         if (value === 1) {
             RGB_value = [0x7F, 0x04, 0x04];

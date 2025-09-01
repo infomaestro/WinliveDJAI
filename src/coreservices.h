@@ -32,13 +32,15 @@ class ScreensaverManager;
 class CoreServices : public QObject {
     Q_OBJECT
 
-  public:
+ public:
     CoreServices(const CmdlineArgs& args, QApplication* pApp);
     ~CoreServices();
-
+    static CoreServices* getInstance();
     /// The secondary long run which should be called after displaying the start up screen
     void initialize(QApplication* pApp);
     void showRegisterWindow();
+    void deleteSettingsFile();
+
 
     std::shared_ptr<KeyboardEventFilter> getKeyboardEventFilter() const {
         return m_pKeyboardEventFilter;

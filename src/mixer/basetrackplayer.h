@@ -151,6 +151,8 @@ class BaseTrackPlayerImpl : public BaseTrackPlayer {
 
     PerformanceTimer m_ejectTimer;
 
+    int LoadedSongsCounter();
+
     std::unique_ptr<ControlPushButton> m_pEject;
 
     // Deck clone control

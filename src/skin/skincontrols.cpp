@@ -3,6 +3,15 @@
 #include "util/serial.h"
 
 #include <QString>
+#include <QUrlQuery>
+#include <QUrl>
+#include <QDialog>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QPushButton>
+#include <QObject>
+
 
 namespace {
 const QString kSkinGroup = QStringLiteral("[Skin]");
@@ -61,7 +70,7 @@ SkinControls::SkinControls()
     m_showSettings.setButtonMode(ControlPushButton::TOGGLE);
     m_showSpinnies.setButtonMode(ControlPushButton::TOGGLE);
     m_showVinylControl.setButtonMode(ControlPushButton::TOGGLE);
-    m_showWinliveAi.setButtonMode(ControlPushButton::TOGGLE);
+    m_showWinliveAi.setButtonMode(ControlPushButton::PUSH);
 
 
     m_showEffectRack.addAlias(ConfigKey(QStringLiteral("[EffectRack1]"), QStringLiteral("show")));
@@ -77,11 +86,17 @@ SkinControls::SkinControls()
             QStringLiteral("[Master]"), QStringLiteral("maximize_library")));
 
 	 // Connect per intercettare il click su WinliveAi
-    connect(&m_showWinliveAi, QOverload<double>::of(&ControlObject::valueChanged), this, [this](double value) {
-        if (value > 0.0) {
-            showWinliveAI(false);
-        }
-    });
+    connect(&m_showWinliveAi,
+            &ControlPushButton::valueChanged,
+            this,
+            [this](double value) {
+                if (value > 0.0) {
+                    showWinliveAI(false);
+                    m_showWinliveAi.set(0.0);
+                }
+            });
+}
+
 
  void SkinControls::showWinliveAI() {
     showWinliveAI(true);

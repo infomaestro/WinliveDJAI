@@ -1168,6 +1168,10 @@ void Tooltips::addStandardTooltips() {
             << tr("Skin Settings Menu")
             << tr("Show/hide skin settings menu");
 
+    add("goto_winliveai")
+            << tr("Winlive Ai")
+            << tr("Go to WinLiveAI web service ");
+
     // Sampler Bank Controls
     add("SaveSamplerBank")
             << tr("Save Sampler Bank")

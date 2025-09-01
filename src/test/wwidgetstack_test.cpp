@@ -102,11 +102,11 @@ TEST_F(WWidgetStackTest, MaintainPageSelected) {
 TEST_F(WWidgetStackTest, MaintainPageControlValue) {
     // The current page control overrides whatever values the individual
     // page triggers may already have.  This is what caused the bug with the
-    // LateNight skin -- The page trigger was set to off, but the current page
+    // WinliveDj skin -- The page trigger was set to off, but the current page
     // control was defaulted to 0, so that overrode the page trigger and
     // showed the first page.
 
-    // This test is set up to reproduce the original LateNight skin case.
+    // This test is set up to reproduce the original WinliveDj skin case.
     m_pCurPageControl.reset(
             new ControlObject(ConfigKey(m_pGroup,
                                         "MaintainPageControlValue-page")));
@@ -191,7 +191,7 @@ TEST_F(WWidgetStackTest, NextPrevControls) {
 
 TEST_F(WWidgetStackTest, HiddenStackNoChanges) {
     // When the widgetstack is hidden, it does not respond to outside changes.
-    // This helps LateNight use the same triggers in multiple views.
+    // This helps WinliveDj use the same triggers in multiple views.
     ExpectPageSelected(1);
     m_pStack->hide();
     m_pPage2Control->set(1);

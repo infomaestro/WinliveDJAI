@@ -445,7 +445,7 @@ LaunchImage* LegacySkinParser::parseLaunchImage(const QString& skinPath, QWidget
     }
 
     // This allows image urls like
-    // url(skin:/style/mixxx-icon-logo-symbolic.svg);
+    // url(skin:/style/wldjai_logo.svg);
     QStringList skinPaths(skinPath);
     QDir::setSearchPaths("skin", skinPaths);
 
@@ -2434,7 +2434,7 @@ void LegacySkinParser::setupConnections(const QDomNode& node, WBaseWidget* pWidg
 
                 // do not add Shortcut string for feedback connections
                 QString shortcut = m_pKeyboard->getKeyboardConfig()->getValueString(configKey);
-                addShortcutToToolTip(pWidget, shortcut, QString(""));
+                addShortcutToToolTip(pWidget, shortcut, QString(""), QString(""));
 
                 const WSliderComposed* pSlider;
 
@@ -2446,58 +2446,59 @@ void LegacySkinParser::setupConnections(const QDomNode& node, WBaseWidget* pWidg
                     subkey = configKey;
                     subkey.item += "_activate";
                     shortcut = m_pKeyboard->getKeyboardConfig()->getValueString(subkey);
-                    addShortcutToToolTip(pWidget, shortcut, tr("activate"));
+                    addShortcutToToolTip(pWidget, shortcut, QString(""), tr("activate"));
 
                     subkey = configKey;
                     subkey.item += "_toggle";
                     shortcut = m_pKeyboard->getKeyboardConfig()->getValueString(subkey);
-                    addShortcutToToolTip(pWidget, shortcut, tr("toggle"));
+                    addShortcutToToolTip(pWidget, shortcut, QString(""), tr("toggle"));
                 } else if ((pSlider = qobject_cast<const WSliderComposed*>(pWidget->toQWidget())) ||
                         qobject_cast<const WKnobComposed*>(pWidget->toQWidget())) {
                     // check for "_up", "_down", "_up_small", "_down_small"
                     ConfigKey subkey;
                     QString shortcut;
+                    QString shortcutSec;
 
                     if (pSlider && pSlider->tryParseHorizontal(node)) {
                         subkey = configKey;
                         subkey.item += "_up";
                         shortcut = m_pKeyboard->getKeyboardConfig()->getValueString(subkey);
-                        addShortcutToToolTip(pWidget, shortcut, tr("right"));
+                        addShortcutToToolTip(pWidget, shortcut, shortcutSec, tr("right"));
 
                         subkey = configKey;
                         subkey.item += "_down";
                         shortcut = m_pKeyboard->getKeyboardConfig()->getValueString(subkey);
-                        addShortcutToToolTip(pWidget, shortcut, tr("left"));
+                        addShortcutToToolTip(pWidget, shortcut, shortcutSec, tr("left"));
 
                         subkey = configKey;
                         subkey.item += "_up_small";
                         shortcut = m_pKeyboard->getKeyboardConfig()->getValueString(subkey);
-                        addShortcutToToolTip(pWidget, shortcut, tr("right small"));
+                        addShortcutToToolTip(pWidget, shortcut, shortcutSec, tr("right small"));
 
                         subkey = configKey;
                         subkey.item += "_down_small";
                         shortcut = m_pKeyboard->getKeyboardConfig()->getValueString(subkey);
-                        addShortcutToToolTip(pWidget, shortcut, tr("left small"));
+                        addShortcutToToolTip(pWidget, shortcut, shortcutSec, tr("left small"));
                     } else { // vertical slider of knob
                         subkey = configKey;
                         subkey.item += "_up";
                         shortcut = m_pKeyboard->getKeyboardConfig()->getValueString(subkey);
-                        addShortcutToToolTip(pWidget, shortcut, tr("up"));
+                        addShortcutToToolTip(pWidget, shortcut, shortcutSec, tr("up"));
 
                         subkey = configKey;
                         subkey.item += "_down";
                         shortcut = m_pKeyboard->getKeyboardConfig()->getValueString(subkey);
-                        addShortcutToToolTip(pWidget, shortcut, tr("down"));
+                        addShortcutToToolTip(pWidget, shortcut, shortcutSec, tr("down"));
 
                         subkey = configKey;
                         subkey.item += "_up_small";
                         shortcut = m_pKeyboard->getKeyboardConfig()->getValueString(subkey);
-                        addShortcutToToolTip(pWidget, shortcut, tr("up small"));
+                        addShortcutToToolTip(pWidget, shortcut, shortcutSec, tr("up small"));
 
                         subkey = configKey;
                         subkey.item += "_down_small";
                         shortcut = m_pKeyboard->getKeyboardConfig()->getValueString(subkey);
-                        addShortcutToToolTip(pWidget, shortcut, tr("down small"));
+                        addShortcutToToolTip(pWidget, shortcut, shortcutSec, tr("down small"));
                     }
                 }
             }
@@ -2514,7 +2515,9 @@ void LegacySkinParser::setupConnections(const QDomNode& node, WBaseWidget* pWidg
 }
 
 void LegacySkinParser::addShortcutToToolTip(WBaseWidget* pWidget,
-                                            const QString& shortcut, const QString& cmd) {
+        const QString& shortcut,
+        const QString& shortcut_secondary,
+        const QString& cmd) {
     if (shortcut.isEmpty()) {
         return;
     }
@@ -2523,8 +2526,9 @@ void LegacySkinParser::addShortcutToToolTip(WBaseWidget* pWidget,
 
     // translate shortcut to native text
     QString nativeShortcut = QKeySequence(shortcut, QKeySequence::PortableText).toString(QKeySequence::NativeText);
+    QString nativeShortcutSec = QKeySequence(shortcut_secondary, QKeySequence::PortableText).toString(QKeySequence::NativeText);
 
-    tooltip += "\n";
+        tooltip += "\n";
     tooltip += tr("Shortcut");
     if (!cmd.isEmpty()) {
         tooltip += " ";
@@ -2532,8 +2536,14 @@ void LegacySkinParser::addShortcutToToolTip(WBaseWidget* pWidget,
     }
     tooltip += ": ";
     tooltip += nativeShortcut;
+
+    if (!shortcut_secondary.isEmpty()) { // secondary shortcut, e.g. for shift+click
+        tooltip += " / " + nativeShortcutSec;
+    }
+
     pWidget->appendBaseTooltip(tooltip);
 }
+
 
 QString LegacySkinParser::parseLaunchImageStyle(const QDomNode& skinDoc) {
     QString schemeLaunchImageStyle;

@@ -1,4 +1,5 @@
 #include "coreservices.h"
+#include "config.h"
 
 #include <QApplication>
 #include <QFileDialog>
@@ -898,8 +899,8 @@ void CoreServices::deleteSettingsFile() {
     UserSettingsPointer pConfig = m_pSettingsManager->settings();
     QString settingspath = QDir(pConfig->getSettingsPath()).filePath(MIXXX_SETTINGS_FILE);
     QMessageBox::information(nullptr,
-            tr("Information"),
-            tr("Starting with default options"),
+            ("Information"),
+            ("Starting with default options"),
             QMessageBox::Ok);
      // Verifica se il file esiste e lo cancella
     QFile settingsFile(settingspath);

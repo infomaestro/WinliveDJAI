@@ -8,6 +8,7 @@
 #include <QThread>
 #include <QtDebug>
 #include <QtGlobal>
+#include <QSharedMemory>
 #include <cstdio>
 #include <stdexcept>
 
@@ -176,7 +177,7 @@ int main(int argc, char * argv[]) {
 
     // These need to be set early on (not sure how early) in order to trigger
     // logic in the OS X appstore support patch from QTBUG-16549.
-    QCoreApplication::setOrganizationDomain("mixxx.org");
+    QCoreApplication::setOrganizationDomain("promusicsoftware.com");
 
     // High DPI scaling is always enabled in Qt6.
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)

@@ -39,7 +39,7 @@ DlgAbout::DlgAbout()
                     .arg(QString::number(
                                  VersionStore::versionNumber().majorVersion()),
                             QString::number(VersionStore::versionNumber()
-                                                    .minorVersion()));
+                                            .minorVersion()));
     QString s_contributions = tr("With contributions from:");
     QString s_mixxxmentions = tr("GNU platform based:");
 
@@ -56,12 +56,12 @@ DlgAbout::DlgAbout()
             << "This program is based on Mixxx. For more info visit www.mixxx.org";
 
     QString sectionTemplate = QString(
-        "<p align=\"center\"><b>%1</b></p><p align=\"center\">%2</p>");
+            "<p align=\"center\"><b>%1</b></p><p align=\"center\">%2</p>");
     QStringList sections;
     sections << sectionTemplate.arg(s_devTeam,
-                                    thisReleaseDevelopers.join("<br>"))
+                        thisReleaseDevelopers.join("<br>"))
              << sectionTemplate.arg(s_mixxxmentions,
-                                    specialThanks.join("<br>"));
+                        specialThanks.join("<br>"));
     textBrowser->setHtml(sections.join(""));
 
     textWebsiteLink->setText(
@@ -71,9 +71,17 @@ DlgAbout::DlgAbout()
                                     .name(),
                             MIXXX_WEBSITE_URL,
                             tr("Official Website")));
-
-    btnDonate->setText(tr("Addons"));
-    connect(btnDonate, &QPushButton::clicked, this, [] {
+    /* if (std::rand() % 6) {
+        if (!Color::isDimColor(palette().text().color())) {
+            btnDonate->setIcon(QIcon(":/images/heart_icon_light.svg"));
+        } else {
+            btnDonate->setIcon(QIcon(":/images/heart_icon_dark.svg"));
+        }
+    } else {
+        btnDonate->setIcon(QIcon(":/images/heart_icon_rainbow.svg"));
+    }*/
+    btnAddons->setText(tr("Addons"));
+    connect(btnAddons, &QPushButton::clicked, this, [] {
         mixxx::DesktopHelper::openUrl(QUrl(MIXXX_ADDONS_URL));
     });
 

@@ -1,13 +1,16 @@
 #pragma once
+#include <QObject>
+
+#include "control/controlobject.h"
 #include "control/controlpushbutton.h"
 
 /// Skin controls that can be use in controller mappings.
-class SkinControls {
+class SkinControls : public QObject {
   public:
     SkinControls();
-
     void showWinliveAI();
     void showWinliveAI(boolean registering);
+
   private:
     ControlPushButton m_showEffectRack;
     ControlPushButton m_showLibraryCoverArt;

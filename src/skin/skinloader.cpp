@@ -144,7 +144,7 @@ QWidget* SkinLoader::loadConfiguredSkin(QWidget* pParent,
     }
 
     // This hooks up to and also creates some common GUI controls and some 'meta'
-    // controls that allow to keep LateNight's xml structure (for cover/spinnies
+    // controls that allow to keep WinliveDj's xml structure (for cover/spinnies
     // and for the ducking GUI) simple.
     setupSpinnyCoverControls();
     // PlayerManager created all devices, but SoundManager will setup devices after
@@ -200,8 +200,8 @@ LaunchImage* SkinLoader::loadLaunchImage(QWidget* pParent) const {
 }
 
 QString SkinLoader::pickResizableSkin(const QString& oldSkin) const {
-    if (oldSkin.contains("latenight", Qt::CaseInsensitive)) {
-        return "LateNight";
+    if (oldSkin.contains("WinliveDj", Qt::CaseInsensitive)) {
+        return "WinliveDj";
     }
     if (oldSkin.contains("deere", Qt::CaseInsensitive)) {
         return "Deere";
@@ -329,3 +329,4 @@ void SkinLoader::updateDuckingControl() {
 }
 } // namespace skin
 } // namespace mixxx
+

@@ -154,7 +154,7 @@ namespace mixxx {
 
 const ColorPalette PredefinedColorPalettes::kMixxxHotcueColorPalette =
         ColorPalette(
-                QStringLiteral("Mixxx Hotcue Colors"),
+                QStringLiteral("Deafult Hotcue Colors"),
                 {
                         kColorMixxxRed,
                         kColorMixxxGreen,
@@ -268,7 +268,7 @@ const ColorPalette PredefinedColorPalettes::kRekordboxCOLORFULHotcueColorPalette
 
 const ColorPalette PredefinedColorPalettes::kMixxxTrackColorPalette =
         ColorPalette(
-                QStringLiteral("Mixxx Track Colors"),
+                QStringLiteral("Default Track Colors"),
                 {
                         kMixxxTrackColorDarkRed,
                         kMixxxTrackColorRed,

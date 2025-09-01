@@ -348,7 +348,7 @@ QString DlgPrefController::mappingSupportLinks(
     if (!forumLink.isEmpty()) {
         linkList << coloredLinkString(
                 m_pLinkColor,
-                "Mixxx&nbsp;Forums",
+                "WinliveDj&nbsp;Forums",
                 forumLink);
     }
 
@@ -356,7 +356,7 @@ QString DlgPrefController::mappingSupportLinks(
     if (!wikiLink.isEmpty()) {
         linkList << coloredLinkString(
                 m_pLinkColor,
-                "Mixxx&nbsp;Wiki",
+                "WinliveDj&nbsp;Wiki",
                 wikiLink);
     }
 
@@ -364,7 +364,7 @@ QString DlgPrefController::mappingSupportLinks(
     if (!manualLink.isEmpty()) {
         linkList << coloredLinkString(
                 m_pLinkColor,
-                "Mixxx&nbsp;Manual",
+                "WinliveDj&nbsp;Manual",
                 manualLink);
     }
 

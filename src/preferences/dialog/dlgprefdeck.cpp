@@ -57,8 +57,8 @@ DlgPrefDeck::DlgPrefDeck(QWidget* parent, UserSettingsPointer pConfig)
             ConfigKey("[Controls]", "CueDefault"), 0);
 
     // Update combo box
-    ComboBoxCueMode->addItem(tr("Mixxx mode"), static_cast<int>(CueMode::Mixxx));
-    ComboBoxCueMode->addItem(tr("Mixxx mode (no blinking)"), static_cast<int>(CueMode::MixxxNoBlinking));
+    ComboBoxCueMode->addItem(tr("Default mode"), static_cast<int>(CueMode::Mixxx));
+    ComboBoxCueMode->addItem(tr("Default mode (no blinking)"), static_cast<int>(CueMode::MixxxNoBlinking));
     ComboBoxCueMode->addItem(tr("Pioneer mode"), static_cast<int>(CueMode::Pioneer));
     ComboBoxCueMode->addItem(tr("Denon mode"), static_cast<int>(CueMode::Denon));
     ComboBoxCueMode->addItem(tr("Numark mode"), static_cast<int>(CueMode::Numark));

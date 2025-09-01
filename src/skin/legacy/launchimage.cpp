@@ -12,8 +12,10 @@
 
 namespace {
 bool isIn2024ChristmasHolidays() {
+    return (false); // xmas holidays set to false for now
+    /*auto currentDate = QDate::currentDate();
     return (currentDate.month() == 12 && currentDate.day() >= 24) ||
-            (currentDate.month() == 1 && currentDate.day() <= 6);
+            (currentDate.month() == 1 && currentDate.day() <= 6);*/
 }
 } // namespace
 

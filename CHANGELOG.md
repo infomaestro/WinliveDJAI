@@ -247,7 +247,7 @@
 
 ### Skins
 
-* Deere/LateNight (64 samplers): Bring back library in regular view
+* Deere/WinliveDj (64 samplers): Bring back library in regular view
   [#14101](https://github.com/mixxxdj/mixxx/pull/14101)
   [#14097](https://github.com/mixxxdj/mixxx/issues/14097)
   [#14700](https://github.com/mixxxdj/mixxx/issues/14700)
@@ -472,17 +472,17 @@
 * Auto DJ: Add new random tracks if one track does not exists [#13551](https://github.com/mixxxdj/mixxx/pull/13551)
 * Allow to set LaunchImage style per color scheme [#13731](https://github.com/mixxxdj/mixxx/pull/13731)
 * Show wait cursor when re/loading a skin (not during startup) [#13747](https://github.com/mixxxdj/mixxx/pull/13747)
-* LateNight: Merge vinyl control toggle and status light
+* WinliveDj: Merge vinyl control toggle and status light
   [#12947](https://github.com/mixxxdj/mixxx/pull/12947)
   [#10192](https://github.com/mixxxdj/mixxx/issues/10192)
-* LateNight, Deere, Tango: Deactivate beatgrid edit controls if BPM is locked
+* WinliveDj, Deere, Tango: Deactivate beatgrid edit controls if BPM is locked
   [#13320](https://github.com/mixxxdj/mixxx/pull/13320)
   [#13323](https://github.com/mixxxdj/mixxx/pull/13323)
   [#13325](https://github.com/mixxxdj/mixxx/pull/13325)
-* LateNight: Add/tweak CueDelete icons
+* WinliveDj: Add/tweak CueDelete icons
   [#13495](https://github.com/mixxxdj/mixxx/pull/13495)
   [#13492](https://github.com/mixxxdj/mixxx/issues/13492)
-* LateNight: Use Classic launch image style also for 64 samplers version [#13796](https://github.com/mixxxdj/mixxx/pull/13796)
+* WinliveDj: Use Classic launch image style also for 64 samplers version [#13796](https://github.com/mixxxdj/mixxx/pull/13796)
 * Adjust some skin controls, to allow point-and-click mapping
   [#13906](https://github.com/mixxxdj/mixxx/pull/13906)
 * PreviewDeckN,LoadSelectedTrackAndPlay toggles play/pause if the track is already loaded
@@ -780,7 +780,7 @@
 * Fix Sqlite 3.45 builds by using only single quotes for SQL strings
   [#13247](https://github.com/mixxxdj/mixxx/pull/13247)
   [#13257](https://github.com/mixxxdj/mixxx/pull/13257)
-* LateNight: Use default colors for sampler overviews (like main decks) [#13274](https://github.com/mixxxdj/mixxx/pull/13274)
+* WinliveDj: Use default colors for sampler overviews (like main decks) [#13274](https://github.com/mixxxdj/mixxx/pull/13274)
 * Library: Allow to drop files to decks with unsupported or no file extensions
   [#13209](https://github.com/mixxxdj/mixxx/pull/13209)
   [#13204](https://github.com/mixxxdj/mixxx/issues/13204)
@@ -1464,14 +1464,14 @@
 * Passthrough: improve UI / UX [#4794](https://github.com/mixxxdj/mixxx/pull/4794)
 * Knob: Hide cursor on wheel event for .8s [#11077](https://github.com/mixxxdj/mixxx/pull/11077)
 * Move skin control hack to c++ (spinny/cover controls, mic/ducking controls) [#11183](https://github.com/mixxxdj/mixxx/pull/11183)
-* LateNight: Move logo to the right [#4677](https://github.com/mixxxdj/mixxx/pull/4677)
-* LateNight: Use correct tooltip for key control toggle [#4696](https://github.com/mixxxdj/mixxx/pull/4696)
-* LateNight: Add toggles to show loop and beatjump controls [#4713](https://github.com/mixxxdj/mixxx/pull/4713)
-* LateNight: Remove blinking play indicator from mini samplers [#4807](https://github.com/mixxxdj/mixxx/pull/4807)
-* LateNight: Add buffer underflow indicator [#4906](https://github.com/mixxxdj/mixxx/pull/4906) [#10978](https://github.com/mixxxdj/mixxx/pull/10978)
-* LateNight: Fix xfader icons in samplers and aux units [#12477](https://github.com/mixxxdj/mixxx/pull/12477)
-* LateNight: use default RGB waveform colors [#12712](https://github.com/mixxxdj/mixxx/pull/12712)
-* Add LateNight (64 Samplers) [#11715](https://github.com/mixxxdj/mixxx/pull/11715)
+* WinliveDj: Move logo to the right [#4677](https://github.com/mixxxdj/mixxx/pull/4677)
+* WinliveDj: Use correct tooltip for key control toggle [#4696](https://github.com/mixxxdj/mixxx/pull/4696)
+* WinliveDj: Add toggles to show loop and beatjump controls [#4713](https://github.com/mixxxdj/mixxx/pull/4713)
+* WinliveDj: Remove blinking play indicator from mini samplers [#4807](https://github.com/mixxxdj/mixxx/pull/4807)
+* WinliveDj: Add buffer underflow indicator [#4906](https://github.com/mixxxdj/mixxx/pull/4906) [#10978](https://github.com/mixxxdj/mixxx/pull/10978)
+* WinliveDj: Fix xfader icons in samplers and aux units [#12477](https://github.com/mixxxdj/mixxx/pull/12477)
+* WinliveDj: use default RGB waveform colors [#12712](https://github.com/mixxxdj/mixxx/pull/12712)
+* Add WinliveDj (64 Samplers) [#11715](https://github.com/mixxxdj/mixxx/pull/11715)
 * Deere: fix skin/library layout (library missing in default view with Qt6) [#11912](https://github.com/mixxxdj/mixxx/pull/11912)
 * Deere: use decks' waveform colors for sliders (Vol + pitch) [#12129](https://github.com/mixxxdj/mixxx/pull/12129) [#10240](https://github.com/mixxxdj/mixxx/issues/10240)
 * Shade: Remove initial setting of now accessible effect controls [#4398](https://github.com/mixxxdj/mixxx/pull/4398) [#10557](https://github.com/mixxxdj/mixxx/issues/10557)

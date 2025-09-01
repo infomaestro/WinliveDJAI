@@ -29,8 +29,8 @@ DlgControllerLearning::DlgControllerLearning(QWidget* parent,
     labelDescription->setWordWrap(true);
     labelMappedTo->setText("");
 
-    QString helpTitle(tr("Click anywhere in Mixxx or choose a control to learn"));
-    QString helpBody(tr("You can click on any button, slider, or knob in Mixxx "
+    QString helpTitle(tr("Click anywhere in WinliveDjAi or choose a control to learn"));
+    QString helpBody(tr("You can click on any button, slider, or knob in WinliveDjAi "
                         "to teach it that control.  You can also type in the "
                         "box to search for a control by name, or click the "
                         "Choose Control button to select from a list."));
@@ -43,7 +43,7 @@ DlgControllerLearning::DlgControllerLearning(QWidget* parent,
 
     QString nextTitle(tr("Now test it out!"));
     QString nextInstructionBody(tr(
-            "If you manipulate the control, you should see the Mixxx user interface "
+            "If you manipulate the control, you should see the WinliveDjAi user interface "
             "respond the way you expect."));
     QString nextTroubleshootTitle(tr("Not quite right?"));
     QString nextTroubleshootBody(tr(
@@ -497,10 +497,10 @@ void DlgControllerLearning::controlPicked(const ConfigKey& control) {
         QMessageBox msg(QMessageBox::Warning,
                 VersionStore::applicationName(),
                 tr("The selected control does not exist.<br>"
-                   "This likely a bug. Please report it on the Mixxx bug "
+                   "This likely a bug. Please report it on the WinliveDjAi bug "
                    "tracker.<br>"
-                   "<a href='https://github.com/mixxxdj/mixxx/issues'>"
-                   "https://github.com/mixxxdj/mixxx/issues</a>"
+                   "<a href='https://www.promusicsofware.com'>"
+                   "https://www.promusicsofware.com</a>"
                    "<br><br>"
                    "You tried to learn: %1,%2")
                         .arg(control.group, control.item));
@@ -516,13 +516,13 @@ void DlgControllerLearning::controlPicked(const ConfigKey& control) {
 
 void DlgControllerLearning::controlClicked(const ConfigKey& controlKey) {
     if (!m_pControlPickerMenu->controlExists(controlKey)) {
-        qWarning() << "Mixxx UI element clicked for which there is no "
+        qWarning() << "WinliveDjAi UI element clicked for which there is no "
                       "learnable control "
                    << controlKey.group << " " << controlKey.item;
         QMessageBox::warning(
                 this,
                 VersionStore::applicationName(),
-                tr("The control you clicked in Mixxx is not learnable.\n"
+                tr("The control you clicked in WinliveDjAi is not learnable.\n"
                    "This could be because you are either using an old skin"
                    " and this control is no longer supported, "
                    "or you clicked a control that provides visual feedback"
