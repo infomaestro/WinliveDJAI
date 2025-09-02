@@ -14,7 +14,7 @@
 
 #define MIXXX_WEBSITE_URL       "https://www.promusicsoftware.com"
 #define MIXXX_WEBSITE_SHORT_URL "https://www.promusicsoftware.com"
-#define MIXXX_SUPPORT_URL       "https://www.promusicsoftware.com"
+#define MIXXX_SUPPORT_URL       "https://www.promusicsoftware.com/news.php?news=250"
 #define MIXXX_TRANSLATION_URL   "https://www.promusicsoftware.com"
 #define MIXXX_DONATE_URL "https://www.promusicsoftware.com"
 #define MIXXX_ADDONS_URL "https://www.promusicsoftware.com/news.php?news=249"  

@@ -96,7 +96,7 @@ class WMainMenuBar : public QMenuBar {
     void slotDeveloperStatsBase(bool enable);
     void slotDeveloperDebugger(bool toggle);
     void slotVisitUrl(const QUrl& url);
-
+    void slotOpenRemoteSupport();
   private:
     void initialize();
 #ifndef __APPLE__
