@@ -771,7 +771,7 @@ bool CoreServices::initializeDatabase() {
         QMessageBox::critical(nullptr,
                 tr("Cannot open database"),
                 tr("Unable to establish a database connection.\n"
-                   "WinliveDjAi requires QT with SQLite support. Please read "
+                   "Winlive Dj Ai requires QT with SQLite support. Please read "
                    "the Qt SQL driver documentation for information on how "
                    "to build it.\n\n"
                    "Click OK to exit."),

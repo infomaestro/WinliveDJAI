@@ -291,7 +291,7 @@ int main(int argc, char * argv[]) {
     // When the last window is closed, terminate the Qt event loop.
     QObject::connect(&app, &MixxxApplication::lastWindowClosed, &app, &MixxxApplication::quit);
 
-    // sharedMemory is used to detect if another instance of WinliveDjAi is already running.
+    // sharedMemory is used to detect if another instance of Winlive Dj Ai is already running.
     QSharedMemory sharedMemory("WLDJAI20_ID");
     if (!sharedMemory.create(1)) {
         QMessageBox::warning(nullptr, "App is already running", "First close the program!");

@@ -71,7 +71,7 @@ void ScreenSaverHelper::triggerUserActivity() {
      Available from 10.7.3 */
     if (&IOPMAssertionDeclareUserActivity) {
         CFStringRef reasonForActivity = CFStringCreateWithCString(kCFAllocatorDefault,
-                "WinliveDjAi digital DJ software",
+                "Winlive Dj Ai digital DJ software",
                 kCFStringEncodingUTF8);
         IOReturn success = IOPMAssertionDeclareUserActivity(reasonForActivity,
                 kIOPMUserActiveLocal,
@@ -95,7 +95,7 @@ void ScreenSaverHelper::inhibitInternal() {
 
     IOReturn success;
     CFStringRef reasonForActivity = CFStringCreateWithCString(kCFAllocatorDefault,
-            "WinliveDjAi digital DJ software",
+            "Winlive Dj Ai digital DJ software",
             kCFStringEncodingUTF8);
     success = IOPMAssertionCreateWithName(kIOPMAssertionTypeNoDisplaySleep, kIOPMAssertionLevelOn, reasonForActivity, &s_systemSleepAssertionID);
     CFRelease(reasonForActivity);

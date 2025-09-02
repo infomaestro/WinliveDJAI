@@ -1,4 +1,4 @@
-# WinliveDjAi
+# Winlive Dj Ai
 
 [![GitHub latest tag](https://img.shields.io/github/tag/WinliveDjAidj/mixxx.svg)](https://mixxx.org/download)
 [![Packaging status](https://repology.org/badge/tiny-repos/mixxx.svg)](https://repology.org/metapackage/mixxx/versions)
@@ -7,12 +7,12 @@
 [![Zulip chat](https://img.shields.io/badge/zulip-join_chat-brightgreen.svg)](https://mixxx.zulipchat.com)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://mixxx.org/donate)
 
-[WinliveDjAi] is Free DJ software that gives you everything you need to perform live
-DJ mixes. WinliveDjAi works on GNU/Linux, Windows, and macOS.
+[Winlive Dj Ai] is Free DJ software that gives you everything you need to perform live
+DJ mixes. Winlive Dj Ai works on GNU/Linux, Windows, and macOS.
 
 ## Quick Start
 
-To get started with WinliveDjAi:
+To get started with Winlive Dj Ai:
 
 1. For live use, [download the latest stable version][download-stable].
 2. For experimentation and testing, [download a development release][download-testing].
@@ -20,15 +20,15 @@ To get started with WinliveDjAi:
 
 ## Bug tracker
 
-The WinliveDjAi team uses [Github Issues][issues] to manage WinliveDjAi development.
+The Winlive Dj Ai team uses [Github Issues][issues] to manage Winlive Dj Ai development.
 
 Have a bug or feature request? [File a bug on Github][fileabug].
 
-Want to get involved in WinliveDjAi development? Assign yourself a bug from the [easy
+Want to get involved in Winlive Dj Ai development? Assign yourself a bug from the [easy
 bug list][easybugs] and get started!
 Read [CONTRIBUTING](CONTRIBUTING.md) for more information.
 
-## Building WinliveDjAi
+## Building Winlive Dj Ai
 
 First, open a terminal (on Windows, use "**x64 Native Tools Command Prompt for
 [VS 2022][visualstudio2022]**"), download the mixxx
@@ -48,7 +48,7 @@ corresponding command for your operating system:
 | Fedora | `tools/rpm_buildenv.sh setup` |
 | Other Linux distros | See the [wiki article](https://github.com/mixxxdj/mixxx/wiki/Compiling%20on%20Linux) |
 
-To build WinliveDjAi, run
+To build Winlive Dj Ai, run
 
     $ mkdir build
     $ cd build
@@ -62,34 +62,34 @@ Detailed build instructions for each target OS can be found [on the wiki](https:
 
 ## Documentation
 
-For help using WinliveDjAi, there are a variety of options:
+For help using Winlive Dj Ai, there are a variety of options:
 
-- [WinliveDjAi manual][manual]
-- [WinliveDjAi wiki][wiki]
+- [Winlive Dj Ai manual][manual]
+- [Winlive Dj Ai wiki][wiki]
 - [Hardware Compatibility]
 - [Creating Skins]
 
 ## Translation
 
-Help to spread WinliveDjAi with translations into more languages, as well as to update and ensure the accuracy of existing translations.
+Help to spread Winlive Dj Ai with translations into more languages, as well as to update and ensure the accuracy of existing translations.
 
 - [Help translate content]
-- [WinliveDjAi i18n wiki]
-- [WinliveDjAi localization forum]
-- [WinliveDjAi glossary]
+- [Winlive Dj Ai i18n wiki]
+- [Winlive Dj Ai localization forum]
+- [Winlive Dj Ai glossary]
 
 ## Community
 
-WinliveDjAi is a vibrant community of hackers, DJs and artists. To keep track of
+Winlive Dj Ai is a vibrant community of hackers, DJs and artists. To keep track of
 development and community news:
 
 - Chat with us on [Zulip][zulip].
 - Follow us on [Mastodon], [Twitter] and [Facebook].
-- Subscribe to the [WinliveDjAi Blog][blog].
-- Post on the [WinliveDjAi forums][discourse].
+- Subscribe to the [Winlive Dj Ai Blog][blog].
+- Post on the [Winlive Dj Ai forums][discourse].
 
 ## License
 
-WinliveDjAi is released under the GPLv2. See the LICENSE file for a full copy of the
+Winlive Dj Ai is released under the GPLv2. See the LICENSE file for a full copy of the
 license.
 

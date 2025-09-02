@@ -47,8 +47,8 @@ DlgPrefControllers::DlgPrefControllers(DlgPreferences* pPreferences,
     // Setting the description text here instead of in the ui file allows to paste
     // a formatted link (text color is a more readable blend of text color and original link color).
     txtMappingsOverview->setText(tr(
-            "WinliveDjAi uses \"mappings\" to connect messages from your controller to "
-            "controls in WinliveDjAi."));
+            "Winlive Dj Ai uses \"mappings\" to connect messages from your controller to "
+            "controls in Winlive Dj Ai."));
 
 
 }
