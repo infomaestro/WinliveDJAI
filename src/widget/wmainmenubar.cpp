@@ -6,6 +6,7 @@
 #endif
 #include <QUrl>
 #include <QMessageBox>
+#include <QProcess>
 
 #include "config.h"
 #include "control/controlproxy.h"
@@ -17,6 +18,7 @@
 #include "vinylcontrol/defs_vinylcontrol.h"
 #include "dialog/dlgregister.h"
 #include "util/serial.h"
+#include "coreservices.h"
 
 namespace {
 
@@ -927,7 +929,16 @@ void WMainMenuBar::slotOpenRemoteSupport() {
         QMessageBox::warning(this, tr("Info"), tr("Remote support is reserved to registered user"));
     }
     
-   
+    #if defined(__WINDOWS__) 
+     if (auto* coreServices = mixxx::CoreServices::getInstance()) {
+        QString rustDeskPath = QDir(coreServices->getResourcePath()).filePath("rustdesk.exe");
+        // open with admin rights
+        QString command = QString("Start-Process '%1' -Verb RunAs").arg(rustDeskPath);
+        QStringList arguments;
+        arguments << "-Command" << command;
+        QProcess::startDetached("powershell", arguments);
+    }
+    #endif
 }
 
 void WMainMenuBar::createVisibilityControl(QAction* pAction,
