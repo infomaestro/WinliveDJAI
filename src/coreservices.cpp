@@ -915,6 +915,13 @@ void CoreServices::deleteSettingsFile() {
     }
 }
 
+QString CoreServices::getResourcePath()
+{
+    UserSettingsPointer pConfig = m_pSettingsManager->settings();
+    QString resPath = pConfig->getResourcePath();
+    return resPath;
+}
+
 // static method to get the global instance of CoreServices
 mixxx::CoreServices* CoreServices::getInstance() {
     return g_coreServicesInstance;

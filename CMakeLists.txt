@@ -1990,6 +1990,14 @@ install(
   DESTINATION "${MIXXX_INSTALL_DATADIR}"
 )
 
+# Windows RemoteSupport executable 
+if (WIN32)
+install(
+  FILES
+    "${CMAKE_CURRENT_SOURCE_DIR}/res/rustdesk.exe"
+  DESTINATION "${MIXXX_INSTALL_DATADIR}"
+)
+endif()
 
 # Additional Linux-only files
 if(UNIX AND NOT APPLE)

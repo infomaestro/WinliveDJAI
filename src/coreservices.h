@@ -40,7 +40,7 @@ class CoreServices : public QObject {
     void initialize(QApplication* pApp);
     void showRegisterWindow();
     void deleteSettingsFile();
-
+    QString getResourcePath();
 
     std::shared_ptr<KeyboardEventFilter> getKeyboardEventFilter() const {
         return m_pKeyboardEventFilter;
