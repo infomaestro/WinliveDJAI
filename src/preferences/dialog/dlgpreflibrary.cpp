@@ -410,12 +410,12 @@ void DlgPrefLibrary::slotRemoveDir() {
     removeMsgBox.setWindowTitle(tr("Confirm Directory Removal"));
 
     removeMsgBox.setText(tr(
-        "Mixxx will no longer watch this directory for new tracks. "
+        "Winlive Dj Ai will no longer watch this directory for new tracks. "
         "What would you like to do with the tracks from this directory and "
         "subdirectories?"
         "<ul>"
         "<li>Hide all tracks from this directory and subdirectories.</li>"
-        "<li>Delete all metadata for these tracks from Mixxx permanently.</li>"
+        "<li>Delete all metadata for these tracks from Winlive Dj Ai permanently.</li>"
         "<li>Leave the tracks unchanged in your library.</li>"
         "</ul>"
         "Hiding tracks saves their metadata in case you re-add them in the "
@@ -423,7 +423,7 @@ void DlgPrefLibrary::slotRemoveDir() {
     removeMsgBox.setInformativeText(tr(
         "Metadata means all track details (artist, title, playcount, etc.) as "
         "well as beatgrids, hotcues, and loops. This choice only affects the "
-        "Mixxx library. No files on disk will be changed or deleted."));
+        "Winlive Dj Ai library. No files on disk will be changed or deleted."));
 
     QPushButton* cancelButton =
             removeMsgBox.addButton(QMessageBox::Cancel);
@@ -486,11 +486,11 @@ void DlgPrefLibrary::slotSeratoMetadataExportClicked(bool checked) {
         if (QMessageBox::warning(this,
                     QStringLiteral("Serato Metadata Export"),
                     QStringLiteral(
-                            "Exporting Serato Metadata from Mixxx is "
+                            "Exporting Serato Metadata from Winlive Dj Ai is "
                             "experimental. There is no official documentation "
                             "of the format. Existing Serato Metadata might be "
                             "lost and files with Serato metadata written by "
-                            "Mixxx could potentially crash Serato DJ, "
+                            "Winlive Dj Ai could potentially crash Serato DJ, "
                             "therefore caution is advised and backups are "
                             "recommended. Are you sure you want to enable this "
                             "option?"),

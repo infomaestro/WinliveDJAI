@@ -168,7 +168,7 @@ void WEffectParameterNameBase::dropEvent(QDropEvent* pEvent) {
 }
 
 const QString WEffectParameterNameBase::mimeTextIdentifier() const {
-    return QStringLiteral("Mixxx effect parameter ") +
+    return QStringLiteral("Winlive Dj Ai effect parameter ") +
             QString::number(
                     static_cast<int>(m_pParameterSlot->parameterType()));
 }

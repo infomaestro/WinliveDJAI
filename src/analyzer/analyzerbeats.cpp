@@ -186,7 +186,7 @@ bool AnalyzerBeats::shouldAnalyze(TrackPointer pTrack) const {
     // Beat grid exists but version and settings differ
     if (!m_bPreferencesReanalyzeOldBpm) {
         qDebug() << "Beat calculation skips analyzing because the track has"
-                << "a BPM computed by a previous Mixxx version and user"
+                << "a BPM computed by a previous Winlive Dj Ai version and user"
                 << "preferences indicate we should not change it.";
         return false;
     }

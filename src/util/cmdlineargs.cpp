@@ -88,7 +88,7 @@ CmdlineArgs::CmdlineArgs()
           // potentially diagnose issues by accessing logs etc. via the native iOS files app.
           m_settingsPath(
                   QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)
-                          .append("/Library/Application Support/Mixxx"))
+                          .append("/Library/Application Support/WinliveDjAi"))
 #else
 
           // TODO(XXX) Trailing slash not needed anymore as we switches from String::append
@@ -161,7 +161,7 @@ bool CmdlineArgs::parse(const QStringList& arguments, CmdlineArgs::ParseMode mod
     if (forUserFeedback) {
         parser.setApplicationDescription(
                 QCoreApplication::translate("CmdlineArgs",
-                        "Mixxx is an open source DJ software. For more "
+                        "Winlive Dj Ai is an open source DJ software. For more "
                         "information, see: ") +
                 MIXXX_MANUAL_COMMANDLINEOPTIONS_URL);
     }
@@ -169,7 +169,7 @@ bool CmdlineArgs::parse(const QStringList& arguments, CmdlineArgs::ParseMode mod
     const QCommandLineOption fullScreen(
             QStringList({QStringLiteral("f"), QStringLiteral("full-screen")}),
             forUserFeedback ? QCoreApplication::translate(
-                                      "CmdlineArgs", "Starts Mixxx in full-screen mode")
+                                      "CmdlineArgs", "Starts Winlive Dj Ai in full-screen mode")
                             : QString());
     QCommandLineOption fullScreenDeprecated(QStringLiteral("fullScreen"));
     fullScreenDeprecated.setFlags(QCommandLineOption::HiddenFromHelp);
@@ -186,14 +186,14 @@ bool CmdlineArgs::parse(const QStringList& arguments, CmdlineArgs::ParseMode mod
 
     const QCommandLineOption startAutoDJ(QStringLiteral("start-autodj"),
             forUserFeedback ? QCoreApplication::translate("CmdlineArgs",
-                                      "Starts Auto DJ when Mixxx is launched.")
+                                      "Starts Auto DJ when Winlive Dj Ai is launched.")
                             : QString());
     parser.addOption(startAutoDJ);
 
     // An option with a value
     const QCommandLineOption settingsPath(QStringLiteral("settings-path"),
             forUserFeedback ? QCoreApplication::translate("CmdlineArgs",
-                                      "Top-level directory where Mixxx should look for settings. "
+                                      "Top-level directory where Winlive Dj Ai should look for settings. "
                                       "Default is: ") +
                             QDir::toNativeSeparators(getSettingsPath())
                             : QString(),
@@ -207,7 +207,7 @@ bool CmdlineArgs::parse(const QStringList& arguments, CmdlineArgs::ParseMode mod
 
     QCommandLineOption resourcePath(QStringLiteral("resource-path"),
             forUserFeedback ? QCoreApplication::translate("CmdlineArgs",
-                                      "Top-level directory where Mixxx should look for its "
+                                      "Top-level directory where Winlive Dj Ai should look for its "
                                       "resource files such as MIDI mappings, overriding the "
                                       "default installation location.")
                             : QString(),
@@ -245,7 +245,7 @@ bool CmdlineArgs::parse(const QStringList& arguments, CmdlineArgs::ParseMode mod
 
     const QCommandLineOption controllerDebug(QStringLiteral("controller-debug"),
             forUserFeedback ? QCoreApplication::translate("CmdlineArgs",
-                                      "Causes Mixxx to display/log all of the controller data it "
+                                      "Causes Winlive Dj Ai to display/log all of the controller data it "
                                       "receives and script functions it loads")
                             : QString());
     QCommandLineOption controllerDebugDeprecated(
@@ -288,7 +288,7 @@ bool CmdlineArgs::parse(const QStringList& arguments, CmdlineArgs::ParseMode mod
     const QCommandLineOption safeMode(QStringLiteral("safe-mode"),
             forUserFeedback ? QCoreApplication::translate("CmdlineArgs",
                                       "Enables safe-mode. Disables OpenGL waveforms, and "
-                                      "spinning vinyl widgets. Try this option if Mixxx is "
+                                      "spinning vinyl widgets. Try this option if Winlive Dj Ai is "
                                       "crashing on startup.")
                             : QString());
     QCommandLineOption safeModeDeprecated(QStringLiteral("safeMode"), safeMode.description());
@@ -323,7 +323,7 @@ bool CmdlineArgs::parse(const QStringList& arguments, CmdlineArgs::ParseMode mod
     const QCommandLineOption logFlushLevel(QStringLiteral("log-flush-level"),
             forUserFeedback ? QCoreApplication::translate("CmdlineArgs",
                                       "Sets the the logging level at which the log buffer is "
-                                      "flushed to mixxx.log. <level> is one of the values defined "
+                                      "flushed to wldjai.log. <level> is one of the values defined "
                                       "at --log-level above.")
                             : QString(),
             QStringLiteral("level"));
@@ -337,7 +337,7 @@ bool CmdlineArgs::parse(const QStringList& arguments, CmdlineArgs::ParseMode mod
     const QCommandLineOption logMaxFileSize(QStringLiteral("log-max-file-size"),
             forUserFeedback ? QCoreApplication::translate("CmdlineArgs",
                                       "Sets the maximum file size of the "
-                                      "mixxx.log file in bytes. "
+                                      "wldjai.log file in bytes. "
                                       "Use -1 for unlimited. The default is "
                                       "100 MB as 1e5 or 100000000.")
                             : QString(),
@@ -348,7 +348,7 @@ bool CmdlineArgs::parse(const QStringList& arguments, CmdlineArgs::ParseMode mod
 
     QCommandLineOption debugAssertBreak(QStringLiteral("debug-assert-break"),
             forUserFeedback ? QCoreApplication::translate("CmdlineArgs",
-                                      "Breaks (SIGINT) Mixxx, if a DEBUG_ASSERT evaluates to "
+                                      "Breaks (SIGINT) Winlive Dj Ai, if a DEBUG_ASSERT evaluates to "
                                       "false. Under a debugger you can continue afterwards.")
                             : QString());
     QCommandLineOption debugAssertBreakDeprecated(
@@ -457,13 +457,13 @@ bool CmdlineArgs::parse(const QStringList& arguments, CmdlineArgs::ParseMode mod
     if (parser.isSet(logLevel)) {
         if (!parseLogLevel(parser.value(logLevel), &m_logLevel)) {
             fputs("\nlog-level wasn't 'trace', 'debug', 'info', 'warning', or 'critical'!\n"
-                  "Mixxx will only print warnings and critical messages to the console.\n",
+                  "Winlive Dj Ai will only print warnings and critical messages to the console.\n",
                     stdout);
         }
     } else if (parser.isSet(logLevelDeprecated)) {
         if (!parseLogLevel(parser.value(logLevelDeprecated), &m_logLevel)) {
             fputs("\nlogLevel wasn't 'trace', 'debug', 'info', 'warning', or 'critical'!\n"
-                  "Mixxx will only print warnings and critical messages to the console.\n",
+                  "Winlive Dj Ai will only print warnings and critical messages to the console.\n",
                     stdout);
         }
     } else {
@@ -475,13 +475,13 @@ bool CmdlineArgs::parse(const QStringList& arguments, CmdlineArgs::ParseMode mod
     if (parser.isSet(logFlushLevel)) {
         if (!parseLogLevel(parser.value(logFlushLevel), &m_logFlushLevel)) {
             fputs("\nlog-flush-level wasn't 'trace', 'debug', 'info', 'warning', or 'critical'!\n"
-                  "Mixxx will only flush output after a critical message.\n",
+                  "Winlive Dj Ai will only flush output after a critical message.\n",
                     stdout);
         }
     } else if (parser.isSet(logFlushLevelDeprecated)) {
         if (!parseLogLevel(parser.value(logFlushLevelDeprecated), &m_logFlushLevel)) {
             fputs("\nlogFlushLevel wasn't 'trace', 'debug', 'info', 'warning', or 'critical'!\n"
-                  "Mixxx will only flush output after a critical message.\n",
+                  "Winlive Dj Ai will only flush output after a critical message.\n",
                     stdout);
         }
     }

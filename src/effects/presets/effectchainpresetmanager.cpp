@@ -111,7 +111,7 @@ bool EffectChainPresetManager::importPreset() {
     QStringList fileNames = QFileDialog::getOpenFileNames(nullptr,
             tr("Import effect chain preset"),
             QDir::homePath(),
-            tr("Mixxx Effect Chain Presets") + QStringLiteral(" (*") +
+            tr("Winlive Dj Ai Effect Chain Presets") + QStringLiteral(" (*") +
                     kXmlFileExtension + QStringLiteral(")"));
 
     bool presetsImported = false;
@@ -213,7 +213,7 @@ void EffectChainPresetManager::exportPreset(const QString& chainPresetName) {
             nullptr,
             tr("Export effect chain preset"),
             QString(),
-            tr("Mixxx Effect Chain Presets") + QStringLiteral(" (*") +
+            tr("Winlive Dj Ai Effect Chain Presets") + QStringLiteral(" (*") +
                     kXmlFileExtension + QStringLiteral(")"));
     saveFileDialog.setDefaultSuffix(kXmlFileExtension);
     saveFileDialog.setAcceptMode(QFileDialog::AcceptSave);

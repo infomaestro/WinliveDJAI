@@ -1437,7 +1437,7 @@ QString RekordboxFeature::formatRootViewHtml() const {
             "the Rekordbox Export mode.<br/>"
             "Rekordbox can only export to USB or SD devices with a FAT or "
             "HFS file system.<br/>"
-            "Mixxx can read a database from any device that contains the "
+            "Winlive Dj Ai can read a database from any device that contains the "
             "database folders (<tt>PIONEER</tt> and <tt>Contents</tt>).<br/>"
             "Not supported are Rekordbox databases that have been moved to "
             "an external device via<br/>"
@@ -1453,7 +1453,7 @@ QString RekordboxFeature::formatRootViewHtml() const {
             << tr("Beatgrids")
             << tr("Hot cues")
             << tr("Memory cues")
-            << tr("Loops (only the first loop is currently usable in Mixxx)");
+            << tr("Loops (only the first loop is currently usable in Winlive Dj Ai)");
 
     QString html;
     QString refreshLink = tr("Check for attached Rekordbox USB / SD devices (refresh)");

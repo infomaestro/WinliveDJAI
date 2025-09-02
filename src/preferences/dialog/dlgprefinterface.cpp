@@ -382,7 +382,7 @@ void DlgPrefInterface::notifyRebootNecessary() {
     // make the fact that you have to restart mixxx more obvious
     QMessageBox::information(this,
             tr("Information"),
-            tr("Mixxx must be restarted before the new locale, scaling or multi-sampling "
+            tr("Winlive Dj Ai must be restarted before the new locale, scaling or multi-sampling "
                "settings will take effect."));
 }
 

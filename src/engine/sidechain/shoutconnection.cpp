@@ -78,12 +78,12 @@ ShoutConnection::ShoutConnection(BroadcastProfilePtr profile,
 
     // shout_init() should've already been called by now
     if (!(m_pShout = shout_new())) {
-        errorDialog(tr("Mixxx encountered a problem"),
+        errorDialog(tr("Winlive Dj Ai encountered a problem"),
                 tr("Could not allocate shout_t"));
     }
 
     if (!(m_pShoutMetaData = shout_metadata_new())) {
-        errorDialog(tr("Mixxx encountered a problem"),
+        errorDialog(tr("Winlive Dj Ai encountered a problem"),
                 tr("Could not allocate shout_metadata_t"));
     }
 

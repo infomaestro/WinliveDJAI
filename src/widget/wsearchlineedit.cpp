@@ -225,7 +225,7 @@ void WSearchLineEdit::setup(const QDomNode& node, const SkinContext& context) {
     setBaseTooltip(tr("Search", "noun") + "\n" +
             tr("Enter a string to search for") + "\n" +
             tr("Use operators like bpm:115-128, artist:BooFar, -year:1990") +
-            "\n" + tr("For more information see User Manual > Mixxx Library") +
+            "\n" + tr("For more information see User Manual > Winlive Dj Ai Library") +
             "\n\n" +
             tr("Shortcuts") + ": \n" +
             tr("Ctrl+F") + "  " +

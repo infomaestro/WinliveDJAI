@@ -2456,10 +2456,10 @@ void WTrackMenu::slotRemoveFromDisk() {
             msgText =
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
                     tr("%1 track files were moved to trash and purged "
-                       "from the Mixxx database.")
+                       "from the Winlive Dj Ai database.")
 #else
                     tr("%1 track files were deleted from disk and purged "
-                       "from the Mixxx database.")
+                       "from the Winlive Dj Ai database.")
 #endif
                             .arg(QString::number(tracksToPurge.length())) +
                     QStringLiteral("<br><br>") +
@@ -2470,12 +2470,12 @@ void WTrackMenu::slotRemoveFromDisk() {
             msgTitle = tr("Track File Moved To Trash");
             msgText = tr(
                     "Track file was moved to trash and purged "
-                    "from the Mixxx database.");
+                    "from the Winlive Dj Ai database.");
 #else
             msgTitle = tr("Track File Deleted");
             msgText = tr(
                     "Track file was deleted from disk and purged "
-                    "from the Mixxx database.");
+                    "from the Winlive Dj Ai database.");
 #endif
         }
         msgBoxPurgeTracks.setWindowTitle(msgTitle);

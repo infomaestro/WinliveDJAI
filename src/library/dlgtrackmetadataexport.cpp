@@ -14,9 +14,9 @@ void DlgTrackMetadataExport::showMessageBoxOncePerSession() {
         QMessageBox::information(
                 nullptr,
                 tr("Export Modified Track Metadata"),
-                tr("Mixxx may wait to modify files until they are not loaded to any decks or samplers. "
+                tr("Winlive Dj Ai may wait to modify files until they are not loaded to any decks or samplers. "
                         "If you do not see changed metadata in other programs immediately, "
-                        "eject the track from all decks and samplers or shutdown Mixxx."));
+                        "eject the track from all decks and samplers or shutdown Winlive Dj Ai."));
         s_bShownDuringThisSession = true;
     }
 }

@@ -24,7 +24,7 @@ const QString kConnectOptions = QStringLiteral("QSQLITE_OPEN_URI");
 
 const QString kUriPrefix = QStringLiteral("file://");
 
-const QString kDefaultFileName = QStringLiteral("mixxxdb.sqlite");
+const QString kDefaultFileName = QStringLiteral("wldjaidb.sqlite");
 
 const QString kUserName = QStringLiteral("mixxx");
 
@@ -90,8 +90,8 @@ bool MixxxDb::initDatabaseSchema(
         QMessageBox::warning(nullptr,
                 upgradeFailed,
                 upgradeToVersionFailed + "\n" +
-                        tr("Your mixxxdb.sqlite file may be corrupt.") +
-                        "\n" + tr("Try renaming it and restarting Mixxx.") +
+                        tr("Your wldjaidb.sqlite file may be corrupt.") +
+                        "\n" + tr("Try renaming it and restarting Winlive Dj Ai.") +
                         "\n" + helpContact + "\n\n" + okToExit,
                 QMessageBox::Ok);
         return false; // abort
@@ -99,8 +99,8 @@ bool MixxxDb::initDatabaseSchema(
         QMessageBox::warning(nullptr,
                 upgradeFailed,
                 upgradeToVersionFailed + "\n" +
-                        tr("Your mixxxdb.sqlite file was created by a newer "
-                           "version of Mixxx and is incompatible.") +
+                        tr("Your wldjaidb.sqlite file was created by a newer "
+                           "version of Winlive Dj Ai and is incompatible.") +
                         "\n\n" + okToExit,
                 QMessageBox::Ok);
         return false; // abort

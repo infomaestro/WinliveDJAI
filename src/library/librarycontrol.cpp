@@ -841,7 +841,7 @@ void LibraryControl::slotMoveTrack(double v) {
 
 void LibraryControl::emitKeyEvent(QKeyEvent&& event) {
     if (!QApplication::focusWindow()) {
-        qInfo() << "No Mixxx window, popup or menu has focus."
+        qInfo() << "No Winlive Dj Ai window, popup or menu has focus."
                 << "Don't send key events.";
         return;
     }
@@ -910,7 +910,7 @@ FocusWidget LibraryControl::getFocusedWidget() {
 
 void LibraryControl::setLibraryFocus(FocusWidget newFocusWidget) {
     if (!QApplication::focusWindow()) {
-        qInfo() << "No Mixxx window, popup or menu has focus."
+        qInfo() << "No Winlive Dj Ai window, popup or menu has focus."
                 << "Don't attempt to focus a specific widget.";
         return;
     }
