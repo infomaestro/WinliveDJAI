@@ -9988,17 +9988,17 @@ Vuoi selezionare un dispositivo di input?</translation>
     <message>
         <location filename="../../src/mixxxmainwindow.cpp" line="1462"/>
         <source>A deck is currently playing. Exit Winlive Dj Ai?</source>
-        <translation type="unfinished"></translation>
+        <translation>Un deck sta suonando. Uscire da Winlive Dj Ai?</translation>
     </message>
     <message>
         <location filename="../../src/mixxxmainwindow.cpp" line="1470"/>
         <source>A sampler is currently playing. Exit Winlive Dj Ai?</source>
-        <translation type="unfinished"></translation>
+        <translation>Un sampler sta suonando. Uscire da Winlive Dj Ai?</translation>
     </message>
     <message>
         <location filename="../../src/mixxxmainwindow.cpp" line="1480"/>
         <source>Discard any changes and exit Winlive Dj Ai?</source>
-        <translation type="unfinished"></translation>
+        <translation>Annulla le modifiche e esci da Winlive Dj Ai?</translation>
     </message>
     <message>
         <location filename="../../src/mixxxmainwindow.cpp" line="1461"/>
