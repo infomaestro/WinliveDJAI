@@ -5,6 +5,7 @@
 #include <QWindow>
 #endif
 #include <QUrl>
+#include <QMessageBox>
 
 #include "config.h"
 #include "control/controlproxy.h"
@@ -651,16 +652,27 @@ void WMainMenuBar::initialize() {
     externalLinkSuffix = QChar(' ') + QChar(0x2197); // north-east arrow
 #endif
 
-    // Community Support
-    QString supportTitle = tr("&Support") + externalLinkSuffix;
-    QString supportText = tr("Get help with Winlive Dj Ai");
+    // Remote Support
+    QString supportTitle = tr("&Remote support") + externalLinkSuffix;
+    QString supportText = tr("Get remote support for Winlive Dj Ai");
     auto* pHelpSupport = new QAction(supportTitle, this);
     pHelpSupport->setStatusTip(supportText);
     pHelpSupport->setWhatsThis(buildWhatsThis(supportTitle, supportText));
     connect(pHelpSupport, &QAction::triggered, this, [this] {
-        slotVisitUrl(QUrl(MIXXX_SUPPORT_URL));
+        slotOpenRemoteSupport();
     });
     pHelpMenu->addAction(pHelpSupport);
+
+    // Support
+    QString translateTitle = tr("&Support") + externalLinkSuffix;
+    QString translateText = tr("Help and support resource for Winlive Dj Ai");
+    auto* pHelpTranslation = new QAction(translateTitle, this);
+    pHelpTranslation->setStatusTip(translateText);
+    pHelpTranslation->setWhatsThis(buildWhatsThis(translateTitle, translateText));
+    connect(pHelpTranslation, &QAction::triggered, this, [this] {
+        slotVisitUrl(QUrl(MIXXX_SUPPORT_URL));
+    });
+    pHelpMenu->addAction(pHelpTranslation);
 
     // User Manual
     QUrl manualUrl = documentationUrl(m_pConfig->getResourcePath(),
@@ -711,16 +723,7 @@ void WMainMenuBar::initialize() {
     });
     pHelpMenu->addAction(pHelpSettingsDir);
 
-    // Translate This Application
-    QString translateTitle = tr("&Translate This Application") + externalLinkSuffix;
-    QString translateText = tr("Help translate this application into your language.");
-    auto* pHelpTranslation = new QAction(translateTitle, this);
-    pHelpTranslation->setStatusTip(translateText);
-    pHelpTranslation->setWhatsThis(buildWhatsThis(translateTitle, translateText));
-    connect(pHelpTranslation, &QAction::triggered, this, [this] {
-        slotVisitUrl(QUrl(MIXXX_TRANSLATION_URL));
-    });
-    pHelpMenu->addAction(pHelpTranslation);
+    
 
     pHelpMenu->addSeparator();
 
@@ -915,6 +918,16 @@ void WMainMenuBar::slotDeveloperDebugger(bool toggle) {
 
 void WMainMenuBar::slotVisitUrl(const QUrl& url) {
     mixxx::DesktopHelper::openUrl(url);
+}
+
+void WMainMenuBar::slotOpenRemoteSupport() {
+    
+    CheckLicenseHelper license;
+    if (license.loadFromFile()== false || license.hasValidLicense() == false) {
+        QMessageBox::warning(this, tr("Info"), tr("Remote support is reserved to registered user"));
+    }
+    
+   
 }
 
 void WMainMenuBar::createVisibilityControl(QAction* pAction,
