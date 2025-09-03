@@ -110,7 +110,9 @@ DlgRegister::DlgRegister(QWidget* parent)
         buttonRegister->setText(tr("Registration in progress..."));
 
         // call server
-        QUrl url("https://www.promusicsoftware.com/wl099.php"); 
+        //QUrl url("https://www.promusicsoftware.com/wl099.php");
+        // revert https to http errore TLS ...
+        QUrl url("http://www.promusicsoftware.com/wl099.php");
 
         QUrlQuery query;
         query.addQueryItem("wl001prac", personalAccount);
