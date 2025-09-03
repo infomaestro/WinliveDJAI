@@ -15379,17 +15379,17 @@ Questa azione non può essere annullata!</translation>
     <message>
         <location filename="../../src/widget/wmainmenubar.cpp" line="656"/>
         <source>&amp;Remote support</source>
-        <translation>&amp;Supporto remoto</translation>
+        <translation>&amp;Assistenza remota</translation>
     </message>
     <message>
         <location filename="../../src/widget/wmainmenubar.cpp" line="657"/>
         <source>Get remote support for Winlive Dj Ai</source>
-        <translation>Supporto remoto per Winlive Dj Ai</translation>
+        <translation>Assistenza remota per Winlive Dj Ai</translation>
     </message>
     <message>
         <location filename="../../src/widget/wmainmenubar.cpp" line="667"/>
         <source>&amp;Support</source>
-        <translation>Supporto</translation>
+        <translation>Assistenza</translation>
     </message>
     <message>
         <location filename="../../src/widget/wmainmenubar.cpp" line="284"/>
