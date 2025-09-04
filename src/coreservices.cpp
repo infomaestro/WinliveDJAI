@@ -618,6 +618,8 @@ void CoreServices::initialize(QApplication* pApp) {
         // resolves to) and a user hitting 'cancel'. If we get a blank return
         // but the user didn't hit cancel, we need to know this and let the
         // user take some course of action -- bkgood
+        
+        /*  inibisce la scelta della cartella musica
         QString fd = QFileDialog::getExistingDirectory(nullptr,
                 tr("Choose music library directory"),
                 QStandardPaths::writableLocation(
@@ -626,6 +628,7 @@ void CoreServices::initialize(QApplication* pApp) {
         if (!fd.isEmpty() && m_pLibrary->requestAddDir(fd)) {
             musicDirAdded = true;
         }
+        */
     }
 
     emit initializationProgressUpdate(60, tr("controllers"));
