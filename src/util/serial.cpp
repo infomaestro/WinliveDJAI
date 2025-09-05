@@ -150,9 +150,9 @@ QString VolumeSerialHelper::getMacVolumeSerial(const QString& drivePath) {
     // This is a simplified approach - you might want to use QXmlStreamReader for robust parsing
     if (output.contains("volume_uuid")) {
         QRegularExpression rx("<string>([A-F0-9\\-]{36})</string>");
-        QRegularExpression match = rx.match(output);
-        if (match.hasMatched()) {
-            return match.caputured(1).remove("-").left(8).toUpper();
+        QRegularExpressionMatch match = rx.match(output);
+        if (match.hasMatch()) {
+            return match.captred(1).remove("-").left(8).toUpper();
         }
     }
 
@@ -184,9 +184,9 @@ QString VolumeSerialHelper::getMacVolumeSerial(const QString& drivePath) {
 
     // Look for serial number in the output
     QRegularExpression serialRx("\"Serial Number\" = \"([^\"]+)\"");
-    QRegularExpression match = serialRx.match(output);
-    if (match.hasMatched()) {
-        return match.caputured(1).toUpper();
+    QRegularExpressionMatch match = serialRx.match(output);
+    if (match.hasMatch()) {
+        return match.captured(1).toUpper();
     }
 
 #endif
