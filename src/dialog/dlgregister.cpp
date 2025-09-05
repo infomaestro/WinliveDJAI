@@ -11,6 +11,8 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QMessageBox>
+#include <QTimer>
+#include <QKeyEvent>
 #include "util/serial.h"
 
 DlgRegister::DlgRegister(QWidget* parent)

@@ -11,7 +11,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QObject>
-
+#include <QDesktopServices>
 
 namespace {
 const QString kSkinGroup = QStringLiteral("[Skin]");
@@ -102,7 +102,7 @@ SkinControls::SkinControls()
     showWinliveAI(true);
  }
 
- void SkinControls::showWinliveAI(boolean registering) {
+ void SkinControls::showWinliveAI(bool registering) {
      CheckLicenseHelper license;
 
      if (license.loadFromFile() 
@@ -117,7 +117,16 @@ SkinControls::SkinControls()
              query.addQueryItem("wl001wlsn", license.serialNumber());
              url.setQuery(query);
 
-             mixxx::DesktopHelper::openUrl(url);
+            #ifdef Q_OS_IOS
+                QUrl urlToOpen = url;
+                if (urlToOpen.scheme() == "file") {
+                    urlToOpen.setScheme("shareddocuments");
+                }
+                QDesktopServices::openUrl(urlToOpen);
+            #else
+                QDesktopServices::openUrl(url);
+            #endif
+
 
              return;
          }
