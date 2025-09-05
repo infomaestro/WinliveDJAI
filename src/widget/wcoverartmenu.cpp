@@ -14,13 +14,14 @@ WCoverArtMenu::WCoverArtMenu(QWidget* parent)
 }
 
 WCoverArtMenu::~WCoverArtMenu() {
-    delete m_pChange;
+    /* delete m_pChange;
     delete m_pReload;
     delete m_pUnset;
+    */
 }
 
 void WCoverArtMenu::createActions() {
-    m_pChange = new QAction(tr("Choose new cover",
+    /* m_pChange = new QAction(tr("Choose new cover",
             "change cover art location"), this);
     connect(m_pChange, &QAction::triggered, this, &WCoverArtMenu::slotChange);
     addAction(m_pChange);
@@ -33,7 +34,7 @@ void WCoverArtMenu::createActions() {
     m_pReload = new QAction(tr("Reload from file/folder",
             "reload cover art from file metadata or folder"), this);
     connect(m_pReload, &QAction::triggered, this, &WCoverArtMenu::reloadCoverArt);
-    addAction(m_pReload);
+    addAction(m_pReload);*/
 }
 
 void WCoverArtMenu::setCoverArt(const CoverInfo& coverInfo) {
