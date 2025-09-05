@@ -152,7 +152,7 @@ QString VolumeSerialHelper::getMacVolumeSerial(const QString& drivePath) {
         QRegularExpression rx("<string>([A-F0-9\\-]{36})</string>");
         QRegularExpressionMatch match = rx.match(output);
         if (match.hasMatch()) {
-            return match.captred(1).remove("-").left(8).toUpper();
+            return match.captured(1).remove("-").left(8).toUpper();
         }
     }
 
