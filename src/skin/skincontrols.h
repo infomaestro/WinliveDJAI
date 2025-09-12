@@ -9,7 +9,7 @@ class SkinControls : public QObject {
   public:
     SkinControls();
     void showWinliveAI();
-    void showWinliveAI(boolean registering);
+    void showWinliveAI(bool registering);
 
   private:
     ControlPushButton m_showEffectRack;

@@ -11,6 +11,8 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QMessageBox>
+#include <QTimer>
+#include <QKeyEvent>
 #include "util/serial.h"
 
 DlgRegister::DlgRegister(QWidget* parent)
@@ -110,7 +112,6 @@ DlgRegister::DlgRegister(QWidget* parent)
         buttonRegister->setText(tr("Registration in progress..."));
 
         // call server
-        //QUrl url("https://www.promusicsoftware.com/wl099.php");
         // revert https to http errore TLS ...
         QUrl url("http://www.promusicsoftware.com/wl099.php");
 

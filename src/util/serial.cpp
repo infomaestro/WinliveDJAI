@@ -11,6 +11,7 @@
 #include <QJsonObject>
 #include <QRandomGenerator>
 #include <QTextStream>
+#include <QRegularExpression.h>
 
 #include "serial.h"
 
@@ -67,7 +68,7 @@ QString VolumeSerialHelper::getApplicationDrivePath() {
     QStringList lines = output.split('\n');
 
     if (lines.size() > 1) {
-        QStringList parts = lines[1].split(QRegExp("\\s+"));
+        QStringList parts = lines[1].split(QRegularExpression("\\s+"));
         if (parts.size() > 5) {
             return parts.last(); // Mount point
         }
@@ -148,11 +149,10 @@ QString VolumeSerialHelper::getMacVolumeSerial(const QString& drivePath) {
     // Parse XML to find volume UUID (closest to Windows volume serial)
     // This is a simplified approach - you might want to use QXmlStreamReader for robust parsing
     if (output.contains("volume_uuid")) {
-        QRegExp rx("<string>([A-F0-9\\-]{36})</string>");
-        if (rx.indexIn(output) != -1) {
-            QString uuid = rx.cap(1);
-            // Remove hyphens and take first 8 characters to mimic Windows format
-            return uuid.remove('-').left(8).toUpper();
+        QRegularExpression rx("<string>([A-F0-9\\-]{36})</string>");
+        QRegularExpressionMatch match = rx.match(output);
+        if (match.hasMatch()) {
+            return match.captured(1).remove("-").left(8).toUpper();
         }
     }
 
@@ -183,9 +183,10 @@ QString VolumeSerialHelper::getMacVolumeSerial(const QString& drivePath) {
     output = process.readAllStandardOutput();
 
     // Look for serial number in the output
-    QRegExp serialRx("\"Serial Number\" = \"([^\"]+)\"");
-    if (serialRx.indexIn(output) != -1) {
-        return serialRx.cap(1).toUpper();
+    QRegularExpression serialRx("\"Serial Number\" = \"([^\"]+)\"");
+    QRegularExpressionMatch match = serialRx.match(output);
+    if (match.hasMatch()) {
+        return match.captured(1).toUpper();
     }
 
 #endif
