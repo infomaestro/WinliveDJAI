@@ -295,8 +295,8 @@ int main(int argc, char * argv[]) {
         // sharedMemory is used to detect if another instance of Winlive Dj Ai is already running.
         QSharedMemory sharedMemory("WLDJAI20_ID");
         if (!sharedMemory.create(1)) {
-            //QMessageBox::warning(nullptr, "App is already running", "First close the program!");
-            //return 0;
+            QMessageBox::warning(nullptr, "App is already running", "First close the program!");
+            return 0;
         }
     #endif
 
