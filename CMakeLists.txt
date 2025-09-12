@@ -222,13 +222,13 @@ elseif(APPLE)
   endif()
 endif()
 
-project(wldjai VERSION 2.0.1)
+project(wldjai VERSION 2.0.2)
 enable_language(C CXX)
 # Work around missing version suffixes support https://gitlab.kitware.com/cmake/cmake/-/issues/16716
 set(MIXXX_VERSION_PRERELEASE "") # set to "alpha" "beta" or ""
 
-set(CMAKE_PROJECT_HOMEPAGE_URL "https://www.mixxx.org")
-set(CMAKE_PROJECT_DESCRIPTION "Mixxx is Free DJ software that gives you everything you need to perform live mixes.")
+set(CMAKE_PROJECT_HOMEPAGE_URL "https://www.promusicsoftware.com")
+set(CMAKE_PROJECT_DESCRIPTION "WLDJAI is a DJ software for your live performances.")
 
 # Used for force control of color output
 set(BUILD_COLORS "auto" CACHE STRING "Try to use colors auto/always/no")
