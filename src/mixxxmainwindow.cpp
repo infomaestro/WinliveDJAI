@@ -134,6 +134,12 @@ MixxxMainWindow::MixxxMainWindow(std::shared_ptr<mixxx::CoreServices> pCoreServi
     m_pLaunchImage = m_pSkinLoader->loadLaunchImage(this);
     m_pCentralWidget = (QWidget*)m_pLaunchImage;
     setCentralWidget(m_pCentralWidget);
+    
+    // Center the window on screen before showing
+    QRect screenGeometry = QApplication::primaryScreen()->availableGeometry();
+    int x = (screenGeometry.width() - width()) / 2 + screenGeometry.x();
+    int y = (screenGeometry.height() - height()) / 2 + screenGeometry.y();
+    move(x, y);
 
     show();
 
