@@ -1754,8 +1754,8 @@ set(MIXXX_INSTALL_DOCDIR "./doc")
 set(MIXXX_INSTALL_LICENSEDIR "./doc")
 if (APPLE AND MACOS_BUNDLE)
   set(MIXXX_INSTALL_BINDIR "${CMAKE_INSTALL_BINDIR}")
-  set(MACOS_BUNDLE_NAME Mixxx CACHE STRING "The macOS app bundle and executable name")
-  set(MACOS_BUNDLE_IDENTIFIER org.mixxx.mixxx CACHE STRING "The macOS app bundle identifier")
+  set(MACOS_BUNDLE_NAME WinliveDjAi CACHE STRING "The macOS app bundle and executable name")
+  set(MACOS_BUNDLE_IDENTIFIER com.promusicsoftware.winlivedjai CACHE STRING "The macOS app bundle identifier")
   set(MIXXX_INSTALL_PREFIX "${MACOS_BUNDLE_NAME}.app")
   set(MIXXX_INSTALL_DATADIR "${MIXXX_INSTALL_PREFIX}/Contents/Resources")
   set(MIXXX_INSTALL_DOCDIR "${MIXXX_INSTALL_DATADIR}")
@@ -4103,7 +4103,7 @@ if(APPLE AND MACOS_BUNDLE)
     endforeach()
     set(
       APPLE_CODESIGN_ENTITLEMENTS
-      "${CMAKE_CURRENT_SOURCE_DIR}/packaging/macos/Mixxx.entitlements"
+      "${CMAKE_CURRENT_SOURCE_DIR}/packaging/macos/WinliveDjAi.entitlements"
     )
 
     # Starting with arm64 macOS Apple will require ad-hoc code signatures,
