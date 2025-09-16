@@ -939,7 +939,7 @@ void WMainMenuBar::slotOpenRemoteSupport() {
         QProcess::startDetached("powershell", arguments);
     }
     #endif
-    #if defined(__MACOS__)
+    #if defined(Q_OS_MAC)
         if (auto* coreServices = mixxx::CoreServices::getInstance()) {
             QString rustDeskPath = QDir(coreServices->getResourcePath()).filePath("rustdesk");
             // Su macOS, per eseguire con privilegi amministrativi si usa osascript
