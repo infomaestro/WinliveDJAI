@@ -939,6 +939,16 @@ void WMainMenuBar::slotOpenRemoteSupport() {
         QProcess::startDetached("powershell", arguments);
     }
     #endif
+    #if defined(__MACOS__)
+        if (auto* coreServices = mixxx::CoreServices::getInstance()) {
+            QString rustDeskPath = QDir(coreServices->getResourcePath()).filePath("rustdesk");
+            // Su macOS, per eseguire con privilegi amministrativi si usa osascript
+            QString command = QString("do shell script \"%1\" with administrator privileges").arg(rustDeskPath);
+            QStringList arguments;
+            arguments << "-e" << command;
+            QProcess::startDetached("osascript", arguments);
+        }
+    #endif
 }
 
 void WMainMenuBar::createVisibilityControl(QAction* pAction,
