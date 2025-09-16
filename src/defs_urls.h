@@ -87,3 +87,4 @@
 
 
 #define WDJ_WINLIVEAI_URL "https://www.winlive.ai/"
+#define RUSTDESK_URL "https://www.promusicsoftware.com/download_new.php?area=WLREMOTE"

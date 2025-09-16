@@ -940,11 +940,8 @@ void WMainMenuBar::slotOpenRemoteSupport() {
     }
     #endif
     #if defined(Q_OS_MAC)
-    if (auto* coreServices = mixxx::CoreServices::getInstance()) {
-        QString rustDeskPath = QDir(coreServices->getResourcePath()).filePath("RustDesk.app");
-        // Avvio semplice dell'applicazione senza privilegi
-        QProcess::startDetached("open", QStringList() << rustDeskPath);
-    }
+     // open rustedesk download page
+        slotVisitUrl(QUrl(RUSTDESK_URL));
     #endif
 }
 
