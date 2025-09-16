@@ -443,7 +443,7 @@ QString Sandbox::migrateOldSettings() {
     // automatically creates it.
     QString sandboxedParentPath = homePath +
             QLatin1String(
-                    "/Library/Containers/org.mixxx.mixxx/Data/Library/"
+                    "/Library/Containers/com.promusicsoftware.winlivedjai/Data/Library/"
                     "Application Support");
     QString sandboxedPath = sandboxedParentPath + QLatin1String("/WinliveDjAi");
     QDir sandboxedDir(sandboxedPath);
