@@ -1992,12 +1992,21 @@ install(
 
 # Windows RemoteSupport executable 
 if (WIN32)
-install(
-  FILES
-    "${CMAKE_CURRENT_SOURCE_DIR}/res/rustdesk.exe"
-  DESTINATION "${MIXXX_INSTALL_DATADIR}"
+  install(
+    FILES
+      "${CMAKE_CURRENT_SOURCE_DIR}/res/rustdesk.exe"
+    DESTINATION "${MIXXX_INSTALL_DATADIR}"
 )
 endif()
+
+# MacOs RemoteSupport .app
+#if (APPLE)
+#  install(
+#    FILES
+#    "${CMAKE_CURRENT_SOURCE_DIR}/res/RustDesk.app"
+#    DESTINATION "${MIXXX_INSTALL_DATADIR}"
+#  )
+#endif()
 
 # Additional Linux-only files
 if(UNIX AND NOT APPLE)
