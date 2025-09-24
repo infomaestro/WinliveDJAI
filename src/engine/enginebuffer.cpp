@@ -31,6 +31,7 @@
 #include "util/logger.h"
 #include "util/sample.h"
 #include "util/timer.h"
+#include "util/winlivegoldsocket.h"
 #include "waveform/visualplayposition.h"
 
 #include <QProcess>
@@ -891,6 +892,14 @@ void EngineBuffer::slotControlPlayKaraoke(double v) {
             QString filePath = QFileInfo(trackLocation).absoluteFilePath();
 
             qDebug() << "Playing file:" << filePath;
+            WinliveGoldSocket* socket = NULL;
+            #if defined(Q_OS_MAC)
+                socket = new WinliveGoldSocket("winlive_server", this);
+            #else
+                socket = new WinliveGoldSocket("127.0.0.1", 12345, this);
+            #endif
+            socket->start(filePath);
+
             QMessageBox::information(nullptr, tr("Invio del path al lettore"), QString(filePath));
         }
     } else if (verifiedPlay) {

@@ -1236,6 +1236,7 @@ add_library(mixxx-lib STATIC EXCLUDE_FROM_ALL
   src/util/valuetransformer.cpp
   src/util/versionstore.cpp
   src/util/widgethelper.cpp
+  src/util/winlivegoldsocket.cpp
   src/util/workerthread.cpp
   src/util/workerthreadscheduler.cpp
   src/util/xml.cpp
@@ -1519,6 +1520,7 @@ target_precompile_headers(mixxx-lib PUBLIC
   src/util/valuetransformer.h
   src/util/versionstore.h
   src/util/widgethelper.h
+  src/util/winlivegoldsocket.h
   src/util/workerthread.h
   src/util/workerthreadscheduler.h
   src/util/xml.h
