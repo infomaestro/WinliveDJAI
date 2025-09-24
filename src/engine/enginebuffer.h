@@ -6,6 +6,7 @@
 #include <QMutex>
 #include <initializer_list>
 
+
 #include "audio/frame.h"
 #include "audio/types.h"
 #include "control/controlvalue.h"
@@ -231,7 +232,8 @@ class EngineBuffer : public EngineObject {
     void slotControlEnd(double);
     void slotControlSeek(double);
     void slotKeylockEngineChanged(double);
-
+    // new implementations
+    void slotControlPlayKaraoke(double);
   signals:
     void trackLoaded(TrackPointer pNewTrack, TrackPointer pOldTrack);
     void trackLoadFailed(TrackPointer pTrack, const QString& reason);
@@ -281,6 +283,9 @@ class EngineBuffer : public EngineObject {
 
     void processSyncRequests();
     void processSeek(bool paused);
+
+   
+
     // For debugging / testing -- returns true if the previous buffer call resulted in a seek.
     FRIEND_TEST(EngineSyncTest, FollowerUserTweakPreservedInSyncDisable);
     bool previousBufferSeek() const {
@@ -394,6 +399,9 @@ class EngineBuffer : public EngineObject {
     ControlPushButton* m_playStartButton;
     ControlPushButton* m_stopStartButton;
     ControlPushButton* m_stopButton;
+
+    ControlPushButton* m_playKaraokeButton;
+    
 
     ControlPushButton* m_pSlipButton;
 

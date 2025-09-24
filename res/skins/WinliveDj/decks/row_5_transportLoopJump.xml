@@ -13,88 +13,166 @@
         <Layout>horizontal</Layout>
         <Children>
 
-          <WidgetGroup><!-- Play, Cue, Reverse - ORIZZONTALI -->
-            <Layout>horizontal</Layout>
+          <WidgetGroup><!-- Play, Cue, Reverse + Karaoke Controls - VERTICALI -->
+            <Layout>vertical</Layout>
             <SizePolicy>max,min</SizePolicy>
             <Children>
 
-              <!-- Play Button (copiato esattamente dal sorgente C ma con dimensioni 48f,52f) -->
-              <WidgetGroup><!-- Play + PlayBlink + default dark background -->
-                <Layout>stacked</Layout>
-                <Size>48f,52f</Size>
+              <WidgetGroup><!-- Play, Cue, Reverse - ORIZZONTALI -->
+                <Layout>horizontal</Layout>
+                <SizePolicy>max,min</SizePolicy>
                 <Children>
-                  <Template src="skins:WinliveDj/controls/button_2state_right_display.xml">
-                    <SetVariable name="TooltipId">play_cue_set</SetVariable>
-                    <SetVariable name="ObjectName">PlayDeck</SetVariable>
-                    <SetVariable name="Size">48f,52f</SetVariable>
-                    <SetVariable name="BtnSize">play</SetVariable>
-                    <SetVariable name="ConfigKey"><Variable name="Group"/>,play</SetVariable>
-                    <SetVariable name="ConfigKeyRight"><Variable name="Group"/>,cue_set</SetVariable>
-                    <SetVariable name="ConfigKeyDisp"><Variable name="Group"/>,play_latched</SetVariable>
+
+                  <!-- Play Button (copiato esattamente dal sorgente C ma con dimensioni 48f,52f) -->
+                  <WidgetGroup><!-- Play + PlayBlink + default dark background -->
+                    <Layout>stacked</Layout>
+                    <Size>48f,52f</Size>
+                    <Children>
+                      <Template src="skins:WinliveDj/controls/button_2state_right_display.xml">
+                        <SetVariable name="TooltipId">play_cue_set</SetVariable>
+                        <SetVariable name="ObjectName">PlayDeck</SetVariable>
+                        <SetVariable name="Size">48f,52f</SetVariable>
+                        <SetVariable name="BtnSize">play</SetVariable>
+                        <SetVariable name="ConfigKey"><Variable name="Group"/>,play</SetVariable>
+                        <SetVariable name="ConfigKeyRight"><Variable name="Group"/>,cue_set</SetVariable>
+                        <SetVariable name="ConfigKeyDisp"><Variable name="Group"/>,play_latched</SetVariable>
+                      </Template>
+                      <PushButton>
+                        <ObjectName>PreviewIndicator</ObjectName>
+                        <Size>48f,52f</Size>
+                        <NumberStates>2</NumberStates>
+                        <Connection>
+                          <ConfigKey><Variable name="Group"/>,play</ConfigKey>
+                        </Connection>
+                      </PushButton>
+                      <PushButton>
+                        <ObjectName>PlayIndicator</ObjectName>
+                        <Size>48f,52f</Size>
+                        <NumberStates>2</NumberStates>
+                        <Connection>
+                          <ConfigKey><Variable name="Group"/>,play_indicator</ConfigKey>
+                        </Connection>
+                      </PushButton>
+                    </Children>
+                  </WidgetGroup><!-- Play + PlayBlink + default dark background -->
+
+                  <!-- Cue Button (copiato ESATTAMENTE dal sorgente C ma con dimensioni 42f,52f) -->
+                  <PushButton>
+                    <TooltipId>cue_default_cue_gotoandstop</TooltipId>
+                    <ObjectName>CueDeck</ObjectName>
+                    <Size>42f,52f</Size>
+                    <NumberStates>2</NumberStates>
+                    <RightClickIsPushButton>true</RightClickIsPushButton>
+                    <State>
+                      <Number>0</Number>
+                      <Text><Variable name="state_0_text"/></Text>
+                      <Alignment><Variable name="Align"/></Alignment>
+                      <Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium.svg</Unpressed>
+                      <Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>
+                    </State>
+                    <State>
+                      <Number>1</Number>
+                      <Text><Variable name="state_1_text"/></Text>
+                      <Alignment><Variable name="Align"/></Alignment>
+                      <Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_set.svg</Unpressed>
+                      <Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>
+                    </State>
+                    <Connection>
+                      <ConfigKey><Variable name="Group"/>,cue_default</ConfigKey>
+                      <ButtonState>LeftButton</ButtonState>
+                    </Connection>
+                    <Connection>
+                      <ConfigKey><Variable name="Group"/>,cue_gotoandstop</ConfigKey>
+                      <ButtonState>RightButton</ButtonState>
+                    </Connection>
+                    <Connection>
+                      <ConfigKey><Variable name="Group"/>,cue_indicator</ConfigKey>
+                      <ConnectValueFromWidget>false</ConnectValueFromWidget>
+                    </Connection>
+                  </PushButton>
+
+                  <!-- Reverse Button (copiato esattamente dal sorgente C ma con dimensioni 26f,52f) -->
+                  <Template src="skins:WinliveDj/controls/button_1state_right.xml">
+                    <SetVariable name="TooltipId">reverse</SetVariable>
+                    <SetVariable name="ObjectName">Reverse</SetVariable>
+                    <SetVariable name="Size">26f,52f</SetVariable>
+                    <SetVariable name="BtnSize">square</SetVariable>
+                    <SetVariable name="ConfigKey"><Variable name="Group"/>,reverse</SetVariable>
+                    <SetVariable name="ConfigKeyRight"><Variable name="Group"/>,reverseroll</SetVariable>
                   </Template>
-                  <PushButton>
-                    <ObjectName>PreviewIndicator</ObjectName>
-                    <Size>48f,52f</Size>
-                    <NumberStates>2</NumberStates>
-                    <Connection>
-                      <ConfigKey><Variable name="Group"/>,play</ConfigKey>
-                    </Connection>
-                  </PushButton>
-                  <PushButton>
-                    <ObjectName>PlayIndicator</ObjectName>
-                    <Size>48f,52f</Size>
-                    <NumberStates>2</NumberStates>
-                    <Connection>
-                      <ConfigKey><Variable name="Group"/>,play_indicator</ConfigKey>
-                    </Connection>
-                  </PushButton>
+
                 </Children>
-              </WidgetGroup><!-- Play + PlayBlink + default dark background -->
+              </WidgetGroup>
 
-              <!-- Cue Button (copiato ESATTAMENTE dal sorgente C ma con dimensioni 42f,52f) -->
-              <PushButton>
-                <TooltipId>cue_default_cue_gotoandstop</TooltipId>
-                <ObjectName>CueDeck</ObjectName>
-                <Size>42f,52f</Size>
-                <NumberStates>2</NumberStates>
-                <RightClickIsPushButton>true</RightClickIsPushButton>
-                <State>
-                  <Number>0</Number>
-                  <Text><Variable name="state_0_text"/></Text>
-                  <Alignment><Variable name="Align"/></Alignment>
-                  <Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium.svg</Unpressed>
-                  <Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>
-                </State>
-                <State>
-                  <Number>1</Number>
-                  <Text><Variable name="state_1_text"/></Text>
-                  <Alignment><Variable name="Align"/></Alignment>
-                  <Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_set.svg</Unpressed>
-                  <Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>
-                </State>
-                <Connection>
-                  <ConfigKey><Variable name="Group"/>,cue_default</ConfigKey>
-                  <ButtonState>LeftButton</ButtonState>
-                </Connection>
-                <Connection>
-                  <ConfigKey><Variable name="Group"/>,cue_gotoandstop</ConfigKey>
-                  <ButtonState>RightButton</ButtonState>
-                </Connection>
-                <Connection>
-                  <ConfigKey><Variable name="Group"/>,cue_indicator</ConfigKey>
-                  <ConnectValueFromWidget>false</ConnectValueFromWidget>
-                </Connection>
-              </PushButton>
+              <!-- NUOVI PULSANTI KARAOKE -->
+              <WidgetGroup><!-- PlayKaraoke, StopKaraoke, PausePlayKaraoke - ORIZZONTALI -->
+                <Layout>horizontal</Layout>
+                <SizePolicy>max,min</SizePolicy>
+                <Children>
 
-              <!-- Reverse Button (copiato esattamente dal sorgente C ma con dimensioni 26f,52f) -->
-              <Template src="skins:WinliveDj/controls/button_1state_right.xml">
-                <SetVariable name="TooltipId">reverse</SetVariable>
-                <SetVariable name="ObjectName">Reverse</SetVariable>
-                <SetVariable name="Size">26f,52f</SetVariable>
-                <SetVariable name="BtnSize">square</SetVariable>
-                <SetVariable name="ConfigKey"><Variable name="Group"/>,reverse</SetVariable>
-                <SetVariable name="ConfigKeyRight"><Variable name="Group"/>,reverseroll</SetVariable>
-              </Template>
+                  <!-- Play Karaoke Button -->
+                  <PushButton>
+                    <TooltipId>play_karaoke</TooltipId>
+                    <ObjectName>PlayKaraoke</ObjectName>
+                    <Size>48f,26f</Size>
+                    <NumberStates>1</NumberStates>
+                    <State>
+                      <Number>0</Number>
+                      <Text>K♪</Text>
+                      <Alignment>center</Alignment>
+                      <Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium.svg</Unpressed>
+                      <Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>
+                    </State>
+                    <Connection>
+                      <ConfigKey><Variable name="Group"/>,play_karaoke</ConfigKey>
+                    </Connection>
+                  </PushButton>
+
+                  <!-- Stop Karaoke Button -->
+                  <PushButton>
+                    <TooltipId>stop_karaoke</TooltipId>
+                    <ObjectName>StopKaraoke</ObjectName>
+                    <Size>42f,26f</Size>
+                    <NumberStates>1</NumberStates>
+                    <State>
+                      <Number>0</Number>
+                      <Text>K■</Text>
+                      <Alignment>center</Alignment>
+                      <Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium.svg</Unpressed>
+                      <Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>
+                    </State>
+                    <Connection>
+                      <ConfigKey><Variable name="Group"/>,stop_karaoke</ConfigKey>
+                    </Connection>
+                  </PushButton>
+
+                  <!-- Pause Karaoke Button -->
+                  <PushButton>
+                    <TooltipId>pause_karaoke</TooltipId>
+                    <ObjectName>PauseKaraoke</ObjectName>
+                    <Size>26f,26f</Size>
+                    <NumberStates>2</NumberStates>
+                    <State>
+                      <Number>0</Number>
+                      <Text>K⏸</Text>
+                      <Alignment>center</Alignment>
+                      <Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium.svg</Unpressed>
+                      <Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>
+                    </State>
+                    <State>
+                      <Number>1</Number>
+                      <Text>K⏸</Text>
+                      <Alignment>center</Alignment>
+                      <Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_set.svg</Unpressed>
+                      <Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>
+                    </State>
+                    <Connection>
+                      <ConfigKey><Variable name="Group"/>,pause_karaoke</ConfigKey>
+                    </Connection>
+                  </PushButton>
+
+                </Children>
+              </WidgetGroup><!-- /KARAOKE BUTTONS -->
 
             </Children>
           </WidgetGroup>

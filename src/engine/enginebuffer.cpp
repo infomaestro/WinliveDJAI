@@ -33,6 +33,11 @@
 #include "util/timer.h"
 #include "waveform/visualplayposition.h"
 
+#include <QProcess>
+#include <QFileInfo>
+#include <QMessageBox>
+
+
 #ifdef __RUBBERBAND__
 #include "engine/bufferscalers/enginebufferscalerubberband.h"
 #endif
@@ -114,6 +119,13 @@ EngineBuffer::EngineBuffer(const QString& group,
             this, &EngineBuffer::slotTrackLoadFailed,
             Qt::DirectConnection);
 
+    // Play Karaoke button
+    m_playKaraokeButton = new ControlPushButton(ConfigKey(m_group, "play_karaoke"));
+    m_playKaraokeButton->setButtonMode(ControlPushButton::TOGGLE);
+    m_playKaraokeButton->connectValueChangeRequest(
+            this, &EngineBuffer::slotControlPlayKaraoke, Qt::DirectConnection); 
+    
+    
     // Play button
     m_playButton = new ControlPushButton(ConfigKey(m_group, "play"));
     m_playButton->setButtonMode(ControlPushButton::TOGGLE);
@@ -774,10 +786,20 @@ void EngineBuffer::verifyPlay() {
 }
 
 void EngineBuffer::slotControlPlayRequest(double v) {
+    
     bool oldPlay = m_playButton->toBool();
     bool verifiedPlay = updateIndicatorsAndModifyPlay(v > 0.0, oldPlay);
 
     if (!oldPlay && verifiedPlay) {
+        // Ottieni il nome del file
+        if (m_pCurrentTrack) {
+            QString trackLocation = m_pCurrentTrack->getLocation();
+            QString filePath = QFileInfo(trackLocation).absoluteFilePath();
+
+            qDebug() << "Playing file:" << filePath;
+
+         }
+
         if (m_pQuantize->toBool()
 #ifdef __VINYLCONTROL__
                 && m_pVinylControlControl && !m_pVinylControlControl->isEnabled()
@@ -789,7 +811,11 @@ void EngineBuffer::slotControlPlayRequest(double v) {
 
     // set and confirm must be called here in any case to update the widget toggle state
     m_playButton->setAndConfirm(verifiedPlay ? 1.0 : 0.0);
+
 }
+
+
+
 
 void EngineBuffer::slotControlStart(double v)
 {
@@ -853,6 +879,29 @@ void EngineBuffer::slotKeylockEngineChanged(double dIndex) {
         break;
     }
 }
+
+void EngineBuffer::slotControlPlayKaraoke(double v) {
+    bool oldPlay = m_playButton->toBool();
+    bool verifiedPlay = updateIndicatorsAndModifyPlay(v > 0.0, oldPlay);
+
+    if (!oldPlay && verifiedPlay) {
+        // Ottieni il nome del file
+        if (m_pCurrentTrack) {
+            QString trackLocation = m_pCurrentTrack->getLocation();
+            QString filePath = QFileInfo(trackLocation).absoluteFilePath();
+
+            qDebug() << "Playing file:" << filePath;
+            QMessageBox::information(nullptr, tr("Invio del path al lettore"), QString(filePath));
+        }
+    } else if (verifiedPlay) {
+        QMessageBox::information(nullptr, tr("Couldn't load track."), tr("A song is playing in this deck. Stop the song first"));
+    } else {
+        QMessageBox::warning(nullptr, tr("Couldn't load track."), tr("Song is invalid or not loaded."));
+    }
+}
+
+
+
 
 void EngineBuffer::processTrackLocked(
         CSAMPLE* pOutput, const int iBufferSize, mixxx::audio::SampleRate sampleRate) {
@@ -1617,3 +1666,4 @@ void EngineBuffer::setScalerForTest(
     // This bool is permanently set and can't be undone.
     m_bScalerOverride = true;
 }
+
