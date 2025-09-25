@@ -126,7 +126,17 @@ EngineBuffer::EngineBuffer(const QString& group,
     m_playKaraokeButton->connectValueChangeRequest(
             this, &EngineBuffer::slotControlPlayKaraoke, Qt::DirectConnection); 
     
-    
+    // Stop Karaoke button
+    m_stopKaraokeButton = new ControlPushButton(ConfigKey(m_group, "stop_karaoke"));
+    m_stopKaraokeButton->connectValueChangeRequest(
+            this, &EngineBuffer::slotControlStopKaraoke, Qt::DirectConnection); 
+
+    // pause Karaoke button
+    m_pauseKaraokeButton = new ControlPushButton(ConfigKey(m_group, "pause_karaoke"));
+    m_pauseKaraokeButton->setButtonMode(ControlPushButton::TOGGLE);
+    m_pauseKaraokeButton->connectValueChangeRequest(
+            this, &EngineBuffer::slotControlPauseKaraoke, Qt::DirectConnection); 
+
     // Play button
     m_playButton = new ControlPushButton(ConfigKey(m_group, "play"));
     m_playButton->setButtonMode(ControlPushButton::TOGGLE);
@@ -296,6 +306,8 @@ EngineBuffer::EngineBuffer(const QString& group,
     df.open(QIODevice::WriteOnly | QIODevice::Text);
     writer.setDevice(&df);
 #endif
+
+    
 
     // Now that all EngineControls have been created call setEngineMixer.
     // TODO(XXX): Get rid of EngineControl::setEngineMixer and
@@ -892,15 +904,15 @@ void EngineBuffer::slotControlPlayKaraoke(double v) {
             QString filePath = QFileInfo(trackLocation).absoluteFilePath();
 
             qDebug() << "Playing file:" << filePath;
-            WinliveGoldSocket* socket = NULL;
+            
             #if defined(Q_OS_MAC)
-                socket = new WinliveGoldSocket("winlive_server", this);
+                m_socket = new WinliveGoldSocket("winlive_server", this);
             #else
-                socket = new WinliveGoldSocket("127.0.0.1", 12345, this);
+                m_socket = new WinliveGoldSocket("127.0.0.1", 12345, this);
             #endif
-            socket->start(filePath);
+                m_socket->start(filePath);
 
-            QMessageBox::information(nullptr, tr("Invio del path al lettore"), QString(filePath));
+            //QMessageBox::information(nullptr, tr("Invio del path al lettore"), QString(filePath));
         }
     } else if (verifiedPlay) {
         QMessageBox::information(nullptr, tr("Couldn't load track."), tr("A song is playing in this deck. Stop the song first"));
@@ -909,8 +921,31 @@ void EngineBuffer::slotControlPlayKaraoke(double v) {
     }
 }
 
+void EngineBuffer::slotControlStopKaraoke(double v) {
+    if (v>0.5) {
+        qDebug() << "Stopping file";
+        if (m_socket == NULL) {
+            //QMessageBox::information(nullptr, tr(""), QString("socket null"));
+            m_socket = new WinliveGoldSocket("127.0.0.1", 12345, this);
+        } else {
+            m_socket->stop();
+        }
+        
+    }
 
+}
 
+void EngineBuffer::slotControlPauseKaraoke(double v) {
+    if (m_pCurrentTrack) {
+        qDebug() << "pause file";
+        if (m_socket == NULL) {
+            m_socket = new WinliveGoldSocket("127.0.0.1", 12345, this);
+        } else {
+            m_socket->pause();
+        }
+        
+    }
+}
 
 void EngineBuffer::processTrackLocked(
         CSAMPLE* pOutput, const int iBufferSize, mixxx::audio::SampleRate sampleRate) {
@@ -1066,6 +1101,9 @@ void EngineBuffer::processTrackLocked(
         // wanted rate!  Make sure new scaler has proper position. This also
         // crossfades between the old scaler and new scaler to prevent
         // clicks.
+        if (m_rate_old != rate) {
+            qDebug() << rate;
+        }
 
         // Handle direction change.
         // The linear scaler supports ramping though zero.
@@ -1131,6 +1169,7 @@ void EngineBuffer::processTrackLocked(
         // Track has already been ejected.
         bCurBufferPaused = true;
     }
+
 
     m_rate_old = rate;
 

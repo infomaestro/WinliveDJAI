@@ -18,6 +18,7 @@
 #include "track/bpm.h"
 #include "track/track_decl.h"
 #include "util/types.h"
+#include "util/winlivegoldsocket.h"
 
 #ifdef __RUBBERBAND__
 #include "engine/bufferscalers/enginebufferscalerubberband.h"
@@ -234,6 +235,8 @@ class EngineBuffer : public EngineObject {
     void slotKeylockEngineChanged(double);
     // new implementations
     void slotControlPlayKaraoke(double);
+    void slotControlStopKaraoke(double);
+    void slotControlPauseKaraoke(double);
   signals:
     void trackLoaded(TrackPointer pNewTrack, TrackPointer pOldTrack);
     void trackLoadFailed(TrackPointer pTrack, const QString& reason);
@@ -401,7 +404,8 @@ class EngineBuffer : public EngineObject {
     ControlPushButton* m_stopButton;
 
     ControlPushButton* m_playKaraokeButton;
-    
+    ControlPushButton* m_stopKaraokeButton;
+    ControlPushButton* m_pauseKaraokeButton;
 
     ControlPushButton* m_pSlipButton;
 
@@ -425,6 +429,8 @@ class EngineBuffer : public EngineObject {
     // Fwd and back controls, start and end of track control
     ControlPushButton* m_startButton;
     ControlPushButton* m_endButton;
+
+    WinliveGoldSocket* m_socket = NULL;
 
     // Object used to perform waveform scaling (sample rate conversion).  These
     // three pointers may be reassigned depending on configuration and tests.

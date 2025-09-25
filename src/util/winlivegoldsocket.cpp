@@ -1,7 +1,7 @@
 // WinliveGoldSocket.cpp
 
 #include "WinliveGoldSocket.h"
-
+#include "moc_WinliveGoldSocket.cpp" // Include the generated MOC file for Qt signals/slots
 #include <QHostAddress>
 
 // Platform-specific constructor implementations
