@@ -42,6 +42,7 @@ KeyControl::KeyControl(const QString& group,
     m_pitchRateInfo.tempoRatio = 1.0;
     m_pitchRateInfo.pitchTweakRatio = 1.0;
     m_pitchRateInfo.keylock = false;
+    m_pitchKaraoke = 0.0;
 
     // Coarse adjust by full semitone steps.
     m_pPitch->setStepCount(12);
@@ -61,6 +62,13 @@ KeyControl::KeyControl(const QString& group,
             &ControlObject::valueChanged,
             this,
             &KeyControl::slotPitchChanged,
+            Qt::DirectConnection);
+
+    // karaoke
+    connect(m_pPitch.get(),
+            &ControlObject::valueChanged,
+            this,
+            &KeyControl::slotPitchChangedKaraoke,
             Qt::DirectConnection);
 
     connect(m_pPitchAdjust.get(),
@@ -119,6 +127,10 @@ KeyControl::KeyControl(const QString& group,
     // m_pitchRateInfo members are initialized with default values, only keylock
     // is persistent and needs to be updated from config
     m_pitchRateInfo.keylock = m_pKeylock->toBool();
+}
+
+double KeyControl::getPitchKaraoke() {
+    return m_pitchKaraoke;
 }
 
 KeyControl::PitchTempoRatio KeyControl::getPitchTempoRatio() {
@@ -355,6 +367,10 @@ void KeyControl::slotPitchChanged(double pitch) {
     Q_UNUSED(pitch)
     m_updatePitchRequest = 1;
     updatePitch();
+}
+
+void KeyControl::slotPitchChangedKaraoke(double pitch) {
+    m_pitchKaraoke = pitch;
 }
 
 void KeyControl::updatePitch() {

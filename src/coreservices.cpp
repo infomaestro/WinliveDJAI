@@ -357,7 +357,10 @@ CoreServices::CoreServices(const CmdlineArgs& args, QApplication* pApp)
     mixxx::Translations::initializeTranslations(
             m_pSettingsManager->settings(), pApp, m_cmdlineArgs.getLocale());
     initializeKeyboard();
-    g_coreServicesInstance = this; // Set the global instance pointer
+    
+    // Set the global instance pointer
+    g_coreServicesInstance = this;
+    m_socket = nullptr;
 }
 
 CoreServices::~CoreServices() {
@@ -890,6 +893,12 @@ void CoreServices::finalize() {
 
     m_pControlIndicatorTimer.reset();
 
+    if (m_socket != nullptr) {
+        m_socket->close();
+        m_socket->deleteLater();
+        m_socket = nullptr;
+    }
+
     t.elapsed(true);
 }
 
@@ -923,6 +932,23 @@ QString CoreServices::getResourcePath()
     UserSettingsPointer pConfig = m_pSettingsManager->settings();
     QString resPath = pConfig->getResourcePath();
     return resPath;
+}
+
+WinliveGoldSocket* CoreServices::getWinliveGoldSocket() {
+    if (m_socket != nullptr) {
+        m_socket->startListening();
+        return m_socket;
+    } else {
+        if (m_socket == nullptr) {
+
+#if defined(Q_OS_MAC)
+            m_socket = new WinliveGoldSocket("winlive_server", this);
+#else
+            m_socket = new WinliveGoldSocket(12345, this);
+#endif
+        }
+        return m_socket;
+    }
 }
 
 // static method to get the global instance of CoreServices

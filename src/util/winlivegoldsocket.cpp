@@ -1,370 +1,291 @@
 // WinliveGoldSocket.cpp
 
-#include "WinliveGoldSocket.h"
-#include "moc_WinliveGoldSocket.cpp" // Include the generated MOC file for Qt signals/slots
+#include "winlivegoldsocket.h"
+#include "moc_winlivegoldsocket.cpp" // Include the generated MOC file for Qt signals/slots
 #include <QHostAddress>
 
-// Platform-specific constructor implementations
+
 #if defined(Q_OS_MAC)
-WinliveGoldSocket::WinliveGoldSocket(const QString& serverName, QObject* parent)
-        : QObject(parent), m_serverName(serverName)
+    WinliveGoldSocket::WinliveGoldSocket(const QString& serverName, QObject* parent)
+        : QObject(parent), m_serverName(serverName), m_infoTimer(new QTimer(this)), m_server(new QLocalServer(this)), m_client(nullptr)
 #else
-WinliveGoldSocket::WinliveGoldSocket(const QString& host, quint16 port, QObject* parent)
-        : QObject(parent), m_host(host), m_port(port)
+    WinliveGoldSocket::WinliveGoldSocket(quint16 port, QObject* parent)
+        : QObject(parent), m_port(port), m_infoTimer(new QTimer(this)), m_server(new QTcpServer(this)), m_client(nullptr)
 #endif
-          ,
-          m_socket(nullptr),
-          m_messageTimer(new QTimer(this)),
-          m_messageInterval(1000),
-          m_waitingForInfo(false),
-          m_waitingForPing(false),
-          m_pingTimer(new QTimer(this)),
-          m_isConnected(false),
-          m_waitingForStartConnection(false) {
-    initializeSocket();
+{
 
-    // Configure message timer for sequential message sending
-    m_messageTimer->setSingleShot(true);
-    connect(m_messageTimer, &QTimer::timeout, this, &WinliveGoldSocket::sendNextMessage);
-
-    // Configure ping timeout timer
-    m_pingTimer->setSingleShot(true);
-    m_pingTimer->setInterval(PING_TIMEOUT_MS);
-    connect(m_pingTimer, &QTimer::timeout, this, &WinliveGoldSocket::onPingTimeout);
-}
-
-WinliveGoldSocket::~WinliveGoldSocket() {
-    if (m_socket && m_isConnected) {
-        disconnectFromHost();
-    }
-}
-
-void WinliveGoldSocket::initializeSocket() {
+    // Connect server signal
 #if defined(Q_OS_MAC)
-    // Initialize QLocalSocket for macOS IPC
-    m_socket = new QLocalSocket(this);
-    connect(m_socket, &QLocalSocket::connected, this, &WinliveGoldSocket::onSocketConnected);
-    connect(m_socket, &QLocalSocket::disconnected, this, &WinliveGoldSocket::onSocketDisconnected);
-    connect(m_socket, &QLocalSocket::readyRead, this, &WinliveGoldSocket::onDataReceived);
-    connect(m_socket, QOverload<QLocalSocket::LocalSocketError>::of(&QLocalSocket::errorOccurred), this, &WinliveGoldSocket::onSocketError);
+    connect(m_server, &QLocalServer::newConnection, this, &WinliveGoldSocket::onNewConnection);
 #else
-    // Initialize QTcpSocket for Windows/Linux TCP communication
-    m_socket = new QTcpSocket(this);
-    connect(m_socket, &QTcpSocket::connected, this, &WinliveGoldSocket::onSocketConnected);
-    connect(m_socket, &QTcpSocket::disconnected, this, &WinliveGoldSocket::onSocketDisconnected);
-    connect(m_socket, &QTcpSocket::readyRead, this, &WinliveGoldSocket::onDataReceived);
-    connect(m_socket, QOverload<QAbstractSocket::SocketError>::of(&QTcpSocket::errorOccurred), this, &WinliveGoldSocket::onSocketError);
+    connect(m_server, &QTcpServer::newConnection, this, &WinliveGoldSocket::onNewConnection);
 #endif
-}
 
-// Connection management methods
-void WinliveGoldSocket::connectToHost() {
-    if (m_isConnected) {
-        qDebug() << "Already connected to host";
-        return;
-    }
-
-    qDebug() << "Attempting to connect to host...";
-#if defined(Q_OS_MAC)
-    m_socket->connectToServer(m_serverName);
-#else
-    m_socket->connectToHost(m_host, m_port);
-#endif
-}
-
-void WinliveGoldSocket::disconnectFromHost() {
-    if (!m_isConnected) {
-        qDebug() << "Already disconnected from host";
-        return;
-    }
-
-    qDebug() << "Disconnecting from host...";
-#if defined(Q_OS_MAC)
-    m_socket->disconnectFromServer();
-#else
-    m_socket->disconnectFromHost();
-#endif
-}
-
-bool WinliveGoldSocket::isConnected() const {
-    return m_isConnected;
-}
-
-// Message queue management
-void WinliveGoldSocket::sendMessages(const QStringList& messages, int intervalMs) {
-    m_messageQueue = messages;
-    m_messageInterval = intervalMs;
-
-    qDebug() << "Queued" << messages.size() << "messages with interval" << intervalMs << "ms";
-
-    if (!m_isConnected) {
-        qDebug() << "Not connected - attempting connection before sending messages";
-        connectToHost();
-    } else {
-        sendNextMessage();
-    }
-}
-
-// Media control command implementations with connection check and auto-launch
-void WinliveGoldSocket::start(const QString& filename) {
-    qDebug() << "Start command requested with filename:" << filename;
-
-    // If already connected, send command immediately
-    if (isConnected()) {
-        qDebug() << "Client connected - sending start command immediately";
-        sendCommand(QString("start %1").arg(filename));
-        return;
-    }
-
-    // Store pending command for delayed execution after connection
-    m_pendingStartFilename = filename;
-    m_waitingForStartConnection = true;
-
-    qDebug() << "Client not connected - initiating auto-launch sequence";
-
-    // First attempt: direct connection (client might be running but disconnected)
-    connectToHost();
-
-    // Set timeout to trigger ping check if direct connection fails
-    QTimer::singleShot(CONNECTION_RETRY_DELAY_MS, this, [this]() {
-        if (m_waitingForStartConnection && !isConnected()) {
-            qDebug() << "Direct connection failed - checking client availability with ping";
-            ping(); // This will trigger client launch if ping times out
+    connect(m_infoTimer, &QTimer::timeout, this, [this]() {
+        if (hasClient()) {
+            //info();
         }
     });
+    }
+
+WinliveGoldSocket::~WinliveGoldSocket() {
+    qDebug() << "Closing Server";
+    m_infoTimer->stop();
+    stopListening();
+}
+
+bool WinliveGoldSocket::startListening() {
+    if (isListening()) {
+        qDebug() << "Server already listening";
+        return true;
+    }
+
+#if defined(Q_OS_MAC)
+    if (!m_server->listen(m_serverName)) {
+        QString error = QString("Failed to start local server: %1").arg(m_server->errorString());
+        qDebug() << error;
+        emit errorOccurred(error);
+        return false;
+    }
+    qDebug() << "Local server listening on:" << m_serverName;
+#else
+    if (!m_server->listen(QHostAddress::LocalHost, m_port)) {
+        QString error = QString("Failed to start TCP server on port %1: %2")
+                                .arg(m_port)
+                                .arg(m_server->errorString());
+        qDebug() << error;
+        emit errorOccurred(error);
+        return false;
+    }
+    qDebug() << "TCP server listening on port:" << m_server->serverPort();
+#endif
+
+    return true;
+}
+
+void WinliveGoldSocket::stopListening() {
+    if (!isListening()) {
+        return;
+    }
+
+    qDebug() << "Stopping server...";
+
+    // Send close command to client if connected
+    if (m_client) {
+        close();
+        QThread::msleep(250); // Give time for close command
+
+#if defined(Q_OS_MAC)
+        m_client->disconnectFromServer();
+#else
+        m_client->disconnectFromHost();
+#endif
+        m_client->deleteLater();
+        m_client = nullptr;
+    }
+
+    m_server->close();
+}
+
+bool WinliveGoldSocket::isListening() const {
+    return m_server->isListening();
+}
+
+bool WinliveGoldSocket::hasClient() const {
+    return m_client != nullptr;
+}
+
+// Media control commands
+void WinliveGoldSocket::start(const QString& deck, const QString& filename) {
+    m_deck = deck;
+    if (hasClient()) {
+        sendCommandToClient("start " + filename);
+    } else {
+        qDebug() << "No client connected, launching client with start mode";
+        m_pendingStartFilename = filename;
+        launchClient();
+    }
 }
 
 void WinliveGoldSocket::play() {
-    sendCommand("play");
+    qDebug() << "Sending play command";
+    sendCommandToClient("play");
 }
 
 void WinliveGoldSocket::pause() {
-    sendCommand("pause");
+    qDebug() << "Sending pause command";
+    sendCommandToClient("pause");
 }
 
 void WinliveGoldSocket::stop() {
-    sendCommand("stop");
+    qDebug() << "Sending stop command";
+    sendCommandToClient("stop");
 }
 
 void WinliveGoldSocket::ff() {
-    sendCommand("ff");
+    qDebug() << "Sending fast forward command";
+    sendCommandToClient("ff");
 }
 
 void WinliveGoldSocket::rw() {
-    sendCommand("rw");
+    qDebug() << "Sending rewind command";
+    sendCommandToClient("rw");
 }
 
 void WinliveGoldSocket::melody() {
-    sendCommand("melody");
+    qDebug() << "Sending melody command";
+    sendCommandToClient("melody");
 }
 
 void WinliveGoldSocket::tone(const QString& newTone) {
-    sendCommand(QString("tone %1").arg(newTone));
+    QString command = QString("tone %1").arg(newTone);
+    qDebug() << "Sending tone command:" << command;
+    sendCommandToClient(command);
 }
 
 void WinliveGoldSocket::close() {
-    sendCommand("close");
+    qDebug() << "Sending close command";
+    sendCommandToClient("close");
 }
 
 void WinliveGoldSocket::info() {
-    qDebug() << "Requesting info from client";
-    m_waitingForInfo = true;
-    sendCommand("info");
+    qDebug() << "Sending info request";
+    sendCommandToClient("info");
 }
 
-void WinliveGoldSocket::ping() {
-    qDebug() << "Sending ping to client";
-    m_waitingForPing = true;
-    m_pingTimer->start();
-    sendCommand("ping");
-}
 
-// Cross-platform client launcher
-void WinliveGoldSocket::launchClient(const QString& mode, const QString& filename) {
-    qDebug() << "Launching client with mode:" << mode << "and filename:" << filename;
+void WinliveGoldSocket::onNewConnection() {
+    qDebug() << "New connection attempt";
 
-#if defined(Q_OS_WIN)
-    QString program = "C:/000/WLGOLDTEST/WinliveGold.exe"; // Update with actual Windows path
-#elif defined(Q_OS_MAC)
-    QString program = "/Applications/WinliveClient.app/Contents/MacOS/WinliveClient"; // Update with actual macOS path
-#else
-    QString program = "/usr/bin/winliveclient"; // Fallback for Linux
-#endif
-
-    QStringList arguments;
-    arguments << mode << filename;
-
-    QProcess* process = new QProcess(this);
-
-    // Handle successful process start
-    connect(process, &QProcess::started, [this, mode, filename]() {
-        qDebug() << "Client process started successfully with mode:" << mode << "filename:" << filename;
-    });
-
-    // Handle process completion
-    connect(process, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), [this, process](int exitCode, QProcess::ExitStatus exitStatus) {
-        Q_UNUSED(exitStatus)
-        qDebug() << "Client process finished with exit code:" << exitCode;
-        process->deleteLater();
-    });
-
-    // Handle process launch errors
-    connect(process, &QProcess::errorOccurred, [this, process, mode, filename](QProcess::ProcessError error) {
-        QString errorMsg = QString("Failed to launch client (mode: %1, filename: %2) - Error: %3")
-                                   .arg(mode, filename)
-                                   .arg(static_cast<int>(error));
-        qDebug() << errorMsg;
-        emit errorOccurred(errorMsg);
-        process->deleteLater();
-    });
-
-    // Start the client process
-    process->start(program, arguments);
-}
-
-// Private slot implementations
-void WinliveGoldSocket::onSocketConnected() {
-    m_isConnected = true;
-    qDebug() << "Socket connection established successfully";
-    emit connected();
-
-    // Execute pending start command if waiting
-    if (m_waitingForStartConnection && !m_pendingStartFilename.isEmpty()) {
-        qDebug() << "Connection established - executing delayed start command with filename:"
-                 << m_pendingStartFilename;
-        sendCommand(QString("start %1").arg(m_pendingStartFilename));
-
-        // Clear pending state
-        m_pendingStartFilename.clear();
-        m_waitingForStartConnection = false;
-    }
-
-    // Process any queued messages
-    if (!m_messageQueue.isEmpty()) {
-        qDebug() << "Processing queued messages after connection";
-        sendNextMessage();
-    }
-}
-
-void WinliveGoldSocket::onSocketDisconnected() {
-    m_isConnected = false;
-    qDebug() << "Socket disconnected";
-    emit disconnected();
-}
-
-void WinliveGoldSocket::onSocketError() {
-    QString errorString;
+    // If we already have a client, reject the new connection
+    if (m_client) {
+        qDebug() << "Rejecting connection - client already connected";
 #if defined(Q_OS_MAC)
-    errorString = QString("LocalSocket error: %1").arg(m_socket->errorString());
+        QLocalSocket* rejectedClient = m_server->nextPendingConnection();
+        if (rejectedClient) {
+            rejectedClient->write("SERVER_BUSY\n");
+            rejectedClient->flush();
+            rejectedClient->disconnectFromServer();
+            rejectedClient->deleteLater();
+        }
 #else
-    errorString = QString("TcpSocket error: %1").arg(m_socket->errorString());
+        QTcpSocket* rejectedClient = m_server->nextPendingConnection();
+        if (rejectedClient) {
+            rejectedClient->write("SERVER_BUSY\n");
+            rejectedClient->flush();
+            rejectedClient->disconnectFromHost();
+            rejectedClient->deleteLater();
+        }
 #endif
-
-    qDebug() << errorString;
-    emit errorOccurred(errorString);
-}
-
-void WinliveGoldSocket::sendNextMessage() {
-    if (m_messageQueue.isEmpty()) {
-        qDebug() << "Message queue is empty";
         return;
     }
 
-    QString message = m_messageQueue.takeFirst();
-    qDebug() << "Sending queued message:" << message << "(" << m_messageQueue.size() << "remaining)";
-    sendCommand(message);
-
-    // Schedule next message if queue not empty
-    if (!m_messageQueue.isEmpty()) {
-        m_messageTimer->start(m_messageInterval);
+    // Accept the first client
+#if defined(Q_OS_MAC)
+    m_client = m_server->nextPendingConnection();
+    if (!m_client) {
+        qDebug() << "Failed to get pending connection";
+        return;
     }
+
+    connect(m_client, &QLocalSocket::disconnected, this, &WinliveGoldSocket::onClientDisconnected);
+    connect(m_client, &QLocalSocket::readyRead, this, &WinliveGoldSocket::onClientDataReceived);
+#else
+    m_client = m_server->nextPendingConnection();
+    if (!m_client) {
+        qDebug() << "Failed to get pending connection";
+        return;
+    }
+
+    connect(m_client, &QTcpSocket::disconnected, this, &WinliveGoldSocket::onClientDisconnected);
+    connect(m_client, &QTcpSocket::readyRead, this, &WinliveGoldSocket::onClientDataReceived);
+#endif
+
+    qDebug() << "Client connected successfully";
+    emit clientConnected();
+
+    if (m_pendingStartFilename.length() > 0) {
+        qDebug() << "Client connected after launch. Sending start command.";
+        start(m_deck, m_pendingStartFilename);
+        m_pendingStartFilename.clear();
+    }
+
+    // start info timer
+    m_infoTimer->start(1000);
 }
 
-void WinliveGoldSocket::onDataReceived() {
-    QByteArray data = m_socket->readAll();
+void WinliveGoldSocket::onClientDisconnected() {
+    qDebug() << "Client disconnected";
+
+    if (m_client) {
+        m_client->deleteLater();
+        m_client = nullptr;     
+    }
+    m_infoTimer->stop();
+
+    emit clientDisconnected();
+}
+
+void WinliveGoldSocket::onClientDataReceived() {
+    if (!m_client) {
+        return;
+    }
+
+    QByteArray data = m_client->readAll();
     QString response = QString::fromUtf8(data).trimmed();
 
     if (response.isEmpty()) {
-        qDebug() << "Received empty response - ignoring";
         return;
     }
 
-    qDebug() << "Data received from client:" << response;
-    handleResponse(response);
+    qDebug() << "Received from client:" << response;
+    processClientResponse(response);
 }
 
-void WinliveGoldSocket::onPingTimeout() {
-    if (m_waitingForPing) {
-        m_waitingForPing = false;
-        qDebug() << "Ping timeout occurred";
-
-        // Handle start command auto-launch scenario
-        if (m_waitingForStartConnection) {
-            qDebug() << "Client not responding to ping - launching client with start mode and filename:"
-                     << m_pendingStartFilename;
-            launchClient("-refwldjai", m_pendingStartFilename);
-
-            // Attempt connection after allowing time for client startup
-            QTimer::singleShot(CLIENT_LAUNCH_DELAY_MS, this, [this]() {
-                qDebug() << "Attempting connection to newly launched client";
-                connectToHost();
-            });
-        } else {
-            qDebug() << "Ping timeout - client not responding";
-            emit pingTimeout();
-        }
-    }
+void WinliveGoldSocket::processClientResponse(const QString& response) {
+    // General acknowledgment or status update
+    qDebug() << "Client response:" << response;
+    emit clientInfo(response);
 }
 
-// Private helper methods
-void WinliveGoldSocket::sendCommand(const QString& command) {
-    if (!m_isConnected) {
-        qDebug() << "Cannot send command - socket not connected:" << command;
-        emit errorOccurred(QString("Cannot send command '%1' - socket not connected").arg(command));
+void WinliveGoldSocket::sendCommandToClient(const QString& command) {
+    if (!m_client || !m_client->isWritable()) {
+        qDebug() << "No client connected - cannot send command:" << command;
         return;
     }
 
-    // Format command with newline termination for protocol compliance
-    QString formattedCommand = command + "\n";
-    QByteArray data = formattedCommand.toUtf8();
+    QString message = m_deck + " " + command + "\n";
+    QByteArray data = message.toUtf8();
+    qint64 written = m_client->write(data);
 
-    qint64 bytesWritten = m_socket->write(data);
-    if (bytesWritten == -1) {
-        QString errorMsg = QString("Failed to write command to socket: %1").arg(command);
-        qDebug() << errorMsg;
-        emit errorOccurred(errorMsg);
-    } else if (bytesWritten != data.size()) {
-        QString warningMsg = QString("Partial write - expected %1 bytes, wrote %2 bytes for command: %3")
-                                     .arg(data.size())
-                                     .arg(bytesWritten)
-                                     .arg(command);
-        qDebug() << warningMsg;
+    if (written == -1) {
+        qDebug() << "Failed to send command to client:" << command;
+        emit errorOccurred(QString("Failed to send command: %1").arg(command));
+    } else if (written != data.size()) {
+        qDebug() << "Partial write - expected" << data.size() << "bytes, wrote" << written;
     } else {
         qDebug() << "Successfully sent command:" << command;
     }
+
+    // Ensure data is sent immediately
+    m_client->flush(); 
 }
 
-void WinliveGoldSocket::handleResponse(const QString& response) {
-    qDebug() << "Processing server response:" << response;
+void WinliveGoldSocket::launchClient() {
+#if defined(Q_OS_WIN)
+    QString program = "C:/000/WLGOLDTEST/WinliveGold.exe";
+#elif defined(Q_OS_MAC)
+    QString program = "/Applications/WinliveClient.app/Contents/MacOS/WinliveClient";
+#else
+    QString program = "/usr/bin/winliveclient";
+#endif
 
-    if (m_waitingForInfo) {
-        m_waitingForInfo = false;
-        qDebug() << "Received info response:" << response;
-        emit infoReceived(response);
-    } else if (m_waitingForPing) {
-        m_waitingForPing = false;
-        m_pingTimer->stop();
+    QStringList arguments;
+    arguments << "-refwldjai" << QString::number(m_port);
 
-        // Handle case where client responds to ping but socket not connected
-        if (m_waitingForStartConnection && !isConnected()) {
-            qDebug() << "Client responded to ping but socket not connected - establishing connection";
-            connectToHost();
-        } else {
-            qDebug() << "Received ping response:" << response;
-            emit pingResponse(response);
-        }
-    } else {
-        qDebug() << "Received generic response:" << response;
-        emit genericResponse(response);
-    }
+    QProcess* process = new QProcess(this);
+    process->start(program, arguments);
+
+    qDebug() << "Launched client with arguments:" << arguments;
 }
+

@@ -254,6 +254,8 @@ class EngineBuffer : public EngineObject {
     void slotPassthroughChanged(double v);
     void slotUpdatedTrackBeats();
 
+    void onSocketInfoReceived(const QString& info);
+
   private:
     struct QueuedSeek {
         mixxx::audio::FramePos position;
@@ -430,8 +432,6 @@ class EngineBuffer : public EngineObject {
     ControlPushButton* m_startButton;
     ControlPushButton* m_endButton;
 
-    WinliveGoldSocket* m_socket = NULL;
-
     // Object used to perform waveform scaling (sample rate conversion).  These
     // three pointers may be reassigned depending on configuration and tests.
     EngineBufferScale* m_pScale;
@@ -491,6 +491,11 @@ class EngineBuffer : public EngineObject {
     int m_iLastBufferSize;
 
     QSharedPointer<VisualPlayPosition> m_visualPlayPos;
+
+    // Karaoke mode state
+    bool m_isKaraoke = false;
+
+    double m_pitchKaraoke_old = 0.0;
 };
 
 Q_DECLARE_METATYPE(EngineBuffer::KeylockEngine)

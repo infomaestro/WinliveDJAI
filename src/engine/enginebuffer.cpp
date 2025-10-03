@@ -31,8 +31,8 @@
 #include "util/logger.h"
 #include "util/sample.h"
 #include "util/timer.h"
-#include "util/winlivegoldsocket.h"
 #include "waveform/visualplayposition.h"
+#include "coreservices.h"
 
 #include <QProcess>
 #include <QFileInfo>
@@ -307,6 +307,9 @@ EngineBuffer::EngineBuffer(const QString& group,
     writer.setDevice(&df);
 #endif
 
+    if (auto* coreServices = mixxx::CoreServices::getInstance()) {
+        connect(coreServices->getWinliveGoldSocket(), &WinliveGoldSocket::clientInfo, this, &EngineBuffer::onSocketInfoReceived, Qt::DirectConnection);
+    }
     
 
     // Now that all EngineControls have been created call setEngineMixer.
@@ -353,6 +356,8 @@ EngineBuffer::~EngineBuffer() {
     SampleUtil::free(m_pCrossfadeBuffer);
 
     qDeleteAll(m_engineControls);
+
+
 }
 
 void EngineBuffer::bindWorkers(EngineWorkerScheduler* pWorkerScheduler) {
@@ -600,6 +605,10 @@ void EngineBuffer::slotTrackLoaded(TrackPointer pTrack,
     // Start buffer processing after all EngineContols are up to date
     // with the current track e.g track is seeked to Cue
     m_iTrackLoading = 0;
+    
+    // Reset karaoke flag
+    m_isKaraoke = false;
+    m_pitchKaraoke_old = 0.0;
 }
 
 // WARNING: Always called from the EngineWorker thread pool
@@ -898,21 +907,20 @@ void EngineBuffer::slotControlPlayKaraoke(double v) {
     bool verifiedPlay = updateIndicatorsAndModifyPlay(v > 0.0, oldPlay);
 
     if (!oldPlay && verifiedPlay) {
-        // Ottieni il nome del file
+
+        // Get the file name
         if (m_pCurrentTrack) {
             QString trackLocation = m_pCurrentTrack->getLocation();
             QString filePath = QFileInfo(trackLocation).absoluteFilePath();
 
             qDebug() << "Playing file:" << filePath;
             
-            #if defined(Q_OS_MAC)
-                m_socket = new WinliveGoldSocket("winlive_server", this);
-            #else
-                m_socket = new WinliveGoldSocket("127.0.0.1", 12345, this);
-            #endif
-                m_socket->start(filePath);
-
-            //QMessageBox::information(nullptr, tr("Invio del path al lettore"), QString(filePath));
+            if (auto* coreServices = mixxx::CoreServices::getInstance()) {
+                coreServices->getWinliveGoldSocket()->start(m_group, filePath);
+                m_isKaraoke = true;
+            }
+            
+            
         }
     } else if (verifiedPlay) {
         QMessageBox::information(nullptr, tr("Couldn't load track."), tr("A song is playing in this deck. Stop the song first"));
@@ -922,28 +930,20 @@ void EngineBuffer::slotControlPlayKaraoke(double v) {
 }
 
 void EngineBuffer::slotControlStopKaraoke(double v) {
-    if (v>0.5) {
+    if (m_pCurrentTrack && v > 0.5) {
         qDebug() << "Stopping file";
-        if (m_socket == NULL) {
-            //QMessageBox::information(nullptr, tr(""), QString("socket null"));
-            m_socket = new WinliveGoldSocket("127.0.0.1", 12345, this);
-        } else {
-            m_socket->stop();
+        if (auto* coreServices = mixxx::CoreServices::getInstance()) {
+            coreServices->getWinliveGoldSocket()->stop();
         }
-        
     }
-
 }
 
 void EngineBuffer::slotControlPauseKaraoke(double v) {
     if (m_pCurrentTrack) {
         qDebug() << "pause file";
-        if (m_socket == NULL) {
-            m_socket = new WinliveGoldSocket("127.0.0.1", 12345, this);
-        } else {
-            m_socket->pause();
+        if (auto* coreServices = mixxx::CoreServices::getInstance()) {
+            coreServices->getWinliveGoldSocket()->pause();
         }
-        
     }
 }
 
@@ -961,6 +961,19 @@ void EngineBuffer::processTrackLocked(
 
     // Sync requests can affect rate, so process those first.
     processSyncRequests();
+
+    // Karaoke mode: if a song is playing in karaoke mode, disable all effects and keylock
+    if (m_isKaraoke == true) {
+        const double pitchKaraoke = m_pKeyControl->getPitchKaraoke();
+        if (m_pitchKaraoke_old != pitchKaraoke) {
+            m_pitchKaraoke_old = pitchKaraoke;
+            if (auto* coreServices = mixxx::CoreServices::getInstance()) {
+                qDebug() << m_group << "- Karaoke pitch changed to" << pitchKaraoke;
+                coreServices->getWinliveGoldSocket()->tone(QString::number((int)pitchKaraoke));
+            }
+        }
+    }
+
 
     // Note: play is also active during cue preview
     bool paused = !m_playButton->toBool();
@@ -1713,5 +1726,9 @@ void EngineBuffer::setScalerForTest(
     m_bScalerChanged = true;
     // This bool is permanently set and can't be undone.
     m_bScalerOverride = true;
+}
+
+void EngineBuffer::onSocketInfoReceived(const QString& info) {
+
 }
 
