@@ -237,6 +237,8 @@ class EngineBuffer : public EngineObject {
     void slotControlPlayKaraoke(double);
     void slotControlStopKaraoke(double);
     void slotControlPauseKaraoke(double);
+    void slotControlRewindKaraoke(double);
+    void slotControlFastForwardKaraoke(double);
   signals:
     void trackLoaded(TrackPointer pNewTrack, TrackPointer pOldTrack);
     void trackLoadFailed(TrackPointer pTrack, const QString& reason);
@@ -408,6 +410,8 @@ class EngineBuffer : public EngineObject {
     ControlPushButton* m_playKaraokeButton;
     ControlPushButton* m_stopKaraokeButton;
     ControlPushButton* m_pauseKaraokeButton;
+    ControlPushButton* m_forwardKaraokeButton;
+    ControlPushButton* m_rewindKaraokeButton;
 
     ControlPushButton* m_pSlipButton;
 

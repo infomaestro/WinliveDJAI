@@ -136,6 +136,19 @@ EngineBuffer::EngineBuffer(const QString& group,
     m_pauseKaraokeButton->setButtonMode(ControlPushButton::TOGGLE);
     m_pauseKaraokeButton->connectValueChangeRequest(
             this, &EngineBuffer::slotControlPauseKaraoke, Qt::DirectConnection); 
+    
+    // rw karaoke button
+    m_rewindKaraokeButton = new ControlPushButton(ConfigKey(m_group, "karaoke_backward"));
+    m_rewindKaraokeButton->setButtonMode(ControlPushButton::TOGGLE);
+    m_rewindKaraokeButton->connectValueChangeRequest(
+            this, &EngineBuffer::slotControlRewindKaraoke, Qt::DirectConnection); 
+
+    // ff karaoke button
+    m_forwardKaraokeButton = new ControlPushButton(ConfigKey(m_group, "karaoke_forward"));
+    m_forwardKaraokeButton->setButtonMode(ControlPushButton::TOGGLE);
+    m_forwardKaraokeButton->connectValueChangeRequest(
+            this, &EngineBuffer::slotControlFastForwardKaraoke, Qt::DirectConnection); 
+
 
     // Play button
     m_playButton = new ControlPushButton(ConfigKey(m_group, "play"));
@@ -943,6 +956,24 @@ void EngineBuffer::slotControlPauseKaraoke(double v) {
         qDebug() << "pause file";
         if (auto* coreServices = mixxx::CoreServices::getInstance()) {
             coreServices->getWinliveGoldSocket()->pause();
+        }
+    }
+}
+
+void EngineBuffer::slotControlRewindKaraoke (double v) {
+    if (m_pCurrentTrack) {
+        qDebug() << "rew file";
+        if (auto* coreServices = mixxx::CoreServices::getInstance()) {
+            coreServices->getWinliveGoldSocket()->rw();
+        }
+    }
+}
+
+void EngineBuffer::slotControlFastForwardKaraoke(double v) {
+    if (m_pCurrentTrack) {
+        qDebug() << "ffw file";
+        if (auto* coreServices = mixxx::CoreServices::getInstance()) {
+            coreServices->getWinliveGoldSocket()->ff();
         }
     }
 }
