@@ -3,6 +3,8 @@
 #ifndef WINLIVEGOLDSOCKET_H
 #define WINLIVEGOLDSOCKET_H
 
+#include "engine/enginebuffer.h"
+
 #include <QDebug>
 #include <QObject>
 #include <QProcess>
@@ -33,6 +35,18 @@ class WinliveGoldSocket : public QObject {
     explicit WinliveGoldSocket(quint16 port, QObject* parent = nullptr);
 #endif
 
+    static const QString COMMAND_START;
+    static const QString COMMAND_PLAY;
+    static const QString COMMAND_PAUSE;
+    static const QString COMMAND_STOP;
+    static const QString COMMAND_FF;
+    static const QString COMMAND_RW;
+    static const QString COMMAND_MELODY;
+    static const QString COMMAND_TONE;
+    static const QString COMMAND_CLOSE;
+    static const QString COMMAND_INFO;
+    static const QString COMMAND_FINISH;
+    
     ~WinliveGoldSocket();
 
     // Server management
@@ -47,7 +61,7 @@ class WinliveGoldSocket : public QObject {
   public slots:
 
     // Media control commands - send to the connected client
-    void start(const QString& deck, const QString& filename);
+    void start(EngineBuffer* deck, const QString& filename);
     void play();
     void pause();
     void stop();
@@ -63,7 +77,7 @@ class WinliveGoldSocket : public QObject {
     void clientDisconnected();
     void clientReady();
     void errorOccurred(const QString& error);   
-    void clientInfo(const QString& info);   
+    void clientInfo(EngineBuffer* deck, const QString & info);   
 
   private slots:
     void onNewConnection();
@@ -73,9 +87,9 @@ class WinliveGoldSocket : public QObject {
   private:
     void processClientResponse(const QString& response);
     void sendCommandToClient(const QString& command);
-    QTimer* m_infoTimer;
-    QString m_pendingStartFilename;
-    QString m_deck;
+    QTimer* m_infoTimer = nullptr;
+    QString m_pendingStartFilename = "";
+    EngineBuffer* m_deck = nullptr;
 
 #if defined(Q_OS_MAC)
     QString m_serverName;   

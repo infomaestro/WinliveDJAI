@@ -256,7 +256,7 @@ class EngineBuffer : public EngineObject {
     void slotPassthroughChanged(double v);
     void slotUpdatedTrackBeats();
 
-    void onSocketInfoReceived(const QString& info);
+    void onSocketInfoReceived(EngineBuffer* deck, const QString& info);
 
   private:
     struct QueuedSeek {
