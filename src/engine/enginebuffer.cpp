@@ -1772,7 +1772,7 @@ void EngineBuffer::onSocketInfoReceived(EngineBuffer* deck, const QString& info)
     
     // parse info response: deck_name|message  
     QStringList parts = info.split('|');
-    if (parts.size() != 2) {
+    if (parts.size() < 2) {
         qDebug() << "Invalid socket info response:" << info;
         return;
     }
@@ -1784,9 +1784,20 @@ void EngineBuffer::onSocketInfoReceived(EngineBuffer* deck, const QString& info)
     }
 
     // which message?
-    QString message = parts[1];
-    if (message == WinliveGoldSocket::COMMAND_FINISH) {
+    QString message = parts[1].toLower();
+    
+    // stop song
+    if (message == WGS_COMMAND_FINISH) {
         ejectTrack();
+        return;
+    }
+
+    if (message == WGS_COMMAND_INFO && parts.size() >= 5) {
+        // message format: current time|total time|tone
+        QString currentTime = parts[2];
+        QString timeElapsed = parts[3];
+        QString tone = parts[4];
+        return;
     }
 }
 

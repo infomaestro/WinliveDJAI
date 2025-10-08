@@ -504,3 +504,4 @@ class EngineBuffer : public EngineObject {
 
 Q_DECLARE_METATYPE(EngineBuffer::KeylockEngine)
 Q_DECLARE_OPERATORS_FOR_FLAGS(EngineBuffer::SeekRequests)
+

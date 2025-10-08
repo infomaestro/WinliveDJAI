@@ -3,7 +3,6 @@
 #ifndef WINLIVEGOLDSOCKET_H
 #define WINLIVEGOLDSOCKET_H
 
-#include "engine/enginebuffer.h"
 
 #include <QDebug>
 #include <QObject>
@@ -17,6 +16,20 @@
 #include <QTcpServer>
 #include <QTcpSocket>
 #endif
+
+class EngineBuffer;
+
+const QString WGS_COMMAND_START = QStringLiteral("start");
+const QString WGS_COMMAND_PLAY = QStringLiteral("play");
+const QString WGS_COMMAND_PAUSE = QStringLiteral("pause");
+const QString WGS_COMMAND_STOP = QStringLiteral("stop");
+const QString WGS_COMMAND_FF = QStringLiteral("ff");
+const QString WGS_COMMAND_RW = QStringLiteral("rw");
+const QString WGS_COMMAND_MELODY = QStringLiteral("melody");
+const QString WGS_COMMAND_TONE = QStringLiteral("tone");
+const QString WGS_COMMAND_CLOSE = QStringLiteral("close");
+const QString WGS_COMMAND_INFO = QStringLiteral("info");
+const QString WGS_COMMAND_FINISH = QStringLiteral("finish");
 
 /*!
  * \class WinliveGoldSocket
@@ -35,17 +48,6 @@ class WinliveGoldSocket : public QObject {
     explicit WinliveGoldSocket(quint16 port, QObject* parent = nullptr);
 #endif
 
-    static const QString COMMAND_START;
-    static const QString COMMAND_PLAY;
-    static const QString COMMAND_PAUSE;
-    static const QString COMMAND_STOP;
-    static const QString COMMAND_FF;
-    static const QString COMMAND_RW;
-    static const QString COMMAND_MELODY;
-    static const QString COMMAND_TONE;
-    static const QString COMMAND_CLOSE;
-    static const QString COMMAND_INFO;
-    static const QString COMMAND_FINISH;
     
     ~WinliveGoldSocket();
 

@@ -1,20 +1,10 @@
 // WinliveGoldSocket.cpp
 
 #include "winlivegoldsocket.h"
-#include "moc_winlivegoldsocket.cpp" // Include the generated MOC file for Qt signals/slots
+#include "engine/enginebuffer.h"
+#include "moc_winlivegoldsocket.cpp" 
 #include <QHostAddress>
 
-const QString WinliveGoldSocket::COMMAND_START = QStringLiteral("start");
-const QString WinliveGoldSocket::COMMAND_PLAY = QStringLiteral("play");
-const QString WinliveGoldSocket::COMMAND_PAUSE = QStringLiteral("pause");
-const QString WinliveGoldSocket::COMMAND_STOP = QStringLiteral("stop");
-const QString WinliveGoldSocket::COMMAND_FF = QStringLiteral("ff");
-const QString WinliveGoldSocket::COMMAND_RW = QStringLiteral("rw");
-const QString WinliveGoldSocket::COMMAND_MELODY = QStringLiteral("melody");
-const QString WinliveGoldSocket::COMMAND_TONE = QStringLiteral("tone");
-const QString WinliveGoldSocket::COMMAND_CLOSE = QStringLiteral("close");
-const QString WinliveGoldSocket::COMMAND_INFO = QStringLiteral("info");
-const QString WinliveGoldSocket::COMMAND_FINISH = QStringLiteral("finish");
 
 #if defined(Q_OS_MAC)
     WinliveGoldSocket::WinliveGoldSocket(const QString& serverName, QObject* parent)
@@ -112,7 +102,7 @@ bool WinliveGoldSocket::hasClient() const {
 void WinliveGoldSocket::start(EngineBuffer* deck, const QString& filename) {
     m_deck = deck;
     if (hasClient()) {
-        sendCommandToClient(COMMAND_START + " " + filename);
+        sendCommandToClient(WGS_COMMAND_START + " " + filename);
     } else {
         qDebug() << "No client connected, launching client with start mode";
         m_pendingStartFilename = filename;
@@ -122,48 +112,48 @@ void WinliveGoldSocket::start(EngineBuffer* deck, const QString& filename) {
 
 void WinliveGoldSocket::play() {
     qDebug() << "Sending play command";
-    sendCommandToClient(COMMAND_PLAY);
+    sendCommandToClient(WGS_COMMAND_PLAY);
 }
 
 void WinliveGoldSocket::pause() {
     qDebug() << "Sending pause command";
-    sendCommandToClient(COMMAND_PAUSE);
+    sendCommandToClient(WGS_COMMAND_PAUSE);
 }
 
 void WinliveGoldSocket::stop() {
     qDebug() << "Sending stop command";
-    sendCommandToClient(COMMAND_STOP);
+    sendCommandToClient(WGS_COMMAND_STOP);
 }
 
 void WinliveGoldSocket::ff() {
     qDebug() << "Sending fast forward command";
-    sendCommandToClient(COMMAND_FF);
+    sendCommandToClient(WGS_COMMAND_FF);
 }
 
 void WinliveGoldSocket::rw() {
     qDebug() << "Sending rewind command";
-    sendCommandToClient(COMMAND_RW);
+    sendCommandToClient(WGS_COMMAND_RW);
 }
 
 void WinliveGoldSocket::melody() {
     qDebug() << "Sending melody command";
-    sendCommandToClient(COMMAND_MELODY);
+    sendCommandToClient(WGS_COMMAND_MELODY);
 }
 
 void WinliveGoldSocket::tone(const QString& newTone) {
-    QString command = QString(COMMAND_TONE + " %1").arg(newTone);
+    QString command = QString(WGS_COMMAND_TONE + " %1").arg(newTone);
     qDebug() << "Sending tone command:" << command;
     sendCommandToClient(command);
 }
 
 void WinliveGoldSocket::close() {
     qDebug() << "Sending close command";
-    sendCommandToClient(COMMAND_CLOSE);
+    sendCommandToClient(WGS_COMMAND_CLOSE);
 }
 
 void WinliveGoldSocket::info() {
     qDebug() << "Sending info request";
-    sendCommandToClient(COMMAND_INFO);
+    sendCommandToClient(WGS_COMMAND_INFO);
 }
 
 
@@ -176,7 +166,7 @@ void WinliveGoldSocket::onNewConnection() {
 #if defined(Q_OS_MAC)
         QLocalSocket* rejectedClient = m_server->nextPendingConnection();
         if (rejectedClient) {
-            rejectedClient->write("dummy " + COMMAND_CLOSE +  "\n");
+            rejectedClient->write("dummy " + WGS_COMMAND_CLOSE +  "\n");
             rejectedClient->flush();
             rejectedClient->disconnectFromServer();
             rejectedClient->deleteLater();
@@ -184,7 +174,7 @@ void WinliveGoldSocket::onNewConnection() {
 #else
         QTcpSocket* rejectedClient = m_server->nextPendingConnection();
         if (rejectedClient) {
-            rejectedClient->write(("dummy " + COMMAND_CLOSE + "\n").toUtf8());
+            rejectedClient->write(("dummy " + WGS_COMMAND_CLOSE + "\n").toUtf8());
             rejectedClient->flush();
             rejectedClient->disconnectFromHost();
             rejectedClient->deleteLater();
@@ -283,6 +273,7 @@ void WinliveGoldSocket::sendCommandToClient(const QString& command) {
     // Ensure data is sent immediately
     m_client->flush(); 
 }
+
 
 void WinliveGoldSocket::launchClient() {
 #if defined(Q_OS_WIN)
