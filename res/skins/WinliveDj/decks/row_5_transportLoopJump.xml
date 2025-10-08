@@ -451,10 +451,10 @@
 						<Children>
 							<Label>
 								<ObjectName>KaraokeInfo</ObjectName>
-								<State></State>
-								<Text>karaoke info</Text>
+								<Text>k -</Text>
 								<Size>104,26f</Size>
 								<Alignment>center</Alignment>
+								<RuntimeEditable>true</RuntimeEditable>
 								<Connection>
 									<ConfigKey><Variable name="Group"/>,karaoke_info</ConfigKey>
 								</Connection>

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QLabel>
-
+#include "control/controlobjectstring.h"
 #include "widget/wbasewidget.h"
 
 class QDomNode;
@@ -29,6 +29,8 @@ class WLabel : public QLabel, public WBaseWidget {
 
   signals:
     void highlightChanged(int highlight);
+  private slots:
+    void slotStringValueChanged(QString value); // AGGIUNGI QUESTO 
 
   protected:
     bool event(QEvent* pEvent) override;
@@ -40,6 +42,7 @@ class WLabel : public QLabel, public WBaseWidget {
     QColor m_qBgColor;
   private:
     QString m_longText;
+    ControlObjectString* m_pControlObjectString; // AGGIUNGI QUESTO
     Qt::TextElideMode m_elideMode;
     double m_scaleFactor;
     int m_highlight;

@@ -6,6 +6,7 @@
 #include "control/controlpotmeter.h"
 #include "control/controlproxy.h"
 #include "control/controlpushbutton.h"
+
 #include "engine/bufferscalers/enginebufferscalelinear.h"
 #include "engine/bufferscalers/enginebufferscalest.h"
 #include "engine/cachingreader/cachingreader.h"
@@ -148,7 +149,9 @@ EngineBuffer::EngineBuffer(const QString& group,
     m_forwardKaraokeButton->setButtonMode(ControlPushButton::TOGGLE);
     m_forwardKaraokeButton->connectValueChangeRequest(
             this, &EngineBuffer::slotControlFastForwardKaraoke, Qt::DirectConnection); 
-
+    
+    // karaoke info   
+    m_pKaraokeInfo = new ControlObjectString(ConfigKey(m_group, "karaoke_info"));
 
     // Play button
     m_playButton = new ControlPushButton(ConfigKey(m_group, "play"));
@@ -212,6 +215,8 @@ EngineBuffer::EngineBuffer(const QString& group,
     m_pKeylock->setButtonMode(ControlPushButton::TOGGLE);
 
     m_pReplayGain = new ControlProxy(m_group, QStringLiteral("replaygain"), this);
+
+    
 
     m_pTrackLoaded = new ControlObject(ConfigKey(m_group, "track_loaded"), false);
     m_pTrackLoaded->setReadOnly();
@@ -928,7 +933,10 @@ void EngineBuffer::slotControlPlayKaraoke(double v) {
     bool verifiedPlay = updateIndicatorsAndModifyPlay(v > 0.0, oldPlay);
 
     if (!oldPlay && verifiedPlay) {
+        m_pKaraokeInfo->set("ciccio");
 
+
+        
         // Get the file name
         if (m_pCurrentTrack) {
             QString trackLocation = m_pCurrentTrack->getLocation();

@@ -10,6 +10,7 @@
 #include "audio/frame.h"
 #include "audio/types.h"
 #include "control/controlvalue.h"
+#include "control/controlobjectstring.h"
 #include "engine/cachingreader/cachingreader.h"
 #include "engine/engineobject.h"
 #include "engine/slipmodestate.h"
@@ -412,6 +413,7 @@ class EngineBuffer : public EngineObject {
     ControlPushButton* m_pauseKaraokeButton;
     ControlPushButton* m_forwardKaraokeButton;
     ControlPushButton* m_rewindKaraokeButton;
+    ControlObjectString* m_pKaraokeInfo;
 
     ControlPushButton* m_pSlipButton;
 

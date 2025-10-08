@@ -15,7 +15,8 @@ WLabel::WLabel(QWidget* pParent)
           m_elideMode(Qt::ElideNone),
           m_scaleFactor(1.0),
           m_highlight(0),
-          m_widthHint(0) {
+          m_widthHint(0),
+          m_pControlObjectString(nullptr) {
 }
 
 void WLabel::setup(const QDomNode& node, const SkinContext& context) {
@@ -23,6 +24,26 @@ void WLabel::setup(const QDomNode& node, const SkinContext& context) {
 
     // Colors
     QPalette pal = palette(); // we have to copy out the palette to edit it since it's const (probably for threadsafety)
+
+    // Connection per ConfigKey dinamiche (consente modifiche runtime se c'è la proprietà RuntimeEditable = true)
+    QString editable = context.selectString(node, "RuntimeEditable");
+    bool isEditable = (editable.toLower() == "true");
+
+    if (isEditable) {
+        QDomElement connection = context.selectElement(node, "Connection");
+        if (!connection.isNull()) {
+            QString configKey = context.selectString(connection, "ConfigKey");
+            if (!configKey.isEmpty()) {
+                ConfigKey key = ConfigKey::parseCommaSeparated(configKey);
+                // if (key.item.contains("karaoke_info")) { //non ho più bisogno di identificare karaoke_info
+                m_pControlObjectString = new ControlObjectString(key, this);
+                connect(m_pControlObjectString, &ControlObjectString::valueChanged, this, &WLabel::slotStringValueChanged);
+                slotStringValueChanged(m_pControlObjectString->get());
+                //}
+            }
+        }
+    }
+
 
     QDomElement bgColor = context.selectElement(node, "BgColor");
     if (!bgColor.isNull()) {
@@ -87,6 +108,10 @@ void WLabel::setup(const QDomNode& node, const SkinContext& context) {
                     "unknown, use right, middle, left or none.";
         }
     }
+
+    
+
+
 }
 
 QString WLabel::text() const {
@@ -150,6 +175,9 @@ void WLabel::setHighlight(int highlight) {
     emit highlightChanged(m_highlight);
 }
 
+void WLabel::slotStringValueChanged(QString value) {
+    setText(value);
+}
 QSize WLabel::sizeHint() const {
     // make sure the sizeHint fits for the entire string.
     QSize size = QLabel::sizeHint();
