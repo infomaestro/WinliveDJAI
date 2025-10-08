@@ -347,13 +347,17 @@ WSearchLineEdit {
   border-style: solid;
   border-color: #0c0c0c;
 }
-
+#KaraokeInfo {
+  border: 1px solid #0c0c0c;
+  border-radius: 1px;
+  background-color: #571719;
+}
 WTrackProperty:hover,
 WTrackProperty:hover[selected="false"],
 WTrackProperty:hover[selected="true"],
 WTrackProperty[selected="true"],
 #BpmTapContainer:hover,
-#PlayPositionText:hover, #PlayPositionTextSmall:hover {
+#PlayPositionText:hover, #PlayPositionTextSmall:hover, #KaraokeInfo:hover{
   background-color: #13242f;  /*wdjai color oldwas #151517*/
   }
   WTrackProperty:hover[selected="true"],
@@ -1219,6 +1223,7 @@ WEffectChainPresetSelector,
   #Deck1 #ArtistText,
   #Deck1 #BpmText,
   #Deck1 #KeyText,
+  #Deck1 #KaraokeInfo,
   #DeckCompact1 #TitleText,
   #DeckCompact1 #ArtistText,
   #DeckCompact1 #BpmText,
@@ -1231,6 +1236,7 @@ WEffectChainPresetSelector,
   #Deck2 #ArtistText,
   #Deck2 #BpmText,
   #Deck2 #KeyText,
+  #Deck2 #KaraokeInfo,
   #DeckCompact2 #TitleText,
   #DeckCompact2 #ArtistText,
   #DeckCompact2 #BpmText,
@@ -1239,6 +1245,7 @@ WEffectChainPresetSelector,
   #DeckMini2 #ArtistTextSmall,
   #DeckMini2 #BpmTextSmall,
   #DeckMini2 #KeyTextSmall,
+
 #MicAuxLabel,
 #SamplerTitle, #SamplerTitleMini,
 #MainMenu QMenu,
