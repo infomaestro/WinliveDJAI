@@ -386,6 +386,10 @@
 								</Value>
 							</BeatSpinBox>
 						</Children>
+						<Connection>
+							<ConfigKey>[Skin],show_loop_controls</ConfigKey>
+							<BindProperty>visible</BindProperty>
+						</Connection>
 					</WidgetGroup>
 					<WidgetGroup>
 						<ObjectName>AlignLeftTop</ObjectName>
@@ -434,6 +438,10 @@
 								</SetVariable>
 							</Template>
 						</Children>
+						<Connection>
+							<ConfigKey>[Skin],show_loop_controls</ConfigKey>
+							<BindProperty>visible</BindProperty>
+						</Connection>
 					</WidgetGroup>
 					<!-- Label Info -->
 					<WidgetGroup>
@@ -448,11 +456,8 @@
 								<Size>104,26f</Size>
 								<Alignment>center</Alignment>
 								<Connection>
-									<ConfigKey>
-										<Variable name="Group"/>,karaoke_info
-									</ConfigKey>
+									<ConfigKey><Variable name="Group"/>,karaoke_info</ConfigKey>
 								</Connection>
-
 							</Label>
 						</Children>
 					</WidgetGroup>
@@ -492,7 +497,11 @@
                     </Connection> -->
                   </BeatSpinBox>
                 </Children>
-              </WidgetGroup>
+			    <Connection>
+				    <ConfigKey>[Skin],show_beatjump_controls</ConfigKey>
+				    <BindProperty>visible</BindProperty>
+			    </Connection>
+			  </WidgetGroup>
               <WidgetGroup>
                 <ObjectName>AlignLeftTop</ObjectName>
                 <Layout>horizontal</Layout>
