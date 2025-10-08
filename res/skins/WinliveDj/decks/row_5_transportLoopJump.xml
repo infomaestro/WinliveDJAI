@@ -463,7 +463,7 @@
             <Layout>vertical</Layout>
             <SizePolicy>min,min</SizePolicy>
             <MinimumSize>52,52</MinimumSize>
-            <MaximumSize>60,52</MaximumSize>
+            <MaximumSize>92,78</MaximumSize>
             <Children>
               <WidgetGroup><!-- beatjump size -->
                 <ObjectName>AlignLeftTop</ObjectName>
@@ -515,13 +515,14 @@
 				</Connection>
 			  </WidgetGroup>
 			  
-				<!-- Key Controls -->
+			  <!-- Key Controls -->
 			  <WidgetGroup>
-					<SizePolicy>me,min</SizePolicy>
-					<MaximumSize>111,</MaximumSize>
+					<SizePolicy>me,26f</SizePolicy>
 					<Layout>vertical</Layout>
 					<Children>
+						<WidgetGroup><Size>0min,4f</Size></WidgetGroup>  <!-- spazio 4 pixel-->
 						<Template src="skins:WinliveDj/decks/key_controls.xml"/>
+						<WidgetGroup><Size>0min,2f</Size></WidgetGroup>  <!-- spazio 2 pixel-->
 					</Children>
 					<Connection>
 						<ConfigKey persist="true">[Skin],show_key_controls</ConfigKey>
