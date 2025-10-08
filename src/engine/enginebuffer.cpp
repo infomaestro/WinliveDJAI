@@ -686,6 +686,7 @@ void EngineBuffer::ejectTrack() {
 
     m_iTrackLoading = 0;
     m_pChannelToCloneFrom = nullptr;
+    m_isKaraoke = false;
 }
 
 void EngineBuffer::notifyTrackLoaded(
@@ -825,6 +826,13 @@ void EngineBuffer::slotControlPlayRequest(double v) {
     bool oldPlay = m_playButton->toBool();
     bool verifiedPlay = updateIndicatorsAndModifyPlay(v > 0.0, oldPlay);
 
+    // karaoke?
+    if (m_isKaraoke == true) {
+        QMessageBox::information(nullptr, tr("Couldn't load track."), tr("A song is playing in this deck. Stop the song first."));
+        verifiedPlay = false;
+    }
+
+
     if (!oldPlay && verifiedPlay) {
         // Ottieni il nome del file
         if (m_pCurrentTrack) {
@@ -929,30 +937,31 @@ void EngineBuffer::slotControlPlayKaraoke(double v) {
             qDebug() << "Playing file:" << filePath;
             
             if (auto* coreServices = mixxx::CoreServices::getInstance()) {
-                coreServices->getWinliveGoldSocket()->start(m_group, filePath);
+                coreServices->getWinliveGoldSocket()->start(this, filePath);
                 m_isKaraoke = true;
             }
             
             
         }
     } else if (verifiedPlay) {
-        QMessageBox::information(nullptr, tr("Couldn't load track."), tr("A song is playing in this deck. Stop the song first"));
+        QMessageBox::information(nullptr, tr("Couldn't load track."), tr("A song is playing in this deck. Stop the song first."));
     } else {
         QMessageBox::warning(nullptr, tr("Couldn't load track."), tr("Song is invalid or not loaded."));
     }
 }
 
 void EngineBuffer::slotControlStopKaraoke(double v) {
-    if (m_pCurrentTrack && v > 0.5) {
+    if (m_isKaraoke && m_pCurrentTrack && v > 0.5) {
         qDebug() << "Stopping file";
         if (auto* coreServices = mixxx::CoreServices::getInstance()) {
             coreServices->getWinliveGoldSocket()->stop();
         }
+        m_isKaraoke = false;
     }
 }
 
 void EngineBuffer::slotControlPauseKaraoke(double v) {
-    if (m_pCurrentTrack) {
+    if (m_isKaraoke && m_pCurrentTrack) {
         qDebug() << "pause file";
         if (auto* coreServices = mixxx::CoreServices::getInstance()) {
             coreServices->getWinliveGoldSocket()->pause();
@@ -961,7 +970,7 @@ void EngineBuffer::slotControlPauseKaraoke(double v) {
 }
 
 void EngineBuffer::slotControlRewindKaraoke (double v) {
-    if (m_pCurrentTrack) {
+    if (m_isKaraoke && m_pCurrentTrack) {
         qDebug() << "rew file";
         if (auto* coreServices = mixxx::CoreServices::getInstance()) {
             coreServices->getWinliveGoldSocket()->rw();
@@ -970,7 +979,7 @@ void EngineBuffer::slotControlRewindKaraoke (double v) {
 }
 
 void EngineBuffer::slotControlFastForwardKaraoke(double v) {
-    if (m_pCurrentTrack) {
+    if (m_isKaraoke && m_pCurrentTrack) {
         qDebug() << "ffw file";
         if (auto* coreServices = mixxx::CoreServices::getInstance()) {
             coreServices->getWinliveGoldSocket()->ff();
@@ -994,7 +1003,7 @@ void EngineBuffer::processTrackLocked(
     processSyncRequests();
 
     // Karaoke mode: if a song is playing in karaoke mode, disable all effects and keylock
-    if (m_isKaraoke == true) {
+    if (m_isKaraoke) {
         const double pitchKaraoke = m_pKeyControl->getPitchKaraoke();
         if (m_pitchKaraoke_old != pitchKaraoke) {
             m_pitchKaraoke_old = pitchKaraoke;
@@ -1759,7 +1768,36 @@ void EngineBuffer::setScalerForTest(
     m_bScalerOverride = true;
 }
 
-void EngineBuffer::onSocketInfoReceived(const QString& info) {
+void EngineBuffer::onSocketInfoReceived(EngineBuffer* deck, const QString& info) {
+    
+    // parse info response: deck_name|message  
+    QStringList parts = info.split('|');
+    if (parts.size() < 2) {
+        qDebug() << "Invalid socket info response:" << info;
+        return;
+    }
+    QString deckName = parts[0];
 
+    if (m_group != deckName) {
+        qDebug() << "Wrong deck:" << deckName;
+        return;
+    }
+
+    // which message?
+    QString message = parts[1].toLower();
+    
+    // stop song
+    if (message == WGS_COMMAND_FINISH) {
+        ejectTrack();
+        return;
+    }
+
+    if (message == WGS_COMMAND_INFO && parts.size() >= 5) {
+        // message format: current time|total time|tone
+        QString currentTime = parts[2];
+        QString timeElapsed = parts[3];
+        QString tone = parts[4];
+        return;
+    }
 }
 

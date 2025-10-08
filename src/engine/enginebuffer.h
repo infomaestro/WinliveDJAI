@@ -256,7 +256,7 @@ class EngineBuffer : public EngineObject {
     void slotPassthroughChanged(double v);
     void slotUpdatedTrackBeats();
 
-    void onSocketInfoReceived(const QString& info);
+    void onSocketInfoReceived(EngineBuffer* deck, const QString& info);
 
   private:
     struct QueuedSeek {
@@ -504,3 +504,4 @@ class EngineBuffer : public EngineObject {
 
 Q_DECLARE_METATYPE(EngineBuffer::KeylockEngine)
 Q_DECLARE_OPERATORS_FOR_FLAGS(EngineBuffer::SeekRequests)
+

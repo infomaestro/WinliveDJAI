@@ -1498,7 +1498,6 @@ target_precompile_headers(mixxx-lib PUBLIC
   src/util/screensaver.h
   src/util/screensavermanager.h
   src/util/semanticversion.h
-  src/util/serial.h
   src/util/singleton.h
   src/util/span.h
   src/util/stat.h
@@ -1520,7 +1519,6 @@ target_precompile_headers(mixxx-lib PUBLIC
   src/util/valuetransformer.h
   src/util/versionstore.h
   src/util/widgethelper.h
-  src/util/winlivegoldsocket.h
   src/util/workerthread.h
   src/util/workerthreadscheduler.h
   src/util/xml.h
