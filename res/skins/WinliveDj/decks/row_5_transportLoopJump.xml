@@ -447,6 +447,12 @@
 								<Text>karaoke info</Text>
 								<Size>104,26f</Size>
 								<Alignment>center</Alignment>
+								<Connection>
+									<ConfigKey>
+										<Variable name="Group"/>,karaoke_info
+									</ConfigKey>
+								</Connection>
+
 							</Label>
 						</Children>
 					</WidgetGroup>
