@@ -2,13 +2,13 @@
   <WidgetGroup>
     <Layout>horizontal</Layout>
     <SizePolicy>p,min</SizePolicy>
-    <MaximumSize>111,</MaximumSize>
+    <MaximumSize>128,</MaximumSize>
     <Children>
       <WidgetGroup>
         <ObjectName>KeyControls</ObjectName>
         <Layout>horizontal</Layout>
         <SizePolicy>me,min</SizePolicy>
-        <MaximumSize>111,</MaximumSize>
+        <MaximumSize>128,</MaximumSize>
         <Children>
           <Template src="skins:WinliveDj/controls/button_2state_right.xml">
             <SetVariable name="TooltipId">sync_reset_key</SetVariable>
@@ -26,9 +26,10 @@
             <TooltipId>track_key</TooltipId>
             <Group><Variable name="Group"/></Group>
             <MinimumSize>30,20</MinimumSize>
-            <MaximumSize>65,20</MaximumSize>
+            <MaximumSize>80,20</MaximumSize>
             <SizePolicy>me,f</SizePolicy>
             <Elide>right</Elide>
+			<DisplayValue>true</DisplayValue>  
             <Connection>
               <ConfigKey><Variable name="Group"/>,visual_key</ConfigKey>
             </Connection>

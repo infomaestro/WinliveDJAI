@@ -474,7 +474,7 @@
             <Layout>vertical</Layout>
             <SizePolicy>min,min</SizePolicy>
             <MinimumSize>52,52</MinimumSize>
-            <MaximumSize>92,78</MaximumSize>
+            <MaximumSize>128,78</MaximumSize>
             <Children>
               <WidgetGroup><!-- beatjump size -->
                 <ObjectName>AlignLeftTop</ObjectName>
