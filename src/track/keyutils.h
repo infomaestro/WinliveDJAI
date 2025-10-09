@@ -137,6 +137,8 @@ class KeyUtils {
             const QVariant& keyTextField, const QVariant& keyIdField);
     static QString keyFromKeyTextAndIdValues(const QString& keyText,
             const mixxx::track::io::key::ChromaticKey& key);
+    
+    
 
   private:
     static QMutex s_notationMutex;

@@ -26,8 +26,8 @@ void WLabel::setup(const QDomNode& node, const SkinContext& context) {
     QPalette pal = palette(); // we have to copy out the palette to edit it since it's const (probably for threadsafety)
 
     // Connection per ConfigKey dinamiche (consente modifiche runtime se c'è la proprietà RuntimeEditable = true)
-    QString editable = context.selectString(node, "RuntimeEditable");
-    bool isEditable = (editable.toLower() == "true");
+    
+    bool isEditable = context.selectBool(node, "RuntimeEditable", false);
 
     if (isEditable) {
         QDomElement connection = context.selectElement(node, "Connection");

@@ -133,6 +133,11 @@ double KeyControl::getPitchKaraoke() {
     return m_pitchKaraoke;
 }
 
+double KeyControl::getPitch() {
+    return m_pPitch->get();
+    
+}
+
 KeyControl::PitchTempoRatio KeyControl::getPitchTempoRatio() {
     // TODO(XXX) remove code duplication by adding this
     // "Update pending" atomic flag to the ControlObject API
