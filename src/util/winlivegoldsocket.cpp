@@ -26,7 +26,8 @@
 
     connect(m_infoTimer, &QTimer::timeout, this, [this]() {
         if (hasClient()) {
-            //info();
+            // uodate karaoke info every second
+            info();
         }
     });
     }
