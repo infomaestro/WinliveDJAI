@@ -364,6 +364,15 @@ EngineBuffer::~EngineBuffer() {
 
     delete m_pScaleLinear;
     delete m_pScaleST;
+
+    delete m_playKaraokeButton;
+    delete m_stopKaraokeButton;
+    delete m_pauseKaraokeButton;
+    delete m_forwardKaraokeButton;
+    delete m_rewindKaraokeButton;
+    delete m_pKaraokeInfo;
+
+
 #ifdef __RUBBERBAND__
     delete m_pScaleRB;
 #endif
@@ -646,6 +655,10 @@ void EngineBuffer::ejectTrack() {
     if (kLogger.traceEnabled()) {
         kLogger.trace() << "EngineBuffer::ejectTrack()";
     }
+
+    // no karaoke
+    m_isKaraoke = false;
+
     TrackPointer pOldTrack = m_pCurrentTrack;
     m_pause.lock();
 
@@ -691,7 +704,6 @@ void EngineBuffer::ejectTrack() {
 
     m_iTrackLoading = 0;
     m_pChannelToCloneFrom = nullptr;
-    m_isKaraoke = false;
 }
 
 void EngineBuffer::notifyTrackLoaded(
@@ -832,11 +844,12 @@ void EngineBuffer::slotControlPlayRequest(double v) {
     bool verifiedPlay = updateIndicatorsAndModifyPlay(v > 0.0, oldPlay);
 
     // karaoke?
-    if (m_isKaraoke == true) {
-        QMessageBox::information(nullptr, tr("Couldn't load track."), tr("A song is playing in this deck. Stop the song first."));
-        verifiedPlay = false;
+    if (auto* coreServices = mixxx::CoreServices::getInstance()) {
+        if (m_isKaraoke && coreServices->getWinliveGoldSocket(false) != nullptr) {
+            QMessageBox::information(nullptr, tr("Couldn't load track."), tr("A song is playing in this deck. Stop the song first."));
+            verifiedPlay = false;
+        }
     }
-
 
     if (!oldPlay && verifiedPlay) {
         // Ottieni il nome del file
@@ -933,10 +946,7 @@ void EngineBuffer::slotControlPlayKaraoke(double v) {
     bool verifiedPlay = updateIndicatorsAndModifyPlay(v > 0.0, oldPlay);
 
     if (!oldPlay && verifiedPlay) {
-        m_pKaraokeInfo->set("ciccio");
 
-
-        
         // Get the file name
         if (m_pCurrentTrack) {
             QString trackLocation = m_pCurrentTrack->getLocation();
@@ -953,8 +963,6 @@ void EngineBuffer::slotControlPlayKaraoke(double v) {
         }
     } else if (verifiedPlay) {
         QMessageBox::information(nullptr, tr("Couldn't load track."), tr("A song is playing in this deck. Stop the song first."));
-    } else {
-        QMessageBox::warning(nullptr, tr("Couldn't load track."), tr("Song is invalid or not loaded."));
     }
 }
 
@@ -1787,7 +1795,6 @@ void EngineBuffer::onSocketInfoReceived(EngineBuffer* deck, const QString& info)
     QString deckName = parts[0];
 
     if (m_group != deckName) {
-        qDebug() << "Wrong deck:" << deckName;
         return;
     }
 
@@ -1796,7 +1803,8 @@ void EngineBuffer::onSocketInfoReceived(EngineBuffer* deck, const QString& info)
     
     // stop song
     if (message == WGS_COMMAND_FINISH) {
-        ejectTrack();
+        // no karaoke
+        m_isKaraoke = false;
         return;
     }
 
@@ -1805,6 +1813,9 @@ void EngineBuffer::onSocketInfoReceived(EngineBuffer* deck, const QString& info)
         QString currentTime = parts[2];
         QString timeElapsed = parts[3];
         QString tone = parts[4];
+
+        m_pKaraokeInfo->set(QString("%1 / %2").arg(currentTime, timeElapsed));
+
         return;
     }
 }

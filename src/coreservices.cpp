@@ -813,6 +813,14 @@ void CoreServices::finalize() {
     Timer t("CoreServices::~CoreServices");
     t.start();
 
+
+    // close socket if open
+    if (m_socket != nullptr) {
+        m_socket->close();
+        m_socket->deleteLater();
+        m_socket = nullptr;
+    }
+
     // Stop all pending library operations
     qDebug() << t.elapsed(false).debugMillisWithUnit() << "stopping pending Library tasks";
     m_pTrackCollectionManager->stopLibraryScan();
@@ -893,12 +901,6 @@ void CoreServices::finalize() {
 
     m_pControlIndicatorTimer.reset();
 
-    if (m_socket != nullptr) {
-        m_socket->close();
-        m_socket->deleteLater();
-        m_socket = nullptr;
-    }
-
     t.elapsed(true);
 }
 
@@ -911,10 +913,10 @@ void CoreServices::deleteSettingsFile() {
     UserSettingsPointer pConfig = m_pSettingsManager->settings();
     QString settingspath = QDir(pConfig->getSettingsPath()).filePath(MIXXX_SETTINGS_FILE);
     QMessageBox::information(nullptr,
-            ("Information"),
-            ("Starting with default options"),
+            tr("Information"),
+            tr("Starting with default options."),
             QMessageBox::Ok);
-     // Verifica se il file esiste e lo cancella
+    // check file and delete it
     QFile settingsFile(settingspath);
     if (settingsFile.exists()) {
         if (settingsFile.remove()) {
@@ -934,17 +936,17 @@ QString CoreServices::getResourcePath()
     return resPath;
 }
 
-WinliveGoldSocket* CoreServices::getWinliveGoldSocket() {
+WinliveGoldSocket* CoreServices::getWinliveGoldSocket(const bool create) {
     if (m_socket != nullptr) {
         m_socket->startListening();
         return m_socket;
     } else {
-        if (m_socket == nullptr) {
+        if (m_socket == nullptr && create) {
 
 #if defined(Q_OS_MAC)
-            m_socket = new WinliveGoldSocket("winlive_server", this);
+            m_socket = new WinliveGoldSocket(this);
 #else
-            m_socket = new WinliveGoldSocket(12345, this);
+            m_socket = new WinliveGoldSocket(this);
 #endif
         }
         return m_socket;

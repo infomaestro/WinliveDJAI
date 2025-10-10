@@ -43,7 +43,7 @@ class CoreServices : public QObject {
     void deleteSettingsFile();
     QString getResourcePath();
 
-    WinliveGoldSocket* getWinliveGoldSocket();
+    WinliveGoldSocket* getWinliveGoldSocket(const bool create = true);
 
     std::shared_ptr<KeyboardEventFilter> getKeyboardEventFilter() const {
         return m_pKeyboardEventFilter;

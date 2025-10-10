@@ -30,6 +30,8 @@ const QString WGS_COMMAND_TONE = QStringLiteral("tone");
 const QString WGS_COMMAND_CLOSE = QStringLiteral("close");
 const QString WGS_COMMAND_INFO = QStringLiteral("info");
 const QString WGS_COMMAND_FINISH = QStringLiteral("finish");
+const quint16 WGS_SERVER_PORT = 12345;
+const QString WGS_SERVER_NAME = QStringLiteral("wldjai");
 
 /*!
  * \class WinliveGoldSocket
@@ -43,9 +45,9 @@ class WinliveGoldSocket : public QObject {
 
   public:
 #if defined(Q_OS_MAC)
-    explicit WinliveGoldSocket(const QString& serverName, QObject* parent = nullptr);
+    explicit WinliveGoldSocket(QObject* parent = nullptr);
 #else
-    explicit WinliveGoldSocket(quint16 port, QObject* parent = nullptr);
+    explicit WinliveGoldSocket(QObject* parent = nullptr);
 #endif
 
     

@@ -7,11 +7,11 @@
 
 
 #if defined(Q_OS_MAC)
-    WinliveGoldSocket::WinliveGoldSocket(const QString& serverName, QObject* parent)
-        : QObject(parent), m_serverName(serverName), m_infoTimer(new QTimer(this)), m_server(new QLocalServer(this)), m_client(nullptr)
+    WinliveGoldSocket::WinliveGoldSocket(QObject* parent)
+        : QObject(parent), m_serverName(WGS_SERVER_NAME), m_infoTimer(new QTimer(this)), m_server(new QLocalServer(this)), m_client(nullptr)
 #else
-    WinliveGoldSocket::WinliveGoldSocket(quint16 port, QObject* parent)
-        : QObject(parent), m_port(port), m_infoTimer(new QTimer(this)), m_server(new QTcpServer(this)), m_client(nullptr)
+    WinliveGoldSocket::WinliveGoldSocket(QObject* parent)
+        : QObject(parent), m_port(WGS_SERVER_PORT), m_infoTimer(new QTimer(this)), m_server(new QTcpServer(this)), m_client(nullptr)
 #endif
 {
 
@@ -34,9 +34,10 @@
 
 WinliveGoldSocket::~WinliveGoldSocket() {
     qDebug() << "Closing Server";
-    m_infoTimer->stop();
     stopListening();
 }
+
+// Nel file cpp (WinliveGoldSocket.cpp)
 
 bool WinliveGoldSocket::startListening() {
     if (isListening()) {
@@ -44,27 +45,40 @@ bool WinliveGoldSocket::startListening() {
         return true;
     }
 
+    m_port = WGS_SERVER_PORT;
+
+    for (quint16 attempt = 0; attempt < 16; ++attempt) {
+        qDebug() << "Attempting to listen on port:" << m_port;
+
 #if defined(Q_OS_MAC)
-    if (!m_server->listen(m_serverName)) {
-        QString error = QString("Failed to start local server: %1").arg(m_server->errorString());
-        qDebug() << error;
-        emit errorOccurred(error);
-        return false;
-    }
-    qDebug() << "Local server listening on:" << m_serverName;
+        // For QLocalServer, port doesn't apply - use server name directly
+        if (m_server->listen(m_serverName)) {
+            qDebug() << "Local server listening on:" << m_serverName;
+            return true;
+        }
 #else
-    if (!m_server->listen(QHostAddress::LocalHost, m_port)) {
-        QString error = QString("Failed to start TCP server on port %1: %2")
-                                .arg(m_port)
-                                .arg(m_server->errorString());
-        qDebug() << error;
-        emit errorOccurred(error);
-        return false;
-    }
-    qDebug() << "TCP server listening on port:" << m_server->serverPort();
+        // Try to listen on TCP port
+        if (m_server->listen(QHostAddress::LocalHost, m_port)) {
+            qDebug() << "TCP server successfully listening on port:" << m_port;
+            return true;
+        }
+
+        // Log why it failed
+        qDebug() << "Failed to listen on port" << m_port
+                 << "- Error:" << m_server->errorString();
 #endif
 
-    return true;
+        // Try next port
+        m_port++;
+    }
+
+    // All attempts failed
+    QString error = QString("Failed to start server (ports %2-%3)")
+                            .arg(WGS_SERVER_PORT)
+                            .arg(m_port - 1);
+    qDebug() << error;
+    emit errorOccurred(error);
+    return false;
 }
 
 void WinliveGoldSocket::stopListening() {
@@ -73,10 +87,10 @@ void WinliveGoldSocket::stopListening() {
     }
 
     qDebug() << "Stopping server...";
+    m_infoTimer->stop();
 
     // Send close command to client if connected
     if (m_client) {
-        close();
         QThread::msleep(250); // Give time for close command
 
 #if defined(Q_OS_MAC)
@@ -286,11 +300,10 @@ void WinliveGoldSocket::launchClient() {
 #endif
 
     QStringList arguments;
-    arguments << "-refwldjai" << QString::number(m_port);
+    arguments << "-refwldjainomidi" << QString::number(m_port);
 
     QProcess* process = new QProcess(this);
     process->start(program, arguments);
 
     qDebug() << "Launched client with arguments:" << arguments;
 }
-
