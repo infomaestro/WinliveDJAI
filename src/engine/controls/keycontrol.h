@@ -28,6 +28,8 @@ class KeyControl : public EngineControl {
 
     double getPitchKaraoke();
 
+    double getPitch();
+
     // Returns a struct, with the results of the last pitch and tempo calculations
     KeyControl::PitchTempoRatio getPitchTempoRatio();
 
