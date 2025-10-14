@@ -1934,6 +1934,13 @@ install(
     "*.qm"
 )
 
+# KaraokeWindow files
+install(
+  DIRECTORY
+    "${CMAKE_CURRENT_SOURCE_DIR}/res/karaokew"
+  DESTINATION
+    "${MIXXX_INSTALL_DATADIR}"
+)
 
 # Font files
 #

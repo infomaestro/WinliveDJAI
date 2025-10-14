@@ -2,6 +2,7 @@
 
 #include "winlivegoldsocket.h"
 #include "engine/enginebuffer.h"
+#include "coreservices.h"
 #include "moc_winlivegoldsocket.cpp" 
 #include <QHostAddress>
 
@@ -291,8 +292,13 @@ void WinliveGoldSocket::sendCommandToClient(const QString& command) {
 
 
 void WinliveGoldSocket::launchClient() {
+   
+
 #if defined(Q_OS_WIN)
-    QString program = "C:/000/WLGOLDTEST/WinliveGold.exe";
+    QString program;
+    if (auto* coreServices = mixxx::CoreServices::getInstance()) {
+         program = QDir(coreServices->getResourcePath()).filePath("karaokew/karaokew.exe");
+    }
 #elif defined(Q_OS_MAC)
     QString program = "/Applications/WinliveClient.app/Contents/MacOS/WinliveClient";
 #else

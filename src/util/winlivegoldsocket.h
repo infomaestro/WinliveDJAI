@@ -94,6 +94,7 @@ class WinliveGoldSocket : public QObject {
     QTimer* m_infoTimer = nullptr;
     QString m_pendingStartFilename = "";
     EngineBuffer* m_deck = nullptr;
+   
 
 #if defined(Q_OS_MAC)
     QString m_serverName;   
