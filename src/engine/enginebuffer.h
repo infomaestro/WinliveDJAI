@@ -224,6 +224,8 @@ class EngineBuffer : public EngineObject {
     void seekExact(mixxx::audio::FramePos);
 
     void verifyPlay();
+    bool isKaraoke() const { return m_isKaraoke;}
+    void setKaraoke(const bool karaoke);
 
   public slots:
     void slotControlPlayRequest(double);

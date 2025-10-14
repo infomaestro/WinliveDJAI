@@ -634,7 +634,7 @@ void EngineBuffer::slotTrackLoaded(TrackPointer pTrack,
     m_iTrackLoading = 0;
     
     // Reset karaoke flag
-    m_isKaraoke = false;
+    setKaraoke(false);
     m_pitchKaraoke_old = 0.0;
 }
 
@@ -657,7 +657,7 @@ void EngineBuffer::ejectTrack() {
     }
 
     // no karaoke
-    m_isKaraoke = false;
+    setKaraoke(false);
 
     TrackPointer pOldTrack = m_pCurrentTrack;
     m_pause.lock();
@@ -841,13 +841,16 @@ void EngineBuffer::verifyPlay() {
 void EngineBuffer::slotControlPlayRequest(double v) {
     
     bool oldPlay = m_playButton->toBool();
-    bool verifiedPlay = updateIndicatorsAndModifyPlay(v > 0.0, oldPlay);
+    bool verifiedPlay = true;
+    if (!isKaraoke()) {
+        verifiedPlay = updateIndicatorsAndModifyPlay(v > 0.0, oldPlay);
+    }
 
     // karaoke?
     if (auto* coreServices = mixxx::CoreServices::getInstance()) {
-        if (m_isKaraoke && coreServices->getWinliveGoldSocket(false) != nullptr) {
+        if (isKaraoke() && coreServices->getWinliveGoldSocket(false) != nullptr) {
             QMessageBox::information(nullptr, tr("Couldn't load track."), tr("A song is playing in this deck. Stop the song first."));
-            verifiedPlay = false;
+            return;
         }
     }
 
@@ -943,9 +946,8 @@ void EngineBuffer::slotKeylockEngineChanged(double dIndex) {
 
 void EngineBuffer::slotControlPlayKaraoke(double v) {
     bool oldPlay = m_playButton->toBool();
-    bool verifiedPlay = updateIndicatorsAndModifyPlay(v > 0.0, oldPlay);
 
-    if (!oldPlay && verifiedPlay) {
+    if (!oldPlay) {
 
         // Get the file name
         if (m_pCurrentTrack) {
@@ -956,28 +958,28 @@ void EngineBuffer::slotControlPlayKaraoke(double v) {
             
             if (auto* coreServices = mixxx::CoreServices::getInstance()) {
                 coreServices->getWinliveGoldSocket()->start(this, filePath);
-                m_isKaraoke = true;
+                setKaraoke(true);
             }
             
             
         }
-    } else if (verifiedPlay) {
+    } else {
         QMessageBox::information(nullptr, tr("Couldn't load track."), tr("A song is playing in this deck. Stop the song first."));
     }
 }
 
 void EngineBuffer::slotControlStopKaraoke(double v) {
-    if (m_isKaraoke && m_pCurrentTrack && v > 0.5) {
+    if (isKaraoke() && m_pCurrentTrack && v > 0.5) {
         qDebug() << "Stopping file";
         if (auto* coreServices = mixxx::CoreServices::getInstance()) {
             coreServices->getWinliveGoldSocket()->stop();
         }
-        m_isKaraoke = false;
+        setKaraoke(false);
     }
 }
 
 void EngineBuffer::slotControlPauseKaraoke(double v) {
-    if (m_isKaraoke && m_pCurrentTrack) {
+    if (isKaraoke() && m_pCurrentTrack) {
         qDebug() << "pause file";
         if (auto* coreServices = mixxx::CoreServices::getInstance()) {
             coreServices->getWinliveGoldSocket()->pause();
@@ -986,7 +988,7 @@ void EngineBuffer::slotControlPauseKaraoke(double v) {
 }
 
 void EngineBuffer::slotControlRewindKaraoke (double v) {
-    if (m_isKaraoke && m_pCurrentTrack) {
+    if (isKaraoke() && m_pCurrentTrack) {
         qDebug() << "rew file";
         if (auto* coreServices = mixxx::CoreServices::getInstance()) {
             coreServices->getWinliveGoldSocket()->rw();
@@ -995,7 +997,7 @@ void EngineBuffer::slotControlRewindKaraoke (double v) {
 }
 
 void EngineBuffer::slotControlFastForwardKaraoke(double v) {
-    if (m_isKaraoke && m_pCurrentTrack) {
+    if (isKaraoke() && m_pCurrentTrack) {
         qDebug() << "ffw file";
         if (auto* coreServices = mixxx::CoreServices::getInstance()) {
             coreServices->getWinliveGoldSocket()->ff();
@@ -1019,7 +1021,7 @@ void EngineBuffer::processTrackLocked(
     processSyncRequests();
 
     // Karaoke mode: if a song is playing in karaoke mode, disable all effects and keylock
-    if (m_isKaraoke) {
+    if (isKaraoke()) {
         const double pitchKaraoke = m_pKeyControl->getPitchKaraoke();
         if (m_pitchKaraoke_old != pitchKaraoke) {
             m_pitchKaraoke_old = pitchKaraoke;
@@ -1804,11 +1806,11 @@ void EngineBuffer::onSocketInfoReceived(EngineBuffer* deck, const QString& info)
     // stop song
     if (message == WGS_COMMAND_FINISH) {
         // no karaoke
-        m_isKaraoke = false;
+        setKaraoke(false);
         return;
     }
 
-    if (message == WGS_COMMAND_INFO && parts.size() >= 5) {
+    if (isKaraoke() && message == WGS_COMMAND_INFO && parts.size() >= 5) {
         // message format: current time|total time|tone
         QString currentTime = parts[2];
         QString timeElapsed = parts[3];
@@ -1820,3 +1822,18 @@ void EngineBuffer::onSocketInfoReceived(EngineBuffer* deck, const QString& info)
     }
 }
 
+
+
+void EngineBuffer::setKaraoke(const bool karaoke) {
+    
+    qDebug() << "Karaoke:" << karaoke;
+
+    if (karaoke == isKaraoke())
+        return;
+
+    m_isKaraoke = karaoke;
+    m_playKaraokeButton->forceSet(karaoke ? 1.0 : 0);
+    if (!karaoke) {
+        m_pKaraokeInfo->set("");
+    }
+}

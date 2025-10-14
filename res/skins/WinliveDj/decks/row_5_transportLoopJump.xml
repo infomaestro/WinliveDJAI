@@ -115,13 +115,20 @@
                     <TooltipId>play_karaoke</TooltipId>
                     <ObjectName>PlayKaraoke</ObjectName>
                     <Size>48f,26f</Size>
-                    <NumberStates>1</NumberStates>
+                    <NumberStates>2</NumberStates>
                     <State>
                       <Number>0</Number>
                       <Text>K♪</Text>
                       <Alignment>center</Alignment>
                       <Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium.svg</Unpressed>
                       <Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>
+                    </State>
+                    <State>
+                      <Number>1</Number>
+                      <Text>K♪</Text>
+                      <Alignment>center</Alignment>
+                      <Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>
+                      <Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Unpressed>
                     </State>
                     <Connection>
                       <ConfigKey><Variable name="Group"/>,play_karaoke</ConfigKey>
@@ -451,7 +458,7 @@
 						<Children>
 							<Label>
 								<ObjectName>KaraokeInfo</ObjectName>
-								<Text>k -</Text>
+								<Text></Text>
 								<Size>104,26f</Size>
 								<Alignment>center</Alignment>
 								<RuntimeEditable>true</RuntimeEditable>

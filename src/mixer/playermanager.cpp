@@ -23,6 +23,7 @@
 #include "util/compatibility/qatomic.h"
 #include "util/defs.h"
 #include "util/logger.h"
+#include "engine/enginebuffer.h"  
 
 namespace {
 
@@ -77,8 +78,10 @@ T* findFirstStoppedPlayerInList(const QList<T*>& players) {
         VERIFY_OR_DEBUG_ASSERT(pPlayControl != nullptr) {
             continue;
         }
+        Deck* pDeck = dynamic_cast<Deck*>(pPlayer);
 
-        if (!pPlayControl->toBool()) {
+
+        if (!pDeck->getEngineDeck()->getEngineBuffer()->isKaraoke() && !pPlayControl->toBool()) {
             return pPlayer;
         }
     }
