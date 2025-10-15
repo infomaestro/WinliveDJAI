@@ -95,7 +95,7 @@
                   <Template src="skins:WinliveDj/controls/button_1state_right.xml">
                     <SetVariable name="TooltipId">reverse</SetVariable>
                     <SetVariable name="ObjectName">Reverse</SetVariable>
-                    <SetVariable name="Size">26f,52f</SetVariable>
+                    <SetVariable name="Size">32f,52f</SetVariable>
                     <SetVariable name="BtnSize">square</SetVariable>
                     <SetVariable name="ConfigKey"><Variable name="Group"/>,reverse</SetVariable>
                     <SetVariable name="ConfigKeyRight"><Variable name="Group"/>,reverseroll</SetVariable>
@@ -103,7 +103,7 @@
 
                 </Children>
               </WidgetGroup>
-
+				
               <!-- NUOVI PULSANTI KARAOKE -->
               <WidgetGroup>
 				  <!-- PlayKaraoke, PausePlayKaraoke, StopKaraoke - ORIZZONTALI -->
@@ -115,18 +115,18 @@
                   <PushButton>
                     <TooltipId>play_karaoke</TooltipId>
                     <ObjectName>PlayKaraoke</ObjectName>
-                    <Size>48f,26f</Size>
+                    <Size>48f,32f</Size>
                     <NumberStates>2</NumberStates>
                     <State>
                       <Number>0</Number>
-                      <Text>K♪</Text>
+                      <Text>Start</Text>
                       <Alignment>center</Alignment>
                       <Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium.svg</Unpressed>
                       <Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>
                     </State>
                     <State>
                       <Number>1</Number>
-                      <Text>K♪</Text>
+                      <Text>Play</Text>
                       <Alignment>center</Alignment>
                       <Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>
                       <Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Unpressed>
@@ -140,7 +140,7 @@
                   <PushButton>
                     <TooltipId>pause_karaoke</TooltipId>
                     <ObjectName>PauseKaraoke</ObjectName>
-                    <Size>48f,26f</Size>
+                    <Size>42f,32f</Size>
                     <NumberStates>2</NumberStates>
                     <State>
                       <Number>0</Number>
@@ -165,7 +165,7 @@
                   <PushButton>
                     <TooltipId>stop_karaoke</TooltipId>
                     <ObjectName>StopKaraoke</ObjectName>
-                    <Size>26f,26f</Size>
+                    <Size>32f,32f</Size>
                     <NumberStates>1</NumberStates>
                     <State>
                       <Number>0</Number>
@@ -256,7 +256,9 @@
                 </WidgetGroup>
               </Children>
             </WidgetStack><!-- HotCues (3-4 / 5-8) -->
-
+			  
+			
+			  
             <!-- AGGIUNTI: Forward e Rewind sotto cue 3 e 4 -->
             <WidgetGroup>
               <Layout>horizontal</Layout>
@@ -268,7 +270,7 @@
                 <PushButton>
                   <TooltipId>karaoke_backward</TooltipId>
                   <ObjectName>KaraokeBack</ObjectName>
-                  <Size>26f,26f</Size>
+                  <Size>26f,32f</Size>
                   <NumberStates>1</NumberStates>
                   <State>
                     <Number>0</Number>
@@ -286,7 +288,7 @@
                 <PushButton>
                   <TooltipId>karaoke_forward</TooltipId>
                   <ObjectName>KaraokeForward</ObjectName>
-                  <Size>26f,26f</Size>
+                  <Size>26f,32f</Size>
                   <NumberStates>1</NumberStates>
                   <State>
                     <Number>0</Number>
@@ -360,8 +362,8 @@
 				<ObjectName>LoopControls</ObjectName>
 				<Layout>vertical</Layout>
 				<SizePolicy>min,min</SizePolicy>
-				<MinimumSize>78,52</MinimumSize>
-				<MaximumSize>104,78</MaximumSize>
+				<MinimumSize>78,44</MinimumSize>
+				<MaximumSize>104,72</MaximumSize>
 				<!-- aumentato per la label -->
 				<Children>
 					<WidgetGroup>
@@ -454,6 +456,8 @@
 							<BindProperty>visible</BindProperty>
 						</Connection>
 					</WidgetGroup>
+
+					
 					<!-- Label Info -->
 					<WidgetGroup>
 						<ObjectName>AlignLeftTop</ObjectName>
@@ -463,7 +467,7 @@
 							<Label>
 								<ObjectName>KaraokeInfo</ObjectName>
 								<Text>Karaoke Stop</Text>
-								<Size>104,26f</Size>
+								<Size>104,32f</Size>
 								<Alignment>center</Alignment>
 								<RuntimeEditable>true</RuntimeEditable>
 								<Connection>
@@ -541,8 +545,8 @@
 				</Connection>
 			  </WidgetGroup>
 			  
-			  <!-- Key Controls -->
-			  <WidgetGroup>
+			  
+				<WidgetGroup>
 					<SizePolicy>me,26f</SizePolicy>
 					<Layout>vertical</Layout>
 					<Children>

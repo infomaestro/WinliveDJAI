@@ -350,14 +350,14 @@ WSearchLineEdit {
 #KaraokeInfo {
   border: 1px solid #0c0c0c;
   border-radius: 1px;
-  background-color: #571719;
+  background-color: #175742;
 }
 WTrackProperty:hover,
 WTrackProperty:hover[selected="false"],
 WTrackProperty:hover[selected="true"],
 WTrackProperty[selected="true"],
 #BpmTapContainer:hover,
-#PlayPositionText:hover, #PlayPositionTextSmall:hover, #KaraokeInfo:hover{
+#PlayPositionText:hover, #PlayPositionTextSmall:hover{
   background-color: #13242f;  /*wdjai color oldwas #151517*/
   }
   WTrackProperty:hover[selected="true"],
@@ -1623,12 +1623,34 @@ WPushButton#CrossfaderButton,
 /************** button background colors **************************************/
 
 /* top-level buttons in transport, fx, micaux and others */
+
+
+
+
+
+
 #DeckRow_5_LoopCuesTransport WPushButton[displayValue="0"],
 #PlayCueMini WPushButton[displayValue="0"],
 WPushButton#PlayIndicator[displayValue="0"],
 WPushButton#CueDeck[displayValue="0"]::section {
     background-color: #571719;
   }
+WPushButton#PlayKaraoke[displayValue="0"],
+WPushButton#PauseKaraoke[displayValue="0"],
+WPushButton#StopKaraoke[displayValue="0"],
+WPushButton#KaraokeBack[displayValue="0"],
+WPushButton#KaraokeForward[displayValue="0"]{
+    background-color: #175742; /* green */
+  }
+
+WPushButton#PlayKaraoke[pressed="true"],
+WPushButton#PauseKaraoke[pressed="true"],
+WPushButton#StopKaraoke[pressed="true"],
+WPushButton#KaraokeBack[pressed="true"],
+WPushButton#KaraokeForward[pressed="true"]{
+    background-color: #0f3d2f; /* dark green */
+}
+
 #SamplerPlayBox WPushButton#PreviewIndicator,
 WPushButton#LoopActivate[displayValue="0"],
 #KeyControls WPushButton[displayValue="0"],
@@ -1755,6 +1777,8 @@ QPushButton#pushButtonRecording:checked,
 #RecFeedback[displayValue="2"] {
   background-color: #a80000;
 }
+
+
 
 /* Green for Fx toggles, QuickEffect + Fx12 */
 #FxUnit1 #FxToggleButton[displayValue="1"],
