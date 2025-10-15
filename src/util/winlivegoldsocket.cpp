@@ -115,14 +115,21 @@ bool WinliveGoldSocket::hasClient() const {
 }
 
 // Media control commands
-void WinliveGoldSocket::start(EngineBuffer* deck, const QString& filename) {
+void WinliveGoldSocket::start(EngineBuffer* deck, const WGSStartParams& params) {
     m_deck = deck;
+    m_params = params;
+
     if (hasClient()) {
-        sendCommandToClient(WGS_COMMAND_START + " " + filename);
+        m_params.pending = false;
+        internalStart(m_params.filename, m_params.tone);
     } else {
-        qDebug() << "No client connected, launching client with start mode";
-        m_pendingStartFilename = filename;
-        launchClient();
+        if (!m_params.pending) {
+            qDebug() << "No client connected, launching client with start mode";
+            m_params.pending = true;
+            launchClient();
+        } else {
+            qDebug() << "Already waiting to start....";
+        }
     }
 }
 
@@ -157,7 +164,7 @@ void WinliveGoldSocket::melody() {
 }
 
 void WinliveGoldSocket::tone(const QString& newTone) {
-    QString command = QString(WGS_COMMAND_TONE + " %1").arg(newTone);
+    QString command = QString(WGS_COMMAND_TONE + "|%1").arg(newTone);
     qDebug() << "Sending tone command:" << command;
     sendCommandToClient(command);
 }
@@ -223,10 +230,10 @@ void WinliveGoldSocket::onNewConnection() {
     qDebug() << "Client connected successfully";
     emit clientConnected();
 
-    if (m_pendingStartFilename.length() > 0) {
+    if (m_params.pending) {
         qDebug() << "Client connected after launch. Sending start command.";
-        start(m_deck, m_pendingStartFilename);
-        m_pendingStartFilename.clear();
+        internalStart(m_params.filename, m_params.tone);
+        m_params.pending = false;
     }
 
     // start info timer
@@ -273,7 +280,7 @@ void WinliveGoldSocket::sendCommandToClient(const QString& command) {
         return;
     }
 
-    QString message = m_deck->getGroup() + " " + command + "\n";
+    QString message = m_deck->getGroup() + "|" + command + "\n";
     QByteArray data = message.toUtf8();
     qint64 written = m_client->write(data);
 
@@ -312,4 +319,9 @@ void WinliveGoldSocket::launchClient() {
     process->start(program, arguments);
 
     qDebug() << "Launched client with arguments:" << arguments;
+}
+
+void WinliveGoldSocket::internalStart(const QString& filename, const QString& tone) {
+    // avoid recursice, senddirectly command
+    sendCommandToClient(QString("%1|%2|%3").arg(WGS_COMMAND_START, filename, tone));
 }

@@ -33,6 +33,20 @@ const QString WGS_COMMAND_FINISH = QStringLiteral("finish");
 const quint16 WGS_SERVER_PORT = 12345;
 const QString WGS_SERVER_NAME = QStringLiteral("wldjai");
 
+struct WGSStartParams {
+    QString filename;
+    QString tone;
+    bool melody;
+    bool pending;
+
+    WGSStartParams(
+            const QString& file = "",
+            const QString& tone = "",
+            bool melody = false)
+            : filename(file), tone(tone), melody(melody), pending(false) {
+    }
+};
+
 /*!
  * \class WinliveGoldSocket
  * \brief Cross-platform socket server for single client media control
@@ -65,7 +79,7 @@ class WinliveGoldSocket : public QObject {
   public slots:
 
     // Media control commands - send to the connected client
-    void start(EngineBuffer* deck, const QString& filename);
+    void start(EngineBuffer* deck, const WGSStartParams& params);
     void play();
     void pause();
     void stop();
@@ -91,8 +105,10 @@ class WinliveGoldSocket : public QObject {
   private:
     void processClientResponse(const QString& response);
     void sendCommandToClient(const QString& command);
+    void internalStart(const QString& filename, const QString& tone);
+
     QTimer* m_infoTimer = nullptr;
-    QString m_pendingStartFilename = "";
+    WGSStartParams m_params;
     EngineBuffer* m_deck = nullptr;
    
 
