@@ -839,15 +839,8 @@ void EngineBuffer::verifyPlay() {
 }
 
 void EngineBuffer::slotControlPlayRequest(double v) {
-    //bool verifiedPlay = false;
-    ///bool oldPlay = false;
-    //if (!isKaraoke()) {
-        bool oldPlay = m_playButton->toBool();
-        bool verifiedPlay = updateIndicatorsAndModifyPlay(v > 0.0, oldPlay);
-    //}
-    //else {
-    //    oldPlay = m_playKaraokeButton->toBool();
-    //}
+    bool oldPlay = m_playButton->toBool();
+    bool verifiedPlay = updateIndicatorsAndModifyPlay(v > 0.0, oldPlay);
 
     // karaoke?
     if (auto* coreServices = mixxx::CoreServices::getInstance()) {
@@ -950,11 +943,6 @@ void EngineBuffer::slotKeylockEngineChanged(double dIndex) {
 
 void EngineBuffer::slotControlPlayKaraoke(double v) {
     
-    //if (m_karaokeOperationInProgress) {
-    //    qDebug() << "Karaoke operation already in progress, ignoring click";
-    //    return;
-    //}
-    
     bool oldPlay = m_playButton->toBool();
 
     if (!oldPlay) {
@@ -972,14 +960,14 @@ void EngineBuffer::slotControlPlayKaraoke(double v) {
             qDebug() << "Playing file:" << filePath;
             
             if (auto* coreServices = mixxx::CoreServices::getInstance()) {
-                if (!m_karaokeOperationInProgress) {
-                    m_karaokeOperationInProgress = true;
-                    m_pKaraokeInfo->set("Karaoke Loading");
-                    coreServices->getWinliveGoldSocket()->start(this, filePath);
-                    setKaraoke(true);
-                    m_karaokeOperationInProgress = false;
-                }
-                
+                m_pKaraokeInfo->set("Karaoke Loading");
+
+                WGSStartParams params{filePath,
+                        QString::number((int)m_pKeyControl->getPitchKaraoke()),
+                        false};
+
+                coreServices->getWinliveGoldSocket()->start(this, params);
+                setKaraoke(true);
             }
             
             // Ripristina il cursore normale
