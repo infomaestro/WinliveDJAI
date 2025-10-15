@@ -105,7 +105,8 @@
               </WidgetGroup>
 
               <!-- NUOVI PULSANTI KARAOKE -->
-              <WidgetGroup><!-- PlayKaraoke, StopKaraoke, PausePlayKaraoke - ORIZZONTALI -->
+              <WidgetGroup>
+				  <!-- PlayKaraoke, PausePlayKaraoke, StopKaraoke - ORIZZONTALI -->
                 <Layout>horizontal</Layout>
                 <SizePolicy>max,min</SizePolicy>
                 <Children>
@@ -134,30 +135,12 @@
                       <ConfigKey><Variable name="Group"/>,play_karaoke</ConfigKey>
                     </Connection>
                   </PushButton>
-
-                  <!-- Stop Karaoke Button -->
-                  <PushButton>
-                    <TooltipId>stop_karaoke</TooltipId>
-                    <ObjectName>StopKaraoke</ObjectName>
-                    <Size>42f,26f</Size>
-                    <NumberStates>1</NumberStates>
-                    <State>
-                      <Number>0</Number>
-                      <Text>K■</Text>
-                      <Alignment>center</Alignment>
-                      <Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium.svg</Unpressed>
-                      <Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>
-                    </State>
-                    <Connection>
-                      <ConfigKey><Variable name="Group"/>,stop_karaoke</ConfigKey>
-                    </Connection>
-                  </PushButton>
-
+					
                   <!-- Pause Karaoke Button -->
                   <PushButton>
                     <TooltipId>pause_karaoke</TooltipId>
                     <ObjectName>PauseKaraoke</ObjectName>
-                    <Size>26f,26f</Size>
+                    <Size>48f,26f</Size>
                     <NumberStates>2</NumberStates>
                     <State>
                       <Number>0</Number>
@@ -177,8 +160,29 @@
                       <ConfigKey><Variable name="Group"/>,pause_karaoke</ConfigKey>
                     </Connection>
                   </PushButton>
+                 
+					<!-- Stop Karaoke Button -->
+                  <PushButton>
+                    <TooltipId>stop_karaoke</TooltipId>
+                    <ObjectName>StopKaraoke</ObjectName>
+                    <Size>26f,26f</Size>
+                    <NumberStates>1</NumberStates>
+                    <State>
+                      <Number>0</Number>
+                      <Text>K■</Text>
+                      <Alignment>center</Alignment>
+                      <Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium.svg</Unpressed>
+                      <Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>
+                    </State>
+                    <Connection>
+                      <ConfigKey><Variable name="Group"/>,stop_karaoke</ConfigKey>
+                    </Connection>
+                  </PushButton>
+					
+		
 
-                </Children>
+
+				</Children>
               </WidgetGroup><!-- /KARAOKE BUTTONS -->
 
             </Children>
@@ -458,7 +462,7 @@
 						<Children>
 							<Label>
 								<ObjectName>KaraokeInfo</ObjectName>
-								<Text></Text>
+								<Text>Karaoke Stop</Text>
 								<Size>104,26f</Size>
 								<Alignment>center</Alignment>
 								<RuntimeEditable>true</RuntimeEditable>

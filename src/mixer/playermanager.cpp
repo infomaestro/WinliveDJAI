@@ -744,6 +744,11 @@ void PlayerManager::slotLoadLocationToPlayerMaybePlay(
         }
         break;
     }
+    // se sta suonando il karaoke esco
+    if (ControlObject::get(ConfigKey(group, "play_karaoke")) > 0.0) {
+        return;
+    }
+
     slotLoadLocationToPlayer(location, group, play);
 }
 

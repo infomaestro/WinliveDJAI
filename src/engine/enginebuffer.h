@@ -504,6 +504,8 @@ class EngineBuffer : public EngineObject {
     bool m_isKaraoke = false;
 
     double m_pitchKaraoke_old = 0.0;
+
+    bool m_karaokeOperationInProgress = false;
 };
 
 Q_DECLARE_METATYPE(EngineBuffer::KeylockEngine)

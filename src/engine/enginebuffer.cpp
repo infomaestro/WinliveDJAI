@@ -839,12 +839,15 @@ void EngineBuffer::verifyPlay() {
 }
 
 void EngineBuffer::slotControlPlayRequest(double v) {
-    
-    bool oldPlay = m_playButton->toBool();
-    bool verifiedPlay = true;
-    if (!isKaraoke()) {
-        verifiedPlay = updateIndicatorsAndModifyPlay(v > 0.0, oldPlay);
-    }
+    //bool verifiedPlay = false;
+    ///bool oldPlay = false;
+    //if (!isKaraoke()) {
+        bool oldPlay = m_playButton->toBool();
+        bool verifiedPlay = updateIndicatorsAndModifyPlay(v > 0.0, oldPlay);
+    //}
+    //else {
+    //    oldPlay = m_playKaraokeButton->toBool();
+    //}
 
     // karaoke?
     if (auto* coreServices = mixxx::CoreServices::getInstance()) {
@@ -915,6 +918,7 @@ void EngineBuffer::slotControlStop(double v)
 {
     if (v > 0.0) {
         m_playButton->set(0);
+        m_pKaraokeInfo->set("Karaoke Stop");
     }
 }
 
@@ -945,22 +949,41 @@ void EngineBuffer::slotKeylockEngineChanged(double dIndex) {
 }
 
 void EngineBuffer::slotControlPlayKaraoke(double v) {
+    
+    //if (m_karaokeOperationInProgress) {
+    //    qDebug() << "Karaoke operation already in progress, ignoring click";
+    //    return;
+    //}
+    
     bool oldPlay = m_playButton->toBool();
 
     if (!oldPlay) {
+        
+        // Imposta il cursore a clessidra
+        QApplication::setOverrideCursor(Qt::WaitCursor);
+        m_pKaraokeInfo->set("Karaoke init");
+        QCoreApplication::processEvents();
 
         // Get the file name
         if (m_pCurrentTrack) {
             QString trackLocation = m_pCurrentTrack->getLocation();
             QString filePath = QFileInfo(trackLocation).absoluteFilePath();
-
+           
             qDebug() << "Playing file:" << filePath;
             
             if (auto* coreServices = mixxx::CoreServices::getInstance()) {
-                coreServices->getWinliveGoldSocket()->start(this, filePath);
-                setKaraoke(true);
+                if (!m_karaokeOperationInProgress) {
+                    m_karaokeOperationInProgress = true;
+                    m_pKaraokeInfo->set("Karaoke Loading");
+                    coreServices->getWinliveGoldSocket()->start(this, filePath);
+                    setKaraoke(true);
+                    m_karaokeOperationInProgress = false;
+                }
+                
             }
             
+            // Ripristina il cursore normale
+            QApplication::restoreOverrideCursor();    
             
         }
     } else {
@@ -1834,6 +1857,7 @@ void EngineBuffer::setKaraoke(const bool karaoke) {
     m_isKaraoke = karaoke;
     m_playKaraokeButton->forceSet(karaoke ? 1.0 : 0);
     if (!karaoke) {
-        m_pKaraokeInfo->set("");
+        m_pKaraokeInfo->set("Karaoke Stop");
+        
     }
 }
