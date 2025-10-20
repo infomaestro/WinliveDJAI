@@ -1935,12 +1935,24 @@ install(
 )
 
 # KaraokeWindow files
+if (WIN32)
 install(
   DIRECTORY
     "${CMAKE_CURRENT_SOURCE_DIR}/res/karaokew"
   DESTINATION
     "${MIXXX_INSTALL_DATADIR}"
 )
+endif()
+
+# KaraokeW.app files
+if (APPLE)
+install(
+    DIRECTORY
+      "${CMAKE_CURRENT_SOURCE_DIR}/res/karaokew.app"
+    DESTINATION
+      "${MIXXX_INSTALL_DATADIR}"
+)
+endif()
 
 # Font files
 #
