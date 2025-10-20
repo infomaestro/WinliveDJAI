@@ -963,7 +963,10 @@ void EngineBuffer::slotControlPlayKaraoke(double v) {
             return;
           
         }
+
+#ifndef Q_OS_MACOS
         QApplication::setOverrideCursor(Qt::WaitCursor);
+#endif
 
 
         m_pKaraokeInfo->set("Karaoke init");
@@ -993,8 +996,10 @@ void EngineBuffer::slotControlPlayKaraoke(double v) {
     } else {
         QMessageBox::information(nullptr, tr("Couldn't load track."), tr("A song is playing in this deck. Stop the song first."));
     }
-    // Ripristina il cursore normale
+    #ifndef Q_OS_MACOS
     QApplication::restoreOverrideCursor();
+    #endif
+
 }
 
 void EngineBuffer::slotControlStopKaraoke(double v) {

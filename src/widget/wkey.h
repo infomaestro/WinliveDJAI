@@ -2,6 +2,7 @@
 
 #include "widget/wlabel.h"
 #include "control/controlproxy.h"
+#include "track/keys.h"
 
 class WKey : public WLabel  {
     Q_OBJECT
