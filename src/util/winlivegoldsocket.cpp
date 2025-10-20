@@ -7,23 +7,15 @@
 #include <QHostAddress>
 
 
-#if defined(Q_OS_MAC)
-    WinliveGoldSocket::WinliveGoldSocket(QObject* parent)
-        : QObject(parent), m_serverName(WGS_SERVER_NAME), m_infoTimer(new QTimer(this)), m_server(new QLocalServer(this)), m_client(nullptr)
-#else
-    WinliveGoldSocket::WinliveGoldSocket(QObject* parent)
-        : QObject(parent), m_port(WGS_SERVER_PORT), m_infoTimer(new QTimer(this)), m_server(new QTcpServer(this)), m_client(nullptr)
-#endif
+
+WinliveGoldSocket::WinliveGoldSocket(QObject* parent)
+    : QObject(parent), m_port(WGS_SERVER_PORT), m_infoTimer(new QTimer(this)), m_server(new QTcpServer(this)), m_client(nullptr)
+
 {
 
 
-
     // Connect server signal
-#if defined(Q_OS_MAC)
-    connect(m_server, &QLocalServer::newConnection, this, &WinliveGoldSocket::onNewConnection);
-#else
     connect(m_server, &QTcpServer::newConnection, this, &WinliveGoldSocket::onNewConnection);
-#endif
 
     connect(m_infoTimer, &QTimer::timeout, this, [this]() {
         if (hasClient()) {
@@ -31,7 +23,7 @@
             info();
         }
     });
-    }
+}
 
 WinliveGoldSocket::~WinliveGoldSocket() {
     qDebug() << "Closing Server";
@@ -51,13 +43,7 @@ bool WinliveGoldSocket::startListening() {
     for (quint16 attempt = 0; attempt < 16; ++attempt) {
         qDebug() << "Attempting to listen on port:" << m_port;
 
-#if defined(Q_OS_MAC)
-        // For QLocalServer, port doesn't apply - use server name directly
-        if (m_server->listen(m_serverName)) {
-            qDebug() << "Local server listening on:" << m_serverName;
-            return true;
-        }
-#else
+
         // Try to listen on TCP port
         if (m_server->listen(QHostAddress::LocalHost, m_port)) {
             qDebug() << "TCP server successfully listening on port:" << m_port;
@@ -67,7 +53,6 @@ bool WinliveGoldSocket::startListening() {
         // Log why it failed
         qDebug() << "Failed to listen on port" << m_port
                  << "- Error:" << m_server->errorString();
-#endif
 
         // Try next port
         m_port++;
@@ -94,11 +79,9 @@ void WinliveGoldSocket::stopListening() {
     if (m_client) {
         QThread::msleep(250); // Give time for close command
 
-#if defined(Q_OS_MAC)
-        m_client->disconnectFromServer();
-#else
+
         m_client->disconnectFromHost();
-#endif
+
         m_client->deleteLater();
         m_client = nullptr;
     }
@@ -186,15 +169,7 @@ void WinliveGoldSocket::onNewConnection() {
     // If we already have a client, reject the new connection
     if (m_client) {
         qDebug() << "Rejecting connection - client already connected";
-#if defined(Q_OS_MAC)
-        QLocalSocket* rejectedClient = m_server->nextPendingConnection();
-        if (rejectedClient) {
-            rejectedClient->write("dummy " + WGS_COMMAND_CLOSE +  "\n");
-            rejectedClient->flush();
-            rejectedClient->disconnectFromServer();
-            rejectedClient->deleteLater();
-        }
-#else
+
         QTcpSocket* rejectedClient = m_server->nextPendingConnection();
         if (rejectedClient) {
             rejectedClient->write(("dummy " + WGS_COMMAND_CLOSE + "\n").toUtf8());
@@ -202,21 +177,10 @@ void WinliveGoldSocket::onNewConnection() {
             rejectedClient->disconnectFromHost();
             rejectedClient->deleteLater();
         }
-#endif
         return;
     }
 
     // Accept the first client
-#if defined(Q_OS_MAC)
-    m_client = m_server->nextPendingConnection();
-    if (!m_client) {
-        qDebug() << "Failed to get pending connection";
-        return;
-    }
-
-    connect(m_client, &QLocalSocket::disconnected, this, &WinliveGoldSocket::onClientDisconnected);
-    connect(m_client, &QLocalSocket::readyRead, this, &WinliveGoldSocket::onClientDataReceived);
-#else
     m_client = m_server->nextPendingConnection();
     if (!m_client) {
         qDebug() << "Failed to get pending connection";
@@ -225,7 +189,7 @@ void WinliveGoldSocket::onNewConnection() {
 
     connect(m_client, &QTcpSocket::disconnected, this, &WinliveGoldSocket::onClientDisconnected);
     connect(m_client, &QTcpSocket::readyRead, this, &WinliveGoldSocket::onClientDataReceived);
-#endif
+
 
     qDebug() << "Client connected successfully";
     emit clientConnected();
@@ -300,19 +264,22 @@ void WinliveGoldSocket::sendCommandToClient(const QString& command) {
 
 void WinliveGoldSocket::launchClient() {
    
-
+ QString program;
+ QStringList arguments;
 #if defined(Q_OS_WIN)
-    QString program;
+   
     if (auto* coreServices = mixxx::CoreServices::getInstance()) {
          program = QDir(coreServices->getResourcePath()).filePath("karaokew/karaokew.exe");
     }
 #elif defined(Q_OS_MAC)
-    QString program = "/Applications/WinliveClient.app/Contents/MacOS/WinliveClient";
+     if (auto* coreServices = mixxx::CoreServices::getInstance()) {
+         program = QDir(coreServices->getResourcePath()).filePath("WinliveGold_DjAiKaraoke.app/Contents/MacOS/WinliveGold_DjAiKaraoke");
+     }
 #else
     QString program = "/usr/bin/winliveclient";
 #endif
 
-    QStringList arguments;
+   
     arguments << "-refwldjainomidi" << QString::number(m_port);
 
     QProcess* process = new QProcess(this);

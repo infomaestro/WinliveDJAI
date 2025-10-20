@@ -1,21 +1,14 @@
 // WinliveGoldSocket.h
-
-#ifndef WINLIVEGOLDSOCKET_H
-#define WINLIVEGOLDSOCKET_H
+#pragma once
 
 
 #include <QDebug>
 #include <QObject>
 #include <QProcess>
 #include <QTimer>
-
-#if defined(Q_OS_MAC)
-#include <QLocalServer>
-#include <QLocalSocket>
-#else
 #include <QTcpServer>
 #include <QTcpSocket>
-#endif
+
 
 class EngineBuffer;
 
@@ -62,11 +55,8 @@ class WinliveGoldSocket : public QObject {
     Q_OBJECT
 
   public:
-#if defined(Q_OS_MAC)
     explicit WinliveGoldSocket(QObject* parent = nullptr);
-#else
-    explicit WinliveGoldSocket(QObject* parent = nullptr);
-#endif
+
 
     
     ~WinliveGoldSocket();
@@ -116,15 +106,10 @@ class WinliveGoldSocket : public QObject {
     EngineBuffer* m_deck = nullptr;
    
 
-#if defined(Q_OS_MAC)
-    QString m_serverName;   
-    QLocalServer* m_server;
-    QLocalSocket* m_client;
-#else
+
     quint16 m_port;
     QTcpServer* m_server;
     QTcpSocket* m_client;
-#endif
+
 };
 
-#endif // WINLIVEGOLDSOCKET_H
