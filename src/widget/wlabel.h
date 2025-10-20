@@ -31,7 +31,8 @@ class WLabel : public QLabel, public WBaseWidget {
     void highlightChanged(int highlight);
   private slots:
     void slotStringValueChanged(QString value); // AGGIUNGI QUESTO 
-
+    void slotStringcolorChanged(QString value); // AGGIUNGI QUESTO
+    void slotBlink();
   protected:
     bool event(QEvent* pEvent) override;
     void resizeEvent(QResizeEvent* event) override;
@@ -47,4 +48,10 @@ class WLabel : public QLabel, public WBaseWidget {
     double m_scaleFactor;
     int m_highlight;
     int m_widthHint;
+    QTimer* m_pBlinkTimer;
+    QString m_blinkColor1;
+    QString m_blinkColor2;
+    bool m_blinkState;
+    void startBlink(const QString& color1, const QString& color2, int intervalMs);
+    void stopBlink();
 };

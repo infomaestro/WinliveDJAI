@@ -34,6 +34,7 @@ class KeyControl : public EngineControl {
     KeyControl::PitchTempoRatio getPitchTempoRatio();
 
     double getKey();
+    void setPitchKaraoke(double pitch);
 
   private slots:
     void slotSetEngineKey(double);

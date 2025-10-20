@@ -67,15 +67,15 @@
                       <Number>0</Number>
                       <Text><Variable name="state_0_text"/></Text>
                       <Alignment><Variable name="Align"/></Alignment>
-                      <Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium.svg</Unpressed>
-                      <Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>
+						<!--<Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium.svg</Unpressed>-->
+                        <!--<Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>-->
                     </State>
                     <State>
                       <Number>1</Number>
                       <Text><Variable name="state_1_text"/></Text>
                       <Alignment><Variable name="Align"/></Alignment>
-                      <Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_set.svg</Unpressed>
-                      <Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>
+                        <!--<Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_set.svg</Unpressed>-->
+                        <!--<Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>-->
                     </State>
                     <Connection>
                       <ConfigKey><Variable name="Group"/>,cue_default</ConfigKey>
@@ -121,15 +121,15 @@
                       <Number>0</Number>
                       <Text>Start</Text>
                       <Alignment>center</Alignment>
-                      <Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium.svg</Unpressed>
-                      <Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>
+						<!--<Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium.svg</Unpressed>-->
+                        <!--<Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>-->
                     </State>
                     <State>
                       <Number>1</Number>
-                      <Text>Play</Text>
+                      <!--<Text>Play</Text>-->
                       <Alignment>center</Alignment>
-                      <Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>
-                      <Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Unpressed>
+					    <Unpressed scalemode="STRETCH">skins:WinliveDj/classic/buttons/btn_playstart_karaoke.png</Unpressed>
+						<Pressed scalemode="STRETCH">skins:WinliveDj/classic/buttons/btn_playstart_karaoke.png</Pressed>
                     </State>
                     <Connection>
                       <ConfigKey><Variable name="Group"/>,play_karaoke</ConfigKey>
@@ -144,17 +144,16 @@
                     <NumberStates>2</NumberStates>
                     <State>
                       <Number>0</Number>
-                      <Text>K⏸</Text>
-                      <Alignment>center</Alignment>
-                      <Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium.svg</Unpressed>
-                      <Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>
+                        <Alignment>center</Alignment>
+						<Unpressed scalemode="STRETCH">skins:WinliveDj/classic/buttons/btn_pause_karaoke.png</Unpressed>
+						<Pressed scalemode="STRETCH">skins:WinliveDj/classic/buttons/btn_pause_karaoke.png</Pressed>
                     </State>
                     <State>
                       <Number>1</Number>
-                      <Text>K⏸</Text>
-                      <Alignment>center</Alignment>
-                      <Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_set.svg</Unpressed>
-                      <Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>
+                     
+                        <Alignment>center</Alignment>
+						<Unpressed scalemode="STRETCH">skins:WinliveDj/classic/buttons/btn_play_karaoke.png</Unpressed>
+						<Pressed scalemode="STRETCH">skins:WinliveDj/classic/buttons/btn_play_karaoke.png</Pressed>
                     </State>
                     <Connection>
                       <ConfigKey><Variable name="Group"/>,pause_karaoke</ConfigKey>
@@ -169,10 +168,9 @@
                     <NumberStates>1</NumberStates>
                     <State>
                       <Number>0</Number>
-                      <Text>K■</Text>
                       <Alignment>center</Alignment>
-                      <Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium.svg</Unpressed>
-                      <Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>
+					    <Unpressed scalemode="STRETCH">skins:WinliveDj/classic/buttons/btn_stop_karaoke.png</Unpressed>
+						<Pressed scalemode="STRETCH">skins:WinliveDj/classic/buttons/btn_stop_karaoke.png</Pressed>
                     </State>
                     <Connection>
                       <ConfigKey><Variable name="Group"/>,stop_karaoke</ConfigKey>
@@ -274,10 +272,10 @@
                   <NumberStates>1</NumberStates>
                   <State>
                     <Number>0</Number>
-                    <Text>RW</Text>
+                    <!--<Text>RW</Text>-->
                     <Alignment>center</Alignment>
-                    <Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium.svg</Unpressed>
-                    <Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>
+					 <Unpressed scalemode="STRETCH">skins:WinliveDj/classic/buttons/btn_rw_karaoke.png</Unpressed>
+						<Pressed scalemode="STRETCH">skins:WinliveDj/classic/buttons/btn_rw_karaoke.png</Pressed>
                   </State>
                   <Connection>
                     <ConfigKey><Variable name="Group"/>,karaoke_backward</ConfigKey>
@@ -292,10 +290,10 @@
                   <NumberStates>1</NumberStates>
                   <State>
                     <Number>0</Number>
-                    <Text>FF</Text>
+                    <!--<Text>FF</Text>-->
                     <Alignment>center</Alignment>
-                    <Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium.svg</Unpressed>
-                    <Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>
+					  <Unpressed scalemode="STRETCH">skins:WinliveDj/classic/buttons/btn_ff_karaoke.png</Unpressed>
+						<Pressed scalemode="STRETCH">skins:WinliveDj/classic/buttons/btn_ff_karaoke.png</Pressed>
                   </State>
                   <Connection>
                     <ConfigKey><Variable name="Group"/>,karaoke_forward</ConfigKey>
@@ -363,7 +361,7 @@
 				<Layout>vertical</Layout>
 				<SizePolicy>min,min</SizePolicy>
 				<MinimumSize>78,44</MinimumSize>
-				<MaximumSize>104,72</MaximumSize>
+				<MaximumSize>104,78</MaximumSize>
 				<!-- aumentato per la label -->
 				<Children>
 					<WidgetGroup>
@@ -458,6 +456,7 @@
 					</WidgetGroup>
 
 					
+					
 					<!-- Label Info -->
 					<WidgetGroup>
 						<ObjectName>AlignLeftTop</ObjectName>
@@ -469,6 +468,7 @@
 								<Text>Karaoke Stop</Text>
 								<Size>104,32f</Size>
 								<Alignment>center</Alignment>
+								<Font>true</Font>
 								<RuntimeEditable>true</RuntimeEditable>
 								<Connection>
 									<ConfigKey><Variable name="Group"/>,karaoke_info</ConfigKey>

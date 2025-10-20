@@ -32,6 +32,7 @@
 #include "util/logger.h"
 #include "util/sample.h"
 #include "util/timer.h"
+#include "util/serial.h"
 #include "waveform/visualplayposition.h"
 #include "coreservices.h"
 
@@ -635,6 +636,8 @@ void EngineBuffer::slotTrackLoaded(TrackPointer pTrack,
     
     // Reset karaoke flag
     setKaraoke(false);
+    
+    m_pKeyControl->setPitchKaraoke(0); // init karaoke key to 0 
     m_pitchKaraoke_old = 0.0;
 }
 
@@ -656,9 +659,12 @@ void EngineBuffer::ejectTrack() {
         kLogger.trace() << "EngineBuffer::ejectTrack()";
     }
 
+    // invio lo stop
+    slotControlStopKaraoke(1.0);
+    
     // no karaoke
     setKaraoke(false);
-
+    
     TrackPointer pOldTrack = m_pCurrentTrack;
     m_pause.lock();
 
@@ -704,6 +710,8 @@ void EngineBuffer::ejectTrack() {
 
     m_iTrackLoading = 0;
     m_pChannelToCloneFrom = nullptr;
+
+   
 }
 
 void EngineBuffer::notifyTrackLoaded(
@@ -944,11 +952,20 @@ void EngineBuffer::slotKeylockEngineChanged(double dIndex) {
 void EngineBuffer::slotControlPlayKaraoke(double v) {
     
     bool oldPlay = m_playButton->toBool();
-
+    // Imposta il cursore a clessidra
+    
     if (!oldPlay) {
         
-        // Imposta il cursore a clessidra
+        CheckLicenseHelper license;
+
+        if (license.loadFromFile() == false || license.hasValidLicense() == false) {
+            QMessageBox::information(nullptr, tr("Not registered"), tr("This function is reserved to registered users."));
+            return;
+          
+        }
         QApplication::setOverrideCursor(Qt::WaitCursor);
+
+
         m_pKaraokeInfo->set("Karaoke init");
         QCoreApplication::processEvents();
 
@@ -960,23 +977,24 @@ void EngineBuffer::slotControlPlayKaraoke(double v) {
             qDebug() << "Playing file:" << filePath;
             
             if (auto* coreServices = mixxx::CoreServices::getInstance()) {
-                m_pKaraokeInfo->set("Karaoke Loading");
+                m_pKaraokeInfo->set("Loading");
 
                 WGSStartParams params{filePath,
-                        QString::number((int)m_pKeyControl->getPitchKaraoke()),
+                        QString::number(qRound(m_pKeyControl->getPitchKaraoke())),
                         false};
 
                 coreServices->getWinliveGoldSocket()->start(this, params);
                 setKaraoke(true);
             }
             
-            // Ripristina il cursore normale
-            QApplication::restoreOverrideCursor();    
+            
             
         }
     } else {
         QMessageBox::information(nullptr, tr("Couldn't load track."), tr("A song is playing in this deck. Stop the song first."));
     }
+    // Ripristina il cursore normale
+    QApplication::restoreOverrideCursor();
 }
 
 void EngineBuffer::slotControlStopKaraoke(double v) {
@@ -995,6 +1013,7 @@ void EngineBuffer::slotControlPauseKaraoke(double v) {
         if (auto* coreServices = mixxx::CoreServices::getInstance()) {
             coreServices->getWinliveGoldSocket()->pause();
         }
+        m_pauseKaraokeButton->forceSet(1.0 - m_pauseKaraokeButton->get());
     }
 }
 
@@ -1038,7 +1057,7 @@ void EngineBuffer::processTrackLocked(
             m_pitchKaraoke_old = pitchKaraoke;
             if (auto* coreServices = mixxx::CoreServices::getInstance()) {
                 qDebug() << m_group << "- Karaoke pitch changed to" << pitchKaraoke;
-                coreServices->getWinliveGoldSocket()->tone(QString::number((int)pitchKaraoke));
+                coreServices->getWinliveGoldSocket()->tone(QString::number(qRound(pitchKaraoke)));
             }
         }
     }
@@ -1818,17 +1837,18 @@ void EngineBuffer::onSocketInfoReceived(EngineBuffer* deck, const QString& info)
     if (message == WGS_COMMAND_FINISH) {
         // no karaoke
         setKaraoke(false);
+        m_pauseKaraokeButton->forceSet(0);
         return;
     }
 
-    if (isKaraoke() && message == WGS_COMMAND_INFO && parts.size() >= 5) {
+    if (isKaraoke() && message == WGS_COMMAND_INFO && parts.size() >= 6) {
         // message format: current time|total time|tone
         QString currentTime = parts[2];
         QString timeElapsed = parts[3];
         QString tone = parts[4];
-
+        QString status = parts[5];
         m_pKaraokeInfo->set(QString("%1 / %2").arg(currentTime, timeElapsed));
-
+        m_pauseKaraokeButton->forceSet((status.toUShort() == KP_STATUS_PAUSED) ? 1.0 : 0);
         return;
     }
 }
@@ -1844,8 +1864,13 @@ void EngineBuffer::setKaraoke(const bool karaoke) {
 
     m_isKaraoke = karaoke;
     m_playKaraokeButton->forceSet(karaoke ? 1.0 : 0);
-    if (!karaoke) {
-        m_pKaraokeInfo->set("Karaoke Stop");
-        
+    
+    
+    if (karaoke) {
+        m_pKaraokeInfo->setBackColors("#175742|#178842|blink:500");
+    } else {
+        m_pKaraokeInfo->setBackColors("#1d312a"); // dimmer green come il mixer
+        m_pKaraokeInfo->set("Karaoke Stop"); 
+        m_pauseKaraokeButton->forceSet(0); // pause button to state 0
     }
 }

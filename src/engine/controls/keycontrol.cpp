@@ -133,6 +133,11 @@ double KeyControl::getPitchKaraoke() {
     return m_pitchKaraoke;
 }
 
+void KeyControl::setPitchKaraoke(double pitch) {
+    m_pitchKaraoke = pitch;
+}
+
+
 double KeyControl::getPitch() {
     return m_pPitch->get();
     

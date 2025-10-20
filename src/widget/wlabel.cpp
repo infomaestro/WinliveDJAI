@@ -16,7 +16,9 @@ WLabel::WLabel(QWidget* pParent)
           m_scaleFactor(1.0),
           m_highlight(0),
           m_widthHint(0),
-          m_pControlObjectString(nullptr) {
+          m_pControlObjectString(nullptr),
+          m_pBlinkTimer(nullptr), // AGGIUNGI QUESTO
+          m_blinkState(false) {
 }
 
 void WLabel::setup(const QDomNode& node, const SkinContext& context) {
@@ -37,8 +39,12 @@ void WLabel::setup(const QDomNode& node, const SkinContext& context) {
                 ConfigKey key = ConfigKey::parseCommaSeparated(configKey);
                 // if (key.item.contains("karaoke_info")) { //non ho più bisogno di identificare karaoke_info
                 m_pControlObjectString = new ControlObjectString(key, this);
+                
                 connect(m_pControlObjectString, &ControlObjectString::valueChanged, this, &WLabel::slotStringValueChanged);
                 slotStringValueChanged(m_pControlObjectString->get());
+                
+                connect(m_pControlObjectString, &ControlObjectString::colorChanged, this, &WLabel::slotStringcolorChanged);
+                slotStringcolorChanged(m_pControlObjectString->getColor());
                 //}
             }
         }
@@ -178,6 +184,58 @@ void WLabel::setHighlight(int highlight) {
 void WLabel::slotStringValueChanged(QString value) {
     setText(value);
 }
+
+void WLabel::slotStringcolorChanged(QString value) {
+    if (m_pBlinkTimer) {
+        m_pBlinkTimer->stop();
+    }
+
+    // Controlla se è un formato blink: "#FF0000|#00FF00|blink:500"
+    QStringList parts = value.split('|');
+
+    if (parts.size() >= 3 && parts[2].startsWith("blink:")) {
+        // Effetto blink
+        QString color1 = parts[0];
+        QString color2 = parts[1];
+        int interval = parts[2].mid(6).toInt(); // Rimuove "blink:"
+
+        startBlink(color1, color2, interval);
+    } else {
+        // Colore singolo
+        QColor color(value);
+        if (!color.isValid()) {
+            qWarning() << "WLabel: Colore non valido:" << value;
+            return;
+        }
+        setStyleSheet(QString("QLabel { background-color: %1; }").arg(color.name()));
+    }
+   
+}
+void WLabel::startBlink(const QString& color1, const QString& color2, int intervalMs) {
+    m_blinkColor1 = color1;
+    m_blinkColor2 = color2;
+    m_blinkState = false;
+
+    if (!m_pBlinkTimer) {
+        m_pBlinkTimer = new QTimer(this);
+        connect(m_pBlinkTimer, &QTimer::timeout, this, &WLabel::slotBlink);
+    }
+
+    m_pBlinkTimer->start(intervalMs);
+}
+
+void WLabel::stopBlink() {
+    if (m_pBlinkTimer) {
+        m_pBlinkTimer->stop();
+    }
+}
+
+void WLabel::slotBlink() {
+    m_blinkState = !m_blinkState;
+    QString color = m_blinkState ? m_blinkColor1 : m_blinkColor2;
+    setStyleSheet(QString("QLabel { background-color: %1; }").arg(color));
+}
+
 QSize WLabel::sizeHint() const {
     // make sure the sizeHint fits for the entire string.
     QSize size = QLabel::sizeHint();

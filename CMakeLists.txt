@@ -222,7 +222,7 @@ elseif(APPLE)
   endif()
 endif()
 
-project(wldjai VERSION 2.0.2)
+project(wldjai VERSION 2.1.0)
 enable_language(C CXX)
 # Work around missing version suffixes support https://gitlab.kitware.com/cmake/cmake/-/issues/16716
 set(MIXXX_VERSION_PRERELEASE "") # set to "alpha" "beta" or ""

@@ -1186,7 +1186,7 @@ void Tooltips::addStandardTooltips() {
 
     // karaoke
     add("play_karaoke")
-            << tr("Play/Pause Karaoke");
+            << tr("Start/Play in Karaoke mode");
     add("stop_karaoke")
             << tr("Stop Karaoke");
     add("pause_karaoke")

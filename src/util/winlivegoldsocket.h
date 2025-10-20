@@ -32,6 +32,10 @@ const QString WGS_COMMAND_INFO = QStringLiteral("info");
 const QString WGS_COMMAND_FINISH = QStringLiteral("finish");
 const quint16 WGS_SERVER_PORT = 12345;
 const QString WGS_SERVER_NAME = QStringLiteral("wldjai");
+const quint16 KP_STATUS_STOPPED = 0;
+const quint16 KP_STATUS_PLAYING = 1;
+const quint16 KP_STATUS_STALLED = 2;
+const quint16 KP_STATUS_PAUSED = 3;
 
 struct WGSStartParams {
     QString filename;
