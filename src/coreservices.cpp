@@ -357,7 +357,10 @@ CoreServices::CoreServices(const CmdlineArgs& args, QApplication* pApp)
     mixxx::Translations::initializeTranslations(
             m_pSettingsManager->settings(), pApp, m_cmdlineArgs.getLocale());
     initializeKeyboard();
-    g_coreServicesInstance = this; // Set the global instance pointer
+    
+    // Set the global instance pointer
+    g_coreServicesInstance = this;
+    m_socket = nullptr;
 }
 
 CoreServices::~CoreServices() {
@@ -810,6 +813,14 @@ void CoreServices::finalize() {
     Timer t("CoreServices::~CoreServices");
     t.start();
 
+
+    // close socket if open
+    if (m_socket != nullptr) {
+        m_socket->close();
+        m_socket->deleteLater();
+        m_socket = nullptr;
+    }
+
     // Stop all pending library operations
     qDebug() << t.elapsed(false).debugMillisWithUnit() << "stopping pending Library tasks";
     m_pTrackCollectionManager->stopLibraryScan();
@@ -902,10 +913,10 @@ void CoreServices::deleteSettingsFile() {
     UserSettingsPointer pConfig = m_pSettingsManager->settings();
     QString settingspath = QDir(pConfig->getSettingsPath()).filePath(MIXXX_SETTINGS_FILE);
     QMessageBox::information(nullptr,
-            ("Information"),
-            ("Starting with default options"),
+            tr("Information"),
+            tr("Starting with default options."),
             QMessageBox::Ok);
-     // Verifica se il file esiste e lo cancella
+    // check file and delete it
     QFile settingsFile(settingspath);
     if (settingsFile.exists()) {
         if (settingsFile.remove()) {
@@ -923,6 +934,23 @@ QString CoreServices::getResourcePath()
     UserSettingsPointer pConfig = m_pSettingsManager->settings();
     QString resPath = pConfig->getResourcePath();
     return resPath;
+}
+
+WinliveGoldSocket* CoreServices::getWinliveGoldSocket(const bool create) {
+    if (m_socket != nullptr) {
+        m_socket->startListening();
+        return m_socket;
+    } else {
+        if (m_socket == nullptr && create) {
+
+#if defined(Q_OS_MAC)
+            m_socket = new WinliveGoldSocket(this);
+#else
+            m_socket = new WinliveGoldSocket(this);
+#endif
+        }
+        return m_socket;
+    }
 }
 
 // static method to get the global instance of CoreServices

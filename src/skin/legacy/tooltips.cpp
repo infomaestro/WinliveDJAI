@@ -1184,4 +1184,15 @@ void Tooltips::addStandardTooltips() {
     add("configure_input")
             << tr("Select and configure a hardware device for this input");
 
+    // karaoke
+    add("play_karaoke")
+            << tr("Start/Play in Karaoke mode");
+    add("stop_karaoke")
+            << tr("Stop Karaoke");
+    add("pause_karaoke")
+            << tr("Pause Karaoke");
+    add("karaoke_backward")
+            << tr("Karaoke rewind");
+    add("karaoke_forward")
+            << tr("Karaoke forward");
 }

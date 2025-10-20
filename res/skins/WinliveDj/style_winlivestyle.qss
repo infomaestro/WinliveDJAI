@@ -347,13 +347,18 @@ WSearchLineEdit {
   border-style: solid;
   border-color: #0c0c0c;
 }
-
+#KaraokeInfo {
+  border: 1px solid #0c0c0c;
+  border-radius: 1px;
+  background-color: #1d312a;
+  font-weight: 800;
+}
 WTrackProperty:hover,
 WTrackProperty:hover[selected="false"],
 WTrackProperty:hover[selected="true"],
 WTrackProperty[selected="true"],
 #BpmTapContainer:hover,
-#PlayPositionText:hover, #PlayPositionTextSmall:hover {
+#PlayPositionText:hover, #PlayPositionTextSmall:hover{
   background-color: #13242f;  /*wdjai color oldwas #151517*/
   }
   WTrackProperty:hover[selected="true"],
@@ -1219,6 +1224,7 @@ WEffectChainPresetSelector,
   #Deck1 #ArtistText,
   #Deck1 #BpmText,
   #Deck1 #KeyText,
+  #Deck1 #KaraokeInfo,
   #DeckCompact1 #TitleText,
   #DeckCompact1 #ArtistText,
   #DeckCompact1 #BpmText,
@@ -1231,6 +1237,7 @@ WEffectChainPresetSelector,
   #Deck2 #ArtistText,
   #Deck2 #BpmText,
   #Deck2 #KeyText,
+  #Deck2 #KaraokeInfo,
   #DeckCompact2 #TitleText,
   #DeckCompact2 #ArtistText,
   #DeckCompact2 #BpmText,
@@ -1239,6 +1246,7 @@ WEffectChainPresetSelector,
   #DeckMini2 #ArtistTextSmall,
   #DeckMini2 #BpmTextSmall,
   #DeckMini2 #KeyTextSmall,
+
 #MicAuxLabel,
 #SamplerTitle, #SamplerTitleMini,
 #MainMenu QMenu,
@@ -1616,12 +1624,41 @@ WPushButton#CrossfaderButton,
 /************** button background colors **************************************/
 
 /* top-level buttons in transport, fx, micaux and others */
+
+
+
+
+
+
 #DeckRow_5_LoopCuesTransport WPushButton[displayValue="0"],
 #PlayCueMini WPushButton[displayValue="0"],
 WPushButton#PlayIndicator[displayValue="0"],
 WPushButton#CueDeck[displayValue="0"]::section {
     background-color: #571719;
   }
+WPushButton#PlayKaraoke[displayValue="0"],
+WPushButton#PauseKaraoke[displayValue="0"],
+WPushButton#StopKaraoke[displayValue="0"],
+WPushButton#KaraokeBack[displayValue="0"],
+WPushButton#KaraokeForward[displayValue="0"]{
+    background-color: #175742; /* green */
+    color: #c2b3a5; /* colore testo del button IVORY*/
+    font-weight: 800;
+  }
+WPushButton#PlayKaraoke[displayValue="1"],
+WPushButton#PauseKaraoke[displayValue="1"]{
+    font-weight: 800;
+}
+
+
+WPushButton#PlayKaraoke[pressed="true"],
+WPushButton#PauseKaraoke[pressed="true"],
+WPushButton#StopKaraoke[pressed="true"],
+WPushButton#KaraokeBack[pressed="true"],
+WPushButton#KaraokeForward[pressed="true"]{
+    background-color: #0f3d2f; /* dark green */
+}
+
 #SamplerPlayBox WPushButton#PreviewIndicator,
 WPushButton#LoopActivate[displayValue="0"],
 #KeyControls WPushButton[displayValue="0"],
@@ -1701,6 +1738,8 @@ WPushButton#PlayDeckMini[displayValue="1"],
 WPushButton#PlaySampler[displayValue="1"],
 WPushButton#PlayPreview[displayValue="1"],
 WPushButton#PlayIndicator[displayValue="1"],
+WPushButton#PlayKaraoke[displayValue="1"],
+WPushButton#PauseKaraoke[displayValue="1"],
 #LibraryPreviewButton:checked,
 #CueDeck[displayValue="1"],
 WPushButton#Reverse[pressed="true"],
@@ -1747,6 +1786,8 @@ QPushButton#pushButtonRecording:checked,
 #RecFeedback[displayValue="2"] {
   background-color: #a80000;
 }
+
+
 
 /* Green for Fx toggles, QuickEffect + Fx12 */
 #FxUnit1 #FxToggleButton[displayValue="1"],

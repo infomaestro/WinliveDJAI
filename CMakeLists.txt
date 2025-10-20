@@ -222,7 +222,7 @@ elseif(APPLE)
   endif()
 endif()
 
-project(wldjai VERSION 2.0.2)
+project(wldjai VERSION 2.1.0)
 enable_language(C CXX)
 # Work around missing version suffixes support https://gitlab.kitware.com/cmake/cmake/-/issues/16716
 set(MIXXX_VERSION_PRERELEASE "") # set to "alpha" "beta" or ""
@@ -748,6 +748,7 @@ add_library(mixxx-lib STATIC EXCLUDE_FROM_ALL
   src/control/controllogpotmeter.cpp
   src/control/controlobject.cpp
   src/control/controlobjectscript.cpp
+  src/control/controlobjectstring.cpp
   src/control/controlpotmeter.cpp
   src/control/controlproxy.cpp
   src/control/controlpushbutton.cpp
@@ -1236,6 +1237,7 @@ add_library(mixxx-lib STATIC EXCLUDE_FROM_ALL
   src/util/valuetransformer.cpp
   src/util/versionstore.cpp
   src/util/widgethelper.cpp
+  src/util/winlivegoldsocket.cpp
   src/util/workerthread.cpp
   src/util/workerthreadscheduler.cpp
   src/util/xml.cpp
@@ -1387,6 +1389,7 @@ target_precompile_headers(mixxx-lib PUBLIC
   src/control/controlpotmeter.h
   src/control/controlproxy.h
   src/control/controlpushbutton.h
+   src/control/controlobjectstring.h
   src/control/controlsortfiltermodel.h
   src/control/controlttrotary.h
   src/control/controlvalue.h
@@ -1497,7 +1500,6 @@ target_precompile_headers(mixxx-lib PUBLIC
   src/util/screensaver.h
   src/util/screensavermanager.h
   src/util/semanticversion.h
-  src/util/serial.h
   src/util/singleton.h
   src/util/span.h
   src/util/stat.h
@@ -1932,6 +1934,13 @@ install(
     "*.qm"
 )
 
+# KaraokeWindow files
+install(
+  DIRECTORY
+    "${CMAKE_CURRENT_SOURCE_DIR}/res/karaokew"
+  DESTINATION
+    "${MIXXX_INSTALL_DATADIR}"
+)
 
 # Font files
 #

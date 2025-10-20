@@ -6,9 +6,11 @@
 #include <QMutex>
 #include <initializer_list>
 
+
 #include "audio/frame.h"
 #include "audio/types.h"
 #include "control/controlvalue.h"
+#include "control/controlobjectstring.h"
 #include "engine/cachingreader/cachingreader.h"
 #include "engine/engineobject.h"
 #include "engine/slipmodestate.h"
@@ -17,6 +19,7 @@
 #include "track/bpm.h"
 #include "track/track_decl.h"
 #include "util/types.h"
+#include "util/winlivegoldsocket.h"
 
 #ifdef __RUBBERBAND__
 #include "engine/bufferscalers/enginebufferscalerubberband.h"
@@ -221,6 +224,8 @@ class EngineBuffer : public EngineObject {
     void seekExact(mixxx::audio::FramePos);
 
     void verifyPlay();
+    bool isKaraoke() const { return m_isKaraoke;}
+    void setKaraoke(const bool karaoke);
 
   public slots:
     void slotControlPlayRequest(double);
@@ -231,7 +236,12 @@ class EngineBuffer : public EngineObject {
     void slotControlEnd(double);
     void slotControlSeek(double);
     void slotKeylockEngineChanged(double);
-
+    // new implementations
+    void slotControlPlayKaraoke(double);
+    void slotControlStopKaraoke(double);
+    void slotControlPauseKaraoke(double);
+    void slotControlRewindKaraoke(double);
+    void slotControlFastForwardKaraoke(double);
   signals:
     void trackLoaded(TrackPointer pNewTrack, TrackPointer pOldTrack);
     void trackLoadFailed(TrackPointer pTrack, const QString& reason);
@@ -248,6 +258,8 @@ class EngineBuffer : public EngineObject {
     // Fired when passthrough mode is enabled or disabled.
     void slotPassthroughChanged(double v);
     void slotUpdatedTrackBeats();
+
+    void onSocketInfoReceived(EngineBuffer* deck, const QString& info);
 
   private:
     struct QueuedSeek {
@@ -281,6 +293,9 @@ class EngineBuffer : public EngineObject {
 
     void processSyncRequests();
     void processSeek(bool paused);
+
+   
+
     // For debugging / testing -- returns true if the previous buffer call resulted in a seek.
     FRIEND_TEST(EngineSyncTest, FollowerUserTweakPreservedInSyncDisable);
     bool previousBufferSeek() const {
@@ -395,6 +410,13 @@ class EngineBuffer : public EngineObject {
     ControlPushButton* m_stopStartButton;
     ControlPushButton* m_stopButton;
 
+    ControlPushButton* m_playKaraokeButton;
+    ControlPushButton* m_stopKaraokeButton;
+    ControlPushButton* m_pauseKaraokeButton;
+    ControlPushButton* m_forwardKaraokeButton;
+    ControlPushButton* m_rewindKaraokeButton;
+    ControlObjectString* m_pKaraokeInfo;
+
     ControlPushButton* m_pSlipButton;
 
     ControlObject* m_pQuantize;
@@ -477,7 +499,15 @@ class EngineBuffer : public EngineObject {
     int m_iLastBufferSize;
 
     QSharedPointer<VisualPlayPosition> m_visualPlayPos;
+
+    // Karaoke mode state
+    bool m_isKaraoke = false;
+
+    double m_pitchKaraoke_old = 0.0;
+
+    bool m_karaokeOperationInProgress = false;
 };
 
 Q_DECLARE_METATYPE(EngineBuffer::KeylockEngine)
 Q_DECLARE_OPERATORS_FOR_FLAGS(EngineBuffer::SeekRequests)
+

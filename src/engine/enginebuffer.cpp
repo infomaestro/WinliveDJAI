@@ -6,6 +6,7 @@
 #include "control/controlpotmeter.h"
 #include "control/controlproxy.h"
 #include "control/controlpushbutton.h"
+
 #include "engine/bufferscalers/enginebufferscalelinear.h"
 #include "engine/bufferscalers/enginebufferscalest.h"
 #include "engine/cachingreader/cachingreader.h"
@@ -31,7 +32,14 @@
 #include "util/logger.h"
 #include "util/sample.h"
 #include "util/timer.h"
+#include "util/serial.h"
 #include "waveform/visualplayposition.h"
+#include "coreservices.h"
+
+#include <QProcess>
+#include <QFileInfo>
+#include <QMessageBox>
+
 
 #ifdef __RUBBERBAND__
 #include "engine/bufferscalers/enginebufferscalerubberband.h"
@@ -114,6 +122,38 @@ EngineBuffer::EngineBuffer(const QString& group,
             this, &EngineBuffer::slotTrackLoadFailed,
             Qt::DirectConnection);
 
+    // Play Karaoke button
+    m_playKaraokeButton = new ControlPushButton(ConfigKey(m_group, "play_karaoke"));
+    m_playKaraokeButton->setButtonMode(ControlPushButton::TOGGLE);
+    m_playKaraokeButton->connectValueChangeRequest(
+            this, &EngineBuffer::slotControlPlayKaraoke, Qt::DirectConnection); 
+    
+    // Stop Karaoke button
+    m_stopKaraokeButton = new ControlPushButton(ConfigKey(m_group, "stop_karaoke"));
+    m_stopKaraokeButton->connectValueChangeRequest(
+            this, &EngineBuffer::slotControlStopKaraoke, Qt::DirectConnection); 
+
+    // pause Karaoke button
+    m_pauseKaraokeButton = new ControlPushButton(ConfigKey(m_group, "pause_karaoke"));
+    m_pauseKaraokeButton->setButtonMode(ControlPushButton::TOGGLE);
+    m_pauseKaraokeButton->connectValueChangeRequest(
+            this, &EngineBuffer::slotControlPauseKaraoke, Qt::DirectConnection); 
+    
+    // rw karaoke button
+    m_rewindKaraokeButton = new ControlPushButton(ConfigKey(m_group, "karaoke_backward"));
+    m_rewindKaraokeButton->setButtonMode(ControlPushButton::TOGGLE);
+    m_rewindKaraokeButton->connectValueChangeRequest(
+            this, &EngineBuffer::slotControlRewindKaraoke, Qt::DirectConnection); 
+
+    // ff karaoke button
+    m_forwardKaraokeButton = new ControlPushButton(ConfigKey(m_group, "karaoke_forward"));
+    m_forwardKaraokeButton->setButtonMode(ControlPushButton::TOGGLE);
+    m_forwardKaraokeButton->connectValueChangeRequest(
+            this, &EngineBuffer::slotControlFastForwardKaraoke, Qt::DirectConnection); 
+    
+    // karaoke info   
+    m_pKaraokeInfo = new ControlObjectString(ConfigKey(m_group, "karaoke_info"));
+
     // Play button
     m_playButton = new ControlPushButton(ConfigKey(m_group, "play"));
     m_playButton->setButtonMode(ControlPushButton::TOGGLE);
@@ -176,6 +216,8 @@ EngineBuffer::EngineBuffer(const QString& group,
     m_pKeylock->setButtonMode(ControlPushButton::TOGGLE);
 
     m_pReplayGain = new ControlProxy(m_group, QStringLiteral("replaygain"), this);
+
+    
 
     m_pTrackLoaded = new ControlObject(ConfigKey(m_group, "track_loaded"), false);
     m_pTrackLoaded->setReadOnly();
@@ -284,6 +326,11 @@ EngineBuffer::EngineBuffer(const QString& group,
     writer.setDevice(&df);
 #endif
 
+    if (auto* coreServices = mixxx::CoreServices::getInstance()) {
+        connect(coreServices->getWinliveGoldSocket(), &WinliveGoldSocket::clientInfo, this, &EngineBuffer::onSocketInfoReceived, Qt::DirectConnection);
+    }
+    
+
     // Now that all EngineControls have been created call setEngineMixer.
     // TODO(XXX): Get rid of EngineControl::setEngineMixer and
     // EngineControl::setEngineBuffer entirely and pass them through the
@@ -318,6 +365,15 @@ EngineBuffer::~EngineBuffer() {
 
     delete m_pScaleLinear;
     delete m_pScaleST;
+
+    delete m_playKaraokeButton;
+    delete m_stopKaraokeButton;
+    delete m_pauseKaraokeButton;
+    delete m_forwardKaraokeButton;
+    delete m_rewindKaraokeButton;
+    delete m_pKaraokeInfo;
+
+
 #ifdef __RUBBERBAND__
     delete m_pScaleRB;
 #endif
@@ -328,6 +384,8 @@ EngineBuffer::~EngineBuffer() {
     SampleUtil::free(m_pCrossfadeBuffer);
 
     qDeleteAll(m_engineControls);
+
+
 }
 
 void EngineBuffer::bindWorkers(EngineWorkerScheduler* pWorkerScheduler) {
@@ -575,6 +633,12 @@ void EngineBuffer::slotTrackLoaded(TrackPointer pTrack,
     // Start buffer processing after all EngineContols are up to date
     // with the current track e.g track is seeked to Cue
     m_iTrackLoading = 0;
+    
+    // Reset karaoke flag
+    setKaraoke(false);
+    
+    m_pKeyControl->setPitchKaraoke(0); // init karaoke key to 0 
+    m_pitchKaraoke_old = 0.0;
 }
 
 // WARNING: Always called from the EngineWorker thread pool
@@ -594,6 +658,13 @@ void EngineBuffer::ejectTrack() {
     if (kLogger.traceEnabled()) {
         kLogger.trace() << "EngineBuffer::ejectTrack()";
     }
+
+    // invio lo stop
+    slotControlStopKaraoke(1.0);
+    
+    // no karaoke
+    setKaraoke(false);
+    
     TrackPointer pOldTrack = m_pCurrentTrack;
     m_pause.lock();
 
@@ -639,6 +710,8 @@ void EngineBuffer::ejectTrack() {
 
     m_iTrackLoading = 0;
     m_pChannelToCloneFrom = nullptr;
+
+   
 }
 
 void EngineBuffer::notifyTrackLoaded(
@@ -777,7 +850,24 @@ void EngineBuffer::slotControlPlayRequest(double v) {
     bool oldPlay = m_playButton->toBool();
     bool verifiedPlay = updateIndicatorsAndModifyPlay(v > 0.0, oldPlay);
 
+    // karaoke?
+    if (auto* coreServices = mixxx::CoreServices::getInstance()) {
+        if (isKaraoke() && coreServices->getWinliveGoldSocket(false) != nullptr) {
+            QMessageBox::information(nullptr, tr("Couldn't load track."), tr("A song is playing in this deck. Stop the song first."));
+            return;
+        }
+    }
+
     if (!oldPlay && verifiedPlay) {
+        // Ottieni il nome del file
+        if (m_pCurrentTrack) {
+            QString trackLocation = m_pCurrentTrack->getLocation();
+            QString filePath = QFileInfo(trackLocation).absoluteFilePath();
+
+            qDebug() << "Playing file:" << filePath;
+
+         }
+
         if (m_pQuantize->toBool()
 #ifdef __VINYLCONTROL__
                 && m_pVinylControlControl && !m_pVinylControlControl->isEnabled()
@@ -789,7 +879,11 @@ void EngineBuffer::slotControlPlayRequest(double v) {
 
     // set and confirm must be called here in any case to update the widget toggle state
     m_playButton->setAndConfirm(verifiedPlay ? 1.0 : 0.0);
+
 }
+
+
+
 
 void EngineBuffer::slotControlStart(double v)
 {
@@ -825,6 +919,7 @@ void EngineBuffer::slotControlStop(double v)
 {
     if (v > 0.0) {
         m_playButton->set(0);
+        m_pKaraokeInfo->set("Karaoke Stop");
     }
 }
 
@@ -854,6 +949,92 @@ void EngineBuffer::slotKeylockEngineChanged(double dIndex) {
     }
 }
 
+void EngineBuffer::slotControlPlayKaraoke(double v) {
+    
+    bool oldPlay = m_playButton->toBool();
+    // Imposta il cursore a clessidra
+    
+    if (!oldPlay) {
+        
+        CheckLicenseHelper license;
+
+        if (license.loadFromFile() == false || license.hasValidLicense() == false) {
+            QMessageBox::information(nullptr, tr("Not registered"), tr("This function is reserved to registered users."));
+            return;
+          
+        }
+        QApplication::setOverrideCursor(Qt::WaitCursor);
+
+
+        m_pKaraokeInfo->set("Karaoke init");
+        QCoreApplication::processEvents();
+
+        // Get the file name
+        if (m_pCurrentTrack) {
+            QString trackLocation = m_pCurrentTrack->getLocation();
+            QString filePath = QFileInfo(trackLocation).absoluteFilePath();
+           
+            qDebug() << "Playing file:" << filePath;
+            
+            if (auto* coreServices = mixxx::CoreServices::getInstance()) {
+                m_pKaraokeInfo->set("Loading");
+
+                WGSStartParams params{filePath,
+                        QString::number(qRound(m_pKeyControl->getPitchKaraoke())),
+                        false};
+
+                coreServices->getWinliveGoldSocket()->start(this, params);
+                setKaraoke(true);
+            }
+            
+            
+            
+        }
+    } else {
+        QMessageBox::information(nullptr, tr("Couldn't load track."), tr("A song is playing in this deck. Stop the song first."));
+    }
+    // Ripristina il cursore normale
+    QApplication::restoreOverrideCursor();
+}
+
+void EngineBuffer::slotControlStopKaraoke(double v) {
+    if (isKaraoke() && m_pCurrentTrack && v > 0.5) {
+        qDebug() << "Stopping file";
+        if (auto* coreServices = mixxx::CoreServices::getInstance()) {
+            coreServices->getWinliveGoldSocket()->stop();
+        }
+        setKaraoke(false);
+    }
+}
+
+void EngineBuffer::slotControlPauseKaraoke(double v) {
+    if (isKaraoke() && m_pCurrentTrack) {
+        qDebug() << "pause file";
+        if (auto* coreServices = mixxx::CoreServices::getInstance()) {
+            coreServices->getWinliveGoldSocket()->pause();
+        }
+        m_pauseKaraokeButton->forceSet(1.0 - m_pauseKaraokeButton->get());
+    }
+}
+
+void EngineBuffer::slotControlRewindKaraoke (double v) {
+    if (isKaraoke() && m_pCurrentTrack) {
+        qDebug() << "rew file";
+        if (auto* coreServices = mixxx::CoreServices::getInstance()) {
+            coreServices->getWinliveGoldSocket()->rw();
+        }
+    }
+}
+
+void EngineBuffer::slotControlFastForwardKaraoke(double v) {
+    if (isKaraoke() && m_pCurrentTrack) {
+        qDebug() << "ffw file";
+        if (auto* coreServices = mixxx::CoreServices::getInstance()) {
+            coreServices->getWinliveGoldSocket()->ff();
+        }
+    }
+}
+
 void EngineBuffer::processTrackLocked(
         CSAMPLE* pOutput, const int iBufferSize, mixxx::audio::SampleRate sampleRate) {
     ScopedTimer t(u"EngineBuffer::process_pauselock");
@@ -868,6 +1049,19 @@ void EngineBuffer::processTrackLocked(
 
     // Sync requests can affect rate, so process those first.
     processSyncRequests();
+
+    // Karaoke mode: if a song is playing in karaoke mode, disable all effects and keylock
+    if (isKaraoke()) {
+        const double pitchKaraoke = m_pKeyControl->getPitchKaraoke();
+        if (m_pitchKaraoke_old != pitchKaraoke) {
+            m_pitchKaraoke_old = pitchKaraoke;
+            if (auto* coreServices = mixxx::CoreServices::getInstance()) {
+                qDebug() << m_group << "- Karaoke pitch changed to" << pitchKaraoke;
+                coreServices->getWinliveGoldSocket()->tone(QString::number(qRound(pitchKaraoke)));
+            }
+        }
+    }
+
 
     // Note: play is also active during cue preview
     bool paused = !m_playButton->toBool();
@@ -1008,6 +1202,9 @@ void EngineBuffer::processTrackLocked(
         // wanted rate!  Make sure new scaler has proper position. This also
         // crossfades between the old scaler and new scaler to prevent
         // clicks.
+        if (m_rate_old != rate) {
+            qDebug() << rate;
+        }
 
         // Handle direction change.
         // The linear scaler supports ramping though zero.
@@ -1073,6 +1270,7 @@ void EngineBuffer::processTrackLocked(
         // Track has already been ejected.
         bCurBufferPaused = true;
     }
+
 
     m_rate_old = rate;
 
@@ -1616,4 +1814,63 @@ void EngineBuffer::setScalerForTest(
     m_bScalerChanged = true;
     // This bool is permanently set and can't be undone.
     m_bScalerOverride = true;
+}
+
+void EngineBuffer::onSocketInfoReceived(EngineBuffer* deck, const QString& info) {
+    
+    // parse info response: deck_name|message  
+    QStringList parts = info.split('|');
+    if (parts.size() < 2) {
+        qDebug() << "Invalid socket info response:" << info;
+        return;
+    }
+    QString deckName = parts[0];
+
+    if (m_group != deckName) {
+        return;
+    }
+
+    // which message?
+    QString message = parts[1].toLower();
+    
+    // stop song
+    if (message == WGS_COMMAND_FINISH) {
+        // no karaoke
+        setKaraoke(false);
+        m_pauseKaraokeButton->forceSet(0);
+        return;
+    }
+
+    if (isKaraoke() && message == WGS_COMMAND_INFO && parts.size() >= 6) {
+        // message format: current time|total time|tone
+        QString currentTime = parts[2];
+        QString timeElapsed = parts[3];
+        QString tone = parts[4];
+        QString status = parts[5];
+        m_pKaraokeInfo->set(QString("%1 / %2").arg(currentTime, timeElapsed));
+        m_pauseKaraokeButton->forceSet((status.toUShort() == KP_STATUS_PAUSED) ? 1.0 : 0);
+        return;
+    }
+}
+
+
+
+void EngineBuffer::setKaraoke(const bool karaoke) {
+    
+    qDebug() << "Karaoke:" << karaoke;
+
+    if (karaoke == isKaraoke())
+        return;
+
+    m_isKaraoke = karaoke;
+    m_playKaraokeButton->forceSet(karaoke ? 1.0 : 0);
+    
+    
+    if (karaoke) {
+        m_pKaraokeInfo->setBackColors("#175742|#178842|blink:500");
+    } else {
+        m_pKaraokeInfo->setBackColors("#1d312a"); // dimmer green come il mixer
+        m_pKaraokeInfo->set("Karaoke Stop"); 
+        m_pauseKaraokeButton->forceSet(0); // pause button to state 0
+    }
 }

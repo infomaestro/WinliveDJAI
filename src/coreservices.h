@@ -4,6 +4,7 @@
 
 #include "preferences/settingsmanager.h"
 #include "util/timer.h"
+#include "util/winlivegoldsocket.h"
 
 class QApplication;
 class CmdlineArgs;
@@ -41,6 +42,8 @@ class CoreServices : public QObject {
     void showRegisterWindow();
     void deleteSettingsFile();
     QString getResourcePath();
+
+    WinliveGoldSocket* getWinliveGoldSocket(const bool create = true);
 
     std::shared_ptr<KeyboardEventFilter> getKeyboardEventFilter() const {
         return m_pKeyboardEventFilter;
@@ -111,7 +114,6 @@ class CoreServices : public QObject {
 
   public slots:
     void slotOptionsKeyboard(bool toggle);
-
   private:
     bool initializeDatabase();
     void initializeKeyboard();
@@ -152,6 +154,8 @@ class CoreServices : public QObject {
     Timer m_runtime_timer;
     const CmdlineArgs& m_cmdlineArgs;
     bool m_isInitialized;
+    WinliveGoldSocket* m_socket;
+
 };
 
 } // namespace mixxx

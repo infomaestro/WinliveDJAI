@@ -13,88 +13,175 @@
         <Layout>horizontal</Layout>
         <Children>
 
-          <WidgetGroup><!-- Play, Cue, Reverse - ORIZZONTALI -->
-            <Layout>horizontal</Layout>
+          <WidgetGroup><!-- Play, Cue, Reverse + Karaoke Controls - VERTICALI -->
+            <Layout>vertical</Layout>
             <SizePolicy>max,min</SizePolicy>
             <Children>
 
-              <!-- Play Button (copiato esattamente dal sorgente C ma con dimensioni 48f,52f) -->
-              <WidgetGroup><!-- Play + PlayBlink + default dark background -->
-                <Layout>stacked</Layout>
-                <Size>48f,52f</Size>
+              <WidgetGroup><!-- Play, Cue, Reverse - ORIZZONTALI -->
+                <Layout>horizontal</Layout>
+                <SizePolicy>max,min</SizePolicy>
                 <Children>
-                  <Template src="skins:WinliveDj/controls/button_2state_right_display.xml">
-                    <SetVariable name="TooltipId">play_cue_set</SetVariable>
-                    <SetVariable name="ObjectName">PlayDeck</SetVariable>
-                    <SetVariable name="Size">48f,52f</SetVariable>
-                    <SetVariable name="BtnSize">play</SetVariable>
-                    <SetVariable name="ConfigKey"><Variable name="Group"/>,play</SetVariable>
-                    <SetVariable name="ConfigKeyRight"><Variable name="Group"/>,cue_set</SetVariable>
-                    <SetVariable name="ConfigKeyDisp"><Variable name="Group"/>,play_latched</SetVariable>
+
+                  <!-- Play Button (copiato esattamente dal sorgente C ma con dimensioni 48f,52f) -->
+                  <WidgetGroup><!-- Play + PlayBlink + default dark background -->
+                    <Layout>stacked</Layout>
+                    <Size>48f,52f</Size>
+                    <Children>
+                      <Template src="skins:WinliveDj/controls/button_2state_right_display.xml">
+                        <SetVariable name="TooltipId">play_cue_set</SetVariable>
+                        <SetVariable name="ObjectName">PlayDeck</SetVariable>
+                        <SetVariable name="Size">48f,52f</SetVariable>
+                        <SetVariable name="BtnSize">play</SetVariable>
+                        <SetVariable name="ConfigKey"><Variable name="Group"/>,play</SetVariable>
+                        <SetVariable name="ConfigKeyRight"><Variable name="Group"/>,cue_set</SetVariable>
+                        <SetVariable name="ConfigKeyDisp"><Variable name="Group"/>,play_latched</SetVariable>
+                      </Template>
+                      <PushButton>
+                        <ObjectName>PreviewIndicator</ObjectName>
+                        <Size>48f,52f</Size>
+                        <NumberStates>2</NumberStates>
+                        <Connection>
+                          <ConfigKey><Variable name="Group"/>,play</ConfigKey>
+                        </Connection>
+                      </PushButton>
+                      <PushButton>
+                        <ObjectName>PlayIndicator</ObjectName>
+                        <Size>48f,52f</Size>
+                        <NumberStates>2</NumberStates>
+                        <Connection>
+                          <ConfigKey><Variable name="Group"/>,play_indicator</ConfigKey>
+                        </Connection>
+                      </PushButton>
+                    </Children>
+                  </WidgetGroup><!-- Play + PlayBlink + default dark background -->
+
+                  <!-- Cue Button (copiato ESATTAMENTE dal sorgente C ma con dimensioni 42f,52f) -->
+                  <PushButton>
+                    <TooltipId>cue_default_cue_gotoandstop</TooltipId>
+                    <ObjectName>CueDeck</ObjectName>
+                    <Size>42f,52f</Size>
+                    <NumberStates>2</NumberStates>
+                    <RightClickIsPushButton>true</RightClickIsPushButton>
+                    <State>
+                      <Number>0</Number>
+                      <Text><Variable name="state_0_text"/></Text>
+                      <Alignment><Variable name="Align"/></Alignment>
+						<!--<Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium.svg</Unpressed>-->
+                        <!--<Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>-->
+                    </State>
+                    <State>
+                      <Number>1</Number>
+                      <Text><Variable name="state_1_text"/></Text>
+                      <Alignment><Variable name="Align"/></Alignment>
+                        <!--<Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_set.svg</Unpressed>-->
+                        <!--<Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>-->
+                    </State>
+                    <Connection>
+                      <ConfigKey><Variable name="Group"/>,cue_default</ConfigKey>
+                      <ButtonState>LeftButton</ButtonState>
+                    </Connection>
+                    <Connection>
+                      <ConfigKey><Variable name="Group"/>,cue_gotoandstop</ConfigKey>
+                      <ButtonState>RightButton</ButtonState>
+                    </Connection>
+                    <Connection>
+                      <ConfigKey><Variable name="Group"/>,cue_indicator</ConfigKey>
+                      <ConnectValueFromWidget>false</ConnectValueFromWidget>
+                    </Connection>
+                  </PushButton>
+
+                  <!-- Reverse Button (copiato esattamente dal sorgente C ma con dimensioni 26f,52f) -->
+                  <Template src="skins:WinliveDj/controls/button_1state_right.xml">
+                    <SetVariable name="TooltipId">reverse</SetVariable>
+                    <SetVariable name="ObjectName">Reverse</SetVariable>
+                    <SetVariable name="Size">32f,52f</SetVariable>
+                    <SetVariable name="BtnSize">square</SetVariable>
+                    <SetVariable name="ConfigKey"><Variable name="Group"/>,reverse</SetVariable>
+                    <SetVariable name="ConfigKeyRight"><Variable name="Group"/>,reverseroll</SetVariable>
                   </Template>
-                  <PushButton>
-                    <ObjectName>PreviewIndicator</ObjectName>
-                    <Size>48f,52f</Size>
-                    <NumberStates>2</NumberStates>
-                    <Connection>
-                      <ConfigKey><Variable name="Group"/>,play</ConfigKey>
-                    </Connection>
-                  </PushButton>
-                  <PushButton>
-                    <ObjectName>PlayIndicator</ObjectName>
-                    <Size>48f,52f</Size>
-                    <NumberStates>2</NumberStates>
-                    <Connection>
-                      <ConfigKey><Variable name="Group"/>,play_indicator</ConfigKey>
-                    </Connection>
-                  </PushButton>
+
                 </Children>
-              </WidgetGroup><!-- Play + PlayBlink + default dark background -->
+              </WidgetGroup>
+				
+              <!-- NUOVI PULSANTI KARAOKE -->
+              <WidgetGroup>
+				  <!-- PlayKaraoke, PausePlayKaraoke, StopKaraoke - ORIZZONTALI -->
+                <Layout>horizontal</Layout>
+                <SizePolicy>max,min</SizePolicy>
+                <Children>
 
-              <!-- Cue Button (copiato ESATTAMENTE dal sorgente C ma con dimensioni 42f,52f) -->
-              <PushButton>
-                <TooltipId>cue_default_cue_gotoandstop</TooltipId>
-                <ObjectName>CueDeck</ObjectName>
-                <Size>42f,52f</Size>
-                <NumberStates>2</NumberStates>
-                <RightClickIsPushButton>true</RightClickIsPushButton>
-                <State>
-                  <Number>0</Number>
-                  <Text><Variable name="state_0_text"/></Text>
-                  <Alignment><Variable name="Align"/></Alignment>
-                  <Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium.svg</Unpressed>
-                  <Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>
-                </State>
-                <State>
-                  <Number>1</Number>
-                  <Text><Variable name="state_1_text"/></Text>
-                  <Alignment><Variable name="Align"/></Alignment>
-                  <Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_set.svg</Unpressed>
-                  <Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>
-                </State>
-                <Connection>
-                  <ConfigKey><Variable name="Group"/>,cue_default</ConfigKey>
-                  <ButtonState>LeftButton</ButtonState>
-                </Connection>
-                <Connection>
-                  <ConfigKey><Variable name="Group"/>,cue_gotoandstop</ConfigKey>
-                  <ButtonState>RightButton</ButtonState>
-                </Connection>
-                <Connection>
-                  <ConfigKey><Variable name="Group"/>,cue_indicator</ConfigKey>
-                  <ConnectValueFromWidget>false</ConnectValueFromWidget>
-                </Connection>
-              </PushButton>
+                  <!-- Play Karaoke Button -->
+                  <PushButton>
+                    <TooltipId>play_karaoke</TooltipId>
+                    <ObjectName>PlayKaraoke</ObjectName>
+                    <Size>48f,32f</Size>
+                    <NumberStates>2</NumberStates>
+                    <State>
+                      <Number>0</Number>
+                      <Text>Start</Text>
+                      <Alignment>center</Alignment>
+						<!--<Unpressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium.svg</Unpressed>-->
+                        <!--<Pressed scalemode="STRETCH">skins:WinliveDj/<Variable name="BtnScheme"/>/buttons/btn_<Variable name="BtnType"/>_medium_active.svg</Pressed>-->
+                    </State>
+                    <State>
+                      <Number>1</Number>
+                      <!--<Text>Play</Text>-->
+                      <Alignment>center</Alignment>
+					    <Unpressed scalemode="STRETCH">skins:WinliveDj/classic/buttons/btn_playstart_karaoke.png</Unpressed>
+						<Pressed scalemode="STRETCH">skins:WinliveDj/classic/buttons/btn_playstart_karaoke.png</Pressed>
+                    </State>
+                    <Connection>
+                      <ConfigKey><Variable name="Group"/>,play_karaoke</ConfigKey>
+                    </Connection>
+                  </PushButton>
+					
+                  <!-- Pause Karaoke Button -->
+                  <PushButton>
+                    <TooltipId>pause_karaoke</TooltipId>
+                    <ObjectName>PauseKaraoke</ObjectName>
+                    <Size>42f,32f</Size>
+                    <NumberStates>2</NumberStates>
+                    <State>
+                      <Number>0</Number>
+                        <Alignment>center</Alignment>
+						<Unpressed scalemode="STRETCH">skins:WinliveDj/classic/buttons/btn_pause_karaoke.png</Unpressed>
+						<Pressed scalemode="STRETCH">skins:WinliveDj/classic/buttons/btn_pause_karaoke.png</Pressed>
+                    </State>
+                    <State>
+                      <Number>1</Number>
+                     
+                        <Alignment>center</Alignment>
+						<Unpressed scalemode="STRETCH">skins:WinliveDj/classic/buttons/btn_play_karaoke.png</Unpressed>
+						<Pressed scalemode="STRETCH">skins:WinliveDj/classic/buttons/btn_play_karaoke.png</Pressed>
+                    </State>
+                    <Connection>
+                      <ConfigKey><Variable name="Group"/>,pause_karaoke</ConfigKey>
+                    </Connection>
+                  </PushButton>
+                 
+					<!-- Stop Karaoke Button -->
+                  <PushButton>
+                    <TooltipId>stop_karaoke</TooltipId>
+                    <ObjectName>StopKaraoke</ObjectName>
+                    <Size>32f,32f</Size>
+                    <NumberStates>1</NumberStates>
+                    <State>
+                      <Number>0</Number>
+                      <Alignment>center</Alignment>
+					    <Unpressed scalemode="STRETCH">skins:WinliveDj/classic/buttons/btn_stop_karaoke.png</Unpressed>
+						<Pressed scalemode="STRETCH">skins:WinliveDj/classic/buttons/btn_stop_karaoke.png</Pressed>
+                    </State>
+                    <Connection>
+                      <ConfigKey><Variable name="Group"/>,stop_karaoke</ConfigKey>
+                    </Connection>
+                  </PushButton>
+					
+		
 
-              <!-- Reverse Button (copiato esattamente dal sorgente C ma con dimensioni 26f,52f) -->
-              <Template src="skins:WinliveDj/controls/button_1state_right.xml">
-                <SetVariable name="TooltipId">reverse</SetVariable>
-                <SetVariable name="ObjectName">Reverse</SetVariable>
-                <SetVariable name="Size">26f,52f</SetVariable>
-                <SetVariable name="BtnSize">square</SetVariable>
-                <SetVariable name="ConfigKey"><Variable name="Group"/>,reverse</SetVariable>
-                <SetVariable name="ConfigKeyRight"><Variable name="Group"/>,reverseroll</SetVariable>
-              </Template>
+
+				</Children>
+              </WidgetGroup><!-- /KARAOKE BUTTONS -->
 
             </Children>
           </WidgetGroup>
@@ -103,78 +190,124 @@
           <WidgetGroup><SizePolicy>i,min</SizePolicy><MaximumSize>8,</MaximumSize></WidgetGroup>
 
           <WidgetGroup><!-- HotCues -->
-            <Layout>vertical</Layout>
-            <SizePolicy>max,min</SizePolicy>
-            <Children>
-              <WidgetGroup><!-- HotCues 1-2 / 1-4 -->
-                <Layout>horizontal</Layout>
-                <Children>
+          <Layout>vertical</Layout>
+          <SizePolicy>max,min</SizePolicy>
+          <Children>
+            <WidgetGroup><!-- HotCues 1-2 / 1-4 -->
+              <Layout>horizontal</Layout>
+              <Children>
+                <Template src="skins:WinliveDj/controls/button_hotcue.xml">
+                  <SetVariable name="number">1</SetVariable>
+                </Template>
+                <Template src="skins:WinliveDj/controls/button_hotcue.xml">
+                  <SetVariable name="number">2</SetVariable>
+                </Template>
+                <WidgetGroup>
+                  <Layout>horizontal</Layout>
+                  <Children>
+                    <Template src="skins:WinliveDj/controls/button_hotcue.xml">
+                      <SetVariable name="number">3</SetVariable>
+                    </Template>
+                    <Template src="skins:WinliveDj/controls/button_hotcue.xml">
+                      <SetVariable name="number">4</SetVariable>
+                    </Template>
+                  </Children>
+                  <Connection>
+                    <ConfigKey>[Skin],show_8_hotcues</ConfigKey>
+                    <BindProperty>visible</BindProperty>
+                  </Connection>
+                </WidgetGroup>
+              </Children>
+            </WidgetGroup><!-- HotCues 1-2 / 1-4 -->
 
-                  <Template src="skins:WinliveDj/controls/button_hotcue.xml">
-                    <SetVariable name="number">1</SetVariable>
-                  </Template>
-                  <Template src="skins:WinliveDj/controls/button_hotcue.xml">
-                    <SetVariable name="number">2</SetVariable>
-                  </Template>
+            <!-- HotCues (3-4 / 5-8) -->
+            <WidgetStack currentpage="[Skin],show_8_hotcues" persist="true">
+              <Children>
+                <WidgetGroup>
+                  <Layout>horizontal</Layout>
+                  <Children>
+                    <Template src="skins:WinliveDj/controls/button_hotcue.xml">
+                      <SetVariable name="number">3</SetVariable>
+                    </Template>
+                    <Template src="skins:WinliveDj/controls/button_hotcue.xml">
+                      <SetVariable name="number">4</SetVariable>
+                    </Template>
+                  </Children>
+                </WidgetGroup>
 
-                  <WidgetGroup>
-                    <Layout>horizontal</Layout>
-                    <Children>
-                      <Template src="skins:WinliveDj/controls/button_hotcue.xml">
-                        <SetVariable name="number">3</SetVariable>
-                      </Template>
-                      <Template src="skins:WinliveDj/controls/button_hotcue.xml">
-                        <SetVariable name="number">4</SetVariable>
-                      </Template>
-                    </Children>
-                    <Connection>
-                      <ConfigKey>[Skin],show_8_hotcues</ConfigKey>
-                      <BindProperty>visible</BindProperty>
-                    </Connection>
-                  </WidgetGroup>
-                </Children>
-              </WidgetGroup><!-- HotCues 1-2 / 1-4 -->
-
-              <!-- HotCues (3-4 / 5-8) -->
-              <WidgetStack currentpage="[Skin],show_8_hotcues" persist="true">
-                <Children>
-                  <WidgetGroup>
-                    <Layout>horizontal</Layout>
-                    <Children>
-                      <Template src="skins:WinliveDj/controls/button_hotcue.xml">
-                        <SetVariable name="number">3</SetVariable>
-                      </Template>
-                      <Template src="skins:WinliveDj/controls/button_hotcue.xml">
-                        <SetVariable name="number">4</SetVariable>
-                      </Template>
-                    </Children>
-                  </WidgetGroup>
-
-                  <WidgetGroup  trigger="[Skin],show_8_hotcues">
-                    <Layout>horizontal</Layout>
-                    <Children>
-                      <Template src="skins:WinliveDj/controls/button_hotcue.xml">
-                        <SetVariable name="number">5</SetVariable>
-                      </Template>
-                      <Template src="skins:WinliveDj/controls/button_hotcue.xml">
-                        <SetVariable name="number">6</SetVariable>
-                      </Template>
-                      <Template src="skins:WinliveDj/controls/button_hotcue.xml">
-                        <SetVariable name="number">7</SetVariable>
-                      </Template>
-                      <Template src="skins:WinliveDj/controls/button_hotcue.xml">
-                        <SetVariable name="number">8</SetVariable>
-                      </Template>
-                    </Children>
-                  </WidgetGroup>
-                </Children>
-              </WidgetStack><!-- HotCues (3-4 / 5-8) -->
-            </Children>
-            <Connection>
-              <ConfigKey>[Skin],show_hotcues</ConfigKey>
-              <BindProperty>visible</BindProperty>
-            </Connection>
-          </WidgetGroup><!-- HotCues -->
+                <WidgetGroup trigger="[Skin],show_8_hotcues">
+                  <Layout>horizontal</Layout>
+                  <Children>
+                    <Template src="skins:WinliveDj/controls/button_hotcue.xml">
+                      <SetVariable name="number">5</SetVariable>
+                    </Template>
+                    <Template src="skins:WinliveDj/controls/button_hotcue.xml">
+                      <SetVariable name="number">6</SetVariable>
+                    </Template>
+                    <Template src="skins:WinliveDj/controls/button_hotcue.xml">
+                      <SetVariable name="number">7</SetVariable>
+                    </Template>
+                    <Template src="skins:WinliveDj/controls/button_hotcue.xml">
+                      <SetVariable name="number">8</SetVariable>
+                    </Template>
+                  </Children>
+                </WidgetGroup>
+              </Children>
+            </WidgetStack><!-- HotCues (3-4 / 5-8) -->
+			  
+			
+			  
+            <!-- AGGIUNTI: Forward e Rewind sotto cue 3 e 4 -->
+            <WidgetGroup>
+              <Layout>horizontal</Layout>
+              <SizePolicy>min,min</SizePolicy>
+              <Children>
+                <WidgetGroup><Size>0min,0min</Size></WidgetGroup>
+    
+                <!-- Rewind Button -->
+                <PushButton>
+                  <TooltipId>karaoke_backward</TooltipId>
+                  <ObjectName>KaraokeBack</ObjectName>
+                  <Size>26f,32f</Size>
+                  <NumberStates>1</NumberStates>
+                  <State>
+                    <Number>0</Number>
+                    <!--<Text>RW</Text>-->
+                    <Alignment>center</Alignment>
+					 <Unpressed scalemode="STRETCH">skins:WinliveDj/classic/buttons/btn_rw_karaoke.png</Unpressed>
+						<Pressed scalemode="STRETCH">skins:WinliveDj/classic/buttons/btn_rw_karaoke.png</Pressed>
+                  </State>
+                  <Connection>
+                    <ConfigKey><Variable name="Group"/>,karaoke_backward</ConfigKey>
+                  </Connection>
+                </PushButton>
+    
+                <!-- Forward Button -->
+                <PushButton>
+                  <TooltipId>karaoke_forward</TooltipId>
+                  <ObjectName>KaraokeForward</ObjectName>
+                  <Size>26f,32f</Size>
+                  <NumberStates>1</NumberStates>
+                  <State>
+                    <Number>0</Number>
+                    <!--<Text>FF</Text>-->
+                    <Alignment>center</Alignment>
+					  <Unpressed scalemode="STRETCH">skins:WinliveDj/classic/buttons/btn_ff_karaoke.png</Unpressed>
+						<Pressed scalemode="STRETCH">skins:WinliveDj/classic/buttons/btn_ff_karaoke.png</Pressed>
+                  </State>
+                  <Connection>
+                    <ConfigKey><Variable name="Group"/>,karaoke_forward</ConfigKey>
+                  </Connection>
+                </PushButton>
+    
+              </Children>
+            </WidgetGroup>
+          </Children>
+          <Connection>
+            <ConfigKey>[Skin],show_hotcues</ConfigKey>
+            <BindProperty>visible</BindProperty>
+          </Connection>
+        </WidgetGroup><!-- HotCues -->
 
           <WidgetGroup><Size>2f,0min</Size></WidgetGroup><!--  = 2-8px wide -->
           <WidgetGroup><SizePolicy>i,min</SizePolicy><MaximumSize>8,</MaximumSize></WidgetGroup>
@@ -222,86 +355,131 @@
           <WidgetGroup><Size>2f,0min</Size></WidgetGroup><!--  = 2-8px wide -->
           <WidgetGroup><SizePolicy>i,min</SizePolicy><MaximumSize>80,</MaximumSize></WidgetGroup>
 
-          <WidgetGroup><!-- Loop buttons + beatloop size spinbox -->
-            <ObjectName>LoopControls</ObjectName>
-            <Layout>vertical</Layout>
-            <SizePolicy>min,min</SizePolicy>
-            <MinimumSize>78,52</MinimumSize>
-            <MaximumSize>104,52</MaximumSize>
-            <Children>
-              <WidgetGroup><!-- loop enable + beatloop size -->
-                <ObjectName>AlignLeftTop</ObjectName>
-                <Layout>horizontal</Layout>
-                <SizePolicy>min,max</SizePolicy>
-                <Children>
-                  <Template src="skins:WinliveDj/controls/button_2state_right_display.xml">
-                    <SetVariable name="TooltipId">beatloop_activate</SetVariable>
-                    <SetVariable name="ObjectName">LoopActivate</SetVariable>
-                    <SetVariable name="Size">26f,26f</SetVariable>
-                    <SetVariable name="ConfigKey"><Variable name="Group"/>,beatloop_activate</SetVariable>
-                    <SetVariable name="ConfigKeyRight"><Variable name="Group"/>,beatlooproll_activate</SetVariable>
-                    <SetVariable name="ConfigKeyDisp"><Variable name="Group"/>,loop_enabled</SetVariable>
-                  </Template>
+			<WidgetGroup>
+				<!-- Loop buttons + beatloop size spinbox -->
+				<ObjectName>LoopControls</ObjectName>
+				<Layout>vertical</Layout>
+				<SizePolicy>min,min</SizePolicy>
+				<MinimumSize>78,44</MinimumSize>
+				<MaximumSize>104,78</MaximumSize>
+				<!-- aumentato per la label -->
+				<Children>
+					<WidgetGroup>
+						<!-- loop enable + beatloop size -->
+						<ObjectName>AlignLeftTop</ObjectName>
+						<Layout>horizontal</Layout>
+						<SizePolicy>min,max</SizePolicy>
+						<Children>
+							<Template src="skins:WinliveDj/controls/button_2state_right_display.xml">
+								<SetVariable name="TooltipId">beatloop_activate</SetVariable>
+								<SetVariable name="ObjectName">LoopActivate</SetVariable>
+								<SetVariable name="Size">26f,26f</SetVariable>
+								<SetVariable name="ConfigKey">
+									<Variable name="Group"/>,beatloop_activate
+								</SetVariable>
+								<SetVariable name="ConfigKeyRight">
+									<Variable name="Group"/>,beatlooproll_activate
+								</SetVariable>
+								<SetVariable name="ConfigKeyDisp">
+									<Variable name="Group"/>,loop_enabled
+								</SetVariable>
+							</Template>
+							<BeatSpinBox>
+								<TooltipId>beatloop_size</TooltipId>
+								<ObjectName>
+									Spinbox_<Variable name="BtnType"/>
+								</ObjectName>
+								<SizePolicy>me,min</SizePolicy>
+								<MinimumSize>46,26</MinimumSize>
+								<MaximumSize>78,26</MaximumSize>
+								<Value>
+									<Variable name="Group"/>,beatloop_size
+								</Value>
+							</BeatSpinBox>
+						</Children>
+						<Connection>
+							<ConfigKey>[Skin],show_loop_controls</ConfigKey>
+							<BindProperty>visible</BindProperty>
+						</Connection>
+					</WidgetGroup>
+					<WidgetGroup>
+						<ObjectName>AlignLeftTop</ObjectName>
+						<Layout>horizontal</Layout>
+						<SizePolicy>min,max</SizePolicy>
+						<Children>
+							<Template src="skins:WinliveDj/controls/button_2state_right.xml">
+								<SetVariable name="TooltipId">reloop_toggle</SetVariable>
+								<SetVariable name="ObjectName">Reloop</SetVariable>
+								<SetVariable name="Size">26f,26f</SetVariable>
+								<SetVariable name="ConfigKey">
+									<Variable name="Group"/>,reloop_toggle
+								</SetVariable>
+								<SetVariable name="ConfigKeyRight">
+									<Variable name="Group"/>,reloop_andstop
+								</SetVariable>
+							</Template>
+							<Template src="skins:WinliveDj/controls/button_1state_right.xml">
+								<SetVariable name="TooltipId">loop_in</SetVariable>
+								<SetVariable name="ObjectName">LoopIn</SetVariable>
+								<SetVariable name="Size">26f,26f</SetVariable>
+								<SetVariable name="ConfigKey">
+									<Variable name="Group"/>,loop_in
+								</SetVariable>
+								<SetVariable name="ConfigKeyRight">
+									<Variable name="Group"/>,loop_in_goto
+								</SetVariable>
+							</Template>
+							<Template src="skins:WinliveDj/controls/button_1state_right.xml">
+								<SetVariable name="TooltipId">loop_out</SetVariable>
+								<SetVariable name="ObjectName">LoopOut</SetVariable>
+								<SetVariable name="Size">26f,26f</SetVariable>
+								<SetVariable name="ConfigKey">
+									<Variable name="Group"/>,loop_out
+								</SetVariable>
+								<SetVariable name="ConfigKeyRight">
+									<Variable name="Group"/>,loop_out_goto
+								</SetVariable>
+							</Template>
+							<Template src="skins:WinliveDj/controls/button_2state_persist.xml">
+								<SetVariable name="TooltipId">loop_anchor</SetVariable>
+								<SetVariable name="ObjectName">LoopAnchor</SetVariable>
+								<SetVariable name="Size">26f,26f</SetVariable>
+								<SetVariable name="ConfigKey">
+									<Variable name="Group"/>,loop_anchor
+								</SetVariable>
+							</Template>
+						</Children>
+						<Connection>
+							<ConfigKey>[Skin],show_loop_controls</ConfigKey>
+							<BindProperty>visible</BindProperty>
+						</Connection>
+					</WidgetGroup>
 
-                  <BeatSpinBox>
-                    <TooltipId>beatloop_size</TooltipId>
-                    <ObjectName>Spinbox_<Variable name="BtnType"/></ObjectName>
-                    <SizePolicy>me,min</SizePolicy>
-                    <MinimumSize>46,26</MinimumSize>
-                    <MaximumSize>78,26</MaximumSize>
-                    <Value><Variable name="Group"/>,beatloop_size</Value>
-                    <!-- disabled until 'highlight' property has been added to WBeatSpinBox / wbasewidget.
-                    <Connection>
-                      <ConfigKey><Variable name="Group"/>,track_loaded</ConfigKey>
-                      <BindProperty>highlight</BindProperty>
-                    </Connection> -->
-                  </BeatSpinBox>
-                </Children>
-              </WidgetGroup>
-
-              <WidgetGroup>
-                <ObjectName>AlignLeftTop</ObjectName>
-                <Layout>horizontal</Layout>
-                <SizePolicy>min,max</SizePolicy>
-                <Children>
-                  <Template src="skins:WinliveDj/controls/button_2state_right.xml">
-                    <SetVariable name="TooltipId">reloop_toggle</SetVariable>
-                    <SetVariable name="ObjectName">Reloop</SetVariable>
-                    <SetVariable name="Size">26f,26f</SetVariable>
-                    <SetVariable name="ConfigKey"><Variable name="Group"/>,reloop_toggle</SetVariable>
-                    <SetVariable name="ConfigKeyRight"><Variable name="Group"/>,reloop_andstop</SetVariable>
-                  </Template>
-
-                  <Template src="skins:WinliveDj/controls/button_1state_right.xml">
-                    <SetVariable name="TooltipId">loop_in</SetVariable>
-                    <SetVariable name="ObjectName">LoopIn</SetVariable>
-                    <SetVariable name="Size">26f,26f</SetVariable>
-                    <SetVariable name="ConfigKey"><Variable name="Group"/>,loop_in</SetVariable>
-                    <SetVariable name="ConfigKeyRight"><Variable name="Group"/>,loop_in_goto</SetVariable>
-                  </Template>
-
-                  <Template src="skins:WinliveDj/controls/button_1state_right.xml">
-                    <SetVariable name="TooltipId">loop_out</SetVariable>
-                    <SetVariable name="ObjectName">LoopOut</SetVariable>
-                    <SetVariable name="Size">26f,26f</SetVariable>
-                    <SetVariable name="ConfigKey"><Variable name="Group"/>,loop_out</SetVariable>
-                    <SetVariable name="ConfigKeyRight"><Variable name="Group"/>,loop_out_goto</SetVariable>
-                  </Template>
-
-                  <Template src="skins:WinliveDj/controls/button_2state_persist.xml">
-                    <SetVariable name="TooltipId">loop_anchor</SetVariable>
-                    <SetVariable name="ObjectName">LoopAnchor</SetVariable>
-                    <SetVariable name="Size">26f,26f</SetVariable>
-                    <SetVariable name="ConfigKey"><Variable name="Group"/>,loop_anchor</SetVariable>
-                  </Template>
-                </Children>
-              </WidgetGroup>
-            </Children>
-            <Connection>
-              <ConfigKey>[Skin],show_loop_controls</ConfigKey>
-              <BindProperty>visible</BindProperty>
-            </Connection>
-          </WidgetGroup><!-- /Loop buttons + beatloop size spinbox -->
+					
+					
+					<!-- Label Info -->
+					<WidgetGroup>
+						<ObjectName>AlignLeftTop</ObjectName>
+						<Layout>horizontal</Layout>
+						<SizePolicy>min,max</SizePolicy>
+						<Children>
+							<Label>
+								<ObjectName>KaraokeInfo</ObjectName>
+								<Text>Karaoke Stop</Text>
+								<Size>104,32f</Size>
+								<Alignment>center</Alignment>
+								<Font>true</Font>
+								<RuntimeEditable>true</RuntimeEditable>
+								<Connection>
+									<ConfigKey><Variable name="Group"/>,karaoke_info</ConfigKey>
+								</Connection>
+							</Label>
+						</Children>
+					</WidgetGroup>
+					<!---->
+				</Children>
+			</WidgetGroup>
+			<!-- /Loop buttons + beatloop size spinbox -->
 
           <WidgetGroup><Size>2f,0min</Size></WidgetGroup><!--  = 2-80px wide -->
           <WidgetGroup><SizePolicy>i,min</SizePolicy><MaximumSize>80,</MaximumSize></WidgetGroup>
@@ -311,7 +489,7 @@
             <Layout>vertical</Layout>
             <SizePolicy>min,min</SizePolicy>
             <MinimumSize>52,52</MinimumSize>
-            <MaximumSize>60,52</MaximumSize>
+            <MaximumSize>128,78</MaximumSize>
             <Children>
               <WidgetGroup><!-- beatjump size -->
                 <ObjectName>AlignLeftTop</ObjectName>
@@ -334,7 +512,11 @@
                     </Connection> -->
                   </BeatSpinBox>
                 </Children>
-              </WidgetGroup>
+			    <Connection>
+				    <ConfigKey>[Skin],show_beatjump_controls</ConfigKey>
+				    <BindProperty>visible</BindProperty>
+			    </Connection>
+			  </WidgetGroup>
               <WidgetGroup>
                 <ObjectName>AlignLeftTop</ObjectName>
                 <Layout>horizontal</Layout>
@@ -357,15 +539,35 @@
                     <SetVariable name="ConfigKeyRight"><Variable name="Group"/>,beatjump_1_forward</SetVariable>
                   </Template>
                 </Children>
-              </WidgetGroup>
-            </Children>
-            <Connection>
-              <ConfigKey>[Skin],show_beatjump_controls</ConfigKey>
-              <BindProperty>visible</BindProperty>
-            </Connection>
+				<Connection>
+					  <ConfigKey>[Skin],show_beatjump_controls</ConfigKey>
+					  <BindProperty>visible</BindProperty>
+				</Connection>
+			  </WidgetGroup>
+			  
+			  
+				<WidgetGroup>
+					<SizePolicy>me,26f</SizePolicy>
+					<Layout>vertical</Layout>
+					<Children>
+						<WidgetGroup><Size>0min,4f</Size></WidgetGroup>  <!-- spazio 4 pixel-->
+						<Template src="skins:WinliveDj/decks/key_controls.xml"/>
+						<WidgetGroup><Size>0min,2f</Size></WidgetGroup>  <!-- spazio 2 pixel-->
+					</Children>
+					<Connection>
+						<ConfigKey persist="true">[Skin],show_key_controls</ConfigKey>
+						<BindProperty>visible</BindProperty>
+					</Connection>
+			  </WidgetGroup>
+				
+				
+			</Children>
+          
           </WidgetGroup><!-- /Jump buttons + beatjump size spinbox -->
+		  
+			
 
-          <WidgetGroup><Size>2f,0min</Size></WidgetGroup>
+			<WidgetGroup><Size>2f,0min</Size></WidgetGroup>
           <WidgetGroup><SizePolicy>i,min</SizePolicy></WidgetGroup>
         </Children>
       </WidgetGroup><!-- DeckRow_5_LoopCuesTransport -->

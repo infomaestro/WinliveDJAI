@@ -26,7 +26,7 @@
 
       <WidgetGroup><Size>2f,0me</Size></WidgetGroup>
 
-      <WidgetGroup>
+		<!--<WidgetGroup>
         <SizePolicy>me,min</SizePolicy>
         <MaximumSize>111,</MaximumSize>
         <Layout>vertical</Layout>
@@ -39,7 +39,7 @@
           <ConfigKey persist="true">[Skin],show_key_controls</ConfigKey>
           <BindProperty>visible</BindProperty>
         </Connection>
-      </WidgetGroup>
+      </WidgetGroup>-->
 
     </Children>
   </WidgetGroup><!-- DeckRow_1_KeyVinylFx -->

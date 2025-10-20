@@ -26,16 +26,22 @@ class KeyControl : public EngineControl {
 
     KeyControl(const QString& group, UserSettingsPointer pConfig);
 
+    double getPitchKaraoke();
+
+    double getPitch();
+
     // Returns a struct, with the results of the last pitch and tempo calculations
     KeyControl::PitchTempoRatio getPitchTempoRatio();
 
     double getKey();
+    void setPitchKaraoke(double pitch);
 
   private slots:
     void slotSetEngineKey(double);
     void slotSetEngineKeyDistance(double);
     void slotFileKeyChanged(double);
     void slotPitchChanged(double);
+    void slotPitchChangedKaraoke(double);
     void slotPitchAdjustChanged(double);
     void slotRateChanged();
     void slotSyncKey(double);
@@ -74,4 +80,5 @@ class KeyControl : public EngineControl {
     QAtomicInt m_updatePitchRequest;
     QAtomicInt m_updatePitchAdjustRequest;
     QAtomicInt m_updateRateRequest;
+    double m_pitchKaraoke;
 };

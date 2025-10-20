@@ -17,9 +17,12 @@ class WKey : public WLabel  {
     void setCents();
 
   private:
+    mixxx::track::io::key::ChromaticKey m_originalKey; // <-- AGGIUNGI QUESTO
     double m_dOldValue;
     bool m_displayCents;
     bool m_displayKey;
+    bool m_displayValue;
     ControlProxy m_keyNotation;
     ControlProxy m_engineKeyDistance;
+    ControlProxy m_pPitch; // <-- AGGIUNTO (non serve unique_ptr per ControlProxy)
 };
