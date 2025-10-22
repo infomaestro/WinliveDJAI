@@ -273,7 +273,8 @@ void WinliveGoldSocket::launchClient() {
     }
 #elif defined(Q_OS_MAC)
      if (auto* coreServices = mixxx::CoreServices::getInstance()) {
-         program = QDir(coreServices->getResourcePath()).filePath("karaokew.app/Contents/MacOS/wlDjAiKaraoke");
+         program = QDir(coreServices->getResourcePath()).filePath("WlDjAiKaraoke.app/Contents/MacOS/wlDjAiKaraoke");
+          qDebug() << "launching app" << program;
      }
 #else
     QString program = "/usr/bin/winliveclient";
