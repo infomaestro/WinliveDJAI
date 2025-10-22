@@ -8,7 +8,13 @@
 #include <QTimer>
 #include <QTcpServer>
 #include <QTcpSocket>
-
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QProgressDialog>
+#include <QMessageBox>
+#include <QFile>
+#include <QFileInfo>
 
 class EngineBuffer;
 
@@ -100,16 +106,17 @@ class WinliveGoldSocket : public QObject {
     void processClientResponse(const QString& response);
     void sendCommandToClient(const QString& command);
     void internalStart(const QString& filename, const QString& tone);
+    void downloadKaraokeClient(const QString& destinationPath);
+ 
 
     QTimer* m_infoTimer = nullptr;
     WGSStartParams m_params;
     EngineBuffer* m_deck = nullptr;
    
-
-
     quint16 m_port;
     QTcpServer* m_server;
     QTcpSocket* m_client;
+    
 
 };
 

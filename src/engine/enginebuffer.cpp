@@ -985,12 +985,11 @@ void EngineBuffer::slotControlPlayKaraoke(double v) {
                 WGSStartParams params{filePath,
                         QString::number(qRound(m_pKeyControl->getPitchKaraoke())),
                         false};
-
+                
                 coreServices->getWinliveGoldSocket()->start(this, params);
-                setKaraoke(true);
+                //setKaraoke(true); // delegated to start func
             }
-            
-            
+              
             
         }
     } else {

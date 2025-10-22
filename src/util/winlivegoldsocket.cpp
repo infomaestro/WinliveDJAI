@@ -101,10 +101,11 @@ bool WinliveGoldSocket::hasClient() const {
 void WinliveGoldSocket::start(EngineBuffer* deck, const WGSStartParams& params) {
     m_deck = deck;
     m_params = params;
-
+   
     if (hasClient()) {
         m_params.pending = false;
         internalStart(m_params.filename, m_params.tone);
+        deck->setKaraoke(true);
     } else {
         if (!m_params.pending) {
             qDebug() << "No client connected, launching client with start mode";
@@ -271,6 +272,16 @@ void WinliveGoldSocket::launchClient() {
     if (auto* coreServices = mixxx::CoreServices::getInstance()) {
          program = QDir(coreServices->getResourcePath()).filePath("karaokew/karaokew.exe");
     }
+
+    program ="C:/temp/karaokew.exe";
+
+    // Verifica se il file esiste
+    if (!QFile::exists(program)) {
+        // Avvia il download
+        downloadKaraokeClient(program);
+        return;
+    }
+
 #elif defined(Q_OS_MAC)
      if (auto* coreServices = mixxx::CoreServices::getInstance()) {
          program = QDir(coreServices->getResourcePath()).filePath("WlDjAiKaraoke.app/Contents/MacOS/wlDjAiKaraoke");
@@ -285,11 +296,101 @@ void WinliveGoldSocket::launchClient() {
 
     QProcess* process = new QProcess(this);
     process->start(program, arguments);
-
+   
+    
     qDebug() << "Launched client with arguments:" << arguments;
+ 
+   
 }
 
 void WinliveGoldSocket::internalStart(const QString& filename, const QString& tone) {
     // avoid recursice, senddirectly command
     sendCommandToClient(QString("%1|%2|%3").arg(WGS_COMMAND_START, filename, tone));
+}
+
+void WinliveGoldSocket::downloadKaraokeClient(const QString& destinationPath) {
+    // URL del file da scaricare (sostituisci con l'URL reale)
+    QUrl url("https://www.promusicsoftware.com/download.php?filename=karaokew.exe");
+
+    // Crea la directory se non esiste
+    QFileInfo fileInfo(destinationPath);
+    QDir().mkpath(fileInfo.absolutePath());
+
+    // Crea il progress dialog MODALE
+    QProgressDialog* progressDialog = new QProgressDialog(
+            "Download karaokew.exe in corso...",
+            "Annulla",
+            0,
+            100);
+    progressDialog->setWindowTitle("Download");
+    progressDialog->setWindowModality(Qt::ApplicationModal); // MODALE per tutta l'applicazione
+    progressDialog->setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint); // <-- AGGIUNGI QUESTA
+    progressDialog->setMinimumDuration(0);
+    progressDialog->setCancelButton(nullptr); // Opzionale: rimuovi il pulsante annulla
+    progressDialog->setAutoClose(false);
+    progressDialog->setAutoReset(false);
+    progressDialog->show();
+
+    // Setup network manager
+    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
+    QNetworkRequest request(url);
+    QNetworkReply* reply = manager->get(request);
+
+    // File temporaneo per il download
+    QFile* file = new QFile(destinationPath + ".tmp");
+    if (!file->open(QIODevice::WriteOnly)) {
+        progressDialog->close();
+        delete progressDialog;
+        QMessageBox::critical(nullptr, "Errore", "Impossibile creare il file temporaneo");
+        delete file;
+        return;
+    }
+
+    // Aggiorna la progress bar
+    connect(reply, &QNetworkReply::downloadProgress, [progressDialog](qint64 bytesReceived, qint64 bytesTotal) {
+        if (bytesTotal > 0) {
+            int percentage = (bytesReceived * 100) / bytesTotal;
+            progressDialog->setValue(percentage);
+
+            // Mostra velocità e tempo rimanente
+            QString label = QString("Download: %1 MB / %2 MB\nAttendere prego...")
+                                    .arg(bytesReceived / 1024.0 / 1024.0, 0, 'f', 2)
+                                    .arg(bytesTotal / 1024.0 / 1024.0, 0, 'f', 2);
+            progressDialog->setLabelText(label);
+        }
+    });
+
+    // Scrivi i dati nel file
+    connect(reply, &QNetworkReply::readyRead, [reply, file]() {
+        file->write(reply->readAll());
+    });
+
+    // Gestisci il completamento
+    connect(reply, &QNetworkReply::finished, [this, reply, file, destinationPath, progressDialog, manager]() {
+        file->close();
+
+        if (reply->error() == QNetworkReply::NoError) {
+            // Rinomina il file temporaneo
+            QFile::remove(destinationPath);
+            file->rename(destinationPath);
+
+            progressDialog->close();
+            delete progressDialog;
+
+            QMessageBox::information(nullptr, "Completato", "Download completato con successo!");
+
+            // Avvia il client
+            launchClient();
+        } else {
+            progressDialog->close();
+            delete progressDialog;
+
+            QMessageBox::critical(nullptr, "Errore", "Errore durante il download: " + reply->errorString());
+            file->remove();
+        }
+
+        delete file;
+        reply->deleteLater();
+        manager->deleteLater();
+    });
 }
