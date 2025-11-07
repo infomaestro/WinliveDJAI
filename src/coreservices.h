@@ -41,6 +41,7 @@ class CoreServices : public QObject {
     void initialize(QApplication* pApp);
     void showRegisterWindow();
     void deleteSettingsFile();
+    void deleteDatabaseFileQuery();
     QString getResourcePath();
 
     WinliveGoldSocket* getWinliveGoldSocket(const bool create = true);

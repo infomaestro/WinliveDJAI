@@ -479,6 +479,7 @@ void CoreServices::initialize(QApplication* pApp) {
     
     if (resetSettings) {
         deleteSettingsFile();
+        deleteDatabaseFileQuery();
     }
 
     if (configVersion.isEmpty() || resetSettings ) {
@@ -926,6 +927,31 @@ void CoreServices::deleteSettingsFile() {
         }
     } else {
         qDebug() << "Settings file does not exist:" << settingspath;
+    }
+}
+
+void CoreServices::deleteDatabaseFileQuery() {
+    UserSettingsPointer pConfig = m_pSettingsManager->settings();
+    QString databasepath = QDir(pConfig->getSettingsPath()).absoluteFilePath(QStringLiteral("wldjaidb.sqlite"));
+    QMessageBox::StandardButton reply = QMessageBox::question(nullptr,
+            tr("Information"),
+            tr("Starting with empty list. Do you want to reset main database file?"),
+            QMessageBox::Yes | QMessageBox::No);
+
+    if (reply == QMessageBox::Yes) {
+
+        QFile DatabaseFile(databasepath);
+        if (DatabaseFile.exists()) {
+            if (DatabaseFile.remove()) {
+                qDebug() << "database file deleted successfully:" << databasepath;
+            } else {
+                qWarning() << "Failed to database settings file:" << databasepath;
+            }
+        } else {
+            qDebug() << "database file does not exist:" << databasepath;
+        }
+    } else {
+        qDebug() << "User chose not to delete the database file";
     }
 }
 
