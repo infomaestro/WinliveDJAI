@@ -226,7 +226,8 @@ class EngineBuffer : public EngineObject {
     void verifyPlay();
     bool isKaraoke() const { return m_isKaraoke;}
     void setKaraoke(const bool karaoke);
-
+    bool isClientInLaunching() const {return m_clientInLaunching;}
+    void setClientInLaunching(const bool inLaunch);
   public slots:
     void slotControlPlayRequest(double);
     void slotControlPlayFromStart(double);
@@ -506,6 +507,10 @@ class EngineBuffer : public EngineObject {
     double m_pitchKaraoke_old = 0.0;
 
     bool m_karaokeOperationInProgress = false;
+
+    bool m_karaokeLicenseMessageShown = false;
+
+    bool m_clientInLaunching = false;
 };
 
 Q_DECLARE_METATYPE(EngineBuffer::KeylockEngine)

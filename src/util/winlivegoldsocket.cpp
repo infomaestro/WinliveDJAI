@@ -111,6 +111,7 @@ void WinliveGoldSocket::start(EngineBuffer* deck, const WGSStartParams& params) 
             qDebug() << "No client connected, launching client with start mode";
             m_params.pending = true;
             launchClient();
+            deck->setKaraoke(true);
         } else {
             qDebug() << "Already waiting to start....";
         }
@@ -213,7 +214,7 @@ void WinliveGoldSocket::onClientDisconnected() {
         m_client = nullptr;     
     }
     m_infoTimer->stop();
-
+    m_deck->setClientInLaunching(false); // reset launching flag
     emit clientDisconnected();
 }
 
@@ -228,7 +229,8 @@ void WinliveGoldSocket::onClientDataReceived() {
     if (response.isEmpty()) {
         return;
     }
-
+    
+    m_deck->setClientInLaunching(false); // reset launching flag on any response
     qDebug() << "Received from client:" << response;
     processClientResponse(response);
 }
@@ -273,7 +275,6 @@ void WinliveGoldSocket::launchClient() {
          program = QDir(coreServices->getResourcePath()).filePath("karaokew/karaokew.exe");
     }
 
-    program ="C:/temp/karaokew.exe";
 
     // Verifica se il file esiste
     if (!QFile::exists(program)) {
@@ -290,10 +291,15 @@ void WinliveGoldSocket::launchClient() {
 #else
     QString program = "/usr/bin/winliveclient";
 #endif
+    
+    if (m_deck->isClientInLaunching()) {
+        qDebug() << "Client is already being launched, skipping launchClient call.";
+        return;
+    }
 
-   
     arguments << "-refwldjainomidi" << QString::number(m_port);
-
+    
+    m_deck->setClientInLaunching(true); // flag to indicate client is being launched
     QProcess* process = new QProcess(this);
     process->start(program, arguments);
    

@@ -853,8 +853,13 @@ void EngineBuffer::slotControlPlayRequest(double v) {
     // karaoke?
     if (auto* coreServices = mixxx::CoreServices::getInstance()) {
         if (isKaraoke() && coreServices->getWinliveGoldSocket(false) != nullptr) {
-            QMessageBox::information(nullptr, tr("Couldn't load track."), tr("A song is playing in this deck. Stop the song first."));
-            return;
+             QMessageBox msgBox(nullptr);
+             msgBox.setWindowTitle(tr("Couldn't load track."));
+             msgBox.setText(tr("A song is playing in this deck. Stop the song first."));
+             msgBox.setIcon(QMessageBox::Information);
+             msgBox.setWindowFlags(msgBox.windowFlags() | Qt::WindowStaysOnTopHint);
+             msgBox.exec();
+             return;
         }
     }
 
@@ -955,15 +960,7 @@ void EngineBuffer::slotControlPlayKaraoke(double v) {
     // Imposta il cursore a clessidra
     
     if (!oldPlay) {
-        
-        CheckLicenseHelper license;
-
-        if (license.loadFromFile() == false || license.hasValidLicense() == false) {
-            QMessageBox::information(nullptr, tr("Not registered"), tr("This function is reserved to registered users."));
-            return;
-          
-        }
-
+       
 #ifndef Q_OS_MACOS
         QApplication::setOverrideCursor(Qt::WaitCursor);
 #endif
@@ -993,7 +990,12 @@ void EngineBuffer::slotControlPlayKaraoke(double v) {
             
         }
     } else {
-        QMessageBox::information(nullptr, tr("Couldn't load track."), tr("A song is playing in this deck. Stop the song first."));
+        QMessageBox msgBox(nullptr);
+        msgBox.setWindowTitle(tr("Couldn't load track."));
+        msgBox.setText(tr("A song is playing in this deck. Stop the song first."));
+        msgBox.setIcon(QMessageBox::Information);
+        msgBox.setWindowFlags(msgBox.windowFlags() | Qt::WindowStaysOnTopHint);
+        msgBox.exec();
     }
     #ifndef Q_OS_MACOS
     QApplication::restoreOverrideCursor();
@@ -1822,6 +1824,7 @@ void EngineBuffer::setScalerForTest(
 
 void EngineBuffer::onSocketInfoReceived(EngineBuffer* deck, const QString& info) {
     
+
     // parse info response: deck_name|message  
     QStringList parts = info.split('|');
     if (parts.size() < 2) {
@@ -1848,11 +1851,38 @@ void EngineBuffer::onSocketInfoReceived(EngineBuffer* deck, const QString& info)
     if (isKaraoke() && message == WGS_COMMAND_INFO && parts.size() >= 6) {
         // message format: current time|total time|tone
         QString currentTime = parts[2];
-        QString timeElapsed = parts[3];
+        QString timeTotal = parts[3];
         QString tone = parts[4];
         QString status = parts[5];
-        m_pKaraokeInfo->set(QString("%1 / %2").arg(currentTime, timeElapsed));
+        
+        m_pKaraokeInfo->set(QString("%1 / %2").arg(currentTime, timeTotal));
         m_pauseKaraokeButton->forceSet((status.toUShort() == KP_STATUS_PAUSED) ? 1.0 : 0);
+
+        // blocco check licenza
+
+        
+
+        QStringList timeParts = currentTime.split(":");
+        int minutes = timeParts[0].toInt();
+        int seconds = timeParts[1].toInt();
+        int totalSeconds = minutes * 60 + seconds;
+        if (totalSeconds >= 45 && !m_karaokeLicenseMessageShown) {
+            m_karaokeLicenseMessageShown = true;
+            CheckLicenseHelper license;
+
+            if (license.loadFromFile() == false || license.hasValidLicense() == false) {
+                slotControlPauseKaraoke(0.0);
+                QMessageBox msgBox(nullptr);
+                msgBox.setWindowTitle(tr("Not registered"));
+                msgBox.setText(tr("This message will not be shown to registered users."));
+                msgBox.setIcon(QMessageBox::Information);
+                msgBox.setWindowFlags(msgBox.windowFlags() | Qt::WindowStaysOnTopHint);
+                msgBox.exec();
+                slotControlPauseKaraoke(0.0);
+            }
+        }
+
+            
         return;
     }
 }
@@ -1876,5 +1906,10 @@ void EngineBuffer::setKaraoke(const bool karaoke) {
         m_pKaraokeInfo->setBackColors("#1d312a"); // dimmer green come il mixer
         m_pKaraokeInfo->set("Karaoke Stop"); 
         m_pauseKaraokeButton->forceSet(0); // pause button to state 0
+        m_karaokeLicenseMessageShown = false; // reset license message shown flag
+        m_clientInLaunching = false;          // reset launching flag
     }
+}
+void EngineBuffer::setClientInLaunching(const bool inLaunch) {
+    m_clientInLaunching = inLaunch;
 }
