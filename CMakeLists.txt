@@ -1945,15 +1945,15 @@ install(
 endif()
 
 # KaraokeW.app files
-if (APPLE)
-  install(CODE "
-        execute_process(
-            COMMAND ditto
-                \"${CMAKE_CURRENT_SOURCE_DIR}/res/WlDjAiKaraoke.app\"
-                \"${CMAKE_INSTALL_PREFIX}/${MIXXX_INSTALL_DATADIR}/WlDjAiKaraoke.app\"
-        )
-    ")
-endif()
+#if (APPLE)
+#  install(CODE "
+#        execute_process(
+#            COMMAND ditto
+#                \"${CMAKE_CURRENT_SOURCE_DIR}/res/WlDjAiKaraoke.app\"
+#                \"${CMAKE_INSTALL_PREFIX}/${MIXXX_INSTALL_DATADIR}/WlDjAiKaraoke.app\"
+#        )
+#    ")
+#endif()
 
 # Font files
 #

@@ -5,7 +5,7 @@
 #include "coreservices.h"
 #include "moc_winlivegoldsocket.cpp" 
 #include <QHostAddress>
-
+#include <QDesktopServices>
 
 
 WinliveGoldSocket::WinliveGoldSocket(QObject* parent)
@@ -110,7 +110,7 @@ void WinliveGoldSocket::start(EngineBuffer* deck, const WGSStartParams& params) 
         if (!m_params.pending) {
             qDebug() << "No client connected, launching client with start mode";
             m_params.pending = true;
-            launchClient();
+            launchClient(deck);
             deck->setKaraoke(true);
         } else {
             qDebug() << "Already waiting to start....";
@@ -265,7 +265,7 @@ void WinliveGoldSocket::sendCommandToClient(const QString& command) {
 }
 
 
-void WinliveGoldSocket::launchClient() {
+void WinliveGoldSocket::launchClient(EngineBuffer* deck) {
    
  QString program;
  QStringList arguments;
@@ -285,9 +285,34 @@ void WinliveGoldSocket::launchClient() {
 
 #elif defined(Q_OS_MAC)
      if (auto* coreServices = mixxx::CoreServices::getInstance()) {
-         program = QDir(coreServices->getResourcePath()).filePath("WlDjAiKaraoke.app/Contents/MacOS/wlDjAiKaraoke");
-          qDebug() << "launching app" << program;
+         program = "/Applications/WlDjAiKaraoke.app/Contents/MacOS/WlDjAiKaraoke";
+         qDebug() << "Launching app:" << program;
+         //QMessageBox::information(nullptr, "settingpath", programPath);
      }
+    /// Verifica se il file esiste
+    if (!QFile::exists(program)) {
+        QMessageBox msgBox;
+        msgBox.setIcon(QMessageBox::Information);
+        msgBox.setWindowTitle(tr("Warning"));
+        msgBox.setText(tr("Il plugin is not installed in applications "));
+        msgBox.setInformativeText(tr("Do you want download and install Karaoke plugin ?"));
+        msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+        msgBox.setDefaultButton(QMessageBox::Yes);
+
+        int ret = msgBox.exec();
+
+        if (ret == QMessageBox::Yes) {
+            QUrl downloadUrl("https://www.promusicsoftware.com/download.php?filename=WlDjAiKaraoke.pkg");
+            if (!QDesktopServices::openUrl(downloadUrl)) {
+                QMessageBox::warning(nullptr,
+                    "Error",
+                    "Cannot open browser.\nDownload manually from:\n" + downloadUrl.toString());
+            }
+        }
+
+        return;
+    }
+
 #else
     QString program = "/usr/bin/winliveclient";
 #endif
@@ -302,7 +327,8 @@ void WinliveGoldSocket::launchClient() {
     m_deck->setClientInLaunching(true); // flag to indicate client is being launched
     QProcess* process = new QProcess(this);
     process->start(program, arguments);
-   
+
+    deck->setKaraoke(true);
     
     qDebug() << "Launched client with arguments:" << arguments;
  
@@ -316,7 +342,7 @@ void WinliveGoldSocket::internalStart(const QString& filename, const QString& to
 
 void WinliveGoldSocket::downloadKaraokeClient(const QString& destinationPath) {
     // URL del file da scaricare (sostituisci con l'URL reale)
-    QUrl url("https://www.promusicsoftware.com/download.php?filename=karaokew.exe");
+    QUrl url("https://www.promusicsoftware.com/download.php?filename=WlDjAiKaraoke.zip");
 
     // Crea la directory se non esiste
     QFileInfo fileInfo(destinationPath);
@@ -324,7 +350,7 @@ void WinliveGoldSocket::downloadKaraokeClient(const QString& destinationPath) {
 
     // Crea il progress dialog MODALE
     QProgressDialog* progressDialog = new QProgressDialog(
-            "Download karaokew.exe in corso...",
+            "Download karaoke plugin ...",
             "Annulla",
             0,
             100);
@@ -343,7 +369,7 @@ void WinliveGoldSocket::downloadKaraokeClient(const QString& destinationPath) {
     QNetworkReply* reply = manager->get(request);
 
     // File temporaneo per il download
-    QFile* file = new QFile(destinationPath + ".tmp");
+    QFile* file = new QFile(destinationPath + ".zip");
     if (!file->open(QIODevice::WriteOnly)) {
         progressDialog->close();
         delete progressDialog;
@@ -358,7 +384,7 @@ void WinliveGoldSocket::downloadKaraokeClient(const QString& destinationPath) {
             int percentage = (bytesReceived * 100) / bytesTotal;
             progressDialog->setValue(percentage);
 
-            // Mostra velocità e tempo rimanente
+            // Mostra velocitï¿½ e tempo rimanente
             QString label = QString("Download: %1 MB / %2 MB\nAttendere prego...")
                                     .arg(bytesReceived / 1024.0 / 1024.0, 0, 'f', 2)
                                     .arg(bytesTotal / 1024.0 / 1024.0, 0, 'f', 2);
@@ -380,13 +406,38 @@ void WinliveGoldSocket::downloadKaraokeClient(const QString& destinationPath) {
             QFile::remove(destinationPath);
             file->rename(destinationPath);
 
+            progressDialog->setLabelText(tr("Installing karaoke plugin ..."));
+
+            QFileInfo fileInfo(destinationPath);
+            QString extractPath = fileInfo.absolutePath();
+
+            // Crea la directory di estrazione
+            QDir().mkpath(extractPath);
+
+            // Usa unzip del sistema
+            QProcess unzip;
+            unzip.start("unzip", QStringList() << "-o" << destinationPath << "-d" << extractPath);
+
+            if (!unzip.waitForFinished(30000)) {  // timeout 30 secondi
+                progressDialog->close();
+                delete progressDialog;
+                QMessageBox::critical(nullptr, "Error", "Timeout while installing!");
+                return;
+            }
+
+            if (unzip.exitCode() != 0) {
+                progressDialog->close();
+                delete progressDialog;
+                QMessageBox::critical(nullptr, "Error",
+                    "Error while extracting:\n" );
+                return;
+            }
+
             progressDialog->close();
             delete progressDialog;
 
-            QMessageBox::information(nullptr, "Completato", "Download completato con successo!");
+            QMessageBox::information(nullptr, "Completed", "Plugin installed!\nNow you can start your karaoke");
 
-            // Avvia il client
-            launchClient();
         } else {
             progressDialog->close();
             delete progressDialog;

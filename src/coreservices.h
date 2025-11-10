@@ -43,6 +43,7 @@ class CoreServices : public QObject {
     void deleteSettingsFile();
     void deleteDatabaseFileQuery();
     QString getResourcePath();
+    QString getSettingsPath();
 
     WinliveGoldSocket* getWinliveGoldSocket(const bool create = true);
 

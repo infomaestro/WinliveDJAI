@@ -962,6 +962,12 @@ QString CoreServices::getResourcePath()
     return resPath;
 }
 
+QString CoreServices::getSettingsPath(){
+    UserSettingsPointer pConfig = m_pSettingsManager->settings();
+    QString setPath = pConfig->getSettingsPath();
+    return setPath;
+}
+
 WinliveGoldSocket* CoreServices::getWinliveGoldSocket(const bool create) {
     if (m_socket != nullptr) {
         m_socket->startListening();

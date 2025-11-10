@@ -74,7 +74,7 @@ class WinliveGoldSocket : public QObject {
     bool hasClient() const;
 
     // Client launcher
-    void launchClient();
+    void launchClient(EngineBuffer* deck);
 
   public slots:
 
