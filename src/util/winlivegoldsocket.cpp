@@ -287,7 +287,7 @@ void WinliveGoldSocket::launchClient(EngineBuffer* deck) {
      if (auto* coreServices = mixxx::CoreServices::getInstance()) {
          program = "/Applications/WlDjAiKaraoke.app/Contents/MacOS/WlDjAiKaraoke";
          qDebug() << "Launching app:" << program;
-         //QMessageBox::information(nullptr, "settingpath", programPath);
+         //QMessageBox::information(nullptr, "programpath", program);
      }
     /// Verifica se il file esiste
     if (!QFile::exists(program)) {
@@ -327,8 +327,8 @@ void WinliveGoldSocket::launchClient(EngineBuffer* deck) {
     m_deck->setClientInLaunching(true); // flag to indicate client is being launched
     QProcess* process = new QProcess(this);
     process->start(program, arguments);
-
-    deck->setKaraoke(true);
+    //QMessageBox::information(nullptr, "programpath", program);
+    //deck->setKaraoke(true);
     
     qDebug() << "Launched client with arguments:" << arguments;
  
