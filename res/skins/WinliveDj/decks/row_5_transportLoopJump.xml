@@ -356,13 +356,13 @@
           <WidgetGroup><SizePolicy>i,min</SizePolicy><MaximumSize>80,</MaximumSize></WidgetGroup>
 
 			<WidgetGroup>
-				<!-- Loop buttons + beatloop size spinbox -->
-				<ObjectName>LoopControls</ObjectName>
-				<Layout>vertical</Layout>
-				<SizePolicy>min,min</SizePolicy>
-				<MinimumSize>78,44</MinimumSize>
-				<MaximumSize>104,78</MaximumSize>
-				<!-- aumentato per la label -->
+			  <!-- Loop buttons + beatloop size spinbox -->
+			  <ObjectName>LoopControls</ObjectName>
+			  <Layout>vertical</Layout>
+			  <SizePolicy>min,min</SizePolicy>
+			  <MinimumSize>78,44</MinimumSize>
+			  <MaximumSize>104,78</MaximumSize>
+			  <!-- aumentato per la label -->
 				<Children>
 					<WidgetGroup>
 						<!-- loop enable + beatloop size -->
@@ -374,15 +374,9 @@
 								<SetVariable name="TooltipId">beatloop_activate</SetVariable>
 								<SetVariable name="ObjectName">LoopActivate</SetVariable>
 								<SetVariable name="Size">26f,26f</SetVariable>
-								<SetVariable name="ConfigKey">
-									<Variable name="Group"/>,beatloop_activate
-								</SetVariable>
-								<SetVariable name="ConfigKeyRight">
-									<Variable name="Group"/>,beatlooproll_activate
-								</SetVariable>
-								<SetVariable name="ConfigKeyDisp">
-									<Variable name="Group"/>,loop_enabled
-								</SetVariable>
+								<SetVariable name="ConfigKey"><Variable name="Group"/>,beatloop_activate</SetVariable>
+								<SetVariable name="ConfigKeyRight"><Variable name="Group"/>,beatlooproll_activate</SetVariable>
+								<SetVariable name="ConfigKeyDisp"><Variable name="Group"/>,loop_enabled</SetVariable>
 							</Template>
 							<BeatSpinBox>
 								<TooltipId>beatloop_size</TooltipId>
@@ -392,9 +386,7 @@
 								<SizePolicy>me,min</SizePolicy>
 								<MinimumSize>46,26</MinimumSize>
 								<MaximumSize>78,26</MaximumSize>
-								<Value>
-									<Variable name="Group"/>,beatloop_size
-								</Value>
+								<Value><Variable name="Group"/>,beatloop_size</Value>
 							</BeatSpinBox>
 						</Children>
 						<Connection>
@@ -411,42 +403,28 @@
 								<SetVariable name="TooltipId">reloop_toggle</SetVariable>
 								<SetVariable name="ObjectName">Reloop</SetVariable>
 								<SetVariable name="Size">26f,26f</SetVariable>
-								<SetVariable name="ConfigKey">
-									<Variable name="Group"/>,reloop_toggle
-								</SetVariable>
-								<SetVariable name="ConfigKeyRight">
-									<Variable name="Group"/>,reloop_andstop
-								</SetVariable>
+								<SetVariable name="ConfigKey"><Variable name="Group"/>,reloop_toggle</SetVariable>
+								<SetVariable name="ConfigKeyRight"><Variable name="Group"/>,reloop_andstop</SetVariable>
 							</Template>
 							<Template src="skins:WinliveDj/controls/button_1state_right.xml">
 								<SetVariable name="TooltipId">loop_in</SetVariable>
 								<SetVariable name="ObjectName">LoopIn</SetVariable>
 								<SetVariable name="Size">26f,26f</SetVariable>
-								<SetVariable name="ConfigKey">
-									<Variable name="Group"/>,loop_in
-								</SetVariable>
-								<SetVariable name="ConfigKeyRight">
-									<Variable name="Group"/>,loop_in_goto
-								</SetVariable>
+								<SetVariable name="ConfigKey"><Variable name="Group"/>,loop_in</SetVariable>
+								<SetVariable name="ConfigKeyRight"><Variable name="Group"/>,loop_in_goto</SetVariable>
 							</Template>
 							<Template src="skins:WinliveDj/controls/button_1state_right.xml">
 								<SetVariable name="TooltipId">loop_out</SetVariable>
 								<SetVariable name="ObjectName">LoopOut</SetVariable>
 								<SetVariable name="Size">26f,26f</SetVariable>
-								<SetVariable name="ConfigKey">
-									<Variable name="Group"/>,loop_out
-								</SetVariable>
-								<SetVariable name="ConfigKeyRight">
-									<Variable name="Group"/>,loop_out_goto
-								</SetVariable>
+								<SetVariable name="ConfigKey"><Variable name="Group"/>,loop_out</SetVariable>
+								<SetVariable name="ConfigKeyRight"><Variable name="Group"/>,loop_out_goto</SetVariable>
 							</Template>
 							<Template src="skins:WinliveDj/controls/button_2state_persist.xml">
 								<SetVariable name="TooltipId">loop_anchor</SetVariable>
 								<SetVariable name="ObjectName">LoopAnchor</SetVariable>
 								<SetVariable name="Size">26f,26f</SetVariable>
-								<SetVariable name="ConfigKey">
-									<Variable name="Group"/>,loop_anchor
-								</SetVariable>
+								<SetVariable name="ConfigKey"><Variable name="Group"/>,loop_anchor</SetVariable>
 							</Template>
 						</Children>
 						<Connection>
@@ -454,8 +432,6 @@
 							<BindProperty>visible</BindProperty>
 						</Connection>
 					</WidgetGroup>
-
-					
 					
 					<!-- Label Info -->
 					<WidgetGroup>
@@ -477,7 +453,8 @@
 						</Children>
 					</WidgetGroup>
 					<!---->
-				</Children>
+					
+			  </Children>
 			</WidgetGroup>
 			<!-- /Loop buttons + beatloop size spinbox -->
 
